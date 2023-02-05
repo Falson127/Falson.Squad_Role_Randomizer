@@ -1,0 +1,18 @@
+{
+  "name": "Falson.Squad Role Randomizer",
+  "version": "0.1.0",
+  "namespace": "Falson.Squad_Role_Randomizer",
+  "package": "Falson.Squad Role Randomizer.dll",
+  "manifest_version": 1,
+
+  "description": "Description of your module. Visit https://github.com/blish-hud/manifest.json/blob/master/manifest-v1.md for details about the manifest format.",
+  "dependencies": {
+    "bh.blishhud": ">=0.5.2"
+  },
+  "url": "https://github.com/Ben/Falson.Squad_Role_Randomizer",
+  "contributors": [
+    {
+      "name": "Ben"
+    }
+  ]
+}
