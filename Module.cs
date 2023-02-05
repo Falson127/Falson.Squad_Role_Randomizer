@@ -12,7 +12,6 @@ namespace Falson.Squad_Role_Randomizer
     [Export(typeof(Blish_HUD.Modules.Module))]
     public class Module : Blish_HUD.Modules.Module
     {
-
         private static readonly Logger Logger = Logger.GetLogger<Module>();
 
         #region Service Managers
