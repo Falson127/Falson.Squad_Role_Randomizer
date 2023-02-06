@@ -141,6 +141,31 @@ namespace Falson.Squad_Role_Randomizer
         //Dimensions 5, 5, 3
         //Roles Per Pannel: PoF: 9
         //Dimensions 5, 4
+        public enum Roles
+        {
+            HandKite,
+            OilKite,
+            FlakKite,
+            Tank,
+            HealAlac,
+            HealQuick,
+            DPSAlac,
+            DPSQuick,
+            Mushroom,
+            Tower,
+            Reflect,
+            Cannon,
+            ConstrucPusher,
+            Lamp,
+            Pylon,
+            Pillar,
+            Green,
+            SoullessPusher,
+            DhuumKite,
+            QadimKite,
+            Sword,
+            Shield
+    }
         #region Define Checkboxes
         public Checkbox HandKitePlayer1;
         public Checkbox OilKitePlayer1;
@@ -959,7 +984,7 @@ namespace Falson.Squad_Role_Randomizer
                     Text = "CA Shield Collector",
                     Location = new Point(300, 50),
                     BasicTooltipText = "CA Shield Collector",
-                    Parent = PoFPannelArray[i]
+                    Parent = PoFPannelArray[i],
                 };
             }
             #endregion
