@@ -147,7 +147,7 @@ namespace Falson.Squad_Role_Randomizer
         public Checkbox HealQuickPlayer3;
         public Checkbox DPSAlacPlayer3;
         public Checkbox DPSQuickPlayer3;
-        public Checkbox MushroomPlaye3r;
+        public Checkbox MushroomPlayer3;
         public Checkbox TowerPlayer3;
         public Checkbox ReflectPlayer3;
         public Checkbox CannonPlayer3;
@@ -569,6 +569,8 @@ namespace Falson.Squad_Role_Randomizer
         //HoT Panel Dimensions(width, height): (510, 100)
         //PoF Panel Dimensions(width, height): (510, 75)
         {
+            //Initialize Windows Here first, Then initialize panels, then labels and checkboxes
+            #region HoT_FlowPanels
             HoT_PlayerRolesPanel1 = new FlowPanel() 
             {
                 Size = new Point(510, 100),
@@ -639,7 +641,253 @@ namespace Falson.Squad_Role_Randomizer
                 CanCollapse = true,
                 Collapsed = true
             };
+            #endregion
+            #region PoF_FlowPanels
 
+
+            #endregion
+            #region Checkbox Labels
+
+            #endregion
+            #region Checkboxes
+            HandKitePlayer1 = new Checkbox { };
+            HandKitePlayer2 = new Checkbox { };
+            HandKitePlayer3 = new Checkbox { };
+            HandKitePlayer4 = new Checkbox { };
+            HandKitePlayer5 = new Checkbox { };
+            HandKitePlayer6 = new Checkbox { };
+            HandKitePlayer7 = new Checkbox { };
+            HandKitePlayer8 = new Checkbox { };
+            HandKitePlayer9 = new Checkbox { };
+            HandKitePlayer10 = new Checkbox { };
+            OilKitePlayer1 = new Checkbox { };
+            OilKitePlayer2 = new Checkbox { };
+            OilKitePlayer3 = new Checkbox { };
+            OilKitePlayer4 = new Checkbox { };
+            OilKitePlayer5 = new Checkbox { };
+            OilKitePlayer6 = new Checkbox { };
+            OilKitePlayer7 = new Checkbox { };
+            OilKitePlayer8 = new Checkbox { };
+            OilKitePlayer9= new Checkbox { };
+            OilKitePlayer10 = new Checkbox { };
+            FlakKitePlayer1 = new Checkbox { };
+            FlakKitePlayer2 = new Checkbox { };
+            FlakKitePlayer3 = new Checkbox { };
+            FlakKitePlayer4 = new Checkbox { };
+            FlakKitePlayer5 = new Checkbox { };
+            FlakKitePlayer6 = new Checkbox { };
+            FlakKitePlayer7 = new Checkbox { };
+            FlakKitePlayer8 = new Checkbox { };
+            FlakKitePlayer9 = new Checkbox { };
+            FlakKitePlayer10 = new Checkbox { };
+            TankPlayer1 = new Checkbox { };
+            TankPlayer2 = new Checkbox { };
+            TankPlayer3 = new Checkbox { };
+            TankPlayer4 = new Checkbox { };
+            TankPlayer5 = new Checkbox { };
+            TankPlayer6 = new Checkbox { };
+            TankPlayer7 = new Checkbox { };
+            TankPlayer8 = new Checkbox { };
+            TankPlayer9 = new Checkbox { };
+            TankPlayer10 = new Checkbox { };
+            HealAlacPlayer1 = new Checkbox { };
+            HealAlacPlayer2 = new Checkbox { };
+            HealAlacPlayer3 = new Checkbox { };
+            HealAlacPlayer4 = new Checkbox { };
+            HealAlacPlayer5 = new Checkbox { };
+            HealAlacPlayer6 = new Checkbox { };
+            HealAlacPlayer7 = new Checkbox { };
+            HealAlacPlayer8 = new Checkbox { };
+            HealAlacPlayer9 = new Checkbox { };
+            HealAlacPlayer10 = new Checkbox { };
+
+            HealQuickPlayer1 = new Checkbox { };
+            HealQuickPlayer2 = new Checkbox { };
+            HealQuickPlayer3 = new Checkbox { };
+            HealQuickPlayer4 = new Checkbox { };
+            HealQuickPlayer5 = new Checkbox { };
+            HealQuickPlayer6 = new Checkbox { };
+            HealQuickPlayer7 = new Checkbox { };
+            HealQuickPlayer8 = new Checkbox { };
+            HealQuickPlayer9 = new Checkbox { };
+            HealQuickPlayer10 = new Checkbox { };
+
+            DPSAlacPlayer1 = new Checkbox { };
+            DPSAlacPlayer2 = new Checkbox { };
+            DPSAlacPlayer3 = new Checkbox { };
+            DPSAlacPlayer4 = new Checkbox { };
+            DPSAlacPlayer5 = new Checkbox { };
+            DPSAlacPlayer6 = new Checkbox { };
+            DPSAlacPlayer7 = new Checkbox { };
+            DPSAlacPlayer8 = new Checkbox { };
+            DPSAlacPlayer9 = new Checkbox { };
+            DPSAlacPlayer10 = new Checkbox { };
+
+            DPSQuickPlayer1 = new Checkbox { };
+            DPSQuickPlayer2 = new Checkbox { };
+            DPSQuickPlayer3 = new Checkbox { };
+            DPSQuickPlayer4 = new Checkbox { };
+            DPSQuickPlayer5 = new Checkbox { };
+            DPSQuickPlayer6 = new Checkbox { };
+            DPSQuickPlayer7 = new Checkbox { };
+            DPSQuickPlayer8 = new Checkbox { };
+            DPSQuickPlayer9 = new Checkbox { };
+            DPSQuickPlayer10 = new Checkbox { };
+
+            MushroomPlayer1 = new Checkbox { };
+            MushroomPlayer2 = new Checkbox { };
+            MushroomPlayer3 = new Checkbox { };
+            MushroomPlayer4 = new Checkbox { };
+            MushroomPlayer5 = new Checkbox { };
+            MushroomPlayer6 = new Checkbox { };
+            MushroomPlayer7 = new Checkbox { };
+            MushroomPlayer8 = new Checkbox { };
+            MushroomPlayer9 = new Checkbox { };
+            MushroomPlayer10 = new Checkbox { };
+
+            TowerPlayer1 = new Checkbox { };
+            TowerPlayer2 = new Checkbox { };
+            TowerPlayer3 = new Checkbox { };
+            TowerPlayer4 = new Checkbox { };
+            TowerPlayer5 = new Checkbox { };
+            TowerPlayer6 = new Checkbox { };
+            TowerPlayer7 = new Checkbox { };
+            TowerPlayer8 = new Checkbox { };
+            TowerPlayer9 = new Checkbox { };
+            TowerPlayer10 = new Checkbox { };
+
+            ReflectPlayer1 = new Checkbox { };
+            ReflectPlayer2 = new Checkbox { };
+            ReflectPlayer3 = new Checkbox { };
+            ReflectPlayer4 = new Checkbox { };
+            ReflectPlayer5 = new Checkbox { };
+            ReflectPlayer6 = new Checkbox { };
+            ReflectPlayer7 = new Checkbox { };
+            ReflectPlayer8 = new Checkbox { };
+            ReflectPlayer9 = new Checkbox { };
+            ReflectPlayer10 = new Checkbox { };
+
+            CannonPlayer1 = new Checkbox { };
+            CannonPlayer2 = new Checkbox { };
+            CannonPlayer3 = new Checkbox { };
+            CannonPlayer4 = new Checkbox { };
+            CannonPlayer5 = new Checkbox { };
+            CannonPlayer6 = new Checkbox { };
+            CannonPlayer7 = new Checkbox { };
+            CannonPlayer8 = new Checkbox { };
+            CannonPlayer9 = new Checkbox { };
+            CannonPlayer10 = new Checkbox { };
+
+            LampPlayer1 = new Checkbox { };
+            LampPlayer2 = new Checkbox { };
+            LampPlayer3 = new Checkbox { };
+            LampPlayer4 = new Checkbox { };
+            LampPlayer5 = new Checkbox { };
+            LampPlayer6 = new Checkbox { };
+            LampPlayer7 = new Checkbox { };
+            LampPlayer8 = new Checkbox { };
+            LampPlayer9 = new Checkbox { };
+            LampPlayer10 = new Checkbox { };
+
+            PylonPlayer1 = new Checkbox { };
+            PylonPlayer2 = new Checkbox { };
+            PylonPlayer3 = new Checkbox { };
+            PylonPlayer4 = new Checkbox { };
+            PylonPlayer5 = new Checkbox { };
+            PylonPlayer6 = new Checkbox { };
+            PylonPlayer7 = new Checkbox { };
+            PylonPlayer8 = new Checkbox { };
+            PylonPlayer9 = new Checkbox { };
+            PylonPlayer10 = new Checkbox { };
+
+            PillarPlayer1 = new Checkbox { };
+            PillarPlayer2 = new Checkbox { };
+            PillarPlayer3 = new Checkbox { };
+            PillarPlayer4 = new Checkbox { };
+            PillarPlayer5 = new Checkbox { };
+            PillarPlayer6 = new Checkbox { };
+            PillarPlayer7 = new Checkbox { };
+            PillarPlayer8 = new Checkbox { };
+            PillarPlayer9 = new Checkbox { };
+            PillarPlayer10 = new Checkbox { };
+
+            GreenPlayer1 = new Checkbox { };
+            GreenPlayer2 = new Checkbox { };
+            GreenPlayer3 = new Checkbox { };
+            GreenPlayer4 = new Checkbox { };
+            GreenPlayer5 = new Checkbox { };
+            GreenPlayer6 = new Checkbox { };
+            GreenPlayer7 = new Checkbox { };
+            GreenPlayer8 = new Checkbox { };
+            GreenPlayer9 = new Checkbox { };
+            GreenPlayer10 = new Checkbox { };
+
+            SoullessPusherPlayer1 = new Checkbox { };
+            SoullessPusherPlayer2 = new Checkbox { };
+            SoullessPusherPlayer3 = new Checkbox { };
+            SoullessPusherPlayer4 = new Checkbox { };
+            SoullessPusherPlayer5 = new Checkbox { };
+            SoullessPusherPlayer6 = new Checkbox { };
+            SoullessPusherPlayer7 = new Checkbox { };
+            SoullessPusherPlayer8 = new Checkbox { };
+            SoullessPusherPlayer9 = new Checkbox { };
+            SoullessPusherPlayer10 = new Checkbox { };
+
+            ConstrucPusherPlayer1 = new Checkbox { };
+            ConstrucPusherPlayer2 = new Checkbox { };
+            ConstrucPusherPlayer3 = new Checkbox { };
+            ConstrucPusherPlayer4 = new Checkbox { };
+            ConstrucPusherPlayer5 = new Checkbox { };
+            ConstrucPusherPlayer6 = new Checkbox { };
+            ConstrucPusherPlayer7 = new Checkbox { };
+            ConstrucPusherPlayer8 = new Checkbox { };
+            ConstrucPusherPlayer9 = new Checkbox { };
+            ConstrucPusherPlayer10 = new Checkbox { };
+
+            DhuumKitePlayer1 = new Checkbox { };
+            DhuumKitePlayer2 = new Checkbox { };
+            DhuumKitePlayer3 = new Checkbox { };
+            DhuumKitePlayer4 = new Checkbox { };
+            DhuumKitePlayer5 = new Checkbox { };
+            DhuumKitePlayer6 = new Checkbox { };
+            DhuumKitePlayer7 = new Checkbox { };
+            DhuumKitePlayer8 = new Checkbox { };
+            DhuumKitePlayer9 = new Checkbox { };
+            DhuumKitePlayer10 = new Checkbox { };
+
+            QadimKitePlayer1 = new Checkbox { };
+            QadimKitePlayer2 = new Checkbox { };
+            QadimKitePlayer3 = new Checkbox { };
+            QadimKitePlayer4 = new Checkbox { };
+            QadimKitePlayer5 = new Checkbox { };
+            QadimKitePlayer6 = new Checkbox { };
+            QadimKitePlayer7 = new Checkbox { };
+            QadimKitePlayer8 = new Checkbox { };
+            QadimKitePlayer9 = new Checkbox { };
+            QadimKitePlayer10 = new Checkbox { };
+
+            SwordPlayer1 = new Checkbox { };
+            SwordPlayer2 = new Checkbox { };
+            SwordPlayer3 = new Checkbox { };
+            SwordPlayer4 = new Checkbox { };
+            SwordPlayer5 = new Checkbox { };
+            SwordPlayer6 = new Checkbox { };
+            SwordPlayer7 = new Checkbox { };
+            SwordPlayer8 = new Checkbox { };
+            SwordPlayer9 = new Checkbox { };
+            SwordPlayer10 = new Checkbox { };
+
+            ShieldPlayer1 = new Checkbox { };
+            ShieldPlayer2 = new Checkbox { };
+            ShieldPlayer3 = new Checkbox { };
+            ShieldPlayer4 = new Checkbox { };
+            ShieldPlayer5 = new Checkbox { };
+            ShieldPlayer6 = new Checkbox { };
+            ShieldPlayer7 = new Checkbox { };
+            ShieldPlayer8 = new Checkbox { };
+            ShieldPlayer9 = new Checkbox { };
+            ShieldPlayer10 = new Checkbox { };
+            #endregion
         }
 
         protected override void OnModuleLoaded(EventArgs e)
