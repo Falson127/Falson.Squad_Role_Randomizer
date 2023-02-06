@@ -90,6 +90,53 @@ namespace Falson.Squad_Role_Randomizer
         public FlowPanel PoF_PlayerRolesPanel9;
         public FlowPanel HoT_PlayerRolesPanel10;
         public FlowPanel PoF_PlayerRolesPanel10;
+        //Checkbox Arrays
+        public Checkbox[] HandKiteBoxArray;
+        public Checkbox[] OilKiteBoxArray;
+        public Checkbox[] FlakKiteBoxArray;
+        public Checkbox[] TankBoxArray;
+        public Checkbox[] HealAlacBoxArray;
+        public Checkbox[] HealQuickBoxArray;
+        public Checkbox[] DPSAlacBoxArray;
+        public Checkbox[] DPSQuickBoxArray;
+        public Checkbox[] MushroomBoxArray;
+        public Checkbox[] TowerBoxArray;
+        public Checkbox[] ReflectBoxArray;
+        public Checkbox[] CannonBoxArray;
+        public Checkbox[] ConstrucPusherBoxArray;
+        public Checkbox[] LampBoxArray;
+        public Checkbox[] PylonBoxArray;
+        public Checkbox[] PillarBoxArray;
+        public Checkbox[] GreenBoxArray;
+        public Checkbox[] SoullessPusherBoxArray;
+        public Checkbox[] DhuumKiteBoxArray;
+        public Checkbox[] QadimKiteBoxArray;
+        public Checkbox[] SwordBoxArray;
+        public Checkbox[] ShieldBoxArray;
+        public Label[] HandKiteLabelArray;
+        public Label[] OilKiteLabelArray;
+        public Label[] FlakKiteLabelArray;
+        public Label[] TankLabelArray;
+        public Label[] HealAlacLabelArray;
+        public Label[] HealQuickLabelArray;
+        public Label[] DPSAlacLabelArray;
+        public Label[] DPSQuickLabelArray;
+        public Label[] MushroomLabelArray;
+        public Label[] TowerLabelArray;
+        public Label[] ReflectLabelArray;
+        public Label[] CannonLabelArray;
+        public Label[] ConstrucPusherLabelArray;
+        public Label[] LampLabelArray;
+        public Label[] PylonLabelArray;
+        public Label[] PillarLabelArray;
+        public Label[] GreenLabelArray;
+        public Label[] SoullessPusherLabelArray;
+        public Label[] DhuumKiteLabelArray;
+        public Label[] QadimKiteLabelArray;
+        public Label[] SwordLabelArray;
+        public Label[] ShieldLabelArray;
+        public Panel[] HoTPannelArray;
+        public Panel[] PoFPannelArray;
         //Roles Per Pannel: HoT: 13
         //Dimensions 5, 5, 3
         //Roles Per Pannel: PoF: 9
@@ -561,16 +608,7 @@ namespace Falson.Squad_Role_Randomizer
 
         protected override void Initialize()
         {
-
-        }
-
-        protected override async Task LoadAsync()
-        //Label Dimensions(width, height): (100, 25)
-        //HoT Panel Dimensions(width, height): (510, 100)
-        //PoF Panel Dimensions(width, height): (510, 75)
-        {
-            //Initialize Windows Here first, Then initialize panels, then labels and checkboxes
-            #region HoT_FlowPanels
+        #region HoT_FlowPanels
             HoT_PlayerRolesPanel1 = new FlowPanel() 
             {
                 Size = new Point(510, 100),
@@ -642,251 +680,288 @@ namespace Falson.Squad_Role_Randomizer
                 Collapsed = true
             };
             #endregion
-            #region PoF_FlowPanels
+        #region PoF_FlowPanels
 
 
             #endregion
-            #region Checkbox Labels
+        #region Checkbox Labels
 
             #endregion
+        HandKiteBoxArray = new Checkbox[10] {HandKitePlayer1, HandKitePlayer2, HandKitePlayer3, HandKitePlayer4, HandKitePlayer5, HandKitePlayer6, HandKitePlayer7, HandKitePlayer8, HandKitePlayer9, HandKitePlayer10};
+        OilKiteBoxArray = new Checkbox[10] {OilKitePlayer1, OilKitePlayer2, OilKitePlayer3, OilKitePlayer4, OilKitePlayer5,OilKitePlayer6,OilKitePlayer7,OilKitePlayer8,OilKitePlayer9,OilKitePlayer10};
+        FlakKiteBoxArray = new Checkbox[10] {FlakKitePlayer1,FlakKitePlayer2,FlakKitePlayer3,FlakKitePlayer4,FlakKitePlayer5,FlakKitePlayer6,FlakKitePlayer7,FlakKitePlayer8,FlakKitePlayer9,FlakKitePlayer10};
+        TankBoxArray = new Checkbox[10] {TankPlayer1,TankPlayer2,TankPlayer3,TankPlayer4,TankPlayer5,TankPlayer6,TankPlayer7,TankPlayer8,TankPlayer9,TankPlayer10};
+        HealAlacBoxArray = new Checkbox[10] {HealAlacPlayer1,HealAlacPlayer2,HealAlacPlayer3,HealAlacPlayer4,HealAlacPlayer5,HealAlacPlayer6,HealAlacPlayer7,HealAlacPlayer8,HealAlacPlayer9,HealAlacPlayer10};
+        HealQuickBoxArray = new Checkbox[10] {HealQuickPlayer1,HealQuickPlayer2,HealQuickPlayer3,HealQuickPlayer4,HealQuickPlayer5,HealQuickPlayer6,HealQuickPlayer7,HealQuickPlayer8,HealQuickPlayer9,HealQuickPlayer10};
+        DPSAlacBoxArray = new Checkbox[10] {DPSAlacPlayer1,DPSAlacPlayer2,DPSAlacPlayer3,DPSAlacPlayer4,DPSAlacPlayer5,DPSAlacPlayer6,DPSAlacPlayer7,DPSAlacPlayer8,DPSAlacPlayer9,DPSAlacPlayer10};
+        DPSQuickBoxArray = new Checkbox[10] {DPSQuickPlayer1,DPSQuickPlayer2,DPSQuickPlayer3,DPSQuickPlayer4,DPSQuickPlayer5,DPSQuickPlayer6,DPSQuickPlayer7,DPSQuickPlayer8,DPSQuickPlayer9,DPSQuickPlayer10};
+        MushroomBoxArray = new Checkbox[10] {MushroomPlayer1,MushroomPlayer2,MushroomPlayer3,MushroomPlayer4,MushroomPlayer5,MushroomPlayer6,MushroomPlayer7,MushroomPlayer8,MushroomPlayer9,MushroomPlayer10};
+        TowerBoxArray = new Checkbox[10] {TowerPlayer1,TowerPlayer2,TowerPlayer3,TowerPlayer4,TowerPlayer5,TowerPlayer6,TowerPlayer7,TowerPlayer8,TowerPlayer9,TowerPlayer10};
+        ReflectBoxArray = new Checkbox[10] {ReflectPlayer1,ReflectPlayer2,ReflectPlayer3,ReflectPlayer4,ReflectPlayer5,ReflectPlayer6,ReflectPlayer7,ReflectPlayer8,ReflectPlayer9,ReflectPlayer10};
+        CannonBoxArray = new Checkbox[10] {CannonPlayer1,CannonPlayer2,CannonPlayer3,CannonPlayer4,CannonPlayer5,CannonPlayer6,CannonPlayer7,CannonPlayer8,CannonPlayer9,CannonPlayer10};
+        ConstrucPusherBoxArray = new Checkbox[10] {ConstrucPusherPlayer1,ConstrucPusherPlayer2,ConstrucPusherPlayer3,ConstrucPusherPlayer4,ConstrucPusherPlayer5,ConstrucPusherPlayer6,ConstrucPusherPlayer7,ConstrucPusherPlayer8,ConstrucPusherPlayer9,ConstrucPusherPlayer10};
+        LampBoxArray = new Checkbox[10] {LampPlayer1,LampPlayer2,LampPlayer3,LampPlayer4,LampPlayer5,LampPlayer6,LampPlayer7,LampPlayer8,LampPlayer9,LampPlayer10};
+        PylonBoxArray = new Checkbox[10] {PylonPlayer1,PylonPlayer2,PylonPlayer3,PylonPlayer4,PylonPlayer5,PylonPlayer6,PylonPlayer7,PylonPlayer8,PylonPlayer9,PylonPlayer10};
+        PillarBoxArray = new Checkbox[10] {PillarPlayer1,PillarPlayer2,PillarPlayer3,PillarPlayer4,PillarPlayer5,PillarPlayer6,PillarPlayer7,PillarPlayer8,PillarPlayer9,PillarPlayer10};
+        GreenBoxArray = new Checkbox[10] {GreenPlayer1,GreenPlayer2,GreenPlayer3,GreenPlayer4,GreenPlayer5,GreenPlayer6,GreenPlayer7,GreenPlayer8,GreenPlayer9,GreenPlayer10};
+        SoullessPusherBoxArray = new Checkbox[10] {SoullessPusherPlayer1,SoullessPusherPlayer2,SoullessPusherPlayer3,SoullessPusherPlayer4,SoullessPusherPlayer5,SoullessPusherPlayer6,SoullessPusherPlayer7,SoullessPusherPlayer8,SoullessPusherPlayer9,SoullessPusherPlayer10};
+        DhuumKiteBoxArray = new Checkbox[10] {DhuumKitePlayer1,DhuumKitePlayer2,DhuumKitePlayer3,DhuumKitePlayer4,DhuumKitePlayer5,DhuumKitePlayer6,DhuumKitePlayer7,DhuumKitePlayer8,DhuumKitePlayer9,DhuumKitePlayer10};
+        QadimKiteBoxArray = new Checkbox[10] {QadimKitePlayer1,QadimKitePlayer2,QadimKitePlayer3,QadimKitePlayer4,QadimKitePlayer5,QadimKitePlayer6,QadimKitePlayer7,QadimKitePlayer8,QadimKitePlayer9,QadimKitePlayer10};
+        SwordBoxArray = new Checkbox[10] {SwordPlayer1,SwordPlayer2,SwordPlayer3,SwordPlayer4,SwordPlayer5,SwordPlayer6,SwordPlayer7,SwordPlayer8,SwordPlayer9,SwordPlayer10};
+        ShieldBoxArray = new Checkbox[10] {ShieldPlayer1,ShieldPlayer2,ShieldPlayer3,ShieldPlayer4,ShieldPlayer5,ShieldPlayer6,ShieldPlayer7,ShieldPlayer8,ShieldPlayer9,ShieldPlayer10};
+        HandKiteLabelArray = new Label[10] { HandkiteLabel1, HandkiteLabel2, HandkiteLabel3, HandkiteLabel4, HandkiteLabel5, HandkiteLabel6, HandkiteLabel7, HandkiteLabel8, HandkiteLabel9, HandkiteLabel10 };
+        OilKiteLabelArray = new Label[10] { OilKiteLabel1, OilKiteLabel2, OilKiteLabel3, OilKiteLabel4, OilKiteLabel5, OilKiteLabel6, OilKiteLabel7, OilKiteLabel8, OilKiteLabel9, OilKiteLabel10 };
+        FlakKiteLabelArray = new Label[10] { FlakKiteLabel1, FlakKiteLabel2, FlakKiteLabel3, FlakKiteLabel4, FlakKiteLabel5, FlakKiteLabel6, FlakKiteLabel7, FlakKiteLabel8, FlakKiteLabel9, FlakKiteLabel10 };
+        TankLabelArray = new Label[10] { TankLabel1, TankLabel2, TankLabel3, TankLabel4, TankLabel5, TankLabel6, TankLabel7, TankLabel8, TankLabel9, TankLabel10 };
+        HealAlacLabelArray = new Label[10] { HealAlacLabel1, HealAlacLabel2, HealAlacLabel3, HealAlacLabel4, HealAlacLabel5, HealAlacLabel6, HealAlacLabel7, HealAlacLabel8, HealAlacLabel9, HealAlacLabel10 };
+        HealQuickLabelArray = new Label[10] { HealQuickLabel1, HealQuickLabel2, HealQuickLabel3, HealQuickLabel4, HealQuickLabel5, HealQuickLabel6, HealQuickLabel7, HealQuickLabel8, HealQuickLabel9, HealQuickLabel10 };
+        DPSAlacLabelArray = new Label[10] { DPSAlacLabel1, DPSAlacLabel2, DPSAlacLabel3, DPSAlacLabel4, DPSAlacLabel5, DPSAlacLabel6, DPSAlacLabel7, DPSAlacLabel8, DPSAlacLabel9, DPSAlacLabel10 };
+        DPSQuickLabelArray = new Label[10] { DPSQuickLabel1, DPSQuickLabel2, DPSQuickLabel3, DPSQuickLabel4, DPSQuickLabel5, DPSQuickLabel6, DPSQuickLabel7, DPSQuickLabel8, DPSQuickLabel9, DPSQuickLabel10 };
+        MushroomLabelArray = new Label[10] { MushroomLabel1, MushroomLabel2, MushroomLabel3, MushroomLabel4, MushroomLabel5, MushroomLabel6, MushroomLabel7, MushroomLabel8, MushroomLabel9, MushroomLabel10 };
+        TowerLabelArray = new Label[10] { TowerLabel1, TowerLabel2, TowerLabel3, TowerLabel4, TowerLabel5, TowerLabel6, TowerLabel7, TowerLabel8, TowerLabel9, TowerLabel10 };
+        ReflectLabelArray = new Label[10] { ReflectLabel1, ReflectLabel2, ReflectLabel3, ReflectLabel4, ReflectLabel5, ReflectLabel6, ReflectLabel7, ReflectLabel8, ReflectLabel9, ReflectLabel10 };
+        CannonLabelArray = new Label[10] { CannonLabel1, CannonLabel2, CannonLabel3, CannonLabel4, CannonLabel5, CannonLabel6, CannonLabel7, CannonLabel8, CannonLabel9, CannonLabel10 };
+        ConstrucPusherLabelArray = new Label[10] { ConstructPusherLabel1, ConstructPusherLabel2, ConstructPusherLabel3, ConstructPusherLabel4, ConstructPusherLabel5, ConstructPusherLabel6, ConstructPusherLabel7, ConstructPusherLabel8, ConstructPusherLabel9, ConstructPusherLabel10 };
+        LampLabelArray = new Label[10] { LampLabel1, LampLabel2, LampLabel3, LampLabel4, LampLabel5, LampLabel6, LampLabel7, LampLabel8, LampLabel9, LampLabel10 };
+        PylonLabelArray = new Label[10] { PylonLabel1, PylonLabel2, PylonLabel3, PylonLabel4, PylonLabel5, PylonLabel6, PylonLabel7, PylonLabel8, PylonLabel9, PylonLabel10 };
+        PillarLabelArray = new Label[10] { PillarLabel1, PillarLabel2, PillarLabel3, PillarLabel4, PillarLabel5, PillarLabel6, PillarLabel7, PillarLabel8, PillarLabel9, PillarLabel10 };
+        GreenLabelArray = new Label[10] { GreenLabel1, GreenLabel2, GreenLabel3, GreenLabel4, GreenLabel5, GreenLabel6, GreenLabel7, GreenLabel8, GreenLabel9, GreenLabel10 };
+        SoullessPusherLabelArray = new Label[10] { SoullessHorrorPusherLabel1, SoullessHorrorPusherLabel2, SoullessHorrorPusherLabel3, SoullessHorrorPusherLabel4, SoullessHorrorPusherLabel5, SoullessHorrorPusherLabel6, SoullessHorrorPusherLabel7, SoullessHorrorPusherLabel8, SoullessHorrorPusherLabel9, SoullessHorrorPusherLabel10 };
+        DhuumKiteLabelArray = new Label[10] { DhuumKiteLabel1, DhuumKiteLabel2, DhuumKiteLabel3, DhuumKiteLabel4, DhuumKiteLabel5, DhuumKiteLabel6, DhuumKiteLabel7, DhuumKiteLabel8, DhuumKiteLabel9, DhuumKiteLabel10 };
+        QadimKiteLabelArray = new Label[10] { QadimKiteLabel1, QadimKiteLabel2, QadimKiteLabel3, QadimKiteLabel4, QadimKiteLabel5, QadimKiteLabel6, QadimKiteLabel7, QadimKiteLabel8, QadimKiteLabel9, QadimKiteLabel10 };
+        SwordLabelArray = new Label[10] { SwordLabel1, SwordLabel2, SwordLabel3, SwordLabel4, SwordLabel5, SwordLabel6, SwordLabel7, SwordLabel8, SwordLabel9, SwordLabel10 };
+        ShieldLabelArray = new Label[10] { ShieldLabel1, ShieldLabel2, ShieldLabel3, ShieldLabel4, ShieldLabel5, ShieldLabel6, ShieldLabel7, ShieldLabel8, ShieldLabel9, ShieldLabel10 };
+        HoTPannelArray = new Panel[10] { HoT_PlayerRolesPanel1, HoT_PlayerRolesPanel2, HoT_PlayerRolesPanel3, HoT_PlayerRolesPanel4, HoT_PlayerRolesPanel5, HoT_PlayerRolesPanel6, HoT_PlayerRolesPanel7, HoT_PlayerRolesPanel8, HoT_PlayerRolesPanel9, HoT_PlayerRolesPanel10 };
+        PoFPannelArray = new Panel[10] { PoF_PlayerRolesPanel1,PoF_PlayerRolesPanel2,PoF_PlayerRolesPanel3,PoF_PlayerRolesPanel4,PoF_PlayerRolesPanel5,PoF_PlayerRolesPanel6,PoF_PlayerRolesPanel7,PoF_PlayerRolesPanel8,PoF_PlayerRolesPanel9,PoF_PlayerRolesPanel10};
+        }
+
+        protected override async Task LoadAsync()
+        //Label Dimensions(width, height): (100, 25)
+        //HoT Panel Dimensions(width, height): (510, 100)
+        //PoF Panel Dimensions(width, height): (510, 75)
+        {
+            //Initialize Windows Here first, Then initialize panels, then labels and checkboxes
             #region Checkboxes
-            HandKitePlayer1 = new Checkbox { };
-            HandKitePlayer2 = new Checkbox { };
-            HandKitePlayer3 = new Checkbox { };
-            HandKitePlayer4 = new Checkbox { };
-            HandKitePlayer5 = new Checkbox { };
-            HandKitePlayer6 = new Checkbox { };
-            HandKitePlayer7 = new Checkbox { };
-            HandKitePlayer8 = new Checkbox { };
-            HandKitePlayer9 = new Checkbox { };
-            HandKitePlayer10 = new Checkbox { };
-            OilKitePlayer1 = new Checkbox { };
-            OilKitePlayer2 = new Checkbox { };
-            OilKitePlayer3 = new Checkbox { };
-            OilKitePlayer4 = new Checkbox { };
-            OilKitePlayer5 = new Checkbox { };
-            OilKitePlayer6 = new Checkbox { };
-            OilKitePlayer7 = new Checkbox { };
-            OilKitePlayer8 = new Checkbox { };
-            OilKitePlayer9= new Checkbox { };
-            OilKitePlayer10 = new Checkbox { };
-            FlakKitePlayer1 = new Checkbox { };
-            FlakKitePlayer2 = new Checkbox { };
-            FlakKitePlayer3 = new Checkbox { };
-            FlakKitePlayer4 = new Checkbox { };
-            FlakKitePlayer5 = new Checkbox { };
-            FlakKitePlayer6 = new Checkbox { };
-            FlakKitePlayer7 = new Checkbox { };
-            FlakKitePlayer8 = new Checkbox { };
-            FlakKitePlayer9 = new Checkbox { };
-            FlakKitePlayer10 = new Checkbox { };
-            TankPlayer1 = new Checkbox { };
-            TankPlayer2 = new Checkbox { };
-            TankPlayer3 = new Checkbox { };
-            TankPlayer4 = new Checkbox { };
-            TankPlayer5 = new Checkbox { };
-            TankPlayer6 = new Checkbox { };
-            TankPlayer7 = new Checkbox { };
-            TankPlayer8 = new Checkbox { };
-            TankPlayer9 = new Checkbox { };
-            TankPlayer10 = new Checkbox { };
-            HealAlacPlayer1 = new Checkbox { };
-            HealAlacPlayer2 = new Checkbox { };
-            HealAlacPlayer3 = new Checkbox { };
-            HealAlacPlayer4 = new Checkbox { };
-            HealAlacPlayer5 = new Checkbox { };
-            HealAlacPlayer6 = new Checkbox { };
-            HealAlacPlayer7 = new Checkbox { };
-            HealAlacPlayer8 = new Checkbox { };
-            HealAlacPlayer9 = new Checkbox { };
-            HealAlacPlayer10 = new Checkbox { };
-
-            HealQuickPlayer1 = new Checkbox { };
-            HealQuickPlayer2 = new Checkbox { };
-            HealQuickPlayer3 = new Checkbox { };
-            HealQuickPlayer4 = new Checkbox { };
-            HealQuickPlayer5 = new Checkbox { };
-            HealQuickPlayer6 = new Checkbox { };
-            HealQuickPlayer7 = new Checkbox { };
-            HealQuickPlayer8 = new Checkbox { };
-            HealQuickPlayer9 = new Checkbox { };
-            HealQuickPlayer10 = new Checkbox { };
-
-            DPSAlacPlayer1 = new Checkbox { };
-            DPSAlacPlayer2 = new Checkbox { };
-            DPSAlacPlayer3 = new Checkbox { };
-            DPSAlacPlayer4 = new Checkbox { };
-            DPSAlacPlayer5 = new Checkbox { };
-            DPSAlacPlayer6 = new Checkbox { };
-            DPSAlacPlayer7 = new Checkbox { };
-            DPSAlacPlayer8 = new Checkbox { };
-            DPSAlacPlayer9 = new Checkbox { };
-            DPSAlacPlayer10 = new Checkbox { };
-
-            DPSQuickPlayer1 = new Checkbox { };
-            DPSQuickPlayer2 = new Checkbox { };
-            DPSQuickPlayer3 = new Checkbox { };
-            DPSQuickPlayer4 = new Checkbox { };
-            DPSQuickPlayer5 = new Checkbox { };
-            DPSQuickPlayer6 = new Checkbox { };
-            DPSQuickPlayer7 = new Checkbox { };
-            DPSQuickPlayer8 = new Checkbox { };
-            DPSQuickPlayer9 = new Checkbox { };
-            DPSQuickPlayer10 = new Checkbox { };
-
-            MushroomPlayer1 = new Checkbox { };
-            MushroomPlayer2 = new Checkbox { };
-            MushroomPlayer3 = new Checkbox { };
-            MushroomPlayer4 = new Checkbox { };
-            MushroomPlayer5 = new Checkbox { };
-            MushroomPlayer6 = new Checkbox { };
-            MushroomPlayer7 = new Checkbox { };
-            MushroomPlayer8 = new Checkbox { };
-            MushroomPlayer9 = new Checkbox { };
-            MushroomPlayer10 = new Checkbox { };
-
-            TowerPlayer1 = new Checkbox { };
-            TowerPlayer2 = new Checkbox { };
-            TowerPlayer3 = new Checkbox { };
-            TowerPlayer4 = new Checkbox { };
-            TowerPlayer5 = new Checkbox { };
-            TowerPlayer6 = new Checkbox { };
-            TowerPlayer7 = new Checkbox { };
-            TowerPlayer8 = new Checkbox { };
-            TowerPlayer9 = new Checkbox { };
-            TowerPlayer10 = new Checkbox { };
-
-            ReflectPlayer1 = new Checkbox { };
-            ReflectPlayer2 = new Checkbox { };
-            ReflectPlayer3 = new Checkbox { };
-            ReflectPlayer4 = new Checkbox { };
-            ReflectPlayer5 = new Checkbox { };
-            ReflectPlayer6 = new Checkbox { };
-            ReflectPlayer7 = new Checkbox { };
-            ReflectPlayer8 = new Checkbox { };
-            ReflectPlayer9 = new Checkbox { };
-            ReflectPlayer10 = new Checkbox { };
-
-            CannonPlayer1 = new Checkbox { };
-            CannonPlayer2 = new Checkbox { };
-            CannonPlayer3 = new Checkbox { };
-            CannonPlayer4 = new Checkbox { };
-            CannonPlayer5 = new Checkbox { };
-            CannonPlayer6 = new Checkbox { };
-            CannonPlayer7 = new Checkbox { };
-            CannonPlayer8 = new Checkbox { };
-            CannonPlayer9 = new Checkbox { };
-            CannonPlayer10 = new Checkbox { };
-
-            LampPlayer1 = new Checkbox { };
-            LampPlayer2 = new Checkbox { };
-            LampPlayer3 = new Checkbox { };
-            LampPlayer4 = new Checkbox { };
-            LampPlayer5 = new Checkbox { };
-            LampPlayer6 = new Checkbox { };
-            LampPlayer7 = new Checkbox { };
-            LampPlayer8 = new Checkbox { };
-            LampPlayer9 = new Checkbox { };
-            LampPlayer10 = new Checkbox { };
-
-            PylonPlayer1 = new Checkbox { };
-            PylonPlayer2 = new Checkbox { };
-            PylonPlayer3 = new Checkbox { };
-            PylonPlayer4 = new Checkbox { };
-            PylonPlayer5 = new Checkbox { };
-            PylonPlayer6 = new Checkbox { };
-            PylonPlayer7 = new Checkbox { };
-            PylonPlayer8 = new Checkbox { };
-            PylonPlayer9 = new Checkbox { };
-            PylonPlayer10 = new Checkbox { };
-
-            PillarPlayer1 = new Checkbox { };
-            PillarPlayer2 = new Checkbox { };
-            PillarPlayer3 = new Checkbox { };
-            PillarPlayer4 = new Checkbox { };
-            PillarPlayer5 = new Checkbox { };
-            PillarPlayer6 = new Checkbox { };
-            PillarPlayer7 = new Checkbox { };
-            PillarPlayer8 = new Checkbox { };
-            PillarPlayer9 = new Checkbox { };
-            PillarPlayer10 = new Checkbox { };
-
-            GreenPlayer1 = new Checkbox { };
-            GreenPlayer2 = new Checkbox { };
-            GreenPlayer3 = new Checkbox { };
-            GreenPlayer4 = new Checkbox { };
-            GreenPlayer5 = new Checkbox { };
-            GreenPlayer6 = new Checkbox { };
-            GreenPlayer7 = new Checkbox { };
-            GreenPlayer8 = new Checkbox { };
-            GreenPlayer9 = new Checkbox { };
-            GreenPlayer10 = new Checkbox { };
-
-            SoullessPusherPlayer1 = new Checkbox { };
-            SoullessPusherPlayer2 = new Checkbox { };
-            SoullessPusherPlayer3 = new Checkbox { };
-            SoullessPusherPlayer4 = new Checkbox { };
-            SoullessPusherPlayer5 = new Checkbox { };
-            SoullessPusherPlayer6 = new Checkbox { };
-            SoullessPusherPlayer7 = new Checkbox { };
-            SoullessPusherPlayer8 = new Checkbox { };
-            SoullessPusherPlayer9 = new Checkbox { };
-            SoullessPusherPlayer10 = new Checkbox { };
-
-            ConstrucPusherPlayer1 = new Checkbox { };
-            ConstrucPusherPlayer2 = new Checkbox { };
-            ConstrucPusherPlayer3 = new Checkbox { };
-            ConstrucPusherPlayer4 = new Checkbox { };
-            ConstrucPusherPlayer5 = new Checkbox { };
-            ConstrucPusherPlayer6 = new Checkbox { };
-            ConstrucPusherPlayer7 = new Checkbox { };
-            ConstrucPusherPlayer8 = new Checkbox { };
-            ConstrucPusherPlayer9 = new Checkbox { };
-            ConstrucPusherPlayer10 = new Checkbox { };
-
-            DhuumKitePlayer1 = new Checkbox { };
-            DhuumKitePlayer2 = new Checkbox { };
-            DhuumKitePlayer3 = new Checkbox { };
-            DhuumKitePlayer4 = new Checkbox { };
-            DhuumKitePlayer5 = new Checkbox { };
-            DhuumKitePlayer6 = new Checkbox { };
-            DhuumKitePlayer7 = new Checkbox { };
-            DhuumKitePlayer8 = new Checkbox { };
-            DhuumKitePlayer9 = new Checkbox { };
-            DhuumKitePlayer10 = new Checkbox { };
-
-            QadimKitePlayer1 = new Checkbox { };
-            QadimKitePlayer2 = new Checkbox { };
-            QadimKitePlayer3 = new Checkbox { };
-            QadimKitePlayer4 = new Checkbox { };
-            QadimKitePlayer5 = new Checkbox { };
-            QadimKitePlayer6 = new Checkbox { };
-            QadimKitePlayer7 = new Checkbox { };
-            QadimKitePlayer8 = new Checkbox { };
-            QadimKitePlayer9 = new Checkbox { };
-            QadimKitePlayer10 = new Checkbox { };
-
-            SwordPlayer1 = new Checkbox { };
-            SwordPlayer2 = new Checkbox { };
-            SwordPlayer3 = new Checkbox { };
-            SwordPlayer4 = new Checkbox { };
-            SwordPlayer5 = new Checkbox { };
-            SwordPlayer6 = new Checkbox { };
-            SwordPlayer7 = new Checkbox { };
-            SwordPlayer8 = new Checkbox { };
-            SwordPlayer9 = new Checkbox { };
-            SwordPlayer10 = new Checkbox { };
-
-            ShieldPlayer1 = new Checkbox { };
-            ShieldPlayer2 = new Checkbox { };
-            ShieldPlayer3 = new Checkbox { };
-            ShieldPlayer4 = new Checkbox { };
-            ShieldPlayer5 = new Checkbox { };
-            ShieldPlayer6 = new Checkbox { };
-            ShieldPlayer7 = new Checkbox { };
-            ShieldPlayer8 = new Checkbox { };
-            ShieldPlayer9 = new Checkbox { };
-            ShieldPlayer10 = new Checkbox { };
+            for (int i = 0; i < 10; i++)
+            {
+                HandKiteBoxArray[i] = new Checkbox 
+                {
+                    Text = "Hand Kite",
+                    Location = new Point(0,0),
+                    BasicTooltipText = "Hand Kite",
+                    Parent = HoTPannelArray[i]
+                };
+            }
+            for (int i = 0; i < 10; i++)
+            {
+                OilKiteBoxArray[i] = new Checkbox
+                {
+                    Text = "Oil Kite",
+                    Location = new Point(100,0),
+                    BasicTooltipText = "Oil Kite",
+                    Parent = HoTPannelArray[i]
+                };
+            }
+            for (int i = 0; i < 10; i++)
+            {
+                FlakKiteBoxArray[i] = new Checkbox 
+                {
+                    Text = "Flak Kite",
+                    Location = new Point(200,0),
+                    BasicTooltipText = "Flak Kite",
+                    Parent = HoTPannelArray[i]
+                };
+            }
+            for (int i = 0; i < 10; i++)
+            {
+                TankBoxArray[i] = new Checkbox 
+                {
+                    Text = "Tank",
+                    Location = new Point(300, 0),
+                    BasicTooltipText = "Tank",
+                    Parent = HoTPannelArray[i]
+                };
+            }
+            for (int i = 0; i < 10; i++)
+            {
+                HealAlacBoxArray[i] = new Checkbox 
+                {
+                    Text = "Heal + Alac",
+                    Location = new Point(400,0),
+                    BasicTooltipText = "Heal + Alac",
+                    Parent = HoTPannelArray[i]
+                };
+            }
+            for (int i = 0; i < 10; i++)
+            {
+                HealQuickBoxArray[i] = new Checkbox 
+                {
+                    Text = "Heal + Quick",
+                    Location = new Point(0, 50),
+                    BasicTooltipText = "Heal + Quick",
+                    Parent = HoTPannelArray[i]
+                };
+            }
+            for (int i = 0; i < 10; i++)
+            {
+                DPSAlacBoxArray[i] = new Checkbox 
+                {
+                    Text = "DPS + Alac",
+                    Location = new Point(100,50),
+                    BasicTooltipText = "DPS + Alac",
+                    Parent = HoTPannelArray[i]
+                };
+            }
+            for (int i = 0; i < 10; i++)
+            {
+                DPSQuickBoxArray[i] = new Checkbox 
+                {
+                    Text = "DPS + Quick",
+                    Location = new Point(200,50),
+                    BasicTooltipText = "DPS + Quick",
+                    Parent = HoTPannelArray[i]
+                };
+            }
+            for (int i = 0; i < 10; i++)
+            {
+                MushroomBoxArray[i] = new Checkbox 
+                {
+                    Text = "Slothosaur Mushroom",
+                    Location = new Point(300, 50),
+                    BasicTooltipText = "Slothosaur Mushroom",
+                    Parent = HoTPannelArray[i]
+                };
+            }
+            for (int i = 0; i < 10; i++)
+            {
+                TowerBoxArray[i] = new Checkbox 
+                {
+                    Text = "Tower Mesmer",
+                    Location = new Point(400, 50),
+                    BasicTooltipText = "Tower Mesmer",
+                    Parent = HoTPannelArray[i]
+                };
+            }
+            for (int i = 0; i < 10; i++)
+            {
+                ReflectBoxArray[i] = new Checkbox 
+                {
+                    Text = "Matthias Reflect",
+                    Location = new Point(0, 100),
+                    BasicTooltipText = "Matthias Reflect",
+                    Parent = HoTPannelArray[i]
+                };
+            }
+            for (int i = 0; i < 10; i++)
+            {
+                CannonBoxArray[i] = new Checkbox 
+                {
+                    Text = "Sabetha Cannons",
+                    Location = new Point(100,100),
+                    BasicTooltipText = "Sabetha Cannons",
+                    Parent = HoTPannelArray[i]                    
+                };
+            }
+            for (int i = 0; i < 10; i++)
+            {
+                ConstrucPusherBoxArray[i] = new Checkbox 
+                {
+                    Text = "Keep Construct Pusher",
+                    Location = new Point(200, 100),
+                    BasicTooltipText = "Keep Construct Pusher",
+                    Parent = HoTPannelArray[i]
+                };
+            }
+            for (int i = 0; i < 10; i++)
+            {
+                LampBoxArray[i] = new Checkbox 
+                {
+                    Text = "Qadim Lamp",
+                    Location = new Point(0,0),
+                    BasicTooltipText = "Qadim Lamp",
+                    Parent = PoFPannelArray[i]
+                };
+            }
+            for (int i = 0; i < 10; i++)
+            {
+                PylonBoxArray[i] = new Checkbox 
+                {
+                    Text = "Qadim Pylon",
+                    Location = new Point(100,0),
+                    BasicTooltipText = "Qadim Pylon",
+                    Parent = PoFPannelArray[i]
+                };
+            }
+            for (int i = 0; i < 10; i++)
+            {
+                PillarBoxArray[i] = new Checkbox 
+                {
+                    Text = "Adina Pillar",
+                    Location = new Point(200,0),
+                    BasicTooltipText = "Adina Pillar",
+                    Parent = PoFPannelArray[i]
+                };
+            }
+            for (int i = 0; i < 10; i++)
+            {
+                GreenBoxArray[i] = new Checkbox 
+                {
+                    Text = "Dhuum Green",
+                    Location = new Point(300,0),
+                    BasicTooltipText = "Dhuum Green",
+                    Parent = PoFPannelArray[i]
+                };
+            }
+            for (int i = 0; i < 10; i++)
+            {
+                SoullessPusherBoxArray[i] = new Checkbox 
+                {
+                    Text = "Soulless Horror Pusher",
+                    Location = new Point(400,0),
+                    BasicTooltipText = "Soulless Horror Pusher",
+                    Parent = PoFPannelArray[i]
+                };
+            }
+            for (int i = 0; i < 10; i++)
+            {
+                DhuumKiteBoxArray[i] = new Checkbox 
+                {
+                    Text = "Dhuum Messenger Kiter",
+                    Location = new Point(0,50),
+                    BasicTooltipText = "Dhuum Messenger Kiter",
+                    Parent = PoFPannelArray[i]
+                };
+            }
+            for (int i = 0; i < 10; i++)
+            {
+                QadimKiteBoxArray[i] = new Checkbox 
+                {
+                    Text = "Qadim Kiter",
+                    Location = new Point(100,50),
+                    BasicTooltipText = "Qadim Kiter",
+                    Parent = PoFPannelArray[i]
+                };
+            }
+            for (int i = 0; i < 10; i++)
+            {
+                SwordBoxArray[i] = new Checkbox 
+                {
+                    Text = "CA Sword Collector",
+                    Location = new Point(200,50),
+                    BasicTooltipText = "CA Sword Collector",
+                    Parent = PoFPannelArray[i]
+                };
+            }
+            for (int i = 0; i < 10; i++)
+            {
+                ShieldBoxArray[i] = new Checkbox 
+                {
+                    Text = "CA Shield Collector",
+                    Location = new Point(300, 50),
+                    BasicTooltipText = "CA Shield Collector",
+                    Parent = PoFPannelArray[i]
+                };
+            }
             #endregion
         }
 
