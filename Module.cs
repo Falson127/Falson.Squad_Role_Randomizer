@@ -30,16 +30,6 @@ namespace Falson.Squad_Role_Randomizer
         public static List<string> FlakKiteValid;
         public static List<string> TowerMesmerValid;
         public static List<string> ReflectValid;
-        public static List<string> player1roles;
-        public static List<string> player2roles;
-        public static List<string> player3roles;
-        public static List<string> player4roles;
-        public static List<string> player5roles;
-        public static List<string> player6roles;
-        public static List<string> player7roles;
-        public static List<string> player8roles;
-        public static List<string> player9roles;
-        public static List<string> player10roles;
         public static Label SelectedTank;
         public static Label SelectedHeal1;
         public static Label SelectedHeal2;
@@ -59,6 +49,17 @@ namespace Falson.Squad_Role_Randomizer
         public StandardButton GenerateRandomRoles;
         public SettingCollection HoTRolesToRandomize;
         public SettingCollection PoFRolesToRandomize;
+        public SettingCollection InternalPlayerRolesSettings;
+        public SettingEntry<bool>[] Player1Roles;
+        public SettingEntry<bool>[] Player2Roles;
+        public SettingEntry<bool>[] Player3Roles;
+        public SettingEntry<bool>[] Player4Roles;
+        public SettingEntry<bool>[] Player5Roles;
+        public SettingEntry<bool>[] Player6Roles;
+        public SettingEntry<bool>[] Player7Roles;
+        public SettingEntry<bool>[] Player8Roles;
+        public SettingEntry<bool>[] Player9Roles;
+        public SettingEntry<bool>[] Player10Roles;
         public List<List<string>> SelectedRolesToRandomize;
         public TextBox Player1Name;
         public TextBox Player2Name;
@@ -712,6 +713,7 @@ namespace Falson.Squad_Role_Randomizer
         #region Checkbox Labels
 
             #endregion
+        #region Box and Label Arrays
         HandKiteBoxArray = new Checkbox[10] {HandKitePlayer1, HandKitePlayer2, HandKitePlayer3, HandKitePlayer4, HandKitePlayer5, HandKitePlayer6, HandKitePlayer7, HandKitePlayer8, HandKitePlayer9, HandKitePlayer10};
         OilKiteBoxArray = new Checkbox[10] {OilKitePlayer1, OilKitePlayer2, OilKitePlayer3, OilKitePlayer4, OilKitePlayer5,OilKitePlayer6,OilKitePlayer7,OilKitePlayer8,OilKitePlayer9,OilKitePlayer10};
         FlakKiteBoxArray = new Checkbox[10] {FlakKitePlayer1,FlakKitePlayer2,FlakKitePlayer3,FlakKitePlayer4,FlakKitePlayer5,FlakKitePlayer6,FlakKitePlayer7,FlakKitePlayer8,FlakKitePlayer9,FlakKitePlayer10};
@@ -758,6 +760,7 @@ namespace Falson.Squad_Role_Randomizer
         ShieldLabelArray = new Label[10] { ShieldLabel1, ShieldLabel2, ShieldLabel3, ShieldLabel4, ShieldLabel5, ShieldLabel6, ShieldLabel7, ShieldLabel8, ShieldLabel9, ShieldLabel10 };
         HoTPannelArray = new Panel[10] { HoT_PlayerRolesPanel1, HoT_PlayerRolesPanel2, HoT_PlayerRolesPanel3, HoT_PlayerRolesPanel4, HoT_PlayerRolesPanel5, HoT_PlayerRolesPanel6, HoT_PlayerRolesPanel7, HoT_PlayerRolesPanel8, HoT_PlayerRolesPanel9, HoT_PlayerRolesPanel10 };
         PoFPannelArray = new Panel[10] { PoF_PlayerRolesPanel1,PoF_PlayerRolesPanel2,PoF_PlayerRolesPanel3,PoF_PlayerRolesPanel4,PoF_PlayerRolesPanel5,PoF_PlayerRolesPanel6,PoF_PlayerRolesPanel7,PoF_PlayerRolesPanel8,PoF_PlayerRolesPanel9,PoF_PlayerRolesPanel10};
+            #endregion
         }
 
         protected override async Task LoadAsync()
