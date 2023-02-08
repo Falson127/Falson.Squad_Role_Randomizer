@@ -50,16 +50,29 @@ namespace Falson.Squad_Role_Randomizer
         public SettingCollection HoTRolesToRandomize;
         public SettingCollection PoFRolesToRandomize;
         public SettingCollection InternalPlayerRolesSettings;
-        public SettingEntry<bool>[] Player1Roles;
-        public SettingEntry<bool>[] Player2Roles;
-        public SettingEntry<bool>[] Player3Roles;
-        public SettingEntry<bool>[] Player4Roles;
-        public SettingEntry<bool>[] Player5Roles;
-        public SettingEntry<bool>[] Player6Roles;
-        public SettingEntry<bool>[] Player7Roles;
-        public SettingEntry<bool>[] Player8Roles;
-        public SettingEntry<bool>[] Player9Roles;
-        public SettingEntry<bool>[] Player10Roles;
+        public SettingEntry<bool>[] HandKiteRoles;
+        public SettingEntry<bool>[] OilKiteRoles;
+        public SettingEntry<bool>[] FlakKiteRoles;
+        public SettingEntry<bool>[] TankRoles;
+        public SettingEntry<bool>[] HealAlacRoles;
+        public SettingEntry<bool>[] HealQuickRoles;
+        public SettingEntry<bool>[] DPSAlacRoles;
+        public SettingEntry<bool>[] DPSQuickRoles;
+        public SettingEntry<bool>[] MushroomRoles;
+        public SettingEntry<bool>[] TowerRoles;
+        public SettingEntry<bool>[] ReflectRoles;
+        public SettingEntry<bool>[] CannonRoles;
+        public SettingEntry<bool>[] ConstrucPusherRoles;
+        public SettingEntry<bool>[] LampRoles;
+        public SettingEntry<bool>[] PylonRoles;
+        public SettingEntry<bool>[] PillarRoles;
+        public SettingEntry<bool>[] GreenRoles;
+        public SettingEntry<bool>[] SoullessPusherRoles;
+        public SettingEntry<bool>[] DhuumKiteRoles;
+        public SettingEntry<bool>[] QadimKiteRoles;
+        public SettingEntry<bool>[] SwordRoles;
+        public SettingEntry<bool>[] ShieldRoles;
+        public List<SettingEntry<bool>[]> PlayerRolesContainer;
         public List<List<string>> SelectedRolesToRandomize;
         public TextBox Player1Name;
         public TextBox Player2Name;
@@ -629,7 +642,117 @@ namespace Falson.Squad_Role_Randomizer
 
         protected override void DefineSettings(SettingCollection settings)
         {
-
+            InternalPlayerRolesSettings.RenderInUi = false;
+            HandKiteRoles = new SettingEntry<bool>[10];
+            for (int i = 0; i < 10; i++)
+            {
+                HandKiteRoles[i] = InternalPlayerRolesSettings.DefineSetting("Hand_Kite Player" + (i + 1).ToString(), false);
+            }
+            OilKiteRoles = new SettingEntry<bool>[10];
+            for (int i = 0; i < 10; i++)
+            {
+                OilKiteRoles[i] = InternalPlayerRolesSettings.DefineSetting("OilKite Player" + (i + 1).ToString(), false);
+            }
+            FlakKiteRoles = new SettingEntry<bool>[10];
+            for (int i = 0; i < 10; i++)
+            {
+                FlakKiteRoles[i] = InternalPlayerRolesSettings.DefineSetting("FlakKite Player" + (i + 1).ToString(), false);
+            }
+            TankRoles = new SettingEntry<bool>[10];
+            for (int i = 0; i < 10; i++)
+            {
+                TankRoles[i] = InternalPlayerRolesSettings.DefineSetting("Tank Player" + (i + 1).ToString(), false);
+            }
+            HealAlacRoles = new SettingEntry<bool>[10];
+            for (int i = 0; i < 10; i++)
+            {
+                HealAlacRoles[i] = InternalPlayerRolesSettings.DefineSetting("HealAlac Player" + (i + 1).ToString(), false);
+            }
+            HealQuickRoles = new SettingEntry<bool>[10];
+            for (int i = 0; i < 10; i++)
+            {
+                HealQuickRoles[i] = InternalPlayerRolesSettings.DefineSetting("HealQuick Player" + (i + 1).ToString(), false);
+            }
+            DPSAlacRoles = new SettingEntry<bool>[10];
+            for (int i = 0; i < 10; i++)
+            {
+                DPSAlacRoles[i] = InternalPlayerRolesSettings.DefineSetting("DPSAlac Player" + (i + 1).ToString(), false);
+            }
+            DPSQuickRoles = new SettingEntry<bool>[10];
+            for (int i = 0; i < 10; i++)
+            {
+                DPSQuickRoles[i] = InternalPlayerRolesSettings.DefineSetting("DPSQuick Player" + (i + 1).ToString(), false);
+            }
+            MushroomRoles = new SettingEntry<bool>[10];
+            for (int i = 0; i < 10; i++)
+            {
+                MushroomRoles[i] = InternalPlayerRolesSettings.DefineSetting("Mushroom Player" + (i + 1).ToString(), false);
+            }
+            TowerRoles = new SettingEntry<bool>[10];
+            for (int i = 0; i < 10; i++)
+            {
+                TowerRoles[i] = InternalPlayerRolesSettings.DefineSetting("Tower Player" + (i + 1).ToString(), false);
+            }
+            ReflectRoles = new SettingEntry<bool>[10];
+            for (int i = 0; i < 10; i++)
+            {
+                ReflectRoles[i] = InternalPlayerRolesSettings.DefineSetting("Reflect Player" + (i + 1).ToString(), false);
+            }
+            CannonRoles = new SettingEntry<bool>[10];
+            for (int i = 0; i < 10; i++)
+            {
+                CannonRoles[i] = InternalPlayerRolesSettings.DefineSetting("Cannon Player" + (i + 1).ToString(), false);
+            }
+            ConstrucPusherRoles = new SettingEntry<bool>[10];
+            for (int i = 0; i < 10; i++)
+            {
+                ConstrucPusherRoles[i] = InternalPlayerRolesSettings.DefineSetting("ConstrucPusher Player" + (i + 1).ToString(), false);
+            }
+            LampRoles = new SettingEntry<bool>[10];
+            for (int i = 0; i < 10; i++)
+            {
+                LampRoles[i] = InternalPlayerRolesSettings.DefineSetting("Lamp Player" + (i + 1).ToString(), false);
+            }
+            PylonRoles = new SettingEntry<bool>[10];
+            for (int i = 0; i < 10; i++)
+            {
+                PylonRoles[i] = InternalPlayerRolesSettings.DefineSetting("Pylon Player" + (i + 1).ToString(), false);
+            }
+            PillarRoles = new SettingEntry<bool>[10];
+            for (int i = 0; i < 10; i++)
+            {
+                PillarRoles[i] = InternalPlayerRolesSettings.DefineSetting("Pillar Player" + (i + 1).ToString(), false);
+            }
+            GreenRoles = new SettingEntry<bool>[10];
+            for (int i = 0; i < 10; i++)
+            {
+                GreenRoles[i] = InternalPlayerRolesSettings.DefineSetting("Green Player" + (i + 1).ToString(), false);
+            }
+            SoullessPusherRoles = new SettingEntry<bool>[10];
+            for (int i = 0; i < 10; i++)
+            {
+                SoullessPusherRoles[i] = InternalPlayerRolesSettings.DefineSetting("SoullessPusher Player" + (i + 1).ToString(), false);
+            }
+            DhuumKiteRoles = new SettingEntry<bool>[10];
+            for (int i = 0; i < 10; i++)
+            {
+                DhuumKiteRoles[i] = InternalPlayerRolesSettings.DefineSetting("DhuumKite Player" + (i + 1).ToString(), false);
+            }
+            QadimKiteRoles = new SettingEntry<bool>[10];
+            for (int i = 0; i < 10; i++)
+            {
+                QadimKiteRoles[i] = InternalPlayerRolesSettings.DefineSetting("QadimKite Player" + (i + 1).ToString(), false);
+            }
+            SwordRoles = new SettingEntry<bool>[10];
+            for (int i = 0; i < 10; i++)
+            {
+                SwordRoles[i] = InternalPlayerRolesSettings.DefineSetting("Sword Player" + (i + 1).ToString(), false);
+            }
+            ShieldRoles = new SettingEntry<bool>[10];
+            for (int i = 0; i < 10; i++)
+            {
+                ShieldRoles[i] = InternalPlayerRolesSettings.DefineSetting("Shield Player" + (i + 1).ToString(), false);
+            }
         }
 
         protected override void Initialize()
@@ -713,53 +836,53 @@ namespace Falson.Squad_Role_Randomizer
         #region Checkbox Labels
 
             #endregion
-        #region Box and Label Arrays
-        HandKiteBoxArray = new Checkbox[10] {HandKitePlayer1, HandKitePlayer2, HandKitePlayer3, HandKitePlayer4, HandKitePlayer5, HandKitePlayer6, HandKitePlayer7, HandKitePlayer8, HandKitePlayer9, HandKitePlayer10};
-        OilKiteBoxArray = new Checkbox[10] {OilKitePlayer1, OilKitePlayer2, OilKitePlayer3, OilKitePlayer4, OilKitePlayer5,OilKitePlayer6,OilKitePlayer7,OilKitePlayer8,OilKitePlayer9,OilKitePlayer10};
-        FlakKiteBoxArray = new Checkbox[10] {FlakKitePlayer1,FlakKitePlayer2,FlakKitePlayer3,FlakKitePlayer4,FlakKitePlayer5,FlakKitePlayer6,FlakKitePlayer7,FlakKitePlayer8,FlakKitePlayer9,FlakKitePlayer10};
-        TankBoxArray = new Checkbox[10] {TankPlayer1,TankPlayer2,TankPlayer3,TankPlayer4,TankPlayer5,TankPlayer6,TankPlayer7,TankPlayer8,TankPlayer9,TankPlayer10};
-        HealAlacBoxArray = new Checkbox[10] {HealAlacPlayer1,HealAlacPlayer2,HealAlacPlayer3,HealAlacPlayer4,HealAlacPlayer5,HealAlacPlayer6,HealAlacPlayer7,HealAlacPlayer8,HealAlacPlayer9,HealAlacPlayer10};
-        HealQuickBoxArray = new Checkbox[10] {HealQuickPlayer1,HealQuickPlayer2,HealQuickPlayer3,HealQuickPlayer4,HealQuickPlayer5,HealQuickPlayer6,HealQuickPlayer7,HealQuickPlayer8,HealQuickPlayer9,HealQuickPlayer10};
-        DPSAlacBoxArray = new Checkbox[10] {DPSAlacPlayer1,DPSAlacPlayer2,DPSAlacPlayer3,DPSAlacPlayer4,DPSAlacPlayer5,DPSAlacPlayer6,DPSAlacPlayer7,DPSAlacPlayer8,DPSAlacPlayer9,DPSAlacPlayer10};
-        DPSQuickBoxArray = new Checkbox[10] {DPSQuickPlayer1,DPSQuickPlayer2,DPSQuickPlayer3,DPSQuickPlayer4,DPSQuickPlayer5,DPSQuickPlayer6,DPSQuickPlayer7,DPSQuickPlayer8,DPSQuickPlayer9,DPSQuickPlayer10};
-        MushroomBoxArray = new Checkbox[10] {MushroomPlayer1,MushroomPlayer2,MushroomPlayer3,MushroomPlayer4,MushroomPlayer5,MushroomPlayer6,MushroomPlayer7,MushroomPlayer8,MushroomPlayer9,MushroomPlayer10};
-        TowerBoxArray = new Checkbox[10] {TowerPlayer1,TowerPlayer2,TowerPlayer3,TowerPlayer4,TowerPlayer5,TowerPlayer6,TowerPlayer7,TowerPlayer8,TowerPlayer9,TowerPlayer10};
-        ReflectBoxArray = new Checkbox[10] {ReflectPlayer1,ReflectPlayer2,ReflectPlayer3,ReflectPlayer4,ReflectPlayer5,ReflectPlayer6,ReflectPlayer7,ReflectPlayer8,ReflectPlayer9,ReflectPlayer10};
-        CannonBoxArray = new Checkbox[10] {CannonPlayer1,CannonPlayer2,CannonPlayer3,CannonPlayer4,CannonPlayer5,CannonPlayer6,CannonPlayer7,CannonPlayer8,CannonPlayer9,CannonPlayer10};
-        ConstrucPusherBoxArray = new Checkbox[10] {ConstrucPusherPlayer1,ConstrucPusherPlayer2,ConstrucPusherPlayer3,ConstrucPusherPlayer4,ConstrucPusherPlayer5,ConstrucPusherPlayer6,ConstrucPusherPlayer7,ConstrucPusherPlayer8,ConstrucPusherPlayer9,ConstrucPusherPlayer10};
-        LampBoxArray = new Checkbox[10] {LampPlayer1,LampPlayer2,LampPlayer3,LampPlayer4,LampPlayer5,LampPlayer6,LampPlayer7,LampPlayer8,LampPlayer9,LampPlayer10};
-        PylonBoxArray = new Checkbox[10] {PylonPlayer1,PylonPlayer2,PylonPlayer3,PylonPlayer4,PylonPlayer5,PylonPlayer6,PylonPlayer7,PylonPlayer8,PylonPlayer9,PylonPlayer10};
-        PillarBoxArray = new Checkbox[10] {PillarPlayer1,PillarPlayer2,PillarPlayer3,PillarPlayer4,PillarPlayer5,PillarPlayer6,PillarPlayer7,PillarPlayer8,PillarPlayer9,PillarPlayer10};
-        GreenBoxArray = new Checkbox[10] {GreenPlayer1,GreenPlayer2,GreenPlayer3,GreenPlayer4,GreenPlayer5,GreenPlayer6,GreenPlayer7,GreenPlayer8,GreenPlayer9,GreenPlayer10};
-        SoullessPusherBoxArray = new Checkbox[10] {SoullessPusherPlayer1,SoullessPusherPlayer2,SoullessPusherPlayer3,SoullessPusherPlayer4,SoullessPusherPlayer5,SoullessPusherPlayer6,SoullessPusherPlayer7,SoullessPusherPlayer8,SoullessPusherPlayer9,SoullessPusherPlayer10};
-        DhuumKiteBoxArray = new Checkbox[10] {DhuumKitePlayer1,DhuumKitePlayer2,DhuumKitePlayer3,DhuumKitePlayer4,DhuumKitePlayer5,DhuumKitePlayer6,DhuumKitePlayer7,DhuumKitePlayer8,DhuumKitePlayer9,DhuumKitePlayer10};
-        QadimKiteBoxArray = new Checkbox[10] {QadimKitePlayer1,QadimKitePlayer2,QadimKitePlayer3,QadimKitePlayer4,QadimKitePlayer5,QadimKitePlayer6,QadimKitePlayer7,QadimKitePlayer8,QadimKitePlayer9,QadimKitePlayer10};
-        SwordBoxArray = new Checkbox[10] {SwordPlayer1,SwordPlayer2,SwordPlayer3,SwordPlayer4,SwordPlayer5,SwordPlayer6,SwordPlayer7,SwordPlayer8,SwordPlayer9,SwordPlayer10};
-        ShieldBoxArray = new Checkbox[10] {ShieldPlayer1,ShieldPlayer2,ShieldPlayer3,ShieldPlayer4,ShieldPlayer5,ShieldPlayer6,ShieldPlayer7,ShieldPlayer8,ShieldPlayer9,ShieldPlayer10};
-        HandKiteLabelArray = new Label[10] { HandkiteLabel1, HandkiteLabel2, HandkiteLabel3, HandkiteLabel4, HandkiteLabel5, HandkiteLabel6, HandkiteLabel7, HandkiteLabel8, HandkiteLabel9, HandkiteLabel10 };
-        OilKiteLabelArray = new Label[10] { OilKiteLabel1, OilKiteLabel2, OilKiteLabel3, OilKiteLabel4, OilKiteLabel5, OilKiteLabel6, OilKiteLabel7, OilKiteLabel8, OilKiteLabel9, OilKiteLabel10 };
-        FlakKiteLabelArray = new Label[10] { FlakKiteLabel1, FlakKiteLabel2, FlakKiteLabel3, FlakKiteLabel4, FlakKiteLabel5, FlakKiteLabel6, FlakKiteLabel7, FlakKiteLabel8, FlakKiteLabel9, FlakKiteLabel10 };
-        TankLabelArray = new Label[10] { TankLabel1, TankLabel2, TankLabel3, TankLabel4, TankLabel5, TankLabel6, TankLabel7, TankLabel8, TankLabel9, TankLabel10 };
-        HealAlacLabelArray = new Label[10] { HealAlacLabel1, HealAlacLabel2, HealAlacLabel3, HealAlacLabel4, HealAlacLabel5, HealAlacLabel6, HealAlacLabel7, HealAlacLabel8, HealAlacLabel9, HealAlacLabel10 };
-        HealQuickLabelArray = new Label[10] { HealQuickLabel1, HealQuickLabel2, HealQuickLabel3, HealQuickLabel4, HealQuickLabel5, HealQuickLabel6, HealQuickLabel7, HealQuickLabel8, HealQuickLabel9, HealQuickLabel10 };
-        DPSAlacLabelArray = new Label[10] { DPSAlacLabel1, DPSAlacLabel2, DPSAlacLabel3, DPSAlacLabel4, DPSAlacLabel5, DPSAlacLabel6, DPSAlacLabel7, DPSAlacLabel8, DPSAlacLabel9, DPSAlacLabel10 };
-        DPSQuickLabelArray = new Label[10] { DPSQuickLabel1, DPSQuickLabel2, DPSQuickLabel3, DPSQuickLabel4, DPSQuickLabel5, DPSQuickLabel6, DPSQuickLabel7, DPSQuickLabel8, DPSQuickLabel9, DPSQuickLabel10 };
-        MushroomLabelArray = new Label[10] { MushroomLabel1, MushroomLabel2, MushroomLabel3, MushroomLabel4, MushroomLabel5, MushroomLabel6, MushroomLabel7, MushroomLabel8, MushroomLabel9, MushroomLabel10 };
-        TowerLabelArray = new Label[10] { TowerLabel1, TowerLabel2, TowerLabel3, TowerLabel4, TowerLabel5, TowerLabel6, TowerLabel7, TowerLabel8, TowerLabel9, TowerLabel10 };
-        ReflectLabelArray = new Label[10] { ReflectLabel1, ReflectLabel2, ReflectLabel3, ReflectLabel4, ReflectLabel5, ReflectLabel6, ReflectLabel7, ReflectLabel8, ReflectLabel9, ReflectLabel10 };
-        CannonLabelArray = new Label[10] { CannonLabel1, CannonLabel2, CannonLabel3, CannonLabel4, CannonLabel5, CannonLabel6, CannonLabel7, CannonLabel8, CannonLabel9, CannonLabel10 };
-        ConstrucPusherLabelArray = new Label[10] { ConstructPusherLabel1, ConstructPusherLabel2, ConstructPusherLabel3, ConstructPusherLabel4, ConstructPusherLabel5, ConstructPusherLabel6, ConstructPusherLabel7, ConstructPusherLabel8, ConstructPusherLabel9, ConstructPusherLabel10 };
-        LampLabelArray = new Label[10] { LampLabel1, LampLabel2, LampLabel3, LampLabel4, LampLabel5, LampLabel6, LampLabel7, LampLabel8, LampLabel9, LampLabel10 };
-        PylonLabelArray = new Label[10] { PylonLabel1, PylonLabel2, PylonLabel3, PylonLabel4, PylonLabel5, PylonLabel6, PylonLabel7, PylonLabel8, PylonLabel9, PylonLabel10 };
-        PillarLabelArray = new Label[10] { PillarLabel1, PillarLabel2, PillarLabel3, PillarLabel4, PillarLabel5, PillarLabel6, PillarLabel7, PillarLabel8, PillarLabel9, PillarLabel10 };
-        GreenLabelArray = new Label[10] { GreenLabel1, GreenLabel2, GreenLabel3, GreenLabel4, GreenLabel5, GreenLabel6, GreenLabel7, GreenLabel8, GreenLabel9, GreenLabel10 };
-        SoullessPusherLabelArray = new Label[10] { SoullessHorrorPusherLabel1, SoullessHorrorPusherLabel2, SoullessHorrorPusherLabel3, SoullessHorrorPusherLabel4, SoullessHorrorPusherLabel5, SoullessHorrorPusherLabel6, SoullessHorrorPusherLabel7, SoullessHorrorPusherLabel8, SoullessHorrorPusherLabel9, SoullessHorrorPusherLabel10 };
-        DhuumKiteLabelArray = new Label[10] { DhuumKiteLabel1, DhuumKiteLabel2, DhuumKiteLabel3, DhuumKiteLabel4, DhuumKiteLabel5, DhuumKiteLabel6, DhuumKiteLabel7, DhuumKiteLabel8, DhuumKiteLabel9, DhuumKiteLabel10 };
-        QadimKiteLabelArray = new Label[10] { QadimKiteLabel1, QadimKiteLabel2, QadimKiteLabel3, QadimKiteLabel4, QadimKiteLabel5, QadimKiteLabel6, QadimKiteLabel7, QadimKiteLabel8, QadimKiteLabel9, QadimKiteLabel10 };
-        SwordLabelArray = new Label[10] { SwordLabel1, SwordLabel2, SwordLabel3, SwordLabel4, SwordLabel5, SwordLabel6, SwordLabel7, SwordLabel8, SwordLabel9, SwordLabel10 };
-        ShieldLabelArray = new Label[10] { ShieldLabel1, ShieldLabel2, ShieldLabel3, ShieldLabel4, ShieldLabel5, ShieldLabel6, ShieldLabel7, ShieldLabel8, ShieldLabel9, ShieldLabel10 };
-        HoTPannelArray = new Panel[10] { HoT_PlayerRolesPanel1, HoT_PlayerRolesPanel2, HoT_PlayerRolesPanel3, HoT_PlayerRolesPanel4, HoT_PlayerRolesPanel5, HoT_PlayerRolesPanel6, HoT_PlayerRolesPanel7, HoT_PlayerRolesPanel8, HoT_PlayerRolesPanel9, HoT_PlayerRolesPanel10 };
-        PoFPannelArray = new Panel[10] { PoF_PlayerRolesPanel1,PoF_PlayerRolesPanel2,PoF_PlayerRolesPanel3,PoF_PlayerRolesPanel4,PoF_PlayerRolesPanel5,PoF_PlayerRolesPanel6,PoF_PlayerRolesPanel7,PoF_PlayerRolesPanel8,PoF_PlayerRolesPanel9,PoF_PlayerRolesPanel10};
+            #region Box and Label Arrays
+            HandKiteBoxArray = new Checkbox[10] {HandKitePlayer1, HandKitePlayer2, HandKitePlayer3, HandKitePlayer4, HandKitePlayer5, HandKitePlayer6, HandKitePlayer7, HandKitePlayer8, HandKitePlayer9, HandKitePlayer10};
+            OilKiteBoxArray = new Checkbox[10] {OilKitePlayer1, OilKitePlayer2, OilKitePlayer3, OilKitePlayer4, OilKitePlayer5,OilKitePlayer6,OilKitePlayer7,OilKitePlayer8,OilKitePlayer9,OilKitePlayer10};
+            FlakKiteBoxArray = new Checkbox[10] {FlakKitePlayer1,FlakKitePlayer2,FlakKitePlayer3,FlakKitePlayer4,FlakKitePlayer5,FlakKitePlayer6,FlakKitePlayer7,FlakKitePlayer8,FlakKitePlayer9,FlakKitePlayer10};
+            TankBoxArray = new Checkbox[10] {TankPlayer1,TankPlayer2,TankPlayer3,TankPlayer4,TankPlayer5,TankPlayer6,TankPlayer7,TankPlayer8,TankPlayer9,TankPlayer10};
+            HealAlacBoxArray = new Checkbox[10] {HealAlacPlayer1,HealAlacPlayer2,HealAlacPlayer3,HealAlacPlayer4,HealAlacPlayer5,HealAlacPlayer6,HealAlacPlayer7,HealAlacPlayer8,HealAlacPlayer9,HealAlacPlayer10};
+            HealQuickBoxArray = new Checkbox[10] {HealQuickPlayer1,HealQuickPlayer2,HealQuickPlayer3,HealQuickPlayer4,HealQuickPlayer5,HealQuickPlayer6,HealQuickPlayer7,HealQuickPlayer8,HealQuickPlayer9,HealQuickPlayer10};
+            DPSAlacBoxArray = new Checkbox[10] {DPSAlacPlayer1,DPSAlacPlayer2,DPSAlacPlayer3,DPSAlacPlayer4,DPSAlacPlayer5,DPSAlacPlayer6,DPSAlacPlayer7,DPSAlacPlayer8,DPSAlacPlayer9,DPSAlacPlayer10};
+            DPSQuickBoxArray = new Checkbox[10] {DPSQuickPlayer1,DPSQuickPlayer2,DPSQuickPlayer3,DPSQuickPlayer4,DPSQuickPlayer5,DPSQuickPlayer6,DPSQuickPlayer7,DPSQuickPlayer8,DPSQuickPlayer9,DPSQuickPlayer10};
+            MushroomBoxArray = new Checkbox[10] {MushroomPlayer1,MushroomPlayer2,MushroomPlayer3,MushroomPlayer4,MushroomPlayer5,MushroomPlayer6,MushroomPlayer7,MushroomPlayer8,MushroomPlayer9,MushroomPlayer10};
+            TowerBoxArray = new Checkbox[10] {TowerPlayer1,TowerPlayer2,TowerPlayer3,TowerPlayer4,TowerPlayer5,TowerPlayer6,TowerPlayer7,TowerPlayer8,TowerPlayer9,TowerPlayer10};
+            ReflectBoxArray = new Checkbox[10] {ReflectPlayer1,ReflectPlayer2,ReflectPlayer3,ReflectPlayer4,ReflectPlayer5,ReflectPlayer6,ReflectPlayer7,ReflectPlayer8,ReflectPlayer9,ReflectPlayer10};
+            CannonBoxArray = new Checkbox[10] {CannonPlayer1,CannonPlayer2,CannonPlayer3,CannonPlayer4,CannonPlayer5,CannonPlayer6,CannonPlayer7,CannonPlayer8,CannonPlayer9,CannonPlayer10};
+            ConstrucPusherBoxArray = new Checkbox[10] {ConstrucPusherPlayer1,ConstrucPusherPlayer2,ConstrucPusherPlayer3,ConstrucPusherPlayer4,ConstrucPusherPlayer5,ConstrucPusherPlayer6,ConstrucPusherPlayer7,ConstrucPusherPlayer8,ConstrucPusherPlayer9,ConstrucPusherPlayer10};
+            LampBoxArray = new Checkbox[10] {LampPlayer1,LampPlayer2,LampPlayer3,LampPlayer4,LampPlayer5,LampPlayer6,LampPlayer7,LampPlayer8,LampPlayer9,LampPlayer10};
+            PylonBoxArray = new Checkbox[10] {PylonPlayer1,PylonPlayer2,PylonPlayer3,PylonPlayer4,PylonPlayer5,PylonPlayer6,PylonPlayer7,PylonPlayer8,PylonPlayer9,PylonPlayer10};
+            PillarBoxArray = new Checkbox[10] {PillarPlayer1,PillarPlayer2,PillarPlayer3,PillarPlayer4,PillarPlayer5,PillarPlayer6,PillarPlayer7,PillarPlayer8,PillarPlayer9,PillarPlayer10};
+            GreenBoxArray = new Checkbox[10] {GreenPlayer1,GreenPlayer2,GreenPlayer3,GreenPlayer4,GreenPlayer5,GreenPlayer6,GreenPlayer7,GreenPlayer8,GreenPlayer9,GreenPlayer10};
+            SoullessPusherBoxArray = new Checkbox[10] {SoullessPusherPlayer1,SoullessPusherPlayer2,SoullessPusherPlayer3,SoullessPusherPlayer4,SoullessPusherPlayer5,SoullessPusherPlayer6,SoullessPusherPlayer7,SoullessPusherPlayer8,SoullessPusherPlayer9,SoullessPusherPlayer10};
+            DhuumKiteBoxArray = new Checkbox[10] {DhuumKitePlayer1,DhuumKitePlayer2,DhuumKitePlayer3,DhuumKitePlayer4,DhuumKitePlayer5,DhuumKitePlayer6,DhuumKitePlayer7,DhuumKitePlayer8,DhuumKitePlayer9,DhuumKitePlayer10};
+            QadimKiteBoxArray = new Checkbox[10] {QadimKitePlayer1,QadimKitePlayer2,QadimKitePlayer3,QadimKitePlayer4,QadimKitePlayer5,QadimKitePlayer6,QadimKitePlayer7,QadimKitePlayer8,QadimKitePlayer9,QadimKitePlayer10};
+            SwordBoxArray = new Checkbox[10] {SwordPlayer1,SwordPlayer2,SwordPlayer3,SwordPlayer4,SwordPlayer5,SwordPlayer6,SwordPlayer7,SwordPlayer8,SwordPlayer9,SwordPlayer10};
+            ShieldBoxArray = new Checkbox[10] {ShieldPlayer1,ShieldPlayer2,ShieldPlayer3,ShieldPlayer4,ShieldPlayer5,ShieldPlayer6,ShieldPlayer7,ShieldPlayer8,ShieldPlayer9,ShieldPlayer10};
+            HandKiteLabelArray = new Label[10] { HandkiteLabel1, HandkiteLabel2, HandkiteLabel3, HandkiteLabel4, HandkiteLabel5, HandkiteLabel6, HandkiteLabel7, HandkiteLabel8, HandkiteLabel9, HandkiteLabel10 };
+            OilKiteLabelArray = new Label[10] { OilKiteLabel1, OilKiteLabel2, OilKiteLabel3, OilKiteLabel4, OilKiteLabel5, OilKiteLabel6, OilKiteLabel7, OilKiteLabel8, OilKiteLabel9, OilKiteLabel10 };
+            FlakKiteLabelArray = new Label[10] { FlakKiteLabel1, FlakKiteLabel2, FlakKiteLabel3, FlakKiteLabel4, FlakKiteLabel5, FlakKiteLabel6, FlakKiteLabel7, FlakKiteLabel8, FlakKiteLabel9, FlakKiteLabel10 };
+            TankLabelArray = new Label[10] { TankLabel1, TankLabel2, TankLabel3, TankLabel4, TankLabel5, TankLabel6, TankLabel7, TankLabel8, TankLabel9, TankLabel10 };
+            HealAlacLabelArray = new Label[10] { HealAlacLabel1, HealAlacLabel2, HealAlacLabel3, HealAlacLabel4, HealAlacLabel5, HealAlacLabel6, HealAlacLabel7, HealAlacLabel8, HealAlacLabel9, HealAlacLabel10 };
+            HealQuickLabelArray = new Label[10] { HealQuickLabel1, HealQuickLabel2, HealQuickLabel3, HealQuickLabel4, HealQuickLabel5, HealQuickLabel6, HealQuickLabel7, HealQuickLabel8, HealQuickLabel9, HealQuickLabel10 };
+            DPSAlacLabelArray = new Label[10] { DPSAlacLabel1, DPSAlacLabel2, DPSAlacLabel3, DPSAlacLabel4, DPSAlacLabel5, DPSAlacLabel6, DPSAlacLabel7, DPSAlacLabel8, DPSAlacLabel9, DPSAlacLabel10 };
+            DPSQuickLabelArray = new Label[10] { DPSQuickLabel1, DPSQuickLabel2, DPSQuickLabel3, DPSQuickLabel4, DPSQuickLabel5, DPSQuickLabel6, DPSQuickLabel7, DPSQuickLabel8, DPSQuickLabel9, DPSQuickLabel10 };
+            MushroomLabelArray = new Label[10] { MushroomLabel1, MushroomLabel2, MushroomLabel3, MushroomLabel4, MushroomLabel5, MushroomLabel6, MushroomLabel7, MushroomLabel8, MushroomLabel9, MushroomLabel10 };
+            TowerLabelArray = new Label[10] { TowerLabel1, TowerLabel2, TowerLabel3, TowerLabel4, TowerLabel5, TowerLabel6, TowerLabel7, TowerLabel8, TowerLabel9, TowerLabel10 };
+            ReflectLabelArray = new Label[10] { ReflectLabel1, ReflectLabel2, ReflectLabel3, ReflectLabel4, ReflectLabel5, ReflectLabel6, ReflectLabel7, ReflectLabel8, ReflectLabel9, ReflectLabel10 };
+            CannonLabelArray = new Label[10] { CannonLabel1, CannonLabel2, CannonLabel3, CannonLabel4, CannonLabel5, CannonLabel6, CannonLabel7, CannonLabel8, CannonLabel9, CannonLabel10 };
+            ConstrucPusherLabelArray = new Label[10] { ConstructPusherLabel1, ConstructPusherLabel2, ConstructPusherLabel3, ConstructPusherLabel4, ConstructPusherLabel5, ConstructPusherLabel6, ConstructPusherLabel7, ConstructPusherLabel8, ConstructPusherLabel9, ConstructPusherLabel10 };
+            LampLabelArray = new Label[10] { LampLabel1, LampLabel2, LampLabel3, LampLabel4, LampLabel5, LampLabel6, LampLabel7, LampLabel8, LampLabel9, LampLabel10 };
+            PylonLabelArray = new Label[10] { PylonLabel1, PylonLabel2, PylonLabel3, PylonLabel4, PylonLabel5, PylonLabel6, PylonLabel7, PylonLabel8, PylonLabel9, PylonLabel10 };
+            PillarLabelArray = new Label[10] { PillarLabel1, PillarLabel2, PillarLabel3, PillarLabel4, PillarLabel5, PillarLabel6, PillarLabel7, PillarLabel8, PillarLabel9, PillarLabel10 };
+            GreenLabelArray = new Label[10] { GreenLabel1, GreenLabel2, GreenLabel3, GreenLabel4, GreenLabel5, GreenLabel6, GreenLabel7, GreenLabel8, GreenLabel9, GreenLabel10 };
+            SoullessPusherLabelArray = new Label[10] { SoullessHorrorPusherLabel1, SoullessHorrorPusherLabel2, SoullessHorrorPusherLabel3, SoullessHorrorPusherLabel4, SoullessHorrorPusherLabel5, SoullessHorrorPusherLabel6, SoullessHorrorPusherLabel7, SoullessHorrorPusherLabel8, SoullessHorrorPusherLabel9, SoullessHorrorPusherLabel10 };
+            DhuumKiteLabelArray = new Label[10] { DhuumKiteLabel1, DhuumKiteLabel2, DhuumKiteLabel3, DhuumKiteLabel4, DhuumKiteLabel5, DhuumKiteLabel6, DhuumKiteLabel7, DhuumKiteLabel8, DhuumKiteLabel9, DhuumKiteLabel10 };
+            QadimKiteLabelArray = new Label[10] { QadimKiteLabel1, QadimKiteLabel2, QadimKiteLabel3, QadimKiteLabel4, QadimKiteLabel5, QadimKiteLabel6, QadimKiteLabel7, QadimKiteLabel8, QadimKiteLabel9, QadimKiteLabel10 };
+            SwordLabelArray = new Label[10] { SwordLabel1, SwordLabel2, SwordLabel3, SwordLabel4, SwordLabel5, SwordLabel6, SwordLabel7, SwordLabel8, SwordLabel9, SwordLabel10 };
+            ShieldLabelArray = new Label[10] { ShieldLabel1, ShieldLabel2, ShieldLabel3, ShieldLabel4, ShieldLabel5, ShieldLabel6, ShieldLabel7, ShieldLabel8, ShieldLabel9, ShieldLabel10 };
+            HoTPannelArray = new Panel[10] { HoT_PlayerRolesPanel1, HoT_PlayerRolesPanel2, HoT_PlayerRolesPanel3, HoT_PlayerRolesPanel4, HoT_PlayerRolesPanel5, HoT_PlayerRolesPanel6, HoT_PlayerRolesPanel7, HoT_PlayerRolesPanel8, HoT_PlayerRolesPanel9, HoT_PlayerRolesPanel10 };
+            PoFPannelArray = new Panel[10] { PoF_PlayerRolesPanel1,PoF_PlayerRolesPanel2,PoF_PlayerRolesPanel3,PoF_PlayerRolesPanel4,PoF_PlayerRolesPanel5,PoF_PlayerRolesPanel6,PoF_PlayerRolesPanel7,PoF_PlayerRolesPanel8,PoF_PlayerRolesPanel9,PoF_PlayerRolesPanel10};
             #endregion
         }
 
@@ -777,7 +900,8 @@ namespace Falson.Squad_Role_Randomizer
                     Text = "Hand Kite",
                     Location = new Point(0,0),
                     BasicTooltipText = "Hand Kite",
-                    Parent = HoTPannelArray[i]
+                    Parent = HoTPannelArray[i],
+                    Checked = HandKiteRoles[i].Value
                 };
             }
             for (int i = 0; i < 10; i++)
@@ -787,7 +911,8 @@ namespace Falson.Squad_Role_Randomizer
                     Text = "Oil Kite",
                     Location = new Point(100,0),
                     BasicTooltipText = "Oil Kite",
-                    Parent = HoTPannelArray[i]
+                    Parent = HoTPannelArray[i],
+                    Checked = OilKiteRoles[i].Value
                 };
             }
             for (int i = 0; i < 10; i++)
@@ -797,7 +922,8 @@ namespace Falson.Squad_Role_Randomizer
                     Text = "Flak Kite",
                     Location = new Point(200,0),
                     BasicTooltipText = "Flak Kite",
-                    Parent = HoTPannelArray[i]
+                    Parent = HoTPannelArray[i],
+                    Checked = FlakKiteRoles[i].Value
                 };
             }
             for (int i = 0; i < 10; i++)
@@ -807,7 +933,8 @@ namespace Falson.Squad_Role_Randomizer
                     Text = "Tank",
                     Location = new Point(300, 0),
                     BasicTooltipText = "Tank",
-                    Parent = HoTPannelArray[i]
+                    Parent = HoTPannelArray[i],
+                    Checked = TankRoles[i].Value
                 };
             }
             for (int i = 0; i < 10; i++)
@@ -817,7 +944,8 @@ namespace Falson.Squad_Role_Randomizer
                     Text = "Heal + Alac",
                     Location = new Point(400,0),
                     BasicTooltipText = "Heal + Alac",
-                    Parent = HoTPannelArray[i]
+                    Parent = HoTPannelArray[i],
+                    Checked = HealAlacRoles[i].Value
                 };
             }
             for (int i = 0; i < 10; i++)
@@ -827,7 +955,8 @@ namespace Falson.Squad_Role_Randomizer
                     Text = "Heal + Quick",
                     Location = new Point(0, 50),
                     BasicTooltipText = "Heal + Quick",
-                    Parent = HoTPannelArray[i]
+                    Parent = HoTPannelArray[i],
+                    Checked = HealQuickRoles[i].Value
                 };
             }
             for (int i = 0; i < 10; i++)
@@ -837,7 +966,8 @@ namespace Falson.Squad_Role_Randomizer
                     Text = "DPS + Alac",
                     Location = new Point(100,50),
                     BasicTooltipText = "DPS + Alac",
-                    Parent = HoTPannelArray[i]
+                    Parent = HoTPannelArray[i],
+                    Checked = DPSAlacRoles[i].Value
                 };
             }
             for (int i = 0; i < 10; i++)
@@ -847,7 +977,8 @@ namespace Falson.Squad_Role_Randomizer
                     Text = "DPS + Quick",
                     Location = new Point(200,50),
                     BasicTooltipText = "DPS + Quick",
-                    Parent = HoTPannelArray[i]
+                    Parent = HoTPannelArray[i],
+                    Checked = DPSQuickRoles[i].Value
                 };
             }
             for (int i = 0; i < 10; i++)
@@ -857,7 +988,8 @@ namespace Falson.Squad_Role_Randomizer
                     Text = "Slothosaur Mushroom",
                     Location = new Point(300, 50),
                     BasicTooltipText = "Slothosaur Mushroom",
-                    Parent = HoTPannelArray[i]
+                    Parent = HoTPannelArray[i],
+                    Checked = MushroomRoles[i].Value
                 };
             }
             for (int i = 0; i < 10; i++)
@@ -867,7 +999,8 @@ namespace Falson.Squad_Role_Randomizer
                     Text = "Tower Mesmer",
                     Location = new Point(400, 50),
                     BasicTooltipText = "Tower Mesmer",
-                    Parent = HoTPannelArray[i]
+                    Parent = HoTPannelArray[i],
+                    Checked = TowerRoles[i].Value
                 };
             }
             for (int i = 0; i < 10; i++)
@@ -877,7 +1010,8 @@ namespace Falson.Squad_Role_Randomizer
                     Text = "Matthias Reflect",
                     Location = new Point(0, 100),
                     BasicTooltipText = "Matthias Reflect",
-                    Parent = HoTPannelArray[i]
+                    Parent = HoTPannelArray[i],
+                    Checked = ReflectRoles[i].Value
                 };
             }
             for (int i = 0; i < 10; i++)
@@ -887,7 +1021,8 @@ namespace Falson.Squad_Role_Randomizer
                     Text = "Sabetha Cannons",
                     Location = new Point(100,100),
                     BasicTooltipText = "Sabetha Cannons",
-                    Parent = HoTPannelArray[i]                    
+                    Parent = HoTPannelArray[i],
+                    Checked = CannonRoles[i].Value
                 };
             }
             for (int i = 0; i < 10; i++)
@@ -897,7 +1032,8 @@ namespace Falson.Squad_Role_Randomizer
                     Text = "Keep Construct Pusher",
                     Location = new Point(200, 100),
                     BasicTooltipText = "Keep Construct Pusher",
-                    Parent = HoTPannelArray[i]
+                    Parent = HoTPannelArray[i],
+                    Checked = ConstrucPusherRoles[i].Value
                 };
             }
             for (int i = 0; i < 10; i++)
@@ -907,7 +1043,8 @@ namespace Falson.Squad_Role_Randomizer
                     Text = "Qadim Lamp",
                     Location = new Point(0,0),
                     BasicTooltipText = "Qadim Lamp",
-                    Parent = PoFPannelArray[i]
+                    Parent = PoFPannelArray[i],
+                    Checked = LampRoles[i].Value
                 };
             }
             for (int i = 0; i < 10; i++)
@@ -917,7 +1054,8 @@ namespace Falson.Squad_Role_Randomizer
                     Text = "Qadim Pylon",
                     Location = new Point(100,0),
                     BasicTooltipText = "Qadim Pylon",
-                    Parent = PoFPannelArray[i]
+                    Parent = PoFPannelArray[i],
+                    Checked = PylonRoles[i].Value
                 };
             }
             for (int i = 0; i < 10; i++)
@@ -927,7 +1065,8 @@ namespace Falson.Squad_Role_Randomizer
                     Text = "Adina Pillar",
                     Location = new Point(200,0),
                     BasicTooltipText = "Adina Pillar",
-                    Parent = PoFPannelArray[i]
+                    Parent = PoFPannelArray[i],
+                    Checked = PillarRoles[i].Value
                 };
             }
             for (int i = 0; i < 10; i++)
@@ -937,7 +1076,8 @@ namespace Falson.Squad_Role_Randomizer
                     Text = "Dhuum Green",
                     Location = new Point(300,0),
                     BasicTooltipText = "Dhuum Green",
-                    Parent = PoFPannelArray[i]
+                    Parent = PoFPannelArray[i],
+                    Checked = GreenRoles[i].Value
                 };
             }
             for (int i = 0; i < 10; i++)
@@ -947,7 +1087,8 @@ namespace Falson.Squad_Role_Randomizer
                     Text = "Soulless Horror Pusher",
                     Location = new Point(400,0),
                     BasicTooltipText = "Soulless Horror Pusher",
-                    Parent = PoFPannelArray[i]
+                    Parent = PoFPannelArray[i],
+                    Checked = SoullessPusherRoles[i].Value
                 };
             }
             for (int i = 0; i < 10; i++)
@@ -957,7 +1098,8 @@ namespace Falson.Squad_Role_Randomizer
                     Text = "Dhuum Messenger Kiter",
                     Location = new Point(0,50),
                     BasicTooltipText = "Dhuum Messenger Kiter",
-                    Parent = PoFPannelArray[i]
+                    Parent = PoFPannelArray[i],
+                    Checked = DhuumKiteRoles[i].Value
                 };
             }
             for (int i = 0; i < 10; i++)
@@ -967,7 +1109,8 @@ namespace Falson.Squad_Role_Randomizer
                     Text = "Qadim Kiter",
                     Location = new Point(100,50),
                     BasicTooltipText = "Qadim Kiter",
-                    Parent = PoFPannelArray[i]
+                    Parent = PoFPannelArray[i],
+                    Checked = QadimKiteRoles[i].Value
                 };
             }
             for (int i = 0; i < 10; i++)
@@ -977,7 +1120,8 @@ namespace Falson.Squad_Role_Randomizer
                     Text = "CA Sword Collector",
                     Location = new Point(200,50),
                     BasicTooltipText = "CA Sword Collector",
-                    Parent = PoFPannelArray[i]
+                    Parent = PoFPannelArray[i],
+                    Checked = SwordRoles[i].Value
                 };
             }
             for (int i = 0; i < 10; i++)
@@ -988,6 +1132,7 @@ namespace Falson.Squad_Role_Randomizer
                     Location = new Point(300, 50),
                     BasicTooltipText = "CA Shield Collector",
                     Parent = PoFPannelArray[i],
+                    Checked = ShieldRoles[i].Value
                 };
             }
             #endregion
