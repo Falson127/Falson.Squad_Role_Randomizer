@@ -757,7 +757,18 @@ namespace Falson.Squad_Role_Randomizer
 
         protected override void Initialize()
         {
-        #region HoT_FlowPanels
+            RandomizerSettingsWindow = new StandardWindow(ContentsManager.GetTexture("155985.png"), new Rectangle(30, 30, 700, 930), new Rectangle(50, 50, 640, 890)) 
+            {
+                Title = "Randomization Settings",
+                Subtitle = "Define Roles to Randomize",
+                Parent = GameService.Graphics.SpriteScreen
+            };
+            RandomizerResultsWindow = new StandardWindow(ContentsManager.GetTexture("155985.png"), new Rectangle(30, 30, 700, 930), new Rectangle(50, 50, 640, 890))
+            {
+                Title = "Randomized Roles",
+                Parent = GameService.Graphics.SpriteScreen
+            };
+            #region HoT_FlowPanels
             HoT_PlayerRolesPanel1 = new FlowPanel() 
             {
                 Size = new Point(510, 100),
@@ -829,11 +840,79 @@ namespace Falson.Squad_Role_Randomizer
                 Collapsed = true
             };
             #endregion
-        #region PoF_FlowPanels
-
-
+            #region PoF_FlowPanels
+            PoF_PlayerRolesPanel1 = new FlowPanel()
+            {
+                Size = new Point(510, 100),
+                Parent = RandomizerSettingsWindow,
+                CanCollapse = true,
+                Collapsed = true
+            };
+            PoF_PlayerRolesPanel2 = new FlowPanel()
+            {
+                Size = new Point(510, 100),
+                Parent = RandomizerSettingsWindow,
+                CanCollapse = true,
+                Collapsed = true
+            };
+            PoF_PlayerRolesPanel3 = new FlowPanel()
+            {
+                Size = new Point(510, 100),
+                Parent = RandomizerSettingsWindow,
+                CanCollapse = true,
+                Collapsed = true
+            };
+            PoF_PlayerRolesPanel4 = new FlowPanel()
+            {
+                Size = new Point(510, 100),
+                Parent = RandomizerSettingsWindow,
+                CanCollapse = true,
+                Collapsed = true
+            };
+            PoF_PlayerRolesPanel5 = new FlowPanel()
+            {
+                Size = new Point(510, 100),
+                Parent = RandomizerSettingsWindow,
+                CanCollapse = true,
+                Collapsed = true
+            };
+            PoF_PlayerRolesPanel6 = new FlowPanel()
+            {
+                Size = new Point(510, 100),
+                Parent = RandomizerSettingsWindow,
+                CanCollapse = true,
+                Collapsed = true
+            };
+            PoF_PlayerRolesPanel7 = new FlowPanel()
+            {
+                Size = new Point(510, 100),
+                Parent = RandomizerSettingsWindow,
+                CanCollapse = true,
+                Collapsed = true
+            };
+            PoF_PlayerRolesPanel8 = new FlowPanel()
+            {
+                Size = new Point(510, 100),
+                Parent = RandomizerSettingsWindow,
+                CanCollapse = true,
+                Collapsed = true
+            };
+            PoF_PlayerRolesPanel9 = new FlowPanel()
+            {
+                Size = new Point(510, 100),
+                Parent = RandomizerSettingsWindow,
+                CanCollapse = true,
+                Collapsed = true
+            };
+            PoF_PlayerRolesPanel10 = new FlowPanel()
+            {
+                Size = new Point(510, 100),
+                Parent = RandomizerSettingsWindow,
+                CanCollapse = true,
+                Collapsed = true
+            };
             #endregion
-        #region Checkbox Labels
+            #region Checkbox Labels
 
             #endregion
             #region Box and Label Arrays
