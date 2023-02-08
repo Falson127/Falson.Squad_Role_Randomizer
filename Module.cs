@@ -1262,8 +1262,18 @@ namespace Falson.Squad_Role_Randomizer
 
     }
 
-    public class GenerateRoles 
+    public class GenerateRoles
     {
+        public List<Action> GenerationFunctions;
+
+        public void RandomizeTheRoles() 
+        {
+            //Check list rolestoberandomized to decide which checks to make
+            //Then check their lengths/run sanity checking to determine which order to generate in
+            //Then add them to GenerationFunctions Action List in the order that they need to be generated
+            //Then run for-loop to invoke each function in GenerationFunctions in order of appearance
+                //Can check length of List to determine max int size in for-loop
+        }
         public void GenerateTank() 
         {
         
