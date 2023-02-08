@@ -9,6 +9,7 @@ using System;
 using System.ComponentModel.Composition;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using System.Runtime;
 
 namespace Falson.Squad_Role_Randomizer
 {
@@ -72,7 +73,8 @@ namespace Falson.Squad_Role_Randomizer
         public SettingEntry<bool>[] QadimKiteRoles;
         public SettingEntry<bool>[] SwordRoles;
         public SettingEntry<bool>[] ShieldRoles;
-        public List<SettingEntry<bool>[]> PlayerRolesContainer;
+        public List<Checkbox[]> ListofCheckboxArrays;
+        public List<SettingEntry<bool>[]> ListofRolesSettings;
         public List<List<string>> SelectedRolesToRandomize;
         public TextBox Player1Name;
         public TextBox Player2Name;
@@ -962,9 +964,30 @@ namespace Falson.Squad_Role_Randomizer
             ShieldLabelArray = new Label[10] { ShieldLabel1, ShieldLabel2, ShieldLabel3, ShieldLabel4, ShieldLabel5, ShieldLabel6, ShieldLabel7, ShieldLabel8, ShieldLabel9, ShieldLabel10 };
             HoTPannelArray = new Panel[10] { HoT_PlayerRolesPanel1, HoT_PlayerRolesPanel2, HoT_PlayerRolesPanel3, HoT_PlayerRolesPanel4, HoT_PlayerRolesPanel5, HoT_PlayerRolesPanel6, HoT_PlayerRolesPanel7, HoT_PlayerRolesPanel8, HoT_PlayerRolesPanel9, HoT_PlayerRolesPanel10 };
             PoFPannelArray = new Panel[10] { PoF_PlayerRolesPanel1,PoF_PlayerRolesPanel2,PoF_PlayerRolesPanel3,PoF_PlayerRolesPanel4,PoF_PlayerRolesPanel5,PoF_PlayerRolesPanel6,PoF_PlayerRolesPanel7,PoF_PlayerRolesPanel8,PoF_PlayerRolesPanel9,PoF_PlayerRolesPanel10};
+            ListofCheckboxArrays = new List<Checkbox[]> {HandKiteBoxArray,OilKiteBoxArray,FlakKiteBoxArray,TankBoxArray,HealAlacBoxArray,HealQuickBoxArray,DPSAlacBoxArray,DPSQuickBoxArray,MushroomBoxArray,TowerBoxArray,ReflectBoxArray,CannonBoxArray,ConstrucPusherBoxArray,LampBoxArray,PylonBoxArray,PillarBoxArray,GreenBoxArray,SoullessPusherBoxArray,DhuumKiteBoxArray,QadimKiteBoxArray,SwordBoxArray,ShieldBoxArray };
+            ListofRolesSettings = new List<SettingEntry<bool>[]> {HandKiteRoles,OilKiteRoles,FlakKiteRoles,TankRoles,HealAlacRoles,HealQuickRoles,DPSAlacRoles,DPSQuickRoles,MushroomRoles,TowerRoles,ReflectRoles,CannonRoles,ConstrucPusherRoles,LampRoles,PylonRoles,PillarRoles,GreenRoles,SoullessPusherRoles,DhuumKiteRoles,QadimKiteRoles,SwordRoles,ShieldRoles };
             #endregion
         }
+        protected void CheckboxCheckedFunctions() 
+        {
+            //Tempcounter increments once per foreach, allowing us to cycle through the same settings bool array 10 times per item, but move to the next settings array for the next corresponding item.
+            //ListofCheckboxArrays contains a list of all the arrays of checkboxes for each role. We cycle through these one item at a time to delegate their checkedchanged functions.
+            //ListofRolesSettings contains the settings bool arrays that we are connecting to each checkbox. We need to cycle cycle only once per item, but cycle through each of the contained arrays 10 times to hit all settings.
+            int tempcounter = 0;
+            foreach (var item in ListofCheckboxArrays)
+            {
+                //var Checkboxarrayitem = item;
 
+                for (int i = 0; i < 10; i++)
+                {
+                    item[i].CheckedChanged += delegate  //Essentially for example this would first produce | HandKiteBoxArray[i].CheckedChanged += delegate (for all 10 checkboxes)
+                    {
+                        ListofRolesSettings[tempcounter][i].Value = !ListofRolesSettings[tempcounter][i].Value; //Then the delegated function is to check HandKiteRoles[i].Value and invert it, where i corresponds to linked checkboxes and checkbox settings for a given role.
+                    };
+                }
+                tempcounter++; //We then increment the tempcounter by 1 to move the ListofRolesSettings[tempcounter] output to be the next in the list and cycle through those settings arrays with their corresponding checkboxes.
+            }
+        }
         protected override async Task LoadAsync()
         //Label Dimensions(width, height): (100, 25)
         //HoT Panel Dimensions(width, height): (510, 100)
@@ -1219,7 +1242,7 @@ namespace Falson.Squad_Role_Randomizer
 
         protected override void OnModuleLoaded(EventArgs e)
         {
-
+            CheckboxCheckedFunctions();
             // Base handler must be called
             base.OnModuleLoaded(e);
         }
