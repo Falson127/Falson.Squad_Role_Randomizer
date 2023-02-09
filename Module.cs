@@ -18,19 +18,30 @@ namespace Falson.Squad_Role_Randomizer
     {
         public static StandardWindow RandomizerResultsWindow;
         public static StandardWindow RandomizerSettingsWindow;
-        public static List<string> TankValid;
         public static List<string> HealValid;
-        public static List<string> DPSAlacValid;
-        public static List<string> DPSQuickValid;
-        public static List<string> HealAlacValid;
-        public static List<string> HealQuickValid;
         public static List<string> DPSValid;
-        public static List<string> CannonValid;
         public static List<string> HandKiteValid;
         public static List<string> OilKiteValid;
         public static List<string> FlakKiteValid;
-        public static List<string> TowerMesmerValid;
+        public static List<string> TankValid;
+        public static List<string> HealAlacValid;
+        public static List<string> HealQuickValid;
+        public static List<string> DPSAlacValid;
+        public static List<string> DPSQuickValid;
+        public static List<string> MushroomValid;
+        public static List<string> TowerValid;
         public static List<string> ReflectValid;
+        public static List<string> CannonValid;
+        public static List<string> ConstrucPusherValid;
+        public static List<string> LampValid;
+        public static List<string> PylonValid;
+        public static List<string> PillarValid;
+        public static List<string> GreenValid;
+        public static List<string> SoullessPusherValid;
+        public static List<string> DhuumKiteArValid;
+        public static List<string> QadimKiteArValid;
+        public static List<string> SwordValid;
+        public static List<string> ShieldValid;
         public static Label SelectedTank;
         public static Label SelectedHeal1;
         public static Label SelectedHeal2;
@@ -85,6 +96,7 @@ namespace Falson.Squad_Role_Randomizer
         public static SettingEntry<string> Player10Name;
         public List<Checkbox[]> ListofCheckboxArrays;
         public List<SettingEntry<bool>[]> ListofRolesSettings;
+        public static List<List<string>> ListofRoleValidLists;
         //public List<List<string>> SelectedRolesToRandomize;
         public TextBox Player1NameBox;
         public TextBox Player2NameBox;
@@ -1400,6 +1412,7 @@ namespace Falson.Squad_Role_Randomizer
             PoFPannelArray = new Panel[10] { PoF_PlayerRolesPanel1,PoF_PlayerRolesPanel2,PoF_PlayerRolesPanel3,PoF_PlayerRolesPanel4,PoF_PlayerRolesPanel5,PoF_PlayerRolesPanel6,PoF_PlayerRolesPanel7,PoF_PlayerRolesPanel8,PoF_PlayerRolesPanel9,PoF_PlayerRolesPanel10};
             ListofCheckboxArrays = new List<Checkbox[]> {HandKiteBoxArray,OilKiteBoxArray,FlakKiteBoxArray,TankBoxArray,HealAlacBoxArray,HealQuickBoxArray,DPSAlacBoxArray,DPSQuickBoxArray,MushroomBoxArray,TowerBoxArray,ReflectBoxArray,CannonBoxArray,ConstrucPusherBoxArray,LampBoxArray,PylonBoxArray,PillarBoxArray,GreenBoxArray,SoullessPusherBoxArray,DhuumKiteBoxArray,QadimKiteBoxArray,SwordBoxArray,ShieldBoxArray };
             ListofRolesSettings = new List<SettingEntry<bool>[]> {HandKiteRoles,OilKiteRoles,FlakKiteRoles,TankRoles,HealAlacRoles,HealQuickRoles,DPSAlacRoles,DPSQuickRoles,MushroomRoles,TowerRoles,ReflectRoles,CannonRoles,ConstrucPusherRoles,LampRoles,PylonRoles,PillarRoles,GreenRoles,SoullessPusherRoles,DhuumKiteRoles,QadimKiteRoles,SwordRoles,ShieldRoles };
+            ListofRoleValidLists = new List<List<string>> { };
             #endregion
         }
 
@@ -1422,7 +1435,6 @@ namespace Falson.Squad_Role_Randomizer
 
             // All static members must be manually unset
         }
-
     }
 
     public class GenerateRoles
@@ -1460,18 +1472,18 @@ namespace Falson.Squad_Role_Randomizer
                 {"Sword", RoleRandomizerMain.SwordRoles },
                 {"Shield", RoleRandomizerMain.ShieldRoles }
             };
-            IDictionary<int, SettingEntry<string>> ArrayPos_to_PlayerNameDictionary = new Dictionary<int, SettingEntry<string>>() 
+            IDictionary<int, string> ArrayPos_to_PlayerNameDictionary = new Dictionary<int, string>() 
             {
-                {0, RoleRandomizerMain.Player1Name},
-                {1, RoleRandomizerMain.Player2Name},
-                {2, RoleRandomizerMain.Player3Name},
-                {3, RoleRandomizerMain.Player4Name},
-                {4, RoleRandomizerMain.Player5Name},
-                {5, RoleRandomizerMain.Player6Name},
-                {6, RoleRandomizerMain.Player7Name},
-                {7, RoleRandomizerMain.Player8Name},
-                {8, RoleRandomizerMain.Player9Name},
-                {9, RoleRandomizerMain.Player10Name}
+                {0, RoleRandomizerMain.Player1Name.Value},
+                {1, RoleRandomizerMain.Player2Name.Value},
+                {2, RoleRandomizerMain.Player3Name.Value},
+                {3, RoleRandomizerMain.Player4Name.Value},
+                {4, RoleRandomizerMain.Player5Name.Value},
+                {5, RoleRandomizerMain.Player6Name.Value},
+                {6, RoleRandomizerMain.Player7Name.Value},
+                {7, RoleRandomizerMain.Player8Name.Value},
+                {8, RoleRandomizerMain.Player9Name.Value},
+                {9, RoleRandomizerMain.Player10Name.Value}
             };
             foreach (var item in RoleRandomizerMain.RolestoRandomizeSelectionCheckboxesArray )
 	        {
@@ -1483,7 +1495,16 @@ namespace Falson.Squad_Role_Randomizer
                     Rolestoberandomized.Add(b);
 	            }
 	        }
-            
+            foreach (var item in Rolestoberandomized)
+            {
+                for (int i = 0; i < 10; i++)
+                {
+                    if (item[i].Value)
+                    { 
+                        
+                    };
+                }
+            }
             //Check list rolestoberandomized to decide which checks to make
             //Then check their lengths/run sanity checking to determine which order to generate in
             //Then add them to GenerationFunctions Action List in the order that they need to be generated
@@ -1520,3 +1541,4 @@ namespace Falson.Squad_Role_Randomizer
         }
     }
 }
+
