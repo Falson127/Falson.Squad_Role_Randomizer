@@ -51,41 +51,51 @@ namespace Falson.Squad_Role_Randomizer
         public SettingCollection HoTRolesToRandomize;
         public SettingCollection PoFRolesToRandomize;
         public SettingCollection InternalPlayerRolesSettings;
-        public SettingEntry<bool>[] HandKiteRoles;
-        public SettingEntry<bool>[] OilKiteRoles;
-        public SettingEntry<bool>[] FlakKiteRoles;
-        public SettingEntry<bool>[] TankRoles;
-        public SettingEntry<bool>[] HealAlacRoles;
-        public SettingEntry<bool>[] HealQuickRoles;
-        public SettingEntry<bool>[] DPSAlacRoles;
-        public SettingEntry<bool>[] DPSQuickRoles;
-        public SettingEntry<bool>[] MushroomRoles;
-        public SettingEntry<bool>[] TowerRoles;
-        public SettingEntry<bool>[] ReflectRoles;
-        public SettingEntry<bool>[] CannonRoles;
-        public SettingEntry<bool>[] ConstrucPusherRoles;
-        public SettingEntry<bool>[] LampRoles;
-        public SettingEntry<bool>[] PylonRoles;
-        public SettingEntry<bool>[] PillarRoles;
-        public SettingEntry<bool>[] GreenRoles;
-        public SettingEntry<bool>[] SoullessPusherRoles;
-        public SettingEntry<bool>[] DhuumKiteRoles;
-        public SettingEntry<bool>[] QadimKiteRoles;
-        public SettingEntry<bool>[] SwordRoles;
-        public SettingEntry<bool>[] ShieldRoles;
+        public static SettingEntry<bool>[] HandKiteRoles;
+        public static SettingEntry<bool>[] OilKiteRoles;
+        public static SettingEntry<bool>[] FlakKiteRoles;
+        public static SettingEntry<bool>[] TankRoles;
+        public static SettingEntry<bool>[] HealAlacRoles;
+        public static SettingEntry<bool>[] HealQuickRoles;
+        public static SettingEntry<bool>[] DPSAlacRoles;
+        public static SettingEntry<bool>[] DPSQuickRoles;
+        public static SettingEntry<bool>[] MushroomRoles;
+        public static SettingEntry<bool>[] TowerRoles;
+        public static SettingEntry<bool>[] ReflectRoles;
+        public static SettingEntry<bool>[] CannonRoles;
+        public static SettingEntry<bool>[] ConstrucPusherRoles;
+        public static SettingEntry<bool>[] LampRoles;
+        public static SettingEntry<bool>[] PylonRoles;
+        public static SettingEntry<bool>[] PillarRoles;
+        public static SettingEntry<bool>[] GreenRoles;
+        public static SettingEntry<bool>[] SoullessPusherRoles;
+        public static SettingEntry<bool>[] DhuumKiteRoles;
+        public static SettingEntry<bool>[] QadimKiteRoles;
+        public static SettingEntry<bool>[] SwordRoles;
+        public static SettingEntry<bool>[] ShieldRoles;
+        public static SettingEntry<string> Player1Name; //Still need to initalize these settings and place them inside the Internal Settings Collection
+        public static SettingEntry<string> Player2Name;
+        public static SettingEntry<string> Player3Name;
+        public static SettingEntry<string> Player4Name;
+        public static SettingEntry<string> Player5Name;
+        public static SettingEntry<string> Player6Name;
+        public static SettingEntry<string> Player7Name;
+        public static SettingEntry<string> Player8Name;
+        public static SettingEntry<string> Player9Name;
+        public static SettingEntry<string> Player10Name;
         public List<Checkbox[]> ListofCheckboxArrays;
         public List<SettingEntry<bool>[]> ListofRolesSettings;
         //public List<List<string>> SelectedRolesToRandomize;
-        public TextBox Player1Name;
-        public TextBox Player2Name;
-        public TextBox Player3Name;
-        public TextBox Player4Name;
-        public TextBox Player5Name;
-        public TextBox Player6Name;
-        public TextBox Player7Name;
-        public TextBox Player8Name;
-        public TextBox Player9Name;
-        public TextBox Player10Name;
+        public TextBox Player1NameBox;
+        public TextBox Player2NameBox;
+        public TextBox Player3NameBox;
+        public TextBox Player4NameBox;
+        public TextBox Player5NameBox;
+        public TextBox Player6NameBox;
+        public TextBox Player7NameBox;
+        public TextBox Player8NameBox;
+        public TextBox Player9NameBox;
+        public TextBox Player10NameBox;
         public FlowPanel HoT_PlayerRolesPanel1;
         public FlowPanel PoF_PlayerRolesPanel1;
         public FlowPanel HoT_PlayerRolesPanel2;
@@ -1418,19 +1428,62 @@ namespace Falson.Squad_Role_Randomizer
     public class GenerateRoles
     {
         public List<Action> GenerationFunctions;
-        public List<string> Rolestoberandomized;
+        public List<SettingEntry<bool>[]> Rolestoberandomized;
+        public List<int> Length_of_Roles_Arrays;
 
-        public void RandomizeTheRoles() 
-        {
+        public void RandomizeTheRoles()
+        { //RandomizeHandKite,RandomizeOilKite,RandomizeFlakKite,RandomizeTank,RandomizeHealAlac,RandomizeHealQuick,RandomizeDPSAlac,RandomizeDPSQuick,RandomizeMushroom,
+          //RandomizeTower,RandomizeReflect,RandomizeCannon,RandomizeConstrucPusher,RandomizeLamp,RandomizePylon,RandomizePillar,RandomizeGreen,RandomizeSoullessPusher,
+          //RandomizeDhuumKite,RandomizeQadimKite,RandomizeSword,RandomizeShield
+            IDictionary<string, SettingEntry<bool>[]> ActiveRolesDictionary = new Dictionary<string, SettingEntry<bool>[]>() 
+            {
+                {"HandKite", RoleRandomizerMain.HandKiteRoles },
+                {"Oil Kite", RoleRandomizerMain.OilKiteRoles },
+                {"Flak Kite", RoleRandomizerMain.FlakKiteRoles },
+                {"Tank", RoleRandomizerMain.TankRoles },
+                {"HealAlac", RoleRandomizerMain.HealAlacRoles },
+                {"HealQuick",RoleRandomizerMain.HealQuickRoles },
+                {"DPSAlac", RoleRandomizerMain.DPSAlacRoles },
+                {"DPSQuick", RoleRandomizerMain.DPSQuickRoles },
+                {"Mushroom", RoleRandomizerMain.MushroomRoles },
+                {"Tower", RoleRandomizerMain.TowerRoles },
+                {"Reflect", RoleRandomizerMain.ReflectRoles },
+                {"Cannon", RoleRandomizerMain.CannonRoles },
+                {"ConstrucPusher", RoleRandomizerMain.ConstrucPusherRoles },
+                {"Lamp", RoleRandomizerMain.LampRoles },
+                {"Pylon", RoleRandomizerMain.PylonRoles },
+                {"Pillar", RoleRandomizerMain.PillarRoles },
+                {"Green", RoleRandomizerMain.GreenRoles },
+                {"SoullessPusher", RoleRandomizerMain.SoullessPusherRoles },
+                {"DhuumKite", RoleRandomizerMain.DhuumKiteRoles },
+                {"QadimKite", RoleRandomizerMain.QadimKiteRoles },
+                {"Sword", RoleRandomizerMain.SwordRoles },
+                {"Shield", RoleRandomizerMain.ShieldRoles }
+            };
+            IDictionary<int, SettingEntry<string>> ArrayPos_to_PlayerNameDictionary = new Dictionary<int, SettingEntry<string>>() 
+            {
+                {0, RoleRandomizerMain.Player1Name},
+                {1, RoleRandomizerMain.Player2Name},
+                {2, RoleRandomizerMain.Player3Name},
+                {3, RoleRandomizerMain.Player4Name},
+                {4, RoleRandomizerMain.Player5Name},
+                {5, RoleRandomizerMain.Player6Name},
+                {6, RoleRandomizerMain.Player7Name},
+                {7, RoleRandomizerMain.Player8Name},
+                {8, RoleRandomizerMain.Player9Name},
+                {9, RoleRandomizerMain.Player10Name}
+            };
             foreach (var item in RoleRandomizerMain.RolestoRandomizeSelectionCheckboxesArray )
 	        {
                 if (item.Checked)
 	            {
                     string s = item.ToString();
                     s.Replace("Randomize", "");
-                    Rolestoberandomized.Add(s)
+                    var b = ActiveRolesDictionary[s];
+                    Rolestoberandomized.Add(b);
 	            }
 	        }
+            
             //Check list rolestoberandomized to decide which checks to make
             //Then check their lengths/run sanity checking to determine which order to generate in
             //Then add them to GenerationFunctions Action List in the order that they need to be generated
