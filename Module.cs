@@ -38,8 +38,8 @@ namespace Falson.Squad_Role_Randomizer
         public static List<string> PillarValid;
         public static List<string> GreenValid;
         public static List<string> SoullessPusherValid;
-        public static List<string> DhuumKiteArValid;
-        public static List<string> QadimKiteArValid;
+        public static List<string> DhuumKiteValid;
+        public static List<string> QadimKiteValid;
         public static List<string> SwordValid;
         public static List<string> ShieldValid;
         public static Label SelectedTank;
@@ -1412,10 +1412,9 @@ namespace Falson.Squad_Role_Randomizer
             PoFPannelArray = new Panel[10] { PoF_PlayerRolesPanel1,PoF_PlayerRolesPanel2,PoF_PlayerRolesPanel3,PoF_PlayerRolesPanel4,PoF_PlayerRolesPanel5,PoF_PlayerRolesPanel6,PoF_PlayerRolesPanel7,PoF_PlayerRolesPanel8,PoF_PlayerRolesPanel9,PoF_PlayerRolesPanel10};
             ListofCheckboxArrays = new List<Checkbox[]> {HandKiteBoxArray,OilKiteBoxArray,FlakKiteBoxArray,TankBoxArray,HealAlacBoxArray,HealQuickBoxArray,DPSAlacBoxArray,DPSQuickBoxArray,MushroomBoxArray,TowerBoxArray,ReflectBoxArray,CannonBoxArray,ConstrucPusherBoxArray,LampBoxArray,PylonBoxArray,PillarBoxArray,GreenBoxArray,SoullessPusherBoxArray,DhuumKiteBoxArray,QadimKiteBoxArray,SwordBoxArray,ShieldBoxArray };
             ListofRolesSettings = new List<SettingEntry<bool>[]> {HandKiteRoles,OilKiteRoles,FlakKiteRoles,TankRoles,HealAlacRoles,HealQuickRoles,DPSAlacRoles,DPSQuickRoles,MushroomRoles,TowerRoles,ReflectRoles,CannonRoles,ConstrucPusherRoles,LampRoles,PylonRoles,PillarRoles,GreenRoles,SoullessPusherRoles,DhuumKiteRoles,QadimKiteRoles,SwordRoles,ShieldRoles };
-            ListofRoleValidLists = new List<List<string>> { };
+            ListofRoleValidLists = new List<List<string>> { HandKiteValid,OilKiteValid,FlakKiteValid,TankValid,HealAlacValid,HealQuickValid,DPSAlacValid,DPSQuickValid,MushroomValid,TowerValid,ReflectValid,CannonValid,ConstrucPusherValid,LampValid,PylonValid,PillarValid,GreenValid,SoullessPusherValid,DhuumKiteValid,QadimKiteValid,SwordValid,ShieldValid};
             #endregion
         }
-
         protected override void OnModuleLoaded(EventArgs e)
         {
             CheckboxCheckedFunctions();
@@ -1450,8 +1449,8 @@ namespace Falson.Squad_Role_Randomizer
             IDictionary<string, SettingEntry<bool>[]> ActiveRolesDictionary = new Dictionary<string, SettingEntry<bool>[]>() 
             {
                 {"HandKite", RoleRandomizerMain.HandKiteRoles },
-                {"Oil Kite", RoleRandomizerMain.OilKiteRoles },
-                {"Flak Kite", RoleRandomizerMain.FlakKiteRoles },
+                {"OilKite", RoleRandomizerMain.OilKiteRoles },
+                {"FlakKite", RoleRandomizerMain.FlakKiteRoles },
                 {"Tank", RoleRandomizerMain.TankRoles },
                 {"HealAlac", RoleRandomizerMain.HealAlacRoles },
                 {"HealQuick",RoleRandomizerMain.HealQuickRoles },
@@ -1485,6 +1484,31 @@ namespace Falson.Squad_Role_Randomizer
                 {8, RoleRandomizerMain.Player9Name.Value},
                 {9, RoleRandomizerMain.Player10Name.Value}
             };
+            IDictionary<SettingEntry<bool>[], int> RolesArrays_to_ArrayListPosDictionary = new Dictionary<SettingEntry<bool>[], int>() 
+            {
+                {RoleRandomizerMain.HandKiteRoles, 0},
+                {RoleRandomizerMain.OilKiteRoles, 1},
+                {RoleRandomizerMain.FlakKiteRoles, 2},
+                {RoleRandomizerMain.TankRoles, 3},
+                {RoleRandomizerMain.HealAlacRoles, 4},
+                {RoleRandomizerMain.HealQuickRoles, 5},
+                {RoleRandomizerMain.DPSAlacRoles, 6},
+                {RoleRandomizerMain.DPSQuickRoles, 7},
+                {RoleRandomizerMain.MushroomRoles, 8},
+                {RoleRandomizerMain.TowerRoles, 9},
+                {RoleRandomizerMain.ReflectRoles, 10},
+                {RoleRandomizerMain.CannonRoles, 11},
+                {RoleRandomizerMain.ConstrucPusherRoles, 12},
+                {RoleRandomizerMain.LampRoles, 13},
+                {RoleRandomizerMain.PylonRoles, 14},
+                {RoleRandomizerMain.PillarRoles, 15},
+                {RoleRandomizerMain.GreenRoles, 16},
+                {RoleRandomizerMain.SoullessPusherRoles, 17},
+                {RoleRandomizerMain.DhuumKiteRoles, 18},
+                {RoleRandomizerMain.QadimKiteRoles, 19},
+                {RoleRandomizerMain.SwordRoles, 20},
+                {RoleRandomizerMain.ShieldRoles, 21}
+            };
             foreach (var item in RoleRandomizerMain.RolestoRandomizeSelectionCheckboxesArray )
 	        {
                 if (item.Checked)
@@ -1495,15 +1519,17 @@ namespace Falson.Squad_Role_Randomizer
                     Rolestoberandomized.Add(b);
 	            }
 	        }
+
             foreach (var item in Rolestoberandomized)
             {
                 for (int i = 0; i < 10; i++)
                 {
                     if (item[i].Value)
-                    { 
-                        
+                    {
+                        RoleRandomizerMain.ListofRoleValidLists[RolesArrays_to_ArrayListPosDictionary[item]].Add(ArrayPos_to_PlayerNameDictionary[i]);
                     };
                 }
+
             }
             //Check list rolestoberandomized to decide which checks to make
             //Then check their lengths/run sanity checking to determine which order to generate in
