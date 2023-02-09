@@ -75,7 +75,7 @@ namespace Falson.Squad_Role_Randomizer
         public SettingEntry<bool>[] ShieldRoles;
         public List<Checkbox[]> ListofCheckboxArrays;
         public List<SettingEntry<bool>[]> ListofRolesSettings;
-        public List<List<string>> SelectedRolesToRandomize;
+        //public List<List<string>> SelectedRolesToRandomize;
         public TextBox Player1Name;
         public TextBox Player2Name;
         public TextBox Player3Name;
@@ -129,6 +129,7 @@ namespace Falson.Squad_Role_Randomizer
         public Checkbox[] QadimKiteBoxArray;
         public Checkbox[] SwordBoxArray;
         public Checkbox[] ShieldBoxArray;
+        public static Checkbox[] RolestoRandomizeSelectionCheckboxesArray;
         public Label[] HandKiteLabelArray;
         public Label[] OilKiteLabelArray;
         public Label[] FlakKiteLabelArray;
@@ -157,31 +158,28 @@ namespace Falson.Squad_Role_Randomizer
         //Dimensions 5, 5, 3
         //Roles Per Pannel: PoF: 9
         //Dimensions 5, 4
-        public enum Roles
-        {
-            HandKite,
-            OilKite,
-            FlakKite,
-            Tank,
-            HealAlac,
-            HealQuick,
-            DPSAlac,
-            DPSQuick,
-            Mushroom,
-            Tower,
-            Reflect,
-            Cannon,
-            ConstrucPusher,
-            Lamp,
-            Pylon,
-            Pillar,
-            Green,
-            SoullessPusher,
-            DhuumKite,
-            QadimKite,
-            Sword,
-            Shield
-    }
+        public Checkbox RandomizeHandKite;
+        public Checkbox RandomizeOilKite;
+        public Checkbox RandomizeFlakKite;
+        public Checkbox RandomizeTank;
+        public Checkbox RandomizeHealAlac;
+        public Checkbox RandomizeHealQuick;
+        public Checkbox RandomizeDPSAlac;
+        public Checkbox RandomizeDPSQuick;
+        public Checkbox RandomizeMushroom;
+        public Checkbox RandomizeTower;
+        public Checkbox RandomizeReflect;
+        public Checkbox RandomizeCannon;
+        public Checkbox RandomizeConstrucPusher;
+        public Checkbox RandomizeLamp;
+        public Checkbox RandomizePylon;
+        public Checkbox RandomizePillar;
+        public Checkbox RandomizeGreen;
+        public Checkbox RandomizeSoullessPusher;
+        public Checkbox RandomizeDhuumKite;
+        public Checkbox RandomizeQadimKite;
+        public Checkbox RandomizeSword;
+        public Checkbox RandomizeShield;
         #region Define Checkboxes
         public Checkbox HandKitePlayer1;
         public Checkbox OilKitePlayer1;
@@ -917,56 +915,6 @@ namespace Falson.Squad_Role_Randomizer
             #region Checkbox Labels
 
             #endregion
-            #region Box and Label Arrays
-            HandKiteBoxArray = new Checkbox[10] {HandKitePlayer1, HandKitePlayer2, HandKitePlayer3, HandKitePlayer4, HandKitePlayer5, HandKitePlayer6, HandKitePlayer7, HandKitePlayer8, HandKitePlayer9, HandKitePlayer10};
-            OilKiteBoxArray = new Checkbox[10] {OilKitePlayer1, OilKitePlayer2, OilKitePlayer3, OilKitePlayer4, OilKitePlayer5,OilKitePlayer6,OilKitePlayer7,OilKitePlayer8,OilKitePlayer9,OilKitePlayer10};
-            FlakKiteBoxArray = new Checkbox[10] {FlakKitePlayer1,FlakKitePlayer2,FlakKitePlayer3,FlakKitePlayer4,FlakKitePlayer5,FlakKitePlayer6,FlakKitePlayer7,FlakKitePlayer8,FlakKitePlayer9,FlakKitePlayer10};
-            TankBoxArray = new Checkbox[10] {TankPlayer1,TankPlayer2,TankPlayer3,TankPlayer4,TankPlayer5,TankPlayer6,TankPlayer7,TankPlayer8,TankPlayer9,TankPlayer10};
-            HealAlacBoxArray = new Checkbox[10] {HealAlacPlayer1,HealAlacPlayer2,HealAlacPlayer3,HealAlacPlayer4,HealAlacPlayer5,HealAlacPlayer6,HealAlacPlayer7,HealAlacPlayer8,HealAlacPlayer9,HealAlacPlayer10};
-            HealQuickBoxArray = new Checkbox[10] {HealQuickPlayer1,HealQuickPlayer2,HealQuickPlayer3,HealQuickPlayer4,HealQuickPlayer5,HealQuickPlayer6,HealQuickPlayer7,HealQuickPlayer8,HealQuickPlayer9,HealQuickPlayer10};
-            DPSAlacBoxArray = new Checkbox[10] {DPSAlacPlayer1,DPSAlacPlayer2,DPSAlacPlayer3,DPSAlacPlayer4,DPSAlacPlayer5,DPSAlacPlayer6,DPSAlacPlayer7,DPSAlacPlayer8,DPSAlacPlayer9,DPSAlacPlayer10};
-            DPSQuickBoxArray = new Checkbox[10] {DPSQuickPlayer1,DPSQuickPlayer2,DPSQuickPlayer3,DPSQuickPlayer4,DPSQuickPlayer5,DPSQuickPlayer6,DPSQuickPlayer7,DPSQuickPlayer8,DPSQuickPlayer9,DPSQuickPlayer10};
-            MushroomBoxArray = new Checkbox[10] {MushroomPlayer1,MushroomPlayer2,MushroomPlayer3,MushroomPlayer4,MushroomPlayer5,MushroomPlayer6,MushroomPlayer7,MushroomPlayer8,MushroomPlayer9,MushroomPlayer10};
-            TowerBoxArray = new Checkbox[10] {TowerPlayer1,TowerPlayer2,TowerPlayer3,TowerPlayer4,TowerPlayer5,TowerPlayer6,TowerPlayer7,TowerPlayer8,TowerPlayer9,TowerPlayer10};
-            ReflectBoxArray = new Checkbox[10] {ReflectPlayer1,ReflectPlayer2,ReflectPlayer3,ReflectPlayer4,ReflectPlayer5,ReflectPlayer6,ReflectPlayer7,ReflectPlayer8,ReflectPlayer9,ReflectPlayer10};
-            CannonBoxArray = new Checkbox[10] {CannonPlayer1,CannonPlayer2,CannonPlayer3,CannonPlayer4,CannonPlayer5,CannonPlayer6,CannonPlayer7,CannonPlayer8,CannonPlayer9,CannonPlayer10};
-            ConstrucPusherBoxArray = new Checkbox[10] {ConstrucPusherPlayer1,ConstrucPusherPlayer2,ConstrucPusherPlayer3,ConstrucPusherPlayer4,ConstrucPusherPlayer5,ConstrucPusherPlayer6,ConstrucPusherPlayer7,ConstrucPusherPlayer8,ConstrucPusherPlayer9,ConstrucPusherPlayer10};
-            LampBoxArray = new Checkbox[10] {LampPlayer1,LampPlayer2,LampPlayer3,LampPlayer4,LampPlayer5,LampPlayer6,LampPlayer7,LampPlayer8,LampPlayer9,LampPlayer10};
-            PylonBoxArray = new Checkbox[10] {PylonPlayer1,PylonPlayer2,PylonPlayer3,PylonPlayer4,PylonPlayer5,PylonPlayer6,PylonPlayer7,PylonPlayer8,PylonPlayer9,PylonPlayer10};
-            PillarBoxArray = new Checkbox[10] {PillarPlayer1,PillarPlayer2,PillarPlayer3,PillarPlayer4,PillarPlayer5,PillarPlayer6,PillarPlayer7,PillarPlayer8,PillarPlayer9,PillarPlayer10};
-            GreenBoxArray = new Checkbox[10] {GreenPlayer1,GreenPlayer2,GreenPlayer3,GreenPlayer4,GreenPlayer5,GreenPlayer6,GreenPlayer7,GreenPlayer8,GreenPlayer9,GreenPlayer10};
-            SoullessPusherBoxArray = new Checkbox[10] {SoullessPusherPlayer1,SoullessPusherPlayer2,SoullessPusherPlayer3,SoullessPusherPlayer4,SoullessPusherPlayer5,SoullessPusherPlayer6,SoullessPusherPlayer7,SoullessPusherPlayer8,SoullessPusherPlayer9,SoullessPusherPlayer10};
-            DhuumKiteBoxArray = new Checkbox[10] {DhuumKitePlayer1,DhuumKitePlayer2,DhuumKitePlayer3,DhuumKitePlayer4,DhuumKitePlayer5,DhuumKitePlayer6,DhuumKitePlayer7,DhuumKitePlayer8,DhuumKitePlayer9,DhuumKitePlayer10};
-            QadimKiteBoxArray = new Checkbox[10] {QadimKitePlayer1,QadimKitePlayer2,QadimKitePlayer3,QadimKitePlayer4,QadimKitePlayer5,QadimKitePlayer6,QadimKitePlayer7,QadimKitePlayer8,QadimKitePlayer9,QadimKitePlayer10};
-            SwordBoxArray = new Checkbox[10] {SwordPlayer1,SwordPlayer2,SwordPlayer3,SwordPlayer4,SwordPlayer5,SwordPlayer6,SwordPlayer7,SwordPlayer8,SwordPlayer9,SwordPlayer10};
-            ShieldBoxArray = new Checkbox[10] {ShieldPlayer1,ShieldPlayer2,ShieldPlayer3,ShieldPlayer4,ShieldPlayer5,ShieldPlayer6,ShieldPlayer7,ShieldPlayer8,ShieldPlayer9,ShieldPlayer10};
-            HandKiteLabelArray = new Label[10] { HandkiteLabel1, HandkiteLabel2, HandkiteLabel3, HandkiteLabel4, HandkiteLabel5, HandkiteLabel6, HandkiteLabel7, HandkiteLabel8, HandkiteLabel9, HandkiteLabel10 };
-            OilKiteLabelArray = new Label[10] { OilKiteLabel1, OilKiteLabel2, OilKiteLabel3, OilKiteLabel4, OilKiteLabel5, OilKiteLabel6, OilKiteLabel7, OilKiteLabel8, OilKiteLabel9, OilKiteLabel10 };
-            FlakKiteLabelArray = new Label[10] { FlakKiteLabel1, FlakKiteLabel2, FlakKiteLabel3, FlakKiteLabel4, FlakKiteLabel5, FlakKiteLabel6, FlakKiteLabel7, FlakKiteLabel8, FlakKiteLabel9, FlakKiteLabel10 };
-            TankLabelArray = new Label[10] { TankLabel1, TankLabel2, TankLabel3, TankLabel4, TankLabel5, TankLabel6, TankLabel7, TankLabel8, TankLabel9, TankLabel10 };
-            HealAlacLabelArray = new Label[10] { HealAlacLabel1, HealAlacLabel2, HealAlacLabel3, HealAlacLabel4, HealAlacLabel5, HealAlacLabel6, HealAlacLabel7, HealAlacLabel8, HealAlacLabel9, HealAlacLabel10 };
-            HealQuickLabelArray = new Label[10] { HealQuickLabel1, HealQuickLabel2, HealQuickLabel3, HealQuickLabel4, HealQuickLabel5, HealQuickLabel6, HealQuickLabel7, HealQuickLabel8, HealQuickLabel9, HealQuickLabel10 };
-            DPSAlacLabelArray = new Label[10] { DPSAlacLabel1, DPSAlacLabel2, DPSAlacLabel3, DPSAlacLabel4, DPSAlacLabel5, DPSAlacLabel6, DPSAlacLabel7, DPSAlacLabel8, DPSAlacLabel9, DPSAlacLabel10 };
-            DPSQuickLabelArray = new Label[10] { DPSQuickLabel1, DPSQuickLabel2, DPSQuickLabel3, DPSQuickLabel4, DPSQuickLabel5, DPSQuickLabel6, DPSQuickLabel7, DPSQuickLabel8, DPSQuickLabel9, DPSQuickLabel10 };
-            MushroomLabelArray = new Label[10] { MushroomLabel1, MushroomLabel2, MushroomLabel3, MushroomLabel4, MushroomLabel5, MushroomLabel6, MushroomLabel7, MushroomLabel8, MushroomLabel9, MushroomLabel10 };
-            TowerLabelArray = new Label[10] { TowerLabel1, TowerLabel2, TowerLabel3, TowerLabel4, TowerLabel5, TowerLabel6, TowerLabel7, TowerLabel8, TowerLabel9, TowerLabel10 };
-            ReflectLabelArray = new Label[10] { ReflectLabel1, ReflectLabel2, ReflectLabel3, ReflectLabel4, ReflectLabel5, ReflectLabel6, ReflectLabel7, ReflectLabel8, ReflectLabel9, ReflectLabel10 };
-            CannonLabelArray = new Label[10] { CannonLabel1, CannonLabel2, CannonLabel3, CannonLabel4, CannonLabel5, CannonLabel6, CannonLabel7, CannonLabel8, CannonLabel9, CannonLabel10 };
-            ConstrucPusherLabelArray = new Label[10] { ConstructPusherLabel1, ConstructPusherLabel2, ConstructPusherLabel3, ConstructPusherLabel4, ConstructPusherLabel5, ConstructPusherLabel6, ConstructPusherLabel7, ConstructPusherLabel8, ConstructPusherLabel9, ConstructPusherLabel10 };
-            LampLabelArray = new Label[10] { LampLabel1, LampLabel2, LampLabel3, LampLabel4, LampLabel5, LampLabel6, LampLabel7, LampLabel8, LampLabel9, LampLabel10 };
-            PylonLabelArray = new Label[10] { PylonLabel1, PylonLabel2, PylonLabel3, PylonLabel4, PylonLabel5, PylonLabel6, PylonLabel7, PylonLabel8, PylonLabel9, PylonLabel10 };
-            PillarLabelArray = new Label[10] { PillarLabel1, PillarLabel2, PillarLabel3, PillarLabel4, PillarLabel5, PillarLabel6, PillarLabel7, PillarLabel8, PillarLabel9, PillarLabel10 };
-            GreenLabelArray = new Label[10] { GreenLabel1, GreenLabel2, GreenLabel3, GreenLabel4, GreenLabel5, GreenLabel6, GreenLabel7, GreenLabel8, GreenLabel9, GreenLabel10 };
-            SoullessPusherLabelArray = new Label[10] { SoullessHorrorPusherLabel1, SoullessHorrorPusherLabel2, SoullessHorrorPusherLabel3, SoullessHorrorPusherLabel4, SoullessHorrorPusherLabel5, SoullessHorrorPusherLabel6, SoullessHorrorPusherLabel7, SoullessHorrorPusherLabel8, SoullessHorrorPusherLabel9, SoullessHorrorPusherLabel10 };
-            DhuumKiteLabelArray = new Label[10] { DhuumKiteLabel1, DhuumKiteLabel2, DhuumKiteLabel3, DhuumKiteLabel4, DhuumKiteLabel5, DhuumKiteLabel6, DhuumKiteLabel7, DhuumKiteLabel8, DhuumKiteLabel9, DhuumKiteLabel10 };
-            QadimKiteLabelArray = new Label[10] { QadimKiteLabel1, QadimKiteLabel2, QadimKiteLabel3, QadimKiteLabel4, QadimKiteLabel5, QadimKiteLabel6, QadimKiteLabel7, QadimKiteLabel8, QadimKiteLabel9, QadimKiteLabel10 };
-            SwordLabelArray = new Label[10] { SwordLabel1, SwordLabel2, SwordLabel3, SwordLabel4, SwordLabel5, SwordLabel6, SwordLabel7, SwordLabel8, SwordLabel9, SwordLabel10 };
-            ShieldLabelArray = new Label[10] { ShieldLabel1, ShieldLabel2, ShieldLabel3, ShieldLabel4, ShieldLabel5, ShieldLabel6, ShieldLabel7, ShieldLabel8, ShieldLabel9, ShieldLabel10 };
-            HoTPannelArray = new Panel[10] { HoT_PlayerRolesPanel1, HoT_PlayerRolesPanel2, HoT_PlayerRolesPanel3, HoT_PlayerRolesPanel4, HoT_PlayerRolesPanel5, HoT_PlayerRolesPanel6, HoT_PlayerRolesPanel7, HoT_PlayerRolesPanel8, HoT_PlayerRolesPanel9, HoT_PlayerRolesPanel10 };
-            PoFPannelArray = new Panel[10] { PoF_PlayerRolesPanel1,PoF_PlayerRolesPanel2,PoF_PlayerRolesPanel3,PoF_PlayerRolesPanel4,PoF_PlayerRolesPanel5,PoF_PlayerRolesPanel6,PoF_PlayerRolesPanel7,PoF_PlayerRolesPanel8,PoF_PlayerRolesPanel9,PoF_PlayerRolesPanel10};
-            ListofCheckboxArrays = new List<Checkbox[]> {HandKiteBoxArray,OilKiteBoxArray,FlakKiteBoxArray,TankBoxArray,HealAlacBoxArray,HealQuickBoxArray,DPSAlacBoxArray,DPSQuickBoxArray,MushroomBoxArray,TowerBoxArray,ReflectBoxArray,CannonBoxArray,ConstrucPusherBoxArray,LampBoxArray,PylonBoxArray,PillarBoxArray,GreenBoxArray,SoullessPusherBoxArray,DhuumKiteBoxArray,QadimKiteBoxArray,SwordBoxArray,ShieldBoxArray };
-            ListofRolesSettings = new List<SettingEntry<bool>[]> {HandKiteRoles,OilKiteRoles,FlakKiteRoles,TankRoles,HealAlacRoles,HealQuickRoles,DPSAlacRoles,DPSQuickRoles,MushroomRoles,TowerRoles,ReflectRoles,CannonRoles,ConstrucPusherRoles,LampRoles,PylonRoles,PillarRoles,GreenRoles,SoullessPusherRoles,DhuumKiteRoles,QadimKiteRoles,SwordRoles,ShieldRoles };
-            #endregion
         }
         protected void CheckboxCheckedFunctions() 
         {
@@ -1237,6 +1185,211 @@ namespace Falson.Squad_Role_Randomizer
                     Checked = ShieldRoles[i].Value
                 };
             }
+            RandomizeHandKite = new Checkbox 
+            {
+                Text = "Randomize Hand Kiter",
+                Location = new Point(),
+                BasicTooltipText = "Check this box to include Hand Kite in the randomization",
+                Parent = RandomizerSettingsWindow
+            };
+            RandomizeOilKite = new Checkbox 
+            {
+                Text = "Randomize Oil Kite",
+                Location = new Point(),
+                BasicTooltipText = "Check this box to include Oil Kite in the randomization",
+                Parent = RandomizerSettingsWindow
+            };
+            RandomizeFlakKite = new Checkbox 
+            {
+                Text = "Randomize Flak Kite",
+                Location = new Point(),
+                BasicTooltipText = "Check this box to include Flak Kite in the randomization",
+                Parent = RandomizerSettingsWindow
+            };
+            RandomizeTank = new Checkbox 
+            {
+                Text = "Randomize Tank",
+                Location = new Point(),
+                BasicTooltipText = "Check this box to include Tank in the randomization",
+                Parent = RandomizerSettingsWindow
+            };
+            RandomizeHealAlac = new Checkbox 
+            {
+                Text = "Randomize Heal Alac",
+                Location = new Point(),
+                BasicTooltipText = "Check this box to include Heal/Alac in the randomization",
+                Parent = RandomizerSettingsWindow
+            };
+            RandomizeHealQuick = new Checkbox 
+            {
+                Text = "Randomize Heal Quickness",
+                Location = new Point(),
+                BasicTooltipText = "Check this box to include Heal/Quickness in the randomization",
+                Parent = RandomizerSettingsWindow
+            };
+            RandomizeDPSAlac = new Checkbox 
+            {
+                Text = "Randomize DPS Alac",
+                Location = new Point(),
+                BasicTooltipText = "Check this box to include DPS/Alac in the randomization",
+                Parent = RandomizerSettingsWindow
+            };
+            RandomizeDPSQuick = new Checkbox 
+            {
+                Text = "Randomize DPS Quickness",
+                Location = new Point(),
+                BasicTooltipText = "Check this box to include DPS/Quickness in the randomization",
+                Parent = RandomizerSettingsWindow
+            };
+            RandomizeMushroom = new Checkbox 
+            {
+                Text = "Randomize Slothosaur Mushrooms",
+                Location = new Point(),
+                BasicTooltipText = "Check this box to include Sloth Mushrooms in the randomization",
+                Parent = RandomizerSettingsWindow
+            };
+            RandomizeTower = new Checkbox 
+            {
+                Text = "Ranomize Tower Mesmer",
+                Location = new Point(),
+                BasicTooltipText = "Check this box to include Tower Mesmer in the randomization",
+                Parent = RandomizerSettingsWindow
+            };
+            RandomizeReflect = new Checkbox 
+            {
+                Text = "Randomize Matthias Reflect",
+                Location = new Point(),
+                BasicTooltipText = "Check this box to include Matthias Reflect in the randomization",
+                Parent = RandomizerSettingsWindow
+            };
+            RandomizeCannon = new Checkbox 
+            {
+                Text = "Randomize Sabetha Cannons",
+                Location = new Point(),
+                BasicTooltipText = "Check this box to include Sabetha Cannons in the randomization",
+                Parent = RandomizerSettingsWindow
+            };
+            RandomizeConstrucPusher = new Checkbox 
+            {
+                Text = "Randomize Keep Construct Pusher",
+                Location = new Point(),
+                BasicTooltipText = "Check this box to include KC Core Pusher in the randomization",
+                Parent = RandomizerSettingsWindow
+            };
+            RandomizeLamp = new Checkbox 
+            {
+                Text = "Randomize Lamp(s)",
+                Location = new Point(),
+                BasicTooltipText = "Check this box to include Qadim Lamp(s) in the randomization",
+                Parent = RandomizerSettingsWindow
+            };
+            RandomizePylon = new Checkbox 
+            {
+                Text = "Randomize Qadim Pylon(s)",
+                Location = new Point(),
+                BasicTooltipText = "Check this box to include the Qadim Pylon(s) in the randomization", //Make dropdown lists with int options 1-3 to apply to both Pylon and Lamp. Then make one that is 1-5 to apply to pillars.
+                Parent = RandomizerSettingsWindow
+            };
+            RandomizePillar = new Checkbox 
+            {
+                Text = "Randomize Adina Pillar(s)",
+                Location = new Point(),
+                BasicTooltipText = "Check this box to include Adina Pillar Baiter(s) in the randomization",
+                Parent = RandomizerSettingsWindow
+            };
+            RandomizeGreen = new Checkbox //Dropdown for 1-2 (tank always takes one green, and one person is dedicated green, but may want to randomize a second dedicated and let kiter do their thing alone
+            {
+                Text = "Randomize Dhuum Green(s)",
+                Location = new Point(),
+                BasicTooltipText = "Check this box to include Dhuum Green(s) in the randomization",
+                Parent = RandomizerSettingsWindow
+            };
+            RandomizeSoullessPusher = new Checkbox 
+            {
+                Text = "Randomize Soulless Horror Pusher",
+                Location = new Point(),
+                BasicTooltipText = "Check this box to include Tormented Dead Pusher in the randomization",
+                Parent = RandomizerSettingsWindow
+            };
+            RandomizeDhuumKite = new Checkbox 
+            {
+                Text = "Randomize Dhuum Messenger Kiter",
+                Location = new Point(),
+                BasicTooltipText = "Check this box to include Messenger Kiter in the randomization",
+                Parent = RandomizerSettingsWindow
+            };
+            RandomizeQadimKite = new Checkbox 
+            {
+                Text = "Randomize Qadim Kite",
+                Location = new Point(),
+                BasicTooltipText = "Check this box to include Qadim Kite in the randomization",
+                Parent = RandomizerSettingsWindow
+            };
+            RandomizeSword = new Checkbox 
+            {
+                Text = "Randomize Sword Collector(s)",
+                Location = new Point(),
+                BasicTooltipText = "Check this box to include Sword Collector(s) in the randomization",
+                Parent = RandomizerSettingsWindow
+            };
+            RandomizeShield = new Checkbox 
+            {
+                Text = "Randomize Shield Collector(s)",
+                Location = new Point(),
+                BasicTooltipText = "Check this box to include Shield Collector(s) in the randomization",
+                Parent = RandomizerSettingsWindow
+            };
+            #endregion
+            #region Box and Label Arrays
+            RolestoRandomizeSelectionCheckboxesArray = new Checkbox[22] {RandomizeHandKite,RandomizeOilKite,RandomizeFlakKite,RandomizeTank,RandomizeHealAlac,RandomizeHealQuick,RandomizeDPSAlac,RandomizeDPSQuick,RandomizeMushroom,RandomizeTower,RandomizeReflect,RandomizeCannon,RandomizeConstrucPusher,RandomizeLamp,RandomizePylon,RandomizePillar,RandomizeGreen,RandomizeSoullessPusher,RandomizeDhuumKite,RandomizeQadimKite,RandomizeSword,RandomizeShield};
+            HandKiteBoxArray = new Checkbox[10] {HandKitePlayer1, HandKitePlayer2, HandKitePlayer3, HandKitePlayer4, HandKitePlayer5, HandKitePlayer6, HandKitePlayer7, HandKitePlayer8, HandKitePlayer9, HandKitePlayer10};
+            OilKiteBoxArray = new Checkbox[10] {OilKitePlayer1, OilKitePlayer2, OilKitePlayer3, OilKitePlayer4, OilKitePlayer5,OilKitePlayer6,OilKitePlayer7,OilKitePlayer8,OilKitePlayer9,OilKitePlayer10};
+            FlakKiteBoxArray = new Checkbox[10] {FlakKitePlayer1,FlakKitePlayer2,FlakKitePlayer3,FlakKitePlayer4,FlakKitePlayer5,FlakKitePlayer6,FlakKitePlayer7,FlakKitePlayer8,FlakKitePlayer9,FlakKitePlayer10};
+            TankBoxArray = new Checkbox[10] {TankPlayer1,TankPlayer2,TankPlayer3,TankPlayer4,TankPlayer5,TankPlayer6,TankPlayer7,TankPlayer8,TankPlayer9,TankPlayer10};
+            HealAlacBoxArray = new Checkbox[10] {HealAlacPlayer1,HealAlacPlayer2,HealAlacPlayer3,HealAlacPlayer4,HealAlacPlayer5,HealAlacPlayer6,HealAlacPlayer7,HealAlacPlayer8,HealAlacPlayer9,HealAlacPlayer10};
+            HealQuickBoxArray = new Checkbox[10] {HealQuickPlayer1,HealQuickPlayer2,HealQuickPlayer3,HealQuickPlayer4,HealQuickPlayer5,HealQuickPlayer6,HealQuickPlayer7,HealQuickPlayer8,HealQuickPlayer9,HealQuickPlayer10};
+            DPSAlacBoxArray = new Checkbox[10] {DPSAlacPlayer1,DPSAlacPlayer2,DPSAlacPlayer3,DPSAlacPlayer4,DPSAlacPlayer5,DPSAlacPlayer6,DPSAlacPlayer7,DPSAlacPlayer8,DPSAlacPlayer9,DPSAlacPlayer10};
+            DPSQuickBoxArray = new Checkbox[10] {DPSQuickPlayer1,DPSQuickPlayer2,DPSQuickPlayer3,DPSQuickPlayer4,DPSQuickPlayer5,DPSQuickPlayer6,DPSQuickPlayer7,DPSQuickPlayer8,DPSQuickPlayer9,DPSQuickPlayer10};
+            MushroomBoxArray = new Checkbox[10] {MushroomPlayer1,MushroomPlayer2,MushroomPlayer3,MushroomPlayer4,MushroomPlayer5,MushroomPlayer6,MushroomPlayer7,MushroomPlayer8,MushroomPlayer9,MushroomPlayer10};
+            TowerBoxArray = new Checkbox[10] {TowerPlayer1,TowerPlayer2,TowerPlayer3,TowerPlayer4,TowerPlayer5,TowerPlayer6,TowerPlayer7,TowerPlayer8,TowerPlayer9,TowerPlayer10};
+            ReflectBoxArray = new Checkbox[10] {ReflectPlayer1,ReflectPlayer2,ReflectPlayer3,ReflectPlayer4,ReflectPlayer5,ReflectPlayer6,ReflectPlayer7,ReflectPlayer8,ReflectPlayer9,ReflectPlayer10};
+            CannonBoxArray = new Checkbox[10] {CannonPlayer1,CannonPlayer2,CannonPlayer3,CannonPlayer4,CannonPlayer5,CannonPlayer6,CannonPlayer7,CannonPlayer8,CannonPlayer9,CannonPlayer10};
+            ConstrucPusherBoxArray = new Checkbox[10] {ConstrucPusherPlayer1,ConstrucPusherPlayer2,ConstrucPusherPlayer3,ConstrucPusherPlayer4,ConstrucPusherPlayer5,ConstrucPusherPlayer6,ConstrucPusherPlayer7,ConstrucPusherPlayer8,ConstrucPusherPlayer9,ConstrucPusherPlayer10};
+            LampBoxArray = new Checkbox[10] {LampPlayer1,LampPlayer2,LampPlayer3,LampPlayer4,LampPlayer5,LampPlayer6,LampPlayer7,LampPlayer8,LampPlayer9,LampPlayer10};
+            PylonBoxArray = new Checkbox[10] {PylonPlayer1,PylonPlayer2,PylonPlayer3,PylonPlayer4,PylonPlayer5,PylonPlayer6,PylonPlayer7,PylonPlayer8,PylonPlayer9,PylonPlayer10};
+            PillarBoxArray = new Checkbox[10] {PillarPlayer1,PillarPlayer2,PillarPlayer3,PillarPlayer4,PillarPlayer5,PillarPlayer6,PillarPlayer7,PillarPlayer8,PillarPlayer9,PillarPlayer10};
+            GreenBoxArray = new Checkbox[10] {GreenPlayer1,GreenPlayer2,GreenPlayer3,GreenPlayer4,GreenPlayer5,GreenPlayer6,GreenPlayer7,GreenPlayer8,GreenPlayer9,GreenPlayer10};
+            SoullessPusherBoxArray = new Checkbox[10] {SoullessPusherPlayer1,SoullessPusherPlayer2,SoullessPusherPlayer3,SoullessPusherPlayer4,SoullessPusherPlayer5,SoullessPusherPlayer6,SoullessPusherPlayer7,SoullessPusherPlayer8,SoullessPusherPlayer9,SoullessPusherPlayer10};
+            DhuumKiteBoxArray = new Checkbox[10] {DhuumKitePlayer1,DhuumKitePlayer2,DhuumKitePlayer3,DhuumKitePlayer4,DhuumKitePlayer5,DhuumKitePlayer6,DhuumKitePlayer7,DhuumKitePlayer8,DhuumKitePlayer9,DhuumKitePlayer10};
+            QadimKiteBoxArray = new Checkbox[10] {QadimKitePlayer1,QadimKitePlayer2,QadimKitePlayer3,QadimKitePlayer4,QadimKitePlayer5,QadimKitePlayer6,QadimKitePlayer7,QadimKitePlayer8,QadimKitePlayer9,QadimKitePlayer10};
+            SwordBoxArray = new Checkbox[10] {SwordPlayer1,SwordPlayer2,SwordPlayer3,SwordPlayer4,SwordPlayer5,SwordPlayer6,SwordPlayer7,SwordPlayer8,SwordPlayer9,SwordPlayer10};
+            ShieldBoxArray = new Checkbox[10] {ShieldPlayer1,ShieldPlayer2,ShieldPlayer3,ShieldPlayer4,ShieldPlayer5,ShieldPlayer6,ShieldPlayer7,ShieldPlayer8,ShieldPlayer9,ShieldPlayer10};
+            HandKiteLabelArray = new Label[10] { HandkiteLabel1, HandkiteLabel2, HandkiteLabel3, HandkiteLabel4, HandkiteLabel5, HandkiteLabel6, HandkiteLabel7, HandkiteLabel8, HandkiteLabel9, HandkiteLabel10 };
+            OilKiteLabelArray = new Label[10] { OilKiteLabel1, OilKiteLabel2, OilKiteLabel3, OilKiteLabel4, OilKiteLabel5, OilKiteLabel6, OilKiteLabel7, OilKiteLabel8, OilKiteLabel9, OilKiteLabel10 };
+            FlakKiteLabelArray = new Label[10] { FlakKiteLabel1, FlakKiteLabel2, FlakKiteLabel3, FlakKiteLabel4, FlakKiteLabel5, FlakKiteLabel6, FlakKiteLabel7, FlakKiteLabel8, FlakKiteLabel9, FlakKiteLabel10 };
+            TankLabelArray = new Label[10] { TankLabel1, TankLabel2, TankLabel3, TankLabel4, TankLabel5, TankLabel6, TankLabel7, TankLabel8, TankLabel9, TankLabel10 };
+            HealAlacLabelArray = new Label[10] { HealAlacLabel1, HealAlacLabel2, HealAlacLabel3, HealAlacLabel4, HealAlacLabel5, HealAlacLabel6, HealAlacLabel7, HealAlacLabel8, HealAlacLabel9, HealAlacLabel10 };
+            HealQuickLabelArray = new Label[10] { HealQuickLabel1, HealQuickLabel2, HealQuickLabel3, HealQuickLabel4, HealQuickLabel5, HealQuickLabel6, HealQuickLabel7, HealQuickLabel8, HealQuickLabel9, HealQuickLabel10 };
+            DPSAlacLabelArray = new Label[10] { DPSAlacLabel1, DPSAlacLabel2, DPSAlacLabel3, DPSAlacLabel4, DPSAlacLabel5, DPSAlacLabel6, DPSAlacLabel7, DPSAlacLabel8, DPSAlacLabel9, DPSAlacLabel10 };
+            DPSQuickLabelArray = new Label[10] { DPSQuickLabel1, DPSQuickLabel2, DPSQuickLabel3, DPSQuickLabel4, DPSQuickLabel5, DPSQuickLabel6, DPSQuickLabel7, DPSQuickLabel8, DPSQuickLabel9, DPSQuickLabel10 };
+            MushroomLabelArray = new Label[10] { MushroomLabel1, MushroomLabel2, MushroomLabel3, MushroomLabel4, MushroomLabel5, MushroomLabel6, MushroomLabel7, MushroomLabel8, MushroomLabel9, MushroomLabel10 };
+            TowerLabelArray = new Label[10] { TowerLabel1, TowerLabel2, TowerLabel3, TowerLabel4, TowerLabel5, TowerLabel6, TowerLabel7, TowerLabel8, TowerLabel9, TowerLabel10 };
+            ReflectLabelArray = new Label[10] { ReflectLabel1, ReflectLabel2, ReflectLabel3, ReflectLabel4, ReflectLabel5, ReflectLabel6, ReflectLabel7, ReflectLabel8, ReflectLabel9, ReflectLabel10 };
+            CannonLabelArray = new Label[10] { CannonLabel1, CannonLabel2, CannonLabel3, CannonLabel4, CannonLabel5, CannonLabel6, CannonLabel7, CannonLabel8, CannonLabel9, CannonLabel10 };
+            ConstrucPusherLabelArray = new Label[10] { ConstructPusherLabel1, ConstructPusherLabel2, ConstructPusherLabel3, ConstructPusherLabel4, ConstructPusherLabel5, ConstructPusherLabel6, ConstructPusherLabel7, ConstructPusherLabel8, ConstructPusherLabel9, ConstructPusherLabel10 };
+            LampLabelArray = new Label[10] { LampLabel1, LampLabel2, LampLabel3, LampLabel4, LampLabel5, LampLabel6, LampLabel7, LampLabel8, LampLabel9, LampLabel10 };
+            PylonLabelArray = new Label[10] { PylonLabel1, PylonLabel2, PylonLabel3, PylonLabel4, PylonLabel5, PylonLabel6, PylonLabel7, PylonLabel8, PylonLabel9, PylonLabel10 };
+            PillarLabelArray = new Label[10] { PillarLabel1, PillarLabel2, PillarLabel3, PillarLabel4, PillarLabel5, PillarLabel6, PillarLabel7, PillarLabel8, PillarLabel9, PillarLabel10 };
+            GreenLabelArray = new Label[10] { GreenLabel1, GreenLabel2, GreenLabel3, GreenLabel4, GreenLabel5, GreenLabel6, GreenLabel7, GreenLabel8, GreenLabel9, GreenLabel10 };
+            SoullessPusherLabelArray = new Label[10] { SoullessHorrorPusherLabel1, SoullessHorrorPusherLabel2, SoullessHorrorPusherLabel3, SoullessHorrorPusherLabel4, SoullessHorrorPusherLabel5, SoullessHorrorPusherLabel6, SoullessHorrorPusherLabel7, SoullessHorrorPusherLabel8, SoullessHorrorPusherLabel9, SoullessHorrorPusherLabel10 };
+            DhuumKiteLabelArray = new Label[10] { DhuumKiteLabel1, DhuumKiteLabel2, DhuumKiteLabel3, DhuumKiteLabel4, DhuumKiteLabel5, DhuumKiteLabel6, DhuumKiteLabel7, DhuumKiteLabel8, DhuumKiteLabel9, DhuumKiteLabel10 };
+            QadimKiteLabelArray = new Label[10] { QadimKiteLabel1, QadimKiteLabel2, QadimKiteLabel3, QadimKiteLabel4, QadimKiteLabel5, QadimKiteLabel6, QadimKiteLabel7, QadimKiteLabel8, QadimKiteLabel9, QadimKiteLabel10 };
+            SwordLabelArray = new Label[10] { SwordLabel1, SwordLabel2, SwordLabel3, SwordLabel4, SwordLabel5, SwordLabel6, SwordLabel7, SwordLabel8, SwordLabel9, SwordLabel10 };
+            ShieldLabelArray = new Label[10] { ShieldLabel1, ShieldLabel2, ShieldLabel3, ShieldLabel4, ShieldLabel5, ShieldLabel6, ShieldLabel7, ShieldLabel8, ShieldLabel9, ShieldLabel10 };
+            HoTPannelArray = new Panel[10] { HoT_PlayerRolesPanel1, HoT_PlayerRolesPanel2, HoT_PlayerRolesPanel3, HoT_PlayerRolesPanel4, HoT_PlayerRolesPanel5, HoT_PlayerRolesPanel6, HoT_PlayerRolesPanel7, HoT_PlayerRolesPanel8, HoT_PlayerRolesPanel9, HoT_PlayerRolesPanel10 };
+            PoFPannelArray = new Panel[10] { PoF_PlayerRolesPanel1,PoF_PlayerRolesPanel2,PoF_PlayerRolesPanel3,PoF_PlayerRolesPanel4,PoF_PlayerRolesPanel5,PoF_PlayerRolesPanel6,PoF_PlayerRolesPanel7,PoF_PlayerRolesPanel8,PoF_PlayerRolesPanel9,PoF_PlayerRolesPanel10};
+            ListofCheckboxArrays = new List<Checkbox[]> {HandKiteBoxArray,OilKiteBoxArray,FlakKiteBoxArray,TankBoxArray,HealAlacBoxArray,HealQuickBoxArray,DPSAlacBoxArray,DPSQuickBoxArray,MushroomBoxArray,TowerBoxArray,ReflectBoxArray,CannonBoxArray,ConstrucPusherBoxArray,LampBoxArray,PylonBoxArray,PillarBoxArray,GreenBoxArray,SoullessPusherBoxArray,DhuumKiteBoxArray,QadimKiteBoxArray,SwordBoxArray,ShieldBoxArray };
+            ListofRolesSettings = new List<SettingEntry<bool>[]> {HandKiteRoles,OilKiteRoles,FlakKiteRoles,TankRoles,HealAlacRoles,HealQuickRoles,DPSAlacRoles,DPSQuickRoles,MushroomRoles,TowerRoles,ReflectRoles,CannonRoles,ConstrucPusherRoles,LampRoles,PylonRoles,PillarRoles,GreenRoles,SoullessPusherRoles,DhuumKiteRoles,QadimKiteRoles,SwordRoles,ShieldRoles };
             #endregion
         }
 
@@ -1265,9 +1418,19 @@ namespace Falson.Squad_Role_Randomizer
     public class GenerateRoles
     {
         public List<Action> GenerationFunctions;
+        public List<string> Rolestoberandomized;
 
         public void RandomizeTheRoles() 
         {
+            foreach (var item in RoleRandomizerMain.RolestoRandomizeSelectionCheckboxesArray )
+	        {
+                if (item.Checked)
+	            {
+                    string s = item.ToString();
+                    s.Replace("Randomize", "");
+                    Rolestoberandomized.Add(s)
+	            }
+	        }
             //Check list rolestoberandomized to decide which checks to make
             //Then check their lengths/run sanity checking to determine which order to generate in
             //Then add them to GenerationFunctions Action List in the order that they need to be generated
