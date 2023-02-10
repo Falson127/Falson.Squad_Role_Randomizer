@@ -11,6 +11,8 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
 
+using System.Diagnostics;
+
 namespace Falson.Squad_Role_Randomizer
 {
     [Export(typeof(Blish_HUD.Modules.Module))]
@@ -1418,6 +1420,7 @@ namespace Falson.Squad_Role_Randomizer
         protected override void OnModuleLoaded(EventArgs e)
         {
             CheckboxCheckedFunctions();
+            GenerateRoles.RandomizeTheRoles();
             // Base handler must be called
             base.OnModuleLoaded(e);
         }
@@ -1438,12 +1441,12 @@ namespace Falson.Squad_Role_Randomizer
 
     public class GenerateRoles
     {
-        public List<Action> GenerationFunctions;
-        public List<SettingEntry<bool>[]> Rolestoberandomized;
-        public List<int> Length_of_Roles_Arrays;
-        public List<string> GenerationSequence;
+        public static List<Action> GenerationFunctions;
+        public static List<SettingEntry<bool>[]> Rolestoberandomized;
+        public static List<int> Length_of_Roles_Arrays;
+        public static List<string> GenerationSequence;
 
-        public void RandomizeTheRoles()
+        public static void RandomizeTheRoles()
         { //RandomizeHandKite,RandomizeOilKite,RandomizeFlakKite,RandomizeTank,RandomizeHealAlac,RandomizeHealQuick,RandomizeDPSAlac,RandomizeDPSQuick,RandomizeMushroom,
           //RandomizeTower,RandomizeReflect,RandomizeCannon,RandomizeConstrucPusher,RandomizeLamp,RandomizePylon,RandomizePillar,RandomizeGreen,RandomizeSoullessPusher,
           //RandomizeDhuumKite,RandomizeQadimKite,RandomizeSword,RandomizeShield
@@ -1607,89 +1610,91 @@ namespace Falson.Squad_Role_Randomizer
             foreach (var item in GenerationFunctions) //Takes the final sequence that gets loaded into the actions list and invokes each of them in order. This step must come last!
             {
                 item.Invoke();
+
+                Debug.WriteLine($"txt");
             }
         }
-        public void GenerateHandKite() 
+        public static void GenerateHandKite() 
         {
         
         }
-        public void GenerateOilKite() 
+        public static void GenerateOilKite() 
         {
         
         }
-        public void GenerateFlakKite() 
+        public static void GenerateFlakKite() 
         {
         
         }
-        public void GenerateTank() 
+        public static void GenerateTank() 
         {
         
         }
-        public void GenerateHealers() 
+        public static void GenerateHealers() 
         {
         
         }
-        public void GenerateAlacrity() 
+        public static void GenerateAlacrity() 
         {
     
         }
-        public void GenerateQuickness() 
+        public static void GenerateQuickness() 
         {
         
         }
-        public void GenerateMushroom() 
+        public static void GenerateMushroom() 
         {
             
         }
-        public void GenerateTower() 
+        public static void GenerateTower() 
         {
             
         }
-        public void GenerateReflect() 
+        public static void GenerateReflect() 
         {
             
         }
-        public void GenerateCannon() 
+        public static void GenerateCannon() 
         {
             
         }
-        public void GenerateConstrucPusher() 
+        public static void GenerateConstrucPusher() 
         {
             
         }
-        public void GenerateLamp() 
+        public static void GenerateLamp() 
         {
             
         }
-        public void GeneratePylon() 
+        public static void GeneratePylon() 
         {
             
         }
-        public void GeneratePillar() 
+        public static void GeneratePillar() 
         {
             
         }
-        public void GenerateGreen() 
+        public static void GenerateGreen() 
         {
             
         }
-        public void GenerateSoullessPusher() 
+        public static void GenerateSoullessPusher() 
         {
             
         }
-        public void GenerateDhuumKite() 
+        public static void GenerateDhuumKite() 
         {
             
         }
-        public void GenerateQadimKite() 
+        public static void GenerateQadimKite() 
         {
             
         }
-        public void GenerateSword() 
+        public static void GenerateSword() 
         {
             
         }
-        public void GenerateShield() 
+        public static void GenerateShield() 
         {
             
         }
