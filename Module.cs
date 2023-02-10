@@ -9,7 +9,7 @@ using System;
 using System.ComponentModel.Composition;
 using System.Threading.Tasks;
 using System.Collections.Generic;
-using System.Runtime;
+using System.Linq;
 
 namespace Falson.Squad_Role_Randomizer
 {
@@ -1441,6 +1441,7 @@ namespace Falson.Squad_Role_Randomizer
         public List<Action> GenerationFunctions;
         public List<SettingEntry<bool>[]> Rolestoberandomized;
         public List<int> Length_of_Roles_Arrays;
+        public List<string> GenerationSequence;
 
         public void RandomizeTheRoles()
         { //RandomizeHandKite,RandomizeOilKite,RandomizeFlakKite,RandomizeTank,RandomizeHealAlac,RandomizeHealQuick,RandomizeDPSAlac,RandomizeDPSQuick,RandomizeMushroom,
@@ -1509,6 +1510,60 @@ namespace Falson.Squad_Role_Randomizer
                 {RoleRandomizerMain.SwordRoles, 20},
                 {RoleRandomizerMain.ShieldRoles, 21}
             };
+            IDictionary<List<string>, string> ValidRoleLists_to_FriendlyNamesDictionary = new Dictionary<List<string>, string>() 
+            {
+                {RoleRandomizerMain.HealValid, "Heal" },
+                {RoleRandomizerMain.DPSValid, "DPS"},
+                {RoleRandomizerMain.HandKiteValid, "HandKite"},
+                {RoleRandomizerMain.OilKiteValid, "OilKite"},
+                {RoleRandomizerMain.FlakKiteValid, "FlakKite"},
+                {RoleRandomizerMain.TankValid, "Tank"},
+                {RoleRandomizerMain.HealAlacValid, "HealAlac"},
+                {RoleRandomizerMain.HealQuickValid, "HealQuick"},
+                {RoleRandomizerMain.DPSAlacValid, "DPSAlac"},
+                {RoleRandomizerMain.DPSQuickValid, "DPSQuick"},
+                {RoleRandomizerMain.MushroomValid, "Mushroom"},
+                {RoleRandomizerMain.TowerValid, "Tower"},
+                {RoleRandomizerMain.ReflectValid, "Reflect"},
+                {RoleRandomizerMain.CannonValid, "Cannon"},
+                {RoleRandomizerMain.ConstrucPusherValid, "ConstrucPusher"},
+                {RoleRandomizerMain.LampValid, "Lamp"},
+                {RoleRandomizerMain.PylonValid, "Pylon"},
+                {RoleRandomizerMain.PillarValid, "Pillar"},
+                {RoleRandomizerMain.GreenValid, "Green"},
+                {RoleRandomizerMain.SoullessPusherValid, "SoullessPusher"},
+                {RoleRandomizerMain.DhuumKiteValid, "DhuumKite"},
+                {RoleRandomizerMain.QadimKiteValid, "QadimKite"},
+                {RoleRandomizerMain.SwordValid, "Sword"},
+                {RoleRandomizerMain.ShieldValid, "Shield"},
+            };
+            IDictionary<string, Action> FriendlyNames_to_ActionsDictionary = new Dictionary<string, Action>() 
+            {
+                {"Heal" , () =>GenerateHealers()},
+                //{"DPS", () =>Generate},
+                {"HandKite", () =>GenerateHandKite()},
+                {"OilKite", () =>GenerateOilKite()},
+                {"FlakKite", () =>GenerateFlakKite()},
+                {"Tank", () =>GenerateTank()},
+                //{"HealAlac", () =>Generate},
+                //{"HealQuick", () =>Generate},
+                {"DPSAlac", () =>GenerateAlacrity()},
+                {"DPSQuick", () =>GenerateQuickness()},
+                {"Mushroom", () =>GenerateMushroom()},
+                {"Tower", () =>GenerateTower()},
+                {"Reflect", () =>GenerateReflect()},
+                {"Cannon", () =>GenerateCannon()},
+                {"ConstrucPusher", () =>GenerateConstrucPusher()},
+                {"Lamp", () =>GenerateLamp()},
+                {"Pylon", () =>GeneratePylon()},
+                {"Pillar", () =>GeneratePillar()},
+                {"Green", () =>GenerateGreen()},
+                {"SoullessPusher", () =>GenerateSoullessPusher()},
+                {"DhuumKite", () =>GenerateDhuumKite()},
+                {"QadimKite", () =>GenerateQadimKite()},
+                {"Sword", () =>GenerateSword()},
+                {"Shield", () =>GenerateShield()},
+            };
             foreach (var item in RoleRandomizerMain.RolestoRandomizeSelectionCheckboxesArray )
 	        {
                 if (item.Checked)
@@ -1529,21 +1584,30 @@ namespace Falson.Squad_Role_Randomizer
                         RoleRandomizerMain.ListofRoleValidLists[RolesArrays_to_ArrayListPosDictionary[item]].Add(ArrayPos_to_PlayerNameDictionary[i]);
                     };
                 }
-
             }
+            IEnumerable<List<string>> SortedList = RoleRandomizerMain.ListofRoleValidLists.OrderBy(x => x.Count);  //sorts the populated lists by length
+            foreach (var item in SortedList)
+            {
+                if (item.Count != 0)
+                {
+                    GenerationSequence.Add(ValidRoleLists_to_FriendlyNamesDictionary[item]); //converts the current (role)valid list into a string name for the role to be generated and adds to the sequence, from shortest lists to longest.
+                }
+            }
+            foreach (var item in GenerationSequence)
+            {
+                GenerationFunctions.Add(FriendlyNames_to_ActionsDictionary[item]);
+            }
+
+
+
+
             //Check list rolestoberandomized to decide which checks to make
             //Then check their lengths/run sanity checking to determine which order to generate in
             //Then add them to GenerationFunctions Action List in the order that they need to be generated
-            //Then run for-loop to invoke each function in GenerationFunctions in order of appearance
-                //Can check length of List to determine max int size in for-loop
-        }
-        public void GenerateTank() 
-        {
-        
-        }
-        public void GenerateHealers() 
-        {
-        
+            foreach (var item in GenerationFunctions) //Takes the final sequence that gets loaded into the actions list and invokes each of them in order. This step must come last!
+            {
+                item.Invoke();
+            }
         }
         public void GenerateHandKite() 
         {
@@ -1557,13 +1621,77 @@ namespace Falson.Squad_Role_Randomizer
         {
         
         }
-        public void GenerateQuickDPS() 
+        public void GenerateTank() 
         {
         
         }
-        public void GenerateAlacDPS() 
+        public void GenerateHealers() 
+        {
+        
+        }
+        public void GenerateAlacrity() 
         {
     
+        }
+        public void GenerateQuickness() 
+        {
+        
+        }
+        public void GenerateMushroom() 
+        {
+            
+        }
+        public void GenerateTower() 
+        {
+            
+        }
+        public void GenerateReflect() 
+        {
+            
+        }
+        public void GenerateCannon() 
+        {
+            
+        }
+        public void GenerateConstrucPusher() 
+        {
+            
+        }
+        public void GenerateLamp() 
+        {
+            
+        }
+        public void GeneratePylon() 
+        {
+            
+        }
+        public void GeneratePillar() 
+        {
+            
+        }
+        public void GenerateGreen() 
+        {
+            
+        }
+        public void GenerateSoullessPusher() 
+        {
+            
+        }
+        public void GenerateDhuumKite() 
+        {
+            
+        }
+        public void GenerateQadimKite() 
+        {
+            
+        }
+        public void GenerateSword() 
+        {
+            
+        }
+        public void GenerateShield() 
+        {
+            
         }
     }
 }
