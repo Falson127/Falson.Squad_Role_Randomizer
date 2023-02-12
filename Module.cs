@@ -20,6 +20,7 @@ namespace Falson.Squad_Role_Randomizer
     {
         public static StandardWindow RandomizerResultsWindow;
         public static StandardWindow RandomizerSettingsWindow;
+        private CornerIcon RandomizerSettingIcon;
         public static List<string> HealValid;
         public static List<string> DPSValid;
         public static List<string> HandKiteValid;
@@ -981,13 +982,11 @@ namespace Falson.Squad_Role_Randomizer
             //ListofCheckboxArrays contains a list of all the arrays of checkboxes for each role. We cycle through these one item at a time to delegate their checkedchanged functions.
             //ListofRolesSettings contains the settings bool arrays that we are connecting to each checkbox. We need to cycle cycle only once per item, but cycle through each of the contained arrays 10 times to hit all settings.
             int tempcounter = 0;
-            foreach (var item in ListofCheckboxArrays)
+            for (int s = 0; s < 22; s++)
             {
-                //var Checkboxarrayitem = item;
-
                 for (int i = 0; i < 10; i++)
                 {
-                    item[i].CheckedChanged += delegate  //Essentially for example this would first produce | HandKiteBoxArray[i].CheckedChanged += delegate (for all 10 checkboxes)
+                    ListofCheckboxArrays[s][i].CheckedChanged += delegate  //Essentially for example this would first produce | HandKiteBoxArray[i].CheckedChanged += delegate (for all 10 checkboxes)
                     {
                         ListofRolesSettings[tempcounter][i].Value = !ListofRolesSettings[tempcounter][i].Value; //Then the delegated function is to check HandKiteRoles[i].Value and invert it, where i corresponds to linked checkboxes and checkbox settings for a given role.
                     };
@@ -1002,7 +1001,8 @@ namespace Falson.Squad_Role_Randomizer
         {
             //Initialize Windows Here first, Then initialize panels, then labels and checkboxes
             #region Box and Label Arrays
-            RolestoRandomizeSelectionCheckboxesArray = new Checkbox[22] {RandomizeHandKite,RandomizeOilKite,RandomizeFlakKite,RandomizeTank,RandomizeHealAlac,RandomizeHealQuick,RandomizeDPSAlac,RandomizeDPSQuick,RandomizeMushroom,RandomizeTower,RandomizeReflect,RandomizeCannon,RandomizeConstrucPusher,RandomizeLamp,RandomizePylon,RandomizePillar,RandomizeGreen,RandomizeSoullessPusher,RandomizeDhuumKite,RandomizeQadimKite,RandomizeSword,RandomizeShield};
+            RolestoRandomizeSelectionCheckboxesArray = new Checkbox[22];
+            //RolestoRandomizeSelectionCheckboxesArray = new Checkbox[22] {RandomizeHandKite,RandomizeOilKite,RandomizeFlakKite,RandomizeTank,RandomizeHealAlac,RandomizeHealQuick,RandomizeDPSAlac,RandomizeDPSQuick,RandomizeMushroom,RandomizeTower,RandomizeReflect,RandomizeCannon,RandomizeConstrucPusher,RandomizeLamp,RandomizePylon,RandomizePillar,RandomizeGreen,RandomizeSoullessPusher,RandomizeDhuumKite,RandomizeQadimKite,RandomizeSword,RandomizeShield};
             HandKiteBoxArray = new Checkbox[10] {HandKitePlayer1, HandKitePlayer2, HandKitePlayer3, HandKitePlayer4, HandKitePlayer5, HandKitePlayer6, HandKitePlayer7, HandKitePlayer8, HandKitePlayer9, HandKitePlayer10};
             OilKiteBoxArray = new Checkbox[10] {OilKitePlayer1, OilKitePlayer2, OilKitePlayer3, OilKitePlayer4, OilKitePlayer5,OilKitePlayer6,OilKitePlayer7,OilKitePlayer8,OilKitePlayer9,OilKitePlayer10};
             FlakKiteBoxArray = new Checkbox[10] {FlakKitePlayer1,FlakKitePlayer2,FlakKitePlayer3,FlakKitePlayer4,FlakKitePlayer5,FlakKitePlayer6,FlakKitePlayer7,FlakKitePlayer8,FlakKitePlayer9,FlakKitePlayer10};
@@ -1297,166 +1297,60 @@ namespace Falson.Squad_Role_Randomizer
                     Checked = ShieldRoles[i].Value
                 };
             }
-            RandomizeHandKite = new Checkbox 
+            IDictionary<int, string> RandomizeSelectionBoxesInt_to_StringDictionary = new Dictionary<int, string> 
             {
-                Text = "Randomize Hand Kiter",
-                Location = new Point(),
-                BasicTooltipText = "Check this box to include Hand Kite in the randomization",
-                Parent = RandomizerSettingsWindow
+                {0,"Hand Kite"},
+                {1,"Oil Kite"},
+                {2,"Flak Kite"},
+                {3,"Tank"},
+                {4,"Heal Alac"},
+                {5,"Heal Quickness"},
+                {6,"DPS Alac"},
+                {7,"DPS Quickness"},
+                {8,"Slothosaur Mushrroms"},
+                {9,"Tower Mesmer"},
+                {10,"Matthias Reflect"},
+                {11,"Sabetha Cannons"},
+                {12,"Keep Construct Pusher"},
+                {13,"Qadim Lamp(s)"},
+                {14,"Qadim Pylon(s)"},
+                {15,"Adina Pillar(s)"},
+                {16,"Dhuum Green(s)"},
+                {17,"Soulless Horror Pusher"},
+                {18,"Dhuum Messenger Kiter"},
+                {19,"Qadim Kite"},
+                {20,"Sword Collector(s)"},
+                {21,"Shield Collector(s)"},
             };
-            RandomizeOilKite = new Checkbox 
+            for (int i = 0; i < 22; i++)
             {
-                Text = "Randomize Oil Kite",
-                Location = new Point(),
-                BasicTooltipText = "Check this box to include Oil Kite in the randomization",
-                Parent = RandomizerSettingsWindow
-            };
-            RandomizeFlakKite = new Checkbox 
-            {
-                Text = "Randomize Flak Kite",
-                Location = new Point(),
-                BasicTooltipText = "Check this box to include Flak Kite in the randomization",
-                Parent = RandomizerSettingsWindow
-            };
-            RandomizeTank = new Checkbox 
-            {
-                Text = "Randomize Tank",
-                Location = new Point(),
-                BasicTooltipText = "Check this box to include Tank in the randomization",
-                Parent = RandomizerSettingsWindow
-            };
-            RandomizeHealAlac = new Checkbox 
-            {
-                Text = "Randomize Heal Alac",
-                Location = new Point(),
-                BasicTooltipText = "Check this box to include Heal/Alac in the randomization",
-                Parent = RandomizerSettingsWindow
-            };
-            RandomizeHealQuick = new Checkbox 
-            {
-                Text = "Randomize Heal Quickness",
-                Location = new Point(),
-                BasicTooltipText = "Check this box to include Heal/Quickness in the randomization",
-                Parent = RandomizerSettingsWindow
-            };
-            RandomizeDPSAlac = new Checkbox 
-            {
-                Text = "Randomize DPS Alac",
-                Location = new Point(),
-                BasicTooltipText = "Check this box to include DPS/Alac in the randomization",
-                Parent = RandomizerSettingsWindow
-            };
-            RandomizeDPSQuick = new Checkbox 
-            {
-                Text = "Randomize DPS Quickness",
-                Location = new Point(),
-                BasicTooltipText = "Check this box to include DPS/Quickness in the randomization",
-                Parent = RandomizerSettingsWindow
-            };
-            RandomizeMushroom = new Checkbox 
-            {
-                Text = "Randomize Slothosaur Mushrooms",
-                Location = new Point(),
-                BasicTooltipText = "Check this box to include Sloth Mushrooms in the randomization",
-                Parent = RandomizerSettingsWindow
-            };
-            RandomizeTower = new Checkbox 
-            {
-                Text = "Ranomize Tower Mesmer",
-                Location = new Point(),
-                BasicTooltipText = "Check this box to include Tower Mesmer in the randomization",
-                Parent = RandomizerSettingsWindow
-            };
-            RandomizeReflect = new Checkbox 
-            {
-                Text = "Randomize Matthias Reflect",
-                Location = new Point(),
-                BasicTooltipText = "Check this box to include Matthias Reflect in the randomization",
-                Parent = RandomizerSettingsWindow
-            };
-            RandomizeCannon = new Checkbox 
-            {
-                Text = "Randomize Sabetha Cannons",
-                Location = new Point(),
-                BasicTooltipText = "Check this box to include Sabetha Cannons in the randomization",
-                Parent = RandomizerSettingsWindow
-            };
-            RandomizeConstrucPusher = new Checkbox 
-            {
-                Text = "Randomize Keep Construct Pusher",
-                Location = new Point(),
-                BasicTooltipText = "Check this box to include KC Core Pusher in the randomization",
-                Parent = RandomizerSettingsWindow
-            };
-            RandomizeLamp = new Checkbox 
-            {
-                Text = "Randomize Lamp(s)",
-                Location = new Point(),
-                BasicTooltipText = "Check this box to include Qadim Lamp(s) in the randomization",
-                Parent = RandomizerSettingsWindow
-            };
-            RandomizePylon = new Checkbox 
-            {
-                Text = "Randomize Qadim Pylon(s)",
-                Location = new Point(),
-                BasicTooltipText = "Check this box to include the Qadim Pylon(s) in the randomization", //Make dropdown lists with int options 1-3 to apply to both Pylon and Lamp. Then make one that is 1-5 to apply to pillars.
-                Parent = RandomizerSettingsWindow
-            };
-            RandomizePillar = new Checkbox 
-            {
-                Text = "Randomize Adina Pillar(s)",
-                Location = new Point(),
-                BasicTooltipText = "Check this box to include Adina Pillar Baiter(s) in the randomization",
-                Parent = RandomizerSettingsWindow
-            };
-            RandomizeGreen = new Checkbox //Dropdown for 1-2 (tank always takes one green, and one person is dedicated green, but may want to randomize a second dedicated and let kiter do their thing alone
-            {
-                Text = "Randomize Dhuum Green(s)",
-                Location = new Point(),
-                BasicTooltipText = "Check this box to include Dhuum Green(s) in the randomization",
-                Parent = RandomizerSettingsWindow
-            };
-            RandomizeSoullessPusher = new Checkbox 
-            {
-                Text = "Randomize Soulless Horror Pusher",
-                Location = new Point(),
-                BasicTooltipText = "Check this box to include Tormented Dead Pusher in the randomization",
-                Parent = RandomizerSettingsWindow
-            };
-            RandomizeDhuumKite = new Checkbox 
-            {
-                Text = "Randomize Dhuum Messenger Kiter",
-                Location = new Point(),
-                BasicTooltipText = "Check this box to include Messenger Kiter in the randomization",
-                Parent = RandomizerSettingsWindow
-            };
-            RandomizeQadimKite = new Checkbox 
-            {
-                Text = "Randomize Qadim Kite",
-                Location = new Point(),
-                BasicTooltipText = "Check this box to include Qadim Kite in the randomization",
-                Parent = RandomizerSettingsWindow
-            };
-            RandomizeSword = new Checkbox 
-            {
-                Text = "Randomize Sword Collector(s)",
-                Location = new Point(),
-                BasicTooltipText = "Check this box to include Sword Collector(s) in the randomization",
-                Parent = RandomizerSettingsWindow
-            };
-            RandomizeShield = new Checkbox 
-            {
-                Text = "Randomize Shield Collector(s)",
-                Location = new Point(),
-                BasicTooltipText = "Check this box to include Shield Collector(s) in the randomization",
-                Parent = RandomizerSettingsWindow
-            };
+                RolestoRandomizeSelectionCheckboxesArray[i] = new Checkbox
+                {
+                    Text = "Randomize " + RandomizeSelectionBoxesInt_to_StringDictionary[i],
+                    Location = new Point(),
+                    BasicTooltipText = "Check this box to include " + RandomizeSelectionBoxesInt_to_StringDictionary[i] + " in the randomization",
+                    Parent = RandomizerSettingsWindow,
+                    Checked = true
+                };
+            }
+            
+            //Make dropdown lists with int options 1-3 to apply to both Pylon and Lamp. Then make one that is 1-5 to apply to pillars.
+            //Greens: Dropdown for 1-2 (tank always takes one green, and one person is dedicated green, but may want to randomize a second dedicated and let kiter do their thing alone
             #endregion
         }
         protected override void OnModuleLoaded(EventArgs e)
         {
             CheckboxCheckedFunctions();
             GenerateRoles.RandomizeTheRoles();
+            RandomizerSettingIcon = new CornerIcon 
+            {
+                Icon = ContentsManager.GetTexture("Emblem.png"),
+                BasicTooltipText = "Click to open settings window"
+            };
+            RandomizerSettingIcon.Click += delegate 
+            {
+                RandomizerSettingsWindow.Show();
+            };
             // Base handler must be called
             base.OnModuleLoaded(e);
         }
@@ -1486,30 +1380,33 @@ namespace Falson.Squad_Role_Randomizer
         { //RandomizeHandKite,RandomizeOilKite,RandomizeFlakKite,RandomizeTank,RandomizeHealAlac,RandomizeHealQuick,RandomizeDPSAlac,RandomizeDPSQuick,RandomizeMushroom,
           //RandomizeTower,RandomizeReflect,RandomizeCannon,RandomizeConstrucPusher,RandomizeLamp,RandomizePylon,RandomizePillar,RandomizeGreen,RandomizeSoullessPusher,
           //RandomizeDhuumKite,RandomizeQadimKite,RandomizeSword,RandomizeShield
-            IDictionary<string, SettingEntry<bool>[]> ActiveRolesDictionary = new Dictionary<string, SettingEntry<bool>[]>() 
+            Rolestoberandomized = new List<SettingEntry<bool>[]>();
+            GenerationSequence = new List<string>();
+            GenerationFunctions = new List<Action>();
+            IDictionary<Checkbox, SettingEntry<bool>[]> ActiveRolesDictionary = new Dictionary<Checkbox, SettingEntry<bool>[]>() 
             {
-                {"HandKite", RoleRandomizerMain.HandKiteRoles },
-                {"OilKite", RoleRandomizerMain.OilKiteRoles },
-                {"FlakKite", RoleRandomizerMain.FlakKiteRoles },
-                {"Tank", RoleRandomizerMain.TankRoles },
-                {"HealAlac", RoleRandomizerMain.HealAlacRoles },
-                {"HealQuick",RoleRandomizerMain.HealQuickRoles },
-                {"DPSAlac", RoleRandomizerMain.DPSAlacRoles },
-                {"DPSQuick", RoleRandomizerMain.DPSQuickRoles },
-                {"Mushroom", RoleRandomizerMain.MushroomRoles },
-                {"Tower", RoleRandomizerMain.TowerRoles },
-                {"Reflect", RoleRandomizerMain.ReflectRoles },
-                {"Cannon", RoleRandomizerMain.CannonRoles },
-                {"ConstrucPusher", RoleRandomizerMain.ConstrucPusherRoles },
-                {"Lamp", RoleRandomizerMain.LampRoles },
-                {"Pylon", RoleRandomizerMain.PylonRoles },
-                {"Pillar", RoleRandomizerMain.PillarRoles },
-                {"Green", RoleRandomizerMain.GreenRoles },
-                {"SoullessPusher", RoleRandomizerMain.SoullessPusherRoles },
-                {"DhuumKite", RoleRandomizerMain.DhuumKiteRoles },
-                {"QadimKite", RoleRandomizerMain.QadimKiteRoles },
-                {"Sword", RoleRandomizerMain.SwordRoles },
-                {"Shield", RoleRandomizerMain.ShieldRoles }
+                {RoleRandomizerMain.RolestoRandomizeSelectionCheckboxesArray[0], RoleRandomizerMain.HandKiteRoles },
+                {RoleRandomizerMain.RolestoRandomizeSelectionCheckboxesArray[1], RoleRandomizerMain.OilKiteRoles },
+                {RoleRandomizerMain.RolestoRandomizeSelectionCheckboxesArray[2], RoleRandomizerMain.FlakKiteRoles },
+                {RoleRandomizerMain.RolestoRandomizeSelectionCheckboxesArray[3], RoleRandomizerMain.TankRoles },
+                {RoleRandomizerMain.RolestoRandomizeSelectionCheckboxesArray[4], RoleRandomizerMain.HealAlacRoles },
+                {RoleRandomizerMain.RolestoRandomizeSelectionCheckboxesArray[5], RoleRandomizerMain.HealQuickRoles },
+                {RoleRandomizerMain.RolestoRandomizeSelectionCheckboxesArray[6], RoleRandomizerMain.DPSAlacRoles },
+                {RoleRandomizerMain.RolestoRandomizeSelectionCheckboxesArray[7], RoleRandomizerMain.DPSQuickRoles },
+                {RoleRandomizerMain.RolestoRandomizeSelectionCheckboxesArray[8], RoleRandomizerMain.MushroomRoles },
+                {RoleRandomizerMain.RolestoRandomizeSelectionCheckboxesArray[9], RoleRandomizerMain.TowerRoles },
+                {RoleRandomizerMain.RolestoRandomizeSelectionCheckboxesArray[10], RoleRandomizerMain.ReflectRoles },
+                {RoleRandomizerMain.RolestoRandomizeSelectionCheckboxesArray[11], RoleRandomizerMain.CannonRoles },
+                {RoleRandomizerMain.RolestoRandomizeSelectionCheckboxesArray[12], RoleRandomizerMain.ConstrucPusherRoles },
+                {RoleRandomizerMain.RolestoRandomizeSelectionCheckboxesArray[13], RoleRandomizerMain.LampRoles },
+                {RoleRandomizerMain.RolestoRandomizeSelectionCheckboxesArray[14], RoleRandomizerMain.PylonRoles },
+                {RoleRandomizerMain.RolestoRandomizeSelectionCheckboxesArray[15], RoleRandomizerMain.PillarRoles },
+                {RoleRandomizerMain.RolestoRandomizeSelectionCheckboxesArray[16], RoleRandomizerMain.GreenRoles },
+                {RoleRandomizerMain.RolestoRandomizeSelectionCheckboxesArray[17], RoleRandomizerMain.SoullessPusherRoles },
+                {RoleRandomizerMain.RolestoRandomizeSelectionCheckboxesArray[18], RoleRandomizerMain.DhuumKiteRoles },
+                {RoleRandomizerMain.RolestoRandomizeSelectionCheckboxesArray[19], RoleRandomizerMain.QadimKiteRoles },
+                {RoleRandomizerMain.RolestoRandomizeSelectionCheckboxesArray[20], RoleRandomizerMain.SwordRoles },
+                {RoleRandomizerMain.RolestoRandomizeSelectionCheckboxesArray[21], RoleRandomizerMain.ShieldRoles }
             };
             IDictionary<int, string> ArrayPos_to_PlayerNameDictionary = new Dictionary<int, string>() 
             {
@@ -1603,16 +1500,22 @@ namespace Falson.Squad_Role_Randomizer
                 {"Sword", () =>GenerateSword()},
                 {"Shield", () =>GenerateShield()},
             };
-            foreach (var item in RoleRandomizerMain.RolestoRandomizeSelectionCheckboxesArray )
-	        {
-                if (item.Checked)
-	            {
-                    string s = item.ToString();
-                    s.Replace("Randomize", "");
-                    var b = ActiveRolesDictionary[s];
-                    Rolestoberandomized.Add(b);
-	            }
-	        }
+
+            for (int i = 0; i < 22; i++)
+            {
+                if (RoleRandomizerMain.RolestoRandomizeSelectionCheckboxesArray[i].Checked)
+                {
+                    var tempkey = RoleRandomizerMain.RolestoRandomizeSelectionCheckboxesArray[i];
+                    var temprole = ActiveRolesDictionary[tempkey];
+                    for (int s = 0; s < 10; s++)
+                    {
+                        if (temprole[s].Value)
+                        {
+                            Rolestoberandomized.Add(temprole);
+                        }
+                    }
+                }
+            }
 
             foreach (var item in Rolestoberandomized)
             {
@@ -1647,7 +1550,7 @@ namespace Falson.Squad_Role_Randomizer
             {
                 item.Invoke();
 
-                Debug.WriteLine($"txt");
+                Debug.WriteLine(item.ToString() + "Invoked");
             }
         }
         public static void GenerateHandKite() 

@@ -5,14 +5,14 @@
   "package": "Falson.Squad Role Randomizer.dll",
   "manifest_version": 1,
 
-  "description": "Description of your module. Visit https://github.com/blish-hud/manifest.json/blob/master/manifest-v1.md for details about the manifest format.",
+  "description": "Allows you to randomly assign roles to your raid static based upon the roles each member is able to play.",
   "dependencies": {
     "bh.blishhud": ">=0.5.2"
   },
-  "url": "https://github.com/Ben/Falson.Squad_Role_Randomizer",
+  "url": "",
   "contributors": [
     {
-      "name": "Ben"
+      "name": "Falson"
     }
   ]
 }
