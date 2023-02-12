@@ -981,6 +981,7 @@ namespace Falson.Squad_Role_Randomizer
             //Tempcounter increments once per foreach, allowing us to cycle through the same settings bool array 10 times per item, but move to the next settings array for the next corresponding item.
             //ListofCheckboxArrays contains a list of all the arrays of checkboxes for each role. We cycle through these one item at a time to delegate their checkedchanged functions.
             //ListofRolesSettings contains the settings bool arrays that we are connecting to each checkbox. We need to cycle cycle only once per item, but cycle through each of the contained arrays 10 times to hit all settings.
+            IDictionary<int,Checkbox> integer_to_CheckboxDictionary = new Dictionary<int,Checkbox> { };
             int tempcounter = 0;
             for (int s = 0; s < 22; s++)
             {
@@ -993,6 +994,7 @@ namespace Falson.Squad_Role_Randomizer
                 }
                 tempcounter++; //We then increment the tempcounter by 1 to move the ListofRolesSettings[tempcounter] output to be the next in the list and cycle through those settings arrays with their corresponding checkboxes.
             }
+
         }
         protected override async Task LoadAsync()
         //Label Dimensions(width, height): (100, 25)
