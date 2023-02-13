@@ -111,6 +111,17 @@ namespace Falson.Squad_Role_Randomizer
         public TextBox Player8NameBox;
         public TextBox Player9NameBox;
         public TextBox Player10NameBox;
+        public FlowPanel Player1FlowPanel;
+        public FlowPanel Player2FlowPanel;
+        public FlowPanel Player3FlowPanel;
+        public FlowPanel Player4FlowPanel;
+        public FlowPanel Player5FlowPanel;
+        public FlowPanel Player6FlowPanel;
+        public FlowPanel Player7FlowPanel;
+        public FlowPanel Player8FlowPanel;
+        public FlowPanel Player9FlowPanel;
+        public FlowPanel Player10FlowPanel;
+        public FlowPanel MasterFlowPanel;
         public FlowPanel HoT_PlayerRolesPanel1;
         public FlowPanel PoF_PlayerRolesPanel1;
         public FlowPanel HoT_PlayerRolesPanel2;
@@ -375,159 +386,299 @@ namespace Falson.Squad_Role_Randomizer
 
         protected override void Initialize()
         {
-            RandomizerSettingsWindow = new StandardWindow(ContentsManager.GetTexture("155985.png"), new Rectangle(30, 30, 700, 930), new Rectangle(50, 50, 640, 890)) 
+            RandomizerSettingsWindow = new StandardWindow(ContentsManager.GetTexture("155985.png"), new Rectangle(40, 26, 913, 691), new Rectangle(70, 71, 839, 605))
             {
                 Title = "Randomization Settings",
                 Subtitle = "Define Roles to Randomize",
-                Parent = GameService.Graphics.SpriteScreen
+                Parent = GameService.Graphics.SpriteScreen,
+                Size = new Point(1250, 600)
             };
             RandomizerResultsWindow = new StandardWindow(ContentsManager.GetTexture("155985.png"), new Rectangle(30, 30, 700, 930), new Rectangle(50, 50, 640, 890))
             {
                 Title = "Randomized Roles",
                 Parent = GameService.Graphics.SpriteScreen
             };
+            MasterFlowPanel = new FlowPanel 
+            {
+                ShowBorder = true,
+                Title = "Set Roles for Each Player",
+                Size = new Point(1100,600),
+                Location = new Point(0,0),
+                Parent = RandomizerSettingsWindow,
+                CanScroll = true,
+                CanCollapse = false,
+                FlowDirection = ControlFlowDirection.SingleTopToBottom
+            };
+            Player1FlowPanel = new FlowPanel 
+            {
+                Title = Player1Name.Value,
+                Size = new Point(1050,150),
+                Parent = MasterFlowPanel,
+                ShowBorder = true,
+                CanCollapse = true,
+                Collapsed = true,
+                FlowDirection = ControlFlowDirection.LeftToRight
+            };
+            Player2FlowPanel = new FlowPanel 
+            {
+                Title = Player2Name.Value,
+                Size = new Point(1050,150),
+                Parent = MasterFlowPanel,
+                ShowBorder = true,
+                CanCollapse = true,
+                Collapsed = true,
+                FlowDirection = ControlFlowDirection.LeftToRight
+            };
+            Player3FlowPanel = new FlowPanel 
+            {
+                Title = Player3Name.Value,
+                Size = new Point(1050,150),
+                Parent = MasterFlowPanel,
+                ShowBorder = true,
+                CanCollapse = true,
+                Collapsed = true,
+                FlowDirection = ControlFlowDirection.LeftToRight
+
+            };
+            Player4FlowPanel = new FlowPanel 
+            {
+                Title = Player4Name.Value,
+                Size = new Point(1050,150),
+                Parent = MasterFlowPanel,
+                ShowBorder = true,
+                CanCollapse = true,
+                Collapsed = true,
+                FlowDirection = ControlFlowDirection.LeftToRight
+
+            };
+            Player5FlowPanel = new FlowPanel 
+            {
+                Title = Player5Name.Value,
+                Size = new Point(1050,150),
+                Parent = MasterFlowPanel,
+                ShowBorder = true,
+                CanCollapse = true,
+                Collapsed = true,
+                FlowDirection = ControlFlowDirection.LeftToRight
+
+            };
+            Player6FlowPanel = new FlowPanel 
+            {
+                Title = Player6Name.Value,
+                Size = new Point(1050,150),
+                Parent = MasterFlowPanel,
+                ShowBorder = true,
+                CanCollapse = true,
+                Collapsed = true,
+                FlowDirection = ControlFlowDirection.LeftToRight
+
+            };
+            Player7FlowPanel = new FlowPanel 
+            {
+                Title = Player7Name.Value,
+                Size = new Point(1050,150),
+                Parent = MasterFlowPanel,
+                ShowBorder = true,
+                CanCollapse = true,
+                Collapsed = true,
+                FlowDirection = ControlFlowDirection.LeftToRight
+
+            };
+            Player8FlowPanel = new FlowPanel 
+            {
+                Title = Player8Name.Value,
+                Size = new Point(1050,150),
+                Parent = MasterFlowPanel,
+                ShowBorder = true,
+                CanCollapse = true,
+                Collapsed = true,
+                FlowDirection = ControlFlowDirection.LeftToRight
+
+            };
+            Player9FlowPanel = new FlowPanel 
+            {
+                Title = Player9Name.Value,
+                Size = new Point(1050,150),
+                Parent = MasterFlowPanel,
+                ShowBorder = true,
+                CanCollapse = true,
+                Collapsed = true,
+                FlowDirection = ControlFlowDirection.LeftToRight
+
+            };
+            Player10FlowPanel = new FlowPanel 
+            {
+                Title = Player10Name.Value,
+                Size = new Point(1050,150),
+                Parent = MasterFlowPanel,
+                ShowBorder = true,
+                CanCollapse = true,
+                Collapsed = true,
+                FlowDirection = ControlFlowDirection.LeftToRight
+
+            };
             #region HoT_FlowPanels
             HoT_PlayerRolesPanel1 = new FlowPanel() 
             {
-                Size = new Point(510, 100),
-                Parent = RandomizerSettingsWindow,
-                CanCollapse = true,
-                Collapsed = true
+                Size = new Point(510,150),
+                Parent = Player1FlowPanel,
+                ShowBorder = true,
+                FlowDirection = ControlFlowDirection.LeftToRight,
+                Title = "HoT Roles"
             };
             HoT_PlayerRolesPanel2 = new FlowPanel() 
             {
-                Size = new Point(510, 100),
-                Parent = RandomizerSettingsWindow,
-                CanCollapse = true,
-                Collapsed = true
+                Size = new Point(510,150),
+                Parent = Player2FlowPanel,
+                ShowBorder = true,
+                FlowDirection = ControlFlowDirection.LeftToRight,
+                Title = "HoT Roles"
             };
             HoT_PlayerRolesPanel3 = new FlowPanel() 
             {
-                Size = new Point(510, 100),
-                Parent = RandomizerSettingsWindow,
-                CanCollapse = true,
-                Collapsed = true
+                Size = new Point(510,150),
+                Parent = Player3FlowPanel,
+                ShowBorder = true,
+                FlowDirection = ControlFlowDirection.LeftToRight,
+                Title = "HoT Roles"
             };
             HoT_PlayerRolesPanel4 = new FlowPanel() 
             {
-                Size = new Point(510, 100),
-                Parent = RandomizerSettingsWindow,
-                CanCollapse = true,
-                Collapsed = true
+                Size = new Point(510,150),
+                Parent = Player4FlowPanel,
+                ShowBorder = true,
+                FlowDirection = ControlFlowDirection.LeftToRight,
+                Title = "HoT Roles"
             };
             HoT_PlayerRolesPanel5 = new FlowPanel() 
             {
-                Size = new Point(510, 100),
-                Parent = RandomizerSettingsWindow,
-                CanCollapse = true,
-                Collapsed = true
+                Size = new Point(510,150),
+                Parent = Player5FlowPanel,
+                ShowBorder = true,
+                FlowDirection = ControlFlowDirection.LeftToRight,
+                Title = "HoT Roles"
             };
             HoT_PlayerRolesPanel6 = new FlowPanel() 
             {
-                Size = new Point(510, 100),
-                Parent = RandomizerSettingsWindow,
-                CanCollapse = true,
-                Collapsed = true
+                Size = new Point(510,150),
+                Parent = Player6FlowPanel,
+                ShowBorder = true,
+                FlowDirection = ControlFlowDirection.LeftToRight,
+                Title = "HoT Roles"
             };
             HoT_PlayerRolesPanel7 = new FlowPanel() 
             {
-                Size = new Point(510, 100),
-                Parent = RandomizerSettingsWindow,
-                CanCollapse = true,
-                Collapsed = true
+                Size = new Point(510,150),
+                Parent = Player7FlowPanel,
+                ShowBorder = true,
+                FlowDirection = ControlFlowDirection.LeftToRight,
+                Title = "HoT Roles"
             };
             HoT_PlayerRolesPanel8 = new FlowPanel() 
             {
-                Size = new Point(510, 100),
-                Parent = RandomizerSettingsWindow,
-                CanCollapse = true,
-                Collapsed = true
+                Size = new Point(510,150),
+                Parent = Player8FlowPanel,
+                ShowBorder = true,
+                FlowDirection = ControlFlowDirection.LeftToRight,
+                Title = "HoT Roles"
             };
             HoT_PlayerRolesPanel9 = new FlowPanel() 
             {
-                Size = new Point(510, 100),
-                Parent = RandomizerSettingsWindow,
-                CanCollapse = true,
-                Collapsed = true,
+                Size = new Point(510,150),
+                Parent = Player9FlowPanel,
+                ShowBorder = true,
+                FlowDirection = ControlFlowDirection.LeftToRight,
+                Title = "HoT Roles",
             };
             HoT_PlayerRolesPanel10 = new FlowPanel() 
             {
-                Size = new Point(510, 100),
-                Parent = RandomizerSettingsWindow,
-                CanCollapse = true,
-                Collapsed = true
+                Size = new Point(510,150),
+                Parent = Player10FlowPanel,
+                ShowBorder = true,
+                FlowDirection = ControlFlowDirection.LeftToRight,
+                Title = "HoT Roles"
             };
             #endregion
             #region PoF_FlowPanels
             PoF_PlayerRolesPanel1 = new FlowPanel()
             {
-                Size = new Point(510, 100),
-                Parent = RandomizerSettingsWindow,
-                CanCollapse = true,
-                Collapsed = true
+                Size = new Point(510, 150),
+                Parent = Player1FlowPanel,
+                ShowBorder = true,
+                Title = "PoF Roles",
+                FlowDirection = ControlFlowDirection.LeftToRight
             };
             PoF_PlayerRolesPanel2 = new FlowPanel()
             {
-                Size = new Point(510, 100),
-                Parent = RandomizerSettingsWindow,
-                CanCollapse = true,
-                Collapsed = true
+                Size = new Point(510, 150),
+                Parent = Player2FlowPanel,
+                ShowBorder = true,
+                Title = "PoF Roles",
+                FlowDirection = ControlFlowDirection.LeftToRight
             };
             PoF_PlayerRolesPanel3 = new FlowPanel()
             {
-                Size = new Point(510, 100),
-                Parent = RandomizerSettingsWindow,
-                CanCollapse = true,
-                Collapsed = true
+                Size = new Point(510, 150),
+                Parent = Player3FlowPanel,
+                ShowBorder = true,
+                Title = "PoF Roles",
+                FlowDirection = ControlFlowDirection.LeftToRight
             };
             PoF_PlayerRolesPanel4 = new FlowPanel()
             {
-                Size = new Point(510, 100),
-                Parent = RandomizerSettingsWindow,
-                CanCollapse = true,
-                Collapsed = true
+                Size = new Point(510, 150),
+                Parent = Player4FlowPanel,
+                ShowBorder = true,
+                Title = "PoF Roles",
+                FlowDirection = ControlFlowDirection.LeftToRight
             };
             PoF_PlayerRolesPanel5 = new FlowPanel()
             {
-                Size = new Point(510, 100),
-                Parent = RandomizerSettingsWindow,
-                CanCollapse = true,
-                Collapsed = true
+                Size = new Point(510, 150),
+                Parent = Player5FlowPanel,
+                ShowBorder = true,
+                Title = "PoF Roles",
+                FlowDirection = ControlFlowDirection.LeftToRight
             };
             PoF_PlayerRolesPanel6 = new FlowPanel()
             {
-                Size = new Point(510, 100),
-                Parent = RandomizerSettingsWindow,
-                CanCollapse = true,
-                Collapsed = true
+                Size = new Point(510, 150),
+                Parent = Player6FlowPanel,
+                ShowBorder = true,
+                Title = "PoF Roles",
+                FlowDirection = ControlFlowDirection.LeftToRight
             };
             PoF_PlayerRolesPanel7 = new FlowPanel()
             {
-                Size = new Point(510, 100),
-                Parent = RandomizerSettingsWindow,
-                CanCollapse = true,
-                Collapsed = true
+                Size = new Point(510, 150),
+                Parent = Player7FlowPanel,
+                ShowBorder = true,
+                Title = "PoF Roles",
+                FlowDirection = ControlFlowDirection.LeftToRight
             };
             PoF_PlayerRolesPanel8 = new FlowPanel()
             {
-                Size = new Point(510, 100),
-                Parent = RandomizerSettingsWindow,
-                CanCollapse = true,
-                Collapsed = true
+                Size = new Point(510, 150),
+                Parent = Player8FlowPanel,
+                ShowBorder = true,
+                Title = "PoF Roles",
+                FlowDirection = ControlFlowDirection.LeftToRight
             };
             PoF_PlayerRolesPanel9 = new FlowPanel()
             {
-                Size = new Point(510, 100),
-                Parent = RandomizerSettingsWindow,
-                CanCollapse = true,
-                Collapsed = true
+                Size = new Point(510, 150),
+                Parent = Player9FlowPanel,
+                ShowBorder = true,
+                Title = "PoF Roles",
+                FlowDirection = ControlFlowDirection.LeftToRight
             };
             PoF_PlayerRolesPanel10 = new FlowPanel()
             {
-                Size = new Point(510, 100),
-                Parent = RandomizerSettingsWindow,
-                CanCollapse = true,
-                Collapsed = true
+                Size = new Point(510, 150),
+                Parent = Player10FlowPanel,
+                ShowBorder = true,
+                Title = "PoF Roles",
+                FlowDirection = ControlFlowDirection.LeftToRight
             };
             #endregion
             #region Checkbox Labels
