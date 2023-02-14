@@ -21,6 +21,7 @@ namespace Falson.Squad_Role_Randomizer
         public static StandardWindow RandomizerResultsWindow;
         public static StandardWindow RandomizerSettingsWindow;
         private CornerIcon RandomizerSettingIcon;
+        private CornerIcon TestingCornerIcon;
         public static List<string> HealValid;
         public static List<string> DPSValid;
         public static List<string> HandKiteValid;
@@ -97,7 +98,7 @@ namespace Falson.Squad_Role_Randomizer
         public static SettingEntry<string> Player8Name;
         public static SettingEntry<string> Player9Name;
         public static SettingEntry<string> Player10Name;
-        public List<Checkbox[]> ListofCheckboxArrays;
+        public List<CustomCheckbox[]> ListofCheckboxArrays;
         public List<SettingEntry<bool>[]> ListofRolesSettings;
         public static List<List<string>> ListofRoleValidLists;
         //public List<List<string>> SelectedRolesToRandomize;
@@ -111,6 +112,7 @@ namespace Falson.Squad_Role_Randomizer
         public TextBox Player8NameBox;
         public TextBox Player9NameBox;
         public TextBox Player10NameBox;
+        public Panel PlayerNameTextBoxPanel;
         public FlowPanel Player1FlowPanel;
         public FlowPanel Player2FlowPanel;
         public FlowPanel Player3FlowPanel;
@@ -122,6 +124,7 @@ namespace Falson.Squad_Role_Randomizer
         public FlowPanel Player9FlowPanel;
         public FlowPanel Player10FlowPanel;
         public FlowPanel MasterFlowPanel;
+        public FlowPanel RandomizeCheckboxesPanel;
         public FlowPanel HoT_PlayerRolesPanel1;
         public FlowPanel PoF_PlayerRolesPanel1;
         public FlowPanel HoT_PlayerRolesPanel2;
@@ -166,28 +169,6 @@ namespace Falson.Squad_Role_Randomizer
         public CustomCheckbox[] SwordBoxArray;
         public CustomCheckbox[] ShieldBoxArray;
         public static Checkbox[] RolestoRandomizeSelectionCheckboxesArray;
-        public Label[] HandKiteLabelArray;
-        public Label[] OilKiteLabelArray;
-        public Label[] FlakKiteLabelArray;
-        public Label[] TankLabelArray;
-        public Label[] HealAlacLabelArray;
-        public Label[] HealQuickLabelArray;
-        public Label[] DPSAlacLabelArray;
-        public Label[] DPSQuickLabelArray;
-        public Label[] MushroomLabelArray;
-        public Label[] TowerLabelArray;
-        public Label[] ReflectLabelArray;
-        public Label[] CannonLabelArray;
-        public Label[] ConstrucPusherLabelArray;
-        public Label[] LampLabelArray;
-        public Label[] PylonLabelArray;
-        public Label[] PillarLabelArray;
-        public Label[] GreenLabelArray;
-        public Label[] SoullessPusherLabelArray;
-        public Label[] DhuumKiteLabelArray;
-        public Label[] QadimKiteLabelArray;
-        public Label[] SwordLabelArray;
-        public Label[] ShieldLabelArray;
         public Panel[] HoTPannelArray;
         public Panel[] PoFPannelArray;
         //Roles Per Pannel: HoT: 13
@@ -391,19 +372,34 @@ namespace Falson.Squad_Role_Randomizer
                 Title = "Randomization Settings",
                 Subtitle = "Define Roles to Randomize",
                 Parent = GameService.Graphics.SpriteScreen,
-                Size = new Point(1250, 600)
+                Size = new Point(1050, 800)
             };
             RandomizerResultsWindow = new StandardWindow(ContentsManager.GetTexture("155985.png"), new Rectangle(30, 30, 700, 930), new Rectangle(50, 50, 640, 890))
             {
                 Title = "Randomized Roles",
                 Parent = GameService.Graphics.SpriteScreen
             };
+            PlayerNameTextBoxPanel = new Panel 
+            {
+                Title = "Enter Player Names",
+                Size = new Point(1000,200),
+                Location = new Point(0,0),
+                Parent = RandomizerSettingsWindow,
+            };
+            RandomizeCheckboxesPanel = new FlowPanel
+            {
+                Title = "Select roles to be randomized",
+                Size = new Point(1000,100),
+                Parent = RandomizerSettingsWindow,
+                Location = new Point(0,0),
+                FlowDirection = ControlFlowDirection.LeftToRight
+            };
             MasterFlowPanel = new FlowPanel 
             {
                 ShowBorder = true,
                 Title = "Set Roles for Each Player",
-                Size = new Point(1100,600),
-                Location = new Point(0,0),
+                Size = new Point(1000,700),
+                Location = new Point(0,101),
                 Parent = RandomizerSettingsWindow,
                 CanScroll = true,
                 CanCollapse = false,
@@ -515,7 +511,6 @@ namespace Falson.Squad_Role_Randomizer
                 CanCollapse = true,
                 Collapsed = true,
                 FlowDirection = ControlFlowDirection.LeftToRight
-
             };
             #region HoT_FlowPanels
             HoT_PlayerRolesPanel1 = new FlowPanel() 
@@ -681,9 +676,6 @@ namespace Falson.Squad_Role_Randomizer
                 FlowDirection = ControlFlowDirection.LeftToRight
             };
             #endregion
-            #region Checkbox Labels
-
-            #endregion
         }
         protected void CheckboxCheckedFunctions() 
         {
@@ -722,7 +714,7 @@ namespace Falson.Squad_Role_Randomizer
             QadimKiteBoxArray = new CustomCheckbox[10];
             SwordBoxArray = new CustomCheckbox[10];
             ShieldBoxArray = new CustomCheckbox[10];
-            ListofCheckboxArrays = new List<Checkbox[]> {HandKiteBoxArray,OilKiteBoxArray,FlakKiteBoxArray,TankBoxArray,HealAlacBoxArray,HealQuickBoxArray,DPSAlacBoxArray,DPSQuickBoxArray,MushroomBoxArray,TowerBoxArray,ReflectBoxArray,CannonBoxArray,ConstrucPusherBoxArray,LampBoxArray,PylonBoxArray,PillarBoxArray,GreenBoxArray,SoullessPusherBoxArray,DhuumKiteBoxArray,QadimKiteBoxArray,SwordBoxArray,ShieldBoxArray };
+            ListofCheckboxArrays = new List<CustomCheckbox[]> {HandKiteBoxArray,OilKiteBoxArray,FlakKiteBoxArray,TankBoxArray,HealAlacBoxArray,HealQuickBoxArray,DPSAlacBoxArray,DPSQuickBoxArray,MushroomBoxArray,TowerBoxArray,ReflectBoxArray,CannonBoxArray,ConstrucPusherBoxArray,LampBoxArray,PylonBoxArray,PillarBoxArray,GreenBoxArray,SoullessPusherBoxArray,DhuumKiteBoxArray,QadimKiteBoxArray,SwordBoxArray,ShieldBoxArray };
             ListofRolesSettings = new List<SettingEntry<bool>[]> {HandKiteRoles,OilKiteRoles,FlakKiteRoles,TankRoles,HealAlacRoles,HealQuickRoles,DPSAlacRoles,DPSQuickRoles,MushroomRoles,TowerRoles,ReflectRoles,CannonRoles,ConstrucPusherRoles,LampRoles,PylonRoles,PillarRoles,GreenRoles,SoullessPusherRoles,DhuumKiteRoles,QadimKiteRoles,SwordRoles,ShieldRoles };
             ListofRoleValidLists = new List<List<string>> { HandKiteValid,OilKiteValid,FlakKiteValid,TankValid,HealAlacValid,HealQuickValid,DPSAlacValid,DPSQuickValid,MushroomValid,TowerValid,ReflectValid,CannonValid,ConstrucPusherValid,LampValid,PylonValid,PillarValid,GreenValid,SoullessPusherValid,DhuumKiteValid,QadimKiteValid,SwordValid,ShieldValid};
             #endregion
@@ -1004,15 +996,180 @@ namespace Falson.Squad_Role_Randomizer
                     Text = "Randomize " + RandomizeSelectionBoxesInt_to_StringDictionary[i],
                     Location = new Point(),
                     BasicTooltipText = "Check this box to include " + RandomizeSelectionBoxesInt_to_StringDictionary[i] + " in the randomization",
-                    Parent = RandomizerSettingsWindow,
+                    Parent = RandomizeCheckboxesPanel,
                     Checked = true
                 };
             }
-            
+
             //Make dropdown lists with int options 1-3 to apply to both Pylon and Lamp. Then make one that is 1-5 to apply to pillars.
             //Greens: Dropdown for 1-2 (tank always takes one green, and one person is dedicated green, but may want to randomize a second dedicated and let kiter do their thing alone
             #endregion
+            #region Textboxes
+            Player1NameBox = new TextBox 
+            {
+                PlaceholderText = "Player 1",
+                Size = new Point(200,25),
+                Parent = PlayerNameTextBoxPanel,
+                Location = new Point(0,0)
+            };
+            Player2NameBox = new TextBox 
+            {
+                PlaceholderText = "Player 2",
+                Size = new Point(200,25),
+                Parent = PlayerNameTextBoxPanel,
+                Location = new Point(0, 25)
+            };
+            Player3NameBox = new TextBox 
+            {
+                PlaceholderText = "Player 3",
+                Size = new Point(200,25),
+                Parent = PlayerNameTextBoxPanel,
+                Location = new Point(0, 50)
+            };
+            Player4NameBox = new TextBox 
+            {
+                PlaceholderText = "Player 4",
+                Size = new Point(200,25),
+                Parent = PlayerNameTextBoxPanel,
+                Location = new Point(0, 75)
+            };
+            Player5NameBox = new TextBox 
+            {
+                PlaceholderText = "Player 5",
+                Size = new Point(200,25),
+                Parent = PlayerNameTextBoxPanel,
+                Location = new Point(0, 100)
+            };
+            Player6NameBox = new TextBox 
+            {
+                PlaceholderText = "Player 6",
+                Size = new Point(200,25),
+                Parent = PlayerNameTextBoxPanel,
+                Location = new Point(200, 0)
+            };
+            Player7NameBox = new TextBox 
+            {
+                PlaceholderText = "Player 7",
+                Size = new Point(200,25),
+                Parent = PlayerNameTextBoxPanel,
+                Location = new Point(200, 25)
+            };
+            Player8NameBox = new TextBox 
+            {
+                PlaceholderText = "Player 8",
+                Size = new Point(200,25),
+                Parent = PlayerNameTextBoxPanel,
+                Location = new Point(200, 50)
+            };
+            Player9NameBox = new TextBox 
+            {
+                PlaceholderText = "Player 9",
+                Size = new Point(200,25),
+                Parent = PlayerNameTextBoxPanel,
+                Location = new Point(200, 75)
+            };
+            Player10NameBox = new TextBox 
+            {
+                PlaceholderText = "Player 10",
+                Size = new Point(200,25),
+                Parent = PlayerNameTextBoxPanel,
+                Location = new Point(200, 100)
+            };
+            #endregion
+
+
+            Player1NameBox.TextChanged += Player1NameBox_TextChanged;
+            Player2NameBox.TextChanged += Player2NameBox_TextChanged;
+            Player3NameBox.TextChanged += Player3NameBox_TextChanged;
+            Player4NameBox.TextChanged += Player4NameBox_TextChanged;
+            Player5NameBox.TextChanged += Player5NameBox_TextChanged;
+            Player6NameBox.TextChanged += Player6NameBox_TextChanged;
+            Player7NameBox.TextChanged += Player7NameBox_TextChanged;
+            Player8NameBox.TextChanged += Player8NameBox_TextChanged;
+            Player9NameBox.TextChanged += Player9NameBox_TextChanged;
+            Player10NameBox.TextChanged += Player10NameBox_TextChanged;
+
+            TestingCornerIcon = new CornerIcon
+            {
+                Icon = ContentsManager.GetTexture("Emblem.png"),
+                BasicTooltipText = "Click for debugging functions"
+            };
+            TestingCornerIcon.Click += delegate
+            {
+                MasterFlowPanel.BackgroundColor = Color.Red;
+                MasterFlowPanel.Size = new Point(1000, 400);
+                MasterFlowPanel.ClipsBounds = false;
+                MasterFlowPanel.Location = new Point(0, 300);
+                RandomizeCheckboxesPanel.Location = new Point(0, 180);
+                RandomizeCheckboxesPanel.Size = new Point(1000, 120);
+                RandomizeCheckboxesPanel.BackgroundColor = Color.Blue;
+                PlayerNameTextBoxPanel.BackgroundColor = Color.Green;
+                PlayerNameTextBoxPanel.Size = new Point(400 , 165);
+
+
+            };
         }
+        #region Textbox text changed functions
+        private void Player10NameBox_TextChanged(object sender, EventArgs e)
+        {
+            Player10FlowPanel.Title = Player10NameBox.Text;
+            Player10Name.Value = Player10NameBox.Text;
+        }
+
+        private void Player9NameBox_TextChanged(object sender, EventArgs e)
+        {
+            Player9FlowPanel.Title = Player9NameBox.Text;
+            Player9Name.Value = Player9NameBox.Text;
+        }
+
+        private void Player8NameBox_TextChanged(object sender, EventArgs e)
+        {
+            Player8FlowPanel.Title = Player8NameBox.Text;
+            Player8Name.Value = Player8NameBox.Text;
+        }
+
+        private void Player7NameBox_TextChanged(object sender, EventArgs e)
+        {
+            Player7FlowPanel.Title = Player7NameBox.Text;
+            Player7Name.Value = Player7NameBox.Text;
+        }
+
+        private void Player6NameBox_TextChanged(object sender, EventArgs e)
+        {
+            Player6FlowPanel.Title = Player6NameBox.Text;
+            Player6Name.Value = Player6NameBox.Text;
+        }
+
+        private void Player5NameBox_TextChanged(object sender, EventArgs e)
+        {
+            Player5FlowPanel.Title = Player5NameBox.Text;
+            Player5Name.Value = Player5NameBox.Text;
+        }
+
+        private void Player4NameBox_TextChanged(object sender, EventArgs e)
+        {
+            Player4FlowPanel.Title = Player4NameBox.Text;
+            Player4Name.Value = Player4NameBox.Text;
+        }
+
+        private void Player3NameBox_TextChanged(object sender, EventArgs e)
+        {
+            Player3FlowPanel.Title = Player3NameBox.Text;
+            Player3Name.Value = Player3NameBox.Text;
+        }
+
+        private void Player2NameBox_TextChanged(object sender, EventArgs e)
+        {
+            Player2FlowPanel.Title = Player2NameBox.Text;
+            Player2Name.Value = Player2NameBox.Text;
+        }
+
+        private void Player1NameBox_TextChanged(object sender, EventArgs e)
+        {
+            Player1FlowPanel.Title = Player1NameBox.Text;
+            Player1Name.Value = Player1NameBox.Text;
+        }
+        #endregion
         protected override void OnModuleLoaded(EventArgs e)
         {
             CheckboxCheckedFunctions();
@@ -1026,6 +1183,9 @@ namespace Falson.Squad_Role_Randomizer
             {
                 RandomizerSettingsWindow.Show();
             };
+
+
+
             // Base handler must be called
             base.OnModuleLoaded(e);
         }
@@ -1229,94 +1389,99 @@ namespace Falson.Squad_Role_Randomizer
         #region RoleGeneratorMethods
         public static void GenerateHandKite() 
         {
-        
+            Debug.WriteLine("Generating Hand Kite");
         }
         public static void GenerateOilKite() 
         {
-        
+            Debug.WriteLine("Generating Oil Kite");
         }
         public static void GenerateFlakKite() 
         {
-        
+            Debug.WriteLine("Generating Flak Kite");
         }
         public static void GenerateTank() 
         {
-        
+            Debug.WriteLine("Generating Tank");
         }
         public static void GenerateHealers() 
         {
-        
+            Debug.WriteLine("Generating Healers");
         }
         public static void GenerateAlacrity() 
         {
-    
+            Debug.WriteLine("Generating Alac");
         }
         public static void GenerateQuickness() 
         {
-        
+            Debug.WriteLine("Generating Quickness");
         }
         public static void GenerateMushroom() 
         {
-            
+            Debug.WriteLine("Generating Mushroom");
         }
         public static void GenerateTower() 
         {
-            
+            Debug.WriteLine("Generating Tower");
         }
         public static void GenerateReflect() 
         {
-            
+            Debug.WriteLine("Generating Reflect");
         }
         public static void GenerateCannon() 
         {
-            
+            Debug.WriteLine("Generating Cannons");
         }
         public static void GenerateConstrucPusher() 
         {
-            
+            Debug.WriteLine("Generating KC Pusher");
         }
         public static void GenerateLamp() 
         {
-            
+            Debug.WriteLine("Generating Lamp");
         }
         public static void GeneratePylon() 
         {
-            
+            Debug.WriteLine("Generating Pylons");
         }
         public static void GeneratePillar() 
         {
-            
+            Debug.WriteLine("Generating Pillars");
         }
         public static void GenerateGreen() 
         {
-            
+            Debug.WriteLine("Generating Greens");
         }
         public static void GenerateSoullessPusher() 
         {
-            
+            Debug.WriteLine("Generating SH Pusher");
         }
         public static void GenerateDhuumKite() 
         {
-            
+            Debug.WriteLine("Generating Dhuum Kite");
         }
         public static void GenerateQadimKite() 
         {
-            
+            Debug.WriteLine("Generating Qadim Kite");
         }
         public static void GenerateSword() 
         {
-            
+            Debug.WriteLine("Generating Sword Kite");
         }
         public static void GenerateShield() 
         {
-            
+            Debug.WriteLine("Generating Shield Kite");
         }
         #endregion
-        public CustomCheckbox testbox = new CustomCheckbox(RoleRandomizerMain.HandKiteRoles[1]);
+        public CustomCheckbox testbox = new CustomCheckbox(RoleRandomizerMain.HandKiteRoles[1])
+        {
+            
+        };
+        
     }
     public class CustomCheckbox : Checkbox 
     {
-        private readonly SettingEntry<bool> _settingEntry;
+        private SettingEntry<bool> _settingEntry; 
+        
 
         public CustomCheckbox(SettingEntry<bool> settingsEntry)
         {
@@ -1325,6 +1490,8 @@ namespace Falson.Squad_Role_Randomizer
         protected override void OnCheckedChanged(CheckChangedEvent e)
         {
             _settingEntry.Value = !_settingEntry.Value;
+            Debug.WriteLine("Changing value of " + _settingEntry.EntryKey + "to: " + _settingEntry.Value.ToString());
+            
 
             Debug.WriteLine(_settingEntry.Value.ToString());
             base.OnCheckedChanged(e);
