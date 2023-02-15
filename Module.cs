@@ -46,22 +46,8 @@ namespace Falson.Squad_Role_Randomizer
         public static List<string> QadimKiteValid;
         public static List<string> SwordValid;
         public static List<string> ShieldValid;
-        public static Label SelectedTank;
-        public static Label SelectedHeal1;
-        public static Label SelectedHeal2;
-        public static Label SelectedAlac1;
-        public static Label SelectedAlac2;
-        public static Label SelectedQuick1;
-        public static Label SelectedQuick2;
-        public static Label SelectedHandKite;
-        public static Label SelectedOilKite;
-        public static Label SelectedMush1;
-        public static Label SelectedMush2;
-        public static Label SelectedMush3;
-        public static Label SelectedMush4;
-        public static Label SelectedFlakKite;
-        public static Label SelectedTowerMesmer;
-        public static Label SelectedReflect;
+        public static Label[] RandomizedResultsLabels;
+        private StandardButton GenerateRolesButton;
         public StandardButton GenerateRandomRoles;
         public SettingCollection HoTRolesToRandomize;
         public SettingCollection PoFRolesToRandomize;
@@ -373,12 +359,25 @@ namespace Falson.Squad_Role_Randomizer
                 Title = "Randomization Settings",
                 Subtitle = "Define Roles to Randomize",
                 Parent = GameService.Graphics.SpriteScreen,
-                Size = new Point(1050, 800)
+                Size = new Point(1050, 800),
+                SavesPosition = true,
+                Id = "Falson.RoleRandomizer.SettingsWindow"
             };
             RandomizerResultsWindow = new StandardWindow(ContentsManager.GetTexture("155985.png"), new Rectangle(30, 30, 700, 930), new Rectangle(50, 50, 640, 890))
             {
                 Title = "Randomized Roles",
-                Parent = GameService.Graphics.SpriteScreen
+                Parent = GameService.Graphics.SpriteScreen,
+                Size = new Point(1000,900),
+                Location = new Point(100,100),
+                SavesPosition = true,
+                Id = "Falson.RoleRandomizer.ResultsWindow"
+            };
+            GenerateRolesButton = new StandardButton 
+            {
+                Text = "Generate Roles",
+                Size = new Point(100,50),
+                Location = new Point(650,57),
+                Parent = RandomizerSettingsWindow
             };
             PlayerNameTextBoxPanel = new Panel 
             {
@@ -1200,6 +1199,7 @@ namespace Falson.Squad_Role_Randomizer
         { //RandomizeHandKite,RandomizeOilKite,RandomizeFlakKite,RandomizeTank,RandomizeHealAlac,RandomizeHealQuick,RandomizeDPSAlac,RandomizeDPSQuick,RandomizeMushroom,
           //RandomizeTower,RandomizeReflect,RandomizeCannon,RandomizeConstrucPusher,RandomizeLamp,RandomizePylon,RandomizePillar,RandomizeGreen,RandomizeSoullessPusher,
           //RandomizeDhuumKite,RandomizeQadimKite,RandomizeSword,RandomizeShield
+            RoleRandomizerMain.RandomizedResultsLabels = new Label[22];
             Rolestoberandomized = new List<SettingEntry<bool>[]>();
             GenerationSequence = new List<string>();
             GenerationFunctions = new List<Action>();
@@ -1268,8 +1268,6 @@ namespace Falson.Squad_Role_Randomizer
             };
             IDictionary<List<string>, string> ValidRoleLists_to_FriendlyNamesDictionary = new Dictionary<List<string>, string>() 
             {
-                {RoleRandomizerMain.HealValid, "Heal" },
-                {RoleRandomizerMain.DPSValid, "DPS"},
                 {RoleRandomizerMain.HandKiteValid, "HandKite"},
                 {RoleRandomizerMain.OilKiteValid, "OilKite"},
                 {RoleRandomizerMain.FlakKiteValid, "FlakKite"},
@@ -1295,16 +1293,14 @@ namespace Falson.Squad_Role_Randomizer
             };
             IDictionary<string, Action> FriendlyNames_to_ActionsDictionary = new Dictionary<string, Action>() 
             {
-                {"Heal" , () =>GenerateHealers()},
-                //{"DPS", () =>Generate},
+                {"HealAlac" , () =>GenerateHealAlac()},
                 {"HandKite", () =>GenerateHandKite()},
                 {"OilKite", () =>GenerateOilKite()},
                 {"FlakKite", () =>GenerateFlakKite()},
                 {"Tank", () =>GenerateTank()},
-                //{"HealAlac", () =>Generate},
-                //{"HealQuick", () =>Generate},
-                {"DPSAlac", () =>GenerateAlacrity()},
-                {"DPSQuick", () =>GenerateQuickness()},
+                {"HealQuick", () =>GenerateHealQuick()},
+                {"DPSAlac", () =>GenerateDPSAlac()},
+                {"DPSQuick", () =>GenerateDPSQuick()},
                 {"Mushroom", () =>GenerateMushroom()},
                 {"Tower", () =>GenerateTower()},
                 {"Reflect", () =>GenerateReflect()},
@@ -1327,13 +1323,17 @@ namespace Falson.Squad_Role_Randomizer
                 {
                     var tempkey = RoleRandomizerMain.RolestoRandomizeSelectionCheckboxesArray[i];
                     var temprole = ActiveRolesDictionary[tempkey];
+                    var ContainsOnePlayerChecked = 0;
                     for (int s = 0; s < 10; s++)
                     {
                         if (temprole[s].Value)
                         {
-                            Rolestoberandomized.Add(temprole);
-                            Debug.WriteLine("Adding " + temprole[s].EntryKey + "to roles to be randomized");
+                            ContainsOnePlayerChecked = 1;
                         }
+                    }
+                    if (ContainsOnePlayerChecked == 1)
+                    {
+                        Rolestoberandomized.Add(temprole);
                     }
                 }
             }
@@ -1364,6 +1364,7 @@ namespace Falson.Squad_Role_Randomizer
 
 
 
+
             //Check list rolestoberandomized to decide which checks to make
             //Then check their lengths/run sanity checking to determine which order to generate in
             //Then add them to GenerationFunctions Action List in the order that they need to be generated
@@ -1371,6 +1372,7 @@ namespace Falson.Squad_Role_Randomizer
             {
                 item.Invoke();
             }
+            RoleRandomizerMain.RandomizerResultsWindow.Show();
         }
         #region RoleGeneratorMethods
         public static void GenerateHandKite() 
@@ -1389,17 +1391,21 @@ namespace Falson.Squad_Role_Randomizer
         {
             Debug.WriteLine("Generating Tank");
         }
-        public static void GenerateHealers() 
+        public static void GenerateHealAlac() 
         {
-            Debug.WriteLine("Generating Healers");
+            Debug.WriteLine("Generating HealAlac");
         }
-        public static void GenerateAlacrity() 
+        public static void GenerateHealQuick() 
         {
-            Debug.WriteLine("Generating Alac");
+            Debug.WriteLine("Generating HealQuick");
         }
-        public static void GenerateQuickness() 
+        public static void GenerateDPSAlac() 
         {
-            Debug.WriteLine("Generating Quickness");
+            Debug.WriteLine("Generating DPSAlac");
+        }
+        public static void GenerateDPSQuick() 
+        {
+            Debug.WriteLine("Generating DPSQuick");
         }
         public static void GenerateMushroom() 
         {
