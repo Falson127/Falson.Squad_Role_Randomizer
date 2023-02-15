@@ -216,7 +216,8 @@ namespace Falson.Squad_Role_Randomizer
         public RoleRandomizerMain([Import("ModuleParameters")] ModuleParameters moduleParameters) : base(moduleParameters) { }
 
         protected override void DefineSettings(SettingCollection settings)
-        {   InternalPlayerRolesSettings = new SettingCollection();
+        {   
+            InternalPlayerRolesSettings = settings.AddSubCollection("Internal Setting Collection", false);
             InternalPlayerRolesSettings.RenderInUi = false;
 
             Player1Name = InternalPlayerRolesSettings.DefineSetting("Player 1 Name", "Player 1");
@@ -677,12 +678,7 @@ namespace Falson.Squad_Role_Randomizer
             };
             #endregion
         }
-        protected void CheckboxCheckedFunctions() 
-        {
-            //IDictionary<Checkbox,SettingEntry<bool>> integer_to_CheckboxDictionary = new Dictionary<Control,SettingEntry<bool>> { };
-            
 
-        }
         protected override async Task LoadAsync()
         //Label Dimensions(width, height): (100, 25)
         //HoT Panel Dimensions(width, height): (510, 100)
@@ -1007,70 +1003,70 @@ namespace Falson.Squad_Role_Randomizer
             #region Textboxes
             Player1NameBox = new TextBox 
             {
-                PlaceholderText = "Player 1",
+                PlaceholderText = Player1Name.Value,
                 Size = new Point(200,25),
                 Parent = PlayerNameTextBoxPanel,
                 Location = new Point(0,0)
             };
             Player2NameBox = new TextBox 
             {
-                PlaceholderText = "Player 2",
+                PlaceholderText = Player2Name.Value,
                 Size = new Point(200,25),
                 Parent = PlayerNameTextBoxPanel,
                 Location = new Point(0, 25)
             };
             Player3NameBox = new TextBox 
             {
-                PlaceholderText = "Player 3",
+                PlaceholderText = Player3Name.Value,
                 Size = new Point(200,25),
                 Parent = PlayerNameTextBoxPanel,
                 Location = new Point(0, 50)
             };
             Player4NameBox = new TextBox 
             {
-                PlaceholderText = "Player 4",
+                PlaceholderText = Player4Name.Value,
                 Size = new Point(200,25),
                 Parent = PlayerNameTextBoxPanel,
                 Location = new Point(0, 75)
             };
             Player5NameBox = new TextBox 
             {
-                PlaceholderText = "Player 5",
+                PlaceholderText = Player5Name.Value,
                 Size = new Point(200,25),
                 Parent = PlayerNameTextBoxPanel,
                 Location = new Point(0, 100)
             };
             Player6NameBox = new TextBox 
             {
-                PlaceholderText = "Player 6",
+                PlaceholderText = Player6Name.Value,
                 Size = new Point(200,25),
                 Parent = PlayerNameTextBoxPanel,
                 Location = new Point(200, 0)
             };
             Player7NameBox = new TextBox 
             {
-                PlaceholderText = "Player 7",
+                PlaceholderText = Player7Name.Value,
                 Size = new Point(200,25),
                 Parent = PlayerNameTextBoxPanel,
                 Location = new Point(200, 25)
             };
             Player8NameBox = new TextBox 
             {
-                PlaceholderText = "Player 8",
+                PlaceholderText = Player8Name.Value,
                 Size = new Point(200,25),
                 Parent = PlayerNameTextBoxPanel,
                 Location = new Point(200, 50)
             };
             Player9NameBox = new TextBox 
             {
-                PlaceholderText = "Player 9",
+                PlaceholderText = Player9Name.Value,
                 Size = new Point(200,25),
                 Parent = PlayerNameTextBoxPanel,
                 Location = new Point(200, 75)
             };
             Player10NameBox = new TextBox 
             {
-                PlaceholderText = "Player 10",
+                PlaceholderText = Player10Name.Value,
                 Size = new Point(200,25),
                 Parent = PlayerNameTextBoxPanel,
                 Location = new Point(200, 100)
@@ -1172,7 +1168,6 @@ namespace Falson.Squad_Role_Randomizer
         #endregion
         protected override void OnModuleLoaded(EventArgs e)
         {
-            CheckboxCheckedFunctions();
             GenerateRoles.RandomizeTheRoles();
             RandomizerSettingIcon = new CornerIcon 
             {
@@ -1347,6 +1342,7 @@ namespace Falson.Squad_Role_Randomizer
                         if (temprole[s].Value)
                         {
                             Rolestoberandomized.Add(temprole);
+                            Debug.WriteLine("Adding " + temprole[s].EntryKey + "to roles to be randomized");
                         }
                     }
                 }
@@ -1472,27 +1468,22 @@ namespace Falson.Squad_Role_Randomizer
             Debug.WriteLine("Generating Shield Kite");
         }
         #endregion
-        public CustomCheckbox testbox = new CustomCheckbox(RoleRandomizerMain.HandKiteRoles[1])
-        {
-            
-        };
+
         
     }
     public class CustomCheckbox : Checkbox 
     {
-        private SettingEntry<bool> _settingEntry; 
-        
+        private readonly SettingEntry<bool> _settingEntry;
 
         public CustomCheckbox(SettingEntry<bool> settingsEntry)
         {
             _settingEntry = settingsEntry;
+            Debug.WriteLine("Initialized as: " + _settingEntry.Value);
         }
         protected override void OnCheckedChanged(CheckChangedEvent e)
         {
-            _settingEntry.Value = !_settingEntry.Value;
+            _settingEntry.Value = Checked;
             Debug.WriteLine("Changing value of " + _settingEntry.EntryKey + "to: " + _settingEntry.Value.ToString());
-            
-
             Debug.WriteLine(_settingEntry.Value.ToString());
             base.OnCheckedChanged(e);
         }
