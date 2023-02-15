@@ -383,24 +383,24 @@ namespace Falson.Squad_Role_Randomizer
             PlayerNameTextBoxPanel = new Panel 
             {
                 Title = "Enter Player Names",
-                Size = new Point(1000,200),
+                Size = new Point(400,165),
                 Location = new Point(0,0),
                 Parent = RandomizerSettingsWindow,
             };
             RandomizeCheckboxesPanel = new FlowPanel
             {
                 Title = "Select roles to be randomized",
-                Size = new Point(1000,100),
+                Size = new Point(1000,120),
                 Parent = RandomizerSettingsWindow,
-                Location = new Point(0,0),
+                Location = new Point(0,180),
                 FlowDirection = ControlFlowDirection.LeftToRight
             };
             MasterFlowPanel = new FlowPanel 
             {
                 ShowBorder = true,
                 Title = "Set Roles for Each Player",
-                Size = new Point(1000,700),
-                Location = new Point(0,101),
+                Size = new Point(1000,400),
+                Location = new Point(0,300),
                 Parent = RandomizerSettingsWindow,
                 CanScroll = true,
                 CanCollapse = false,
@@ -1092,16 +1092,6 @@ namespace Falson.Squad_Role_Randomizer
             };
             TestingCornerIcon.Click += delegate
             {
-                MasterFlowPanel.BackgroundColor = Color.Red;
-                MasterFlowPanel.Size = new Point(1000, 400);
-                MasterFlowPanel.ClipsBounds = false;
-                MasterFlowPanel.Location = new Point(0, 300);
-                RandomizeCheckboxesPanel.Location = new Point(0, 180);
-                RandomizeCheckboxesPanel.Size = new Point(1000, 120);
-                RandomizeCheckboxesPanel.BackgroundColor = Color.Blue;
-                PlayerNameTextBoxPanel.BackgroundColor = Color.Green;
-                PlayerNameTextBoxPanel.Size = new Point(400 , 165);
-
 
             };
         }
