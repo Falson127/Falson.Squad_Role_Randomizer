@@ -53,6 +53,7 @@ namespace Falson.Squad_Role_Randomizer
         public SettingCollection HoTRolesToRandomize;
         public SettingCollection PoFRolesToRandomize;
         public SettingCollection InternalPlayerRolesSettings;
+        public SettingEntry<int>[] CounterBoxesSettings;
         public static SettingEntry<bool>[] HandKiteRoles;
         public static SettingEntry<bool>[] OilKiteRoles;
         public static SettingEntry<bool>[] FlakKiteRoles;
@@ -203,7 +204,11 @@ namespace Falson.Squad_Role_Randomizer
         {   
             InternalPlayerRolesSettings = settings.AddSubCollection("Internal Setting Collection", false);
             InternalPlayerRolesSettings.RenderInUi = false;
-
+            CounterBoxesSettings = new SettingEntry<int>[12];
+            for (int i = 0; i < 12; i++)
+            {
+                CounterBoxesSettings[i] = InternalPlayerRolesSettings.DefineSetting("Counter Box " + i+1 + "setting", 1);
+            }
             Player1Name = InternalPlayerRolesSettings.DefineSetting("Player 1 Name", "Player 1");
             Player2Name = InternalPlayerRolesSettings.DefineSetting("Player 2 Name", "Player 2");
             Player3Name = InternalPlayerRolesSettings.DefineSetting("Player 3 Name", "Player 3");
@@ -1042,18 +1047,18 @@ namespace Falson.Squad_Role_Randomizer
                 };
             }
             for (int i = 0; i<12; i++) 
-            { 
+            {
                 CounterBoxes[i] = new CounterBox
                 {
                     MaxValue = CounterBoxes_MaxAllowedIntValues[i],
                     Parent = RolesWithNumbers,
                     ValueWidth = 10,
                     Width = 60,
-                    BasicTooltipText = CounterBoxInt_to_Text[i]
+                    BasicTooltipText = CounterBoxInt_to_Text[i],
+                    Value = CounterBoxesSettings[i].Value,
+                    MinValue = 1
                 };
-                
             }
-
             //Make dropdown lists with int options 1-3 to apply to both Pylon and Lamp. Then make one that is 1-5 to apply to pillars.
             //Greens: Dropdown for 1-2 (tank always takes one green, and one person is dedicated green, but may want to randomize a second dedicated and let kiter do their thing alone
             #endregion
@@ -1140,7 +1145,16 @@ namespace Falson.Squad_Role_Randomizer
                 };
             }
             #endregion
+            TestingCornerIcon = new CornerIcon
+            {
+                Icon = ContentsManager.GetTexture("Emblem.png"),
+                BasicTooltipText = "Click for debugging functions"
+            };
+            TestingCornerIcon.Click += delegate
+            {
 
+            };
+            #region Static Changing Functions
             Player1NameBox.TextChanged += Player1NameBox_TextChanged;
             Player2NameBox.TextChanged += Player2NameBox_TextChanged;
             Player3NameBox.TextChanged += Player3NameBox_TextChanged;
@@ -1151,17 +1165,80 @@ namespace Falson.Squad_Role_Randomizer
             Player8NameBox.TextChanged += Player8NameBox_TextChanged;
             Player9NameBox.TextChanged += Player9NameBox_TextChanged;
             Player10NameBox.TextChanged += Player10NameBox_TextChanged;
-
-            TestingCornerIcon = new CornerIcon
-            {
-                Icon = ContentsManager.GetTexture("Emblem.png"),
-                BasicTooltipText = "Click for debugging functions"
-            };
-            TestingCornerIcon.Click += delegate
-            {
-
-            };
+            CounterBoxes[0].Click += CounterBox1Click;
+            CounterBoxes[1].Click += CounterBox2Click;
+            CounterBoxes[2].Click += CounterBox3Click;
+            CounterBoxes[3].Click += CounterBox4Click;
+            CounterBoxes[4].Click += CounterBox5Click;
+            CounterBoxes[5].Click += CounterBox6Click;
+            CounterBoxes[6].Click += CounterBox7Click;
+            CounterBoxes[7].Click += CounterBox8Click;
+            CounterBoxes[8].Click += CounterBox9Click;
+            CounterBoxes[9].Click += CounterBox10Click;
+            CounterBoxes[10].Click += CounterBox11Click;
+            CounterBoxes[11].Click += CounterBox12Click;
         }
+
+        private void CounterBox12Click(object sender, Blish_HUD.Input.MouseEventArgs e)
+        {
+            CounterBoxesSettings[11].Value = CounterBoxes[11].Value;
+        }
+
+        private void CounterBox11Click(object sender, Blish_HUD.Input.MouseEventArgs e)
+        {
+            CounterBoxesSettings[10].Value = CounterBoxes[10].Value;
+        }
+
+        private void CounterBox10Click(object sender, Blish_HUD.Input.MouseEventArgs e)
+        {
+            CounterBoxesSettings[9].Value = CounterBoxes[9].Value;
+        }
+
+        private void CounterBox9Click(object sender, Blish_HUD.Input.MouseEventArgs e)
+        {
+            CounterBoxesSettings[8].Value = CounterBoxes[8].Value;
+        }
+
+        private void CounterBox8Click(object sender, Blish_HUD.Input.MouseEventArgs e)
+        {
+            CounterBoxesSettings[7].Value = CounterBoxes[7].Value;
+        }
+
+        private void CounterBox7Click(object sender, Blish_HUD.Input.MouseEventArgs e)
+        {
+            CounterBoxesSettings[6].Value = CounterBoxes[6].Value;
+        }
+
+        private void CounterBox6Click(object sender, Blish_HUD.Input.MouseEventArgs e)
+        {
+            CounterBoxesSettings[5].Value = CounterBoxes[5].Value;
+        }
+
+        private void CounterBox5Click(object sender, Blish_HUD.Input.MouseEventArgs e)
+        {
+            CounterBoxesSettings[4].Value = CounterBoxes[4].Value;
+        }
+
+        private void CounterBox4Click(object sender, Blish_HUD.Input.MouseEventArgs e)
+        {
+            CounterBoxesSettings[3].Value = CounterBoxes[3].Value;
+        }
+
+        private void CounterBox3Click(object sender, Blish_HUD.Input.MouseEventArgs e)
+        {
+            CounterBoxesSettings[2].Value = CounterBoxes[2].Value;
+        }
+
+        private void CounterBox2Click(object sender, Blish_HUD.Input.MouseEventArgs e)
+        {
+            CounterBoxesSettings[1].Value = CounterBoxes[1].Value;
+        }
+
+        private void CounterBox1Click(object sender, Blish_HUD.Input.MouseEventArgs e)
+        {
+            CounterBoxesSettings[0].Value = CounterBoxes[0].Value;
+        }
+        #endregion
         #region Textbox text changed functions
         private void Player10NameBox_TextChanged(object sender, EventArgs e)
         {
@@ -1429,6 +1506,7 @@ namespace Falson.Squad_Role_Randomizer
                 GenerationFunctions.Add(FriendlyNames_to_ActionsDictionary[item]);
             }
 
+            
 
 
 
