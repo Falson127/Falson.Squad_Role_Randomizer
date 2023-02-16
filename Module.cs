@@ -47,6 +47,7 @@ namespace Falson.Squad_Role_Randomizer
         public static List<string> SwordValid;
         public static List<string> ShieldValid;
         public static Label[] RandomizedResultsLabels;
+        public CounterBox[] CounterBoxes; //need 12 items in this
         private StandardButton GenerateRolesButton;
         public StandardButton GenerateRandomRoles;
         public SettingCollection HoTRolesToRandomize;
@@ -111,6 +112,7 @@ namespace Falson.Squad_Role_Randomizer
         public FlowPanel Player10FlowPanel;
         public FlowPanel MasterFlowPanel;
         public FlowPanel RandomizeCheckboxesPanel;
+        public FlowPanel ResultsFlowPanel;
         public FlowPanel HoT_PlayerRolesPanel1;
         public FlowPanel PoF_PlayerRolesPanel1;
         public FlowPanel HoT_PlayerRolesPanel2;
@@ -136,27 +138,28 @@ namespace Falson.Squad_Role_Randomizer
         public CustomCheckbox[] OilKiteBoxArray;
         public CustomCheckbox[] FlakKiteBoxArray;
         public CustomCheckbox[] TankBoxArray;
-        public CustomCheckbox[] HealAlacBoxArray;
-        public CustomCheckbox[] HealQuickBoxArray;
-        public CustomCheckbox[] DPSAlacBoxArray;
-        public CustomCheckbox[] DPSQuickBoxArray;
-        public CustomCheckbox[] MushroomBoxArray;
+        public CustomCheckbox[] HealAlacBoxArray; //1-2
+        public CustomCheckbox[] HealQuickBoxArray; //1-2
+        public CustomCheckbox[] DPSAlacBoxArray; //1-2
+        public CustomCheckbox[] DPSQuickBoxArray; //1-2
+        public CustomCheckbox[] MushroomBoxArray; //1-4
         public CustomCheckbox[] TowerBoxArray;
         public CustomCheckbox[] ReflectBoxArray;
-        public CustomCheckbox[] CannonBoxArray;
+        public CustomCheckbox[] CannonBoxArray; //1-2
         public CustomCheckbox[] ConstrucPusherBoxArray;
-        public CustomCheckbox[] LampBoxArray;
-        public CustomCheckbox[] PylonBoxArray;
-        public CustomCheckbox[] PillarBoxArray;
-        public CustomCheckbox[] GreenBoxArray;
+        public CustomCheckbox[] LampBoxArray; //1-3
+        public CustomCheckbox[] PylonBoxArray; //1-3
+        public CustomCheckbox[] PillarBoxArray; //1-5
+        public CustomCheckbox[] GreenBoxArray; //1-2
         public CustomCheckbox[] SoullessPusherBoxArray;
         public CustomCheckbox[] DhuumKiteBoxArray;
         public CustomCheckbox[] QadimKiteBoxArray;
-        public CustomCheckbox[] SwordBoxArray;
-        public CustomCheckbox[] ShieldBoxArray;
+        public CustomCheckbox[] SwordBoxArray; //1-2
+        public CustomCheckbox[] ShieldBoxArray; //1-2
         public static Checkbox[] RolestoRandomizeSelectionCheckboxesArray;
         public Panel[] HoTPannelArray;
         public Panel[] PoFPannelArray;
+        public FlowPanel RolesWithNumbers;
         //Roles Per Pannel: HoT: 13
         //Dimensions 5, 5, 3
         //Roles Per Pannel: PoF: 9
@@ -183,11 +186,6 @@ namespace Falson.Squad_Role_Randomizer
         public Checkbox RandomizeQadimKite;
         public Checkbox RandomizeSword;
         public Checkbox RandomizeShield;
-
-       
-
-
-
 
         private static readonly Logger Logger = Logger.GetLogger<Module>();
 
@@ -354,6 +352,8 @@ namespace Falson.Squad_Role_Randomizer
 
         protected override void Initialize()
         {
+            CounterBoxes = new CounterBox[12];
+            RandomizedResultsLabels = new Label[22];
             RandomizerSettingsWindow = new StandardWindow(ContentsManager.GetTexture("155985.png"), new Rectangle(40, 26, 913, 691), new Rectangle(70, 71, 839, 605))
             {
                 Title = "Randomization Settings",
@@ -371,6 +371,22 @@ namespace Falson.Squad_Role_Randomizer
                 Location = new Point(100,100),
                 SavesPosition = true,
                 Id = "Falson.RoleRandomizer.ResultsWindow"
+            };
+            RolesWithNumbers = new FlowPanel 
+            {
+                Title = "Number of each role to generate",
+                Parent = RandomizerSettingsWindow,
+                Size = new Point(400,165),
+                Location = new Point(401,0),
+                FlowDirection = ControlFlowDirection.TopToBottom
+            };
+            ResultsFlowPanel = new FlowPanel
+            {
+                Title = "Generated Results",
+                Parent = RandomizerResultsWindow,
+                FlowDirection = ControlFlowDirection.TopToBottom,
+                Size = new Point(900,600),
+                Location = new Point(0,0)
             };
             GenerateRolesButton = new StandardButton 
             {
@@ -969,7 +985,7 @@ namespace Falson.Squad_Role_Randomizer
                 {5,"Heal Quickness"},
                 {6,"DPS Alac"},
                 {7,"DPS Quickness"},
-                {8,"Slothosaur Mushrroms"},
+                {8,"Slothosaur Mushrooms"},
                 {9,"Tower Mesmer"},
                 {10,"Matthias Reflect"},
                 {11,"Sabetha Cannons"},
@@ -984,16 +1000,58 @@ namespace Falson.Squad_Role_Randomizer
                 {20,"Sword Collector(s)"},
                 {21,"Shield Collector(s)"},
             };
+
+            IDictionary<int, int> CounterBoxes_MaxAllowedIntValues = new Dictionary<int, int>
+            {
+                {0, 2},
+                {1, 2},
+                {2, 2},
+                {3, 2},
+                {4, 4},
+                {5, 2},
+                {6, 3},
+                {7, 3},
+                {8, 5},
+                {9, 2},
+                {10, 2},
+                {11, 2}
+            };
+            IDictionary<int, string> CounterBoxInt_to_Text = new Dictionary<int, string>
+            {
+                {0, "# of Heal/Alac"},
+                {1, "# of Heal/Quick"},
+                {2, "# of DPS/Alac"},
+                {3, "# of DPS/Quick"},
+                {4, "# of Mushrooms"},
+                {5, "# of Cannons"},
+                {6, "# of Lamps"},
+                {7, "# of Pylons"},
+                {8, "# of Pillars"},
+                {9, "# of Greens"},
+                {10, "# of Swords"},
+                {11, "# of Shields"}
+            };
             for (int i = 0; i < 22; i++)
             {
                 RolestoRandomizeSelectionCheckboxesArray[i] = new Checkbox
                 {
                     Text = "Randomize " + RandomizeSelectionBoxesInt_to_StringDictionary[i],
-                    Location = new Point(),
                     BasicTooltipText = "Check this box to include " + RandomizeSelectionBoxesInt_to_StringDictionary[i] + " in the randomization",
                     Parent = RandomizeCheckboxesPanel,
                     Checked = true
                 };
+            }
+            for (int i = 0; i<12; i++) 
+            { 
+                CounterBoxes[i] = new CounterBox
+                {
+                    MaxValue = CounterBoxes_MaxAllowedIntValues[i],
+                    Parent = RolesWithNumbers,
+                    ValueWidth = 10,
+                    Width = 60,
+                    BasicTooltipText = CounterBoxInt_to_Text[i]
+                };
+                
             }
 
             //Make dropdown lists with int options 1-3 to apply to both Pylon and Lamp. Then make one that is 1-5 to apply to pillars.
@@ -1071,7 +1129,17 @@ namespace Falson.Squad_Role_Randomizer
                 Location = new Point(200, 100)
             };
             #endregion
+            #region Results Labels
 
+            for (int i = 0; i < 22; i++)
+            {
+                RandomizedResultsLabels[i] = new Label 
+                {
+                    Parent = ResultsFlowPanel,
+                    Size = new Point(200,25),
+                };
+            }
+            #endregion
 
             Player1NameBox.TextChanged += Player1NameBox_TextChanged;
             Player2NameBox.TextChanged += Player2NameBox_TextChanged;
@@ -1157,7 +1225,7 @@ namespace Falson.Squad_Role_Randomizer
         #endregion
         protected override void OnModuleLoaded(EventArgs e)
         {
-            GenerateRoles.RandomizeTheRoles();
+            //GenerateRoles.RandomizeTheRoles();
             RandomizerSettingIcon = new CornerIcon 
             {
                 Icon = ContentsManager.GetTexture("Emblem.png"),
