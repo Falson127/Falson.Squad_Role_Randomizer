@@ -48,12 +48,12 @@ namespace Falson.Squad_Role_Randomizer
         public static List<string> ShieldValid;
         public static Label[] RandomizedResultsLabels;
         public CounterBox[] CounterBoxes; //need 12 items in this
+        public Label[] CounterBoxLabels;
         private StandardButton GenerateRolesButton;
         public StandardButton GenerateRandomRoles;
-        public SettingCollection HoTRolesToRandomize;
-        public SettingCollection PoFRolesToRandomize;
         public SettingCollection InternalPlayerRolesSettings;
         public SettingEntry<int>[] CounterBoxesSettings;
+        public static SettingEntry<bool>[] RolesToGenerate;
         public static SettingEntry<bool>[] HandKiteRoles;
         public static SettingEntry<bool>[] OilKiteRoles;
         public static SettingEntry<bool>[] FlakKiteRoles;
@@ -157,10 +157,10 @@ namespace Falson.Squad_Role_Randomizer
         public CustomCheckbox[] QadimKiteBoxArray;
         public CustomCheckbox[] SwordBoxArray; //1-2
         public CustomCheckbox[] ShieldBoxArray; //1-2
-        public static Checkbox[] RolestoRandomizeSelectionCheckboxesArray;
+        public static CustomCheckbox[] RolestoRandomizeSelectionCheckboxesArray;
         public Panel[] HoTPannelArray;
         public Panel[] PoFPannelArray;
-        public FlowPanel RolesWithNumbers;
+        public Panel RolesWithNumbers;
         //Roles Per Pannel: HoT: 13
         //Dimensions 5, 5, 3
         //Roles Per Pannel: PoF: 9
@@ -207,7 +207,12 @@ namespace Falson.Squad_Role_Randomizer
             CounterBoxesSettings = new SettingEntry<int>[12];
             for (int i = 0; i < 12; i++)
             {
-                CounterBoxesSettings[i] = InternalPlayerRolesSettings.DefineSetting("Counter Box " + i+1 + "setting", 1);
+                CounterBoxesSettings[i] = InternalPlayerRolesSettings.DefineSetting("Counter Box " + (i+1) + "setting", 1);
+            }
+            RolesToGenerate = new SettingEntry<bool>[22];
+            for (int i = 0; i < 22; i++)
+            {
+                RolesToGenerate[i] = InternalPlayerRolesSettings.DefineSetting("Role to Generate " + (i+1), true);
             }
             Player1Name = InternalPlayerRolesSettings.DefineSetting("Player 1 Name", "Player 1");
             Player2Name = InternalPlayerRolesSettings.DefineSetting("Player 2 Name", "Player 2");
@@ -358,6 +363,7 @@ namespace Falson.Squad_Role_Randomizer
         protected override void Initialize()
         {
             CounterBoxes = new CounterBox[12];
+            CounterBoxLabels = new Label[12];
             RandomizedResultsLabels = new Label[22];
             RandomizerSettingsWindow = new StandardWindow(ContentsManager.GetTexture("155985.png"), new Rectangle(40, 26, 913, 691), new Rectangle(70, 71, 839, 605))
             {
@@ -368,7 +374,7 @@ namespace Falson.Squad_Role_Randomizer
                 SavesPosition = true,
                 Id = "Falson.RoleRandomizer.SettingsWindow"
             };
-            RandomizerResultsWindow = new StandardWindow(ContentsManager.GetTexture("155985.png"), new Rectangle(30, 30, 700, 930), new Rectangle(50, 50, 640, 890))
+            RandomizerResultsWindow = new StandardWindow(ContentsManager.GetTexture("155985.png"), new Rectangle(40, 26, 913, 691), new Rectangle(70, 71, 839, 605))
             {
                 Title = "Randomized Roles",
                 Parent = GameService.Graphics.SpriteScreen,
@@ -377,13 +383,12 @@ namespace Falson.Squad_Role_Randomizer
                 SavesPosition = true,
                 Id = "Falson.RoleRandomizer.ResultsWindow"
             };
-            RolesWithNumbers = new FlowPanel 
+            RolesWithNumbers = new Panel 
             {
                 Title = "Number of each role to generate",
                 Parent = RandomizerSettingsWindow,
-                Size = new Point(400,165),
+                Size = new Point(480,165),
                 Location = new Point(401,0),
-                FlowDirection = ControlFlowDirection.TopToBottom
             };
             ResultsFlowPanel = new FlowPanel
             {
@@ -395,11 +400,12 @@ namespace Falson.Squad_Role_Randomizer
             };
             GenerateRolesButton = new StandardButton 
             {
-                Text = "Generate Roles",
-                Size = new Point(100,50),
-                Location = new Point(650,57),
-                Parent = RandomizerSettingsWindow
+                Text = "Generate \n  Roles",
+                Size = new Point(80,100),
+                Location = new Point(890,40),
+                Parent = RandomizerSettingsWindow,
             };
+            GenerateRolesButton.Click += GenerateRolesButton_Click;
             PlayerNameTextBoxPanel = new Panel 
             {
                 Title = "Enter Player Names",
@@ -412,20 +418,21 @@ namespace Falson.Squad_Role_Randomizer
                 Title = "Select roles to be randomized",
                 Size = new Point(1000,120),
                 Parent = RandomizerSettingsWindow,
-                Location = new Point(0,180),
+                Location = new Point(0,166),
                 FlowDirection = ControlFlowDirection.LeftToRight
             };
             MasterFlowPanel = new FlowPanel 
             {
                 ShowBorder = true,
-                Title = "Set Roles for Each Player",
+                Title = "Set Roles for Each Player  (Click to Expand)",
                 Size = new Point(1000,400),
-                Location = new Point(0,300),
+                Location = new Point(0,255),
                 Parent = RandomizerSettingsWindow,
                 CanScroll = true,
                 CanCollapse = false,
                 FlowDirection = ControlFlowDirection.SingleTopToBottom
             };
+            #region Player Panels
             Player1FlowPanel = new FlowPanel 
             {
                 Title = Player1Name.Value,
@@ -533,6 +540,7 @@ namespace Falson.Squad_Role_Randomizer
                 Collapsed = true,
                 FlowDirection = ControlFlowDirection.LeftToRight
             };
+            #endregion
             #region HoT_FlowPanels
             HoT_PlayerRolesPanel1 = new FlowPanel() 
             {
@@ -699,6 +707,11 @@ namespace Falson.Squad_Role_Randomizer
             #endregion
         }
 
+        private void GenerateRolesButton_Click(object sender, Blish_HUD.Input.MouseEventArgs e)
+        {
+            GenerateRoles.RandomizeTheRoles();
+        }
+
         protected override async Task LoadAsync()
         //Label Dimensions(width, height): (100, 25)
         //HoT Panel Dimensions(width, height): (510, 100)
@@ -706,7 +719,7 @@ namespace Falson.Squad_Role_Randomizer
         {
             //Initialize Windows Here first, Then initialize panels, then labels and checkboxes
             #region Box and Label Arrays
-            RolestoRandomizeSelectionCheckboxesArray = new Checkbox[22];
+            RolestoRandomizeSelectionCheckboxesArray = new CustomCheckbox[22];
             //RolestoRandomizeSelectionCheckboxesArray = new Checkbox[22] {RandomizeHandKite,RandomizeOilKite,RandomizeFlakKite,RandomizeTank,RandomizeHealAlac,RandomizeHealQuick,RandomizeDPSAlac,RandomizeDPSQuick,RandomizeMushroom,RandomizeTower,RandomizeReflect,RandomizeCannon,RandomizeConstrucPusher,RandomizeLamp,RandomizePylon,RandomizePillar,RandomizeGreen,RandomizeSoullessPusher,RandomizeDhuumKite,RandomizeQadimKite,RandomizeSword,RandomizeShield};
             HandKiteBoxArray = new CustomCheckbox[10];
             OilKiteBoxArray = new CustomCheckbox[10];
@@ -1038,14 +1051,46 @@ namespace Falson.Squad_Role_Randomizer
             };
             for (int i = 0; i < 22; i++)
             {
-                RolestoRandomizeSelectionCheckboxesArray[i] = new Checkbox
+                RolestoRandomizeSelectionCheckboxesArray[i] = new CustomCheckbox(RolesToGenerate[i])
                 {
-                    Text = "Randomize " + RandomizeSelectionBoxesInt_to_StringDictionary[i],
+                    Text =  RandomizeSelectionBoxesInt_to_StringDictionary[i] + "  ",
                     BasicTooltipText = "Check this box to include " + RandomizeSelectionBoxesInt_to_StringDictionary[i] + " in the randomization",
                     Parent = RandomizeCheckboxesPanel,
-                    Checked = true
+                    Checked = RolesToGenerate[i].Value
                 };
             }
+            #endregion
+            #region CounterBoxes
+            IDictionary<int, int> CounterBox_X_PositionDictionary = new Dictionary<int, int>
+            {
+                {0, 100},
+                {1, 100},
+                {2, 100},
+                {3, 100},
+                {4, 100},
+                {5, 260},
+                {6, 260},
+                {7, 260},
+                {8, 260},
+                {9, 260},
+                {10, 420},
+                {11, 420},
+            };
+            IDictionary<int, int> CounterBox_Y_PositionDictionary = new Dictionary<int, int>
+            {
+                {0, 0},
+                {1, 25},
+                {2, 50},
+                {3, 75},
+                {4, 100},
+                {5, 0},
+                {6, 25},
+                {7, 50},
+                {8, 75},
+                {9, 100},
+                {10, 0},
+                {11, 25},
+            };
             for (int i = 0; i<12; i++) 
             {
                 CounterBoxes[i] = new CounterBox
@@ -1056,11 +1101,10 @@ namespace Falson.Squad_Role_Randomizer
                     Width = 60,
                     BasicTooltipText = CounterBoxInt_to_Text[i],
                     Value = CounterBoxesSettings[i].Value,
-                    MinValue = 1
+                    MinValue = 1,
+                    Location = new Point(CounterBox_X_PositionDictionary[i],CounterBox_Y_PositionDictionary[i])
                 };
             }
-            //Make dropdown lists with int options 1-3 to apply to both Pylon and Lamp. Then make one that is 1-5 to apply to pillars.
-            //Greens: Dropdown for 1-2 (tank always takes one green, and one person is dedicated green, but may want to randomize a second dedicated and let kiter do their thing alone
             #endregion
             #region Textboxes
             Player1NameBox = new TextBox 
@@ -1134,7 +1178,7 @@ namespace Falson.Squad_Role_Randomizer
                 Location = new Point(200, 100)
             };
             #endregion
-            #region Results Labels
+            #region Labels
 
             for (int i = 0; i < 22; i++)
             {
@@ -1142,6 +1186,49 @@ namespace Falson.Squad_Role_Randomizer
                 {
                     Parent = ResultsFlowPanel,
                     Size = new Point(200,25),
+                    Text = "Placeholder"
+                };
+            }
+            IDictionary<int, int> CounterBoxLabel_X_PositionDictionary = new Dictionary<int, int> 
+            {
+                {0, 0},
+                {1, 0},
+                {2, 0},
+                {3, 0},
+                {4, 0},
+                {5, 160},
+                {6, 160},
+                {7, 160},
+                {8, 160},
+                {9, 160},
+                {10, 320},
+                {11, 320},
+            };
+            IDictionary<int, int> CounterBoxLabel_Y_PositionDictionary = new Dictionary<int, int>
+            {
+                {0, 0},
+                {1, 25},
+                {2, 50},
+                {3, 75},
+                {4, 100},
+                {5, 0},
+                {6, 25},
+                {7, 50},
+                {8, 75},
+                {9, 100},
+                {10, 0},
+                {11, 25},
+            };
+
+            CounterBoxLabels = new Label[12];
+            for (int i = 0; i < 12; i++)
+            {
+                CounterBoxLabels[i] = new Label 
+                {
+                    Text = CounterBoxInt_to_Text[i],
+                    Size = new Point(100,25),
+                    Location = new Point(CounterBoxLabel_X_PositionDictionary[i],CounterBoxLabel_Y_PositionDictionary[i]),
+                    Parent = RolesWithNumbers
                 };
             }
             #endregion
@@ -1152,9 +1239,14 @@ namespace Falson.Squad_Role_Randomizer
             };
             TestingCornerIcon.Click += delegate
             {
-
+                GenerateRolesButton.Size = new Point(80, 100);
+                GenerateRolesButton.Location = new Point(890, 40);
+                MasterFlowPanel.Size = new Point(1000,400);
+                MasterFlowPanel.Location = new Point(0, 255);
+                MasterFlowPanel.BackgroundColor = Color.Red;
+                MasterFlowPanel.ClipsBounds = true;
+                RandomizeCheckboxesPanel.Location = new Point(0, 166);
             };
-            #region Static Changing Functions
             Player1NameBox.TextChanged += Player1NameBox_TextChanged;
             Player2NameBox.TextChanged += Player2NameBox_TextChanged;
             Player3NameBox.TextChanged += Player3NameBox_TextChanged;
@@ -1178,7 +1270,7 @@ namespace Falson.Squad_Role_Randomizer
             CounterBoxes[10].Click += CounterBox11Click;
             CounterBoxes[11].Click += CounterBox12Click;
         }
-
+        #region CounterBox Click Functions
         private void CounterBox12Click(object sender, Blish_HUD.Input.MouseEventArgs e)
         {
             CounterBoxesSettings[11].Value = CounterBoxes[11].Value;
@@ -1348,7 +1440,7 @@ namespace Falson.Squad_Role_Randomizer
             Rolestoberandomized = new List<SettingEntry<bool>[]>();
             GenerationSequence = new List<string>();
             GenerationFunctions = new List<Action>();
-            IDictionary<Checkbox, SettingEntry<bool>[]> ActiveRolesDictionary = new Dictionary<Checkbox, SettingEntry<bool>[]>() 
+            IDictionary<CustomCheckbox, SettingEntry<bool>[]> ActiveRolesDictionary = new Dictionary<CustomCheckbox, SettingEntry<bool>[]>() 
             {
                 {RoleRandomizerMain.RolestoRandomizeSelectionCheckboxesArray[0], RoleRandomizerMain.HandKiteRoles },
                 {RoleRandomizerMain.RolestoRandomizeSelectionCheckboxesArray[1], RoleRandomizerMain.OilKiteRoles },
