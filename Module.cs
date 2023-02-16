@@ -1503,6 +1503,31 @@ namespace Falson.Squad_Role_Randomizer
                 {RoleRandomizerMain.SwordRoles, 20},
                 {RoleRandomizerMain.ShieldRoles, 21}
             };
+            IDictionary<SettingEntry<bool>[], List<string>> RolesArrays_to_ValidLists = new Dictionary<SettingEntry<bool>[], List<string>>()
+            {
+                {RoleRandomizerMain.HandKiteRoles, RoleRandomizerMain.HandKiteValid},
+                {RoleRandomizerMain.OilKiteRoles,RoleRandomizerMain.OilKiteValid },
+                {RoleRandomizerMain.FlakKiteRoles, RoleRandomizerMain.FlakKiteValid},
+                {RoleRandomizerMain.TankRoles, RoleRandomizerMain.TankValid},
+                {RoleRandomizerMain.HealAlacRoles, RoleRandomizerMain.HealAlacValid},
+                {RoleRandomizerMain.HealQuickRoles,RoleRandomizerMain.HealQuickValid},
+                {RoleRandomizerMain.DPSAlacRoles,RoleRandomizerMain.DPSAlacValid},
+                {RoleRandomizerMain.DPSQuickRoles, RoleRandomizerMain.DPSQuickValid},
+                {RoleRandomizerMain.MushroomRoles, RoleRandomizerMain.MushroomValid},
+                {RoleRandomizerMain.TowerRoles, RoleRandomizerMain.TowerValid },
+                {RoleRandomizerMain.ReflectRoles,RoleRandomizerMain.ReflectValid },
+                {RoleRandomizerMain.CannonRoles,RoleRandomizerMain.CannonValid },
+                {RoleRandomizerMain.ConstrucPusherRoles, RoleRandomizerMain.ConstrucPusherValid},
+                {RoleRandomizerMain.LampRoles,  RoleRandomizerMain.LampValid},
+                {RoleRandomizerMain.PylonRoles,RoleRandomizerMain.PylonValid },
+                {RoleRandomizerMain.PillarRoles,RoleRandomizerMain.PillarValid },
+                {RoleRandomizerMain.GreenRoles, RoleRandomizerMain.GreenValid },
+                {RoleRandomizerMain.SoullessPusherRoles,RoleRandomizerMain.SoullessPusherValid },
+                {RoleRandomizerMain.DhuumKiteRoles,RoleRandomizerMain.DhuumKiteValid },
+                {RoleRandomizerMain.QadimKiteRoles,RoleRandomizerMain.QadimKiteValid },
+                {RoleRandomizerMain.SwordRoles, RoleRandomizerMain.SwordValid },
+                {RoleRandomizerMain.ShieldRoles,  RoleRandomizerMain.ShieldValid}
+            };
             IDictionary<List<string>, string> ValidRoleLists_to_FriendlyNamesDictionary = new Dictionary<List<string>, string>() 
             {
                 {RoleRandomizerMain.HandKiteValid, "HandKite"},
@@ -1566,6 +1591,7 @@ namespace Falson.Squad_Role_Randomizer
                         if (temprole[s].Value)
                         {
                             ContainsOnePlayerChecked = 1;
+                            RolesArrays_to_ValidLists[temprole].Add(ArrayPos_to_PlayerNameDictionary[s]); //adds the player that has checked true for a role to the role valid list for that particular role.
                         }
                     }
                     if (ContainsOnePlayerChecked == 1)
