@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 using falson = Falson.Squad_Role_Randomizer.RoleRandomizerMain;
 using falsonG = Falson.Squad_Role_Randomizer.GenerateRoles;
 
@@ -40,6 +41,7 @@ namespace Falson.Randomizer.Randomizer
         private static List<List<string>> QadimKiteExclusivityBubble;
         private static List<List<string>> SwordExclusivityBubble;
         private static List<List<string>> ShieldExclusivityBubble;
+        private List<List<List<string>>> ListofExclusivityBubbles;
 
         public void DefineExlusiveLists() 
         {
@@ -63,33 +65,35 @@ namespace Falson.Randomizer.Randomizer
             QadimKiteExclusivityBubble = new List<List<string>> { falson.TankValid, falson.HealAlacValid, falson.HealQuickValid, falson.DPSAlacValid, falson.DPSQuickValid, falson.LampValid };
             SwordExclusivityBubble = new List<List<string>> { falson.HealAlacValid, falson.HealQuickValid };
             ShieldExclusivityBubble = new List<List<string>> { falson.HealAlacValid, falson.HealQuickValid };
+            ListofExclusivityBubbles = new List<List<List<string>>> { HandKiteExclusivityBubble, OilKiteExclusivityBubble, FlakKiteExclusivityBubble, TankExclusivityBubble, HealAlacExclusivityBubble, HealQuickExclusivityBubble, DPSAlacExclusivityBubble, DPSQuickExclusivityBubble, MushroomExclusivityBubble, ReflectExclusivityBubble, CannonExclusivityBubble, LampExclusivityBubble, PylonExclusivityBubble, PillarExclusivityBubble, GreenExclusivityBubble, SoullessPusherExclusivityBubble, DhuumKiteExclusivityBubble, QadimKiteExclusivityBubble, SwordExclusivityBubble, ShieldExclusivityBubble };
+
         }
 
         public void BeginRandomization() 
         {
             //ValidRoleLists, which have been sorted smallest to largest, are brought in using falsonG.GenerationSequence
-            IDictionary<List<string>, List<List<string>>> RolesDictionary = new Dictionary<List<string>, List<List<string>>>
+            IDictionary<List<List<string>>, List<string>> RolesDictionary = new Dictionary<List<List<string>>, List<string>>
             {
-                {falson.HandKiteValid,HandKiteExclusivityBubble},
-                {falson.OilKiteValid,OilKiteExclusivityBubble},
-                {falson.FlakKiteValid,FlakKiteExclusivityBubble},
-                {falson.TankValid,TankExclusivityBubble},
-                {falson.HealAlacValid,HealAlacExclusivityBubble},
-                {falson.HealQuickValid,HealQuickExclusivityBubble},
-                {falson.DPSAlacValid,DPSAlacExclusivityBubble},
-                {falson.DPSQuickValid,DPSQuickExclusivityBubble},
-                {falson.MushroomValid,MushroomExclusivityBubble},
-                {falson.ReflectValid,ReflectExclusivityBubble},
-                {falson.CannonValid,CannonExclusivityBubble},
-                {falson.LampValid,LampExclusivityBubble},
-                {falson.PylonValid,PylonExclusivityBubble},
-                {falson.PillarValid,PillarExclusivityBubble},
-                {falson.GreenValid,GreenExclusivityBubble},
-                {falson.SoullessPusherValid,SoullessPusherExclusivityBubble},
-                {falson.DhuumKiteValid,DhuumKiteExclusivityBubble},
-                {falson.QadimKiteValid,QadimKiteExclusivityBubble},
-                {falson.SwordValid,SwordExclusivityBubble},
-                {falson.ShieldValid,ShieldExclusivityBubble}
+                {HandKiteExclusivityBubble,falson.HandKiteValid},
+                {OilKiteExclusivityBubble, falson.OilKiteValid},
+                {FlakKiteExclusivityBubble,falson.FlakKiteValid},
+                {TankExclusivityBubble, falson.TankValid},
+                {HealAlacExclusivityBubble,falson.HealAlacValid},
+                {HealQuickExclusivityBubble,falson.HealQuickValid},
+                {DPSAlacExclusivityBubble,falson.DPSAlacValid},
+                {DPSQuickExclusivityBubble,falson.DPSQuickValid},
+                {MushroomExclusivityBubble,falson.MushroomValid},
+                {ReflectExclusivityBubble,falson.ReflectValid},
+                {CannonExclusivityBubble,falson.CannonValid},
+                {LampExclusivityBubble,falson.LampValid},
+                {PylonExclusivityBubble,falson.PylonValid},
+                {PillarExclusivityBubble,falson.PillarValid},
+                {GreenExclusivityBubble,falson.GreenValid},
+                {SoullessPusherExclusivityBubble,falson.SoullessPusherValid},
+                {DhuumKiteExclusivityBubble,falson.DhuumKiteValid},
+                {QadimKiteExclusivityBubble,falson.QadimKiteValid},
+                {SwordExclusivityBubble,falson.SwordValid},
+                {ShieldExclusivityBubble,falson.ShieldValid}
             };
             IDictionary<int, List<List<string>>> listsize_to_Listsoflistsize = new Dictionary<int, List<List<string>>> 
             {
@@ -122,17 +126,14 @@ namespace Falson.Randomizer.Randomizer
             {
                 listsize_to_Listsoflistsize[ValidNameList.Count()].Add(ValidNameList); //populates the ListsOfLengthXs
             }
+            var sortedNameList = new List<List<string>>();
             foreach (var nameList in ListsOfLengthX)
             {
-                int minUniqueNames = ListsofLengthX_to_minUniqueNames[nameList];
-                for (int i = 0; i < nameList.Count; i++)
-                {
-                    for (int j = i+1; j < nameList.Count; j++)
-                    {
-                        int uniqueNames1 = nameList[i].Except(nameList[j]).Distinct().Count();
-                        int uniqueNames2 = nameList[j].Except(nameList[i]).Distinct().Count();
-                    }
-                }
+                sortedNameList = ListofExclusivityBubbles.OrderByDescending(l => l.Count).Select(l => RolesDictionary[l]).ToList(); //If I understand it correctly, this should take l, a list of list<string>'s within LoEB's, order it by descending sizes
+            }                                                                                                                       //and then for each l, return the dictionary linked rolevalid list sorted by which has the higher number of conflicts.
+            foreach (var item in sortedNameList)
+            {
+                Debug.WriteLine(item.ToString());
             }
             //foreach (var item in falsonG.GenerationSequence)
             //{
