@@ -709,7 +709,7 @@ namespace Falson.Squad_Role_Randomizer
 
         private void GenerateRolesButton_Click(object sender, Blish_HUD.Input.MouseEventArgs e)
         {
-            GenerateRoles.RandomizeTheRoles();
+            PrepareRoles.PrepRoles();
         }
 
         protected override async Task LoadAsync()
@@ -1425,21 +1425,20 @@ namespace Falson.Squad_Role_Randomizer
         }
     }
 
-    public class GenerateRoles
+    public class PrepareRoles
     {
-        public static List<Action> GenerationFunctions;
         public static List<SettingEntry<bool>[]> Rolestoberandomized;
         public static List<int> Length_of_Roles_Arrays;
         public static List<List<string>> GenerationSequence;
 
-        public static void RandomizeTheRoles()
-        { //RandomizeHandKite,RandomizeOilKite,RandomizeFlakKite,RandomizeTank,RandomizeHealAlac,RandomizeHealQuick,RandomizeDPSAlac,RandomizeDPSQuick,RandomizeMushroom,
-          //RandomizeTower,RandomizeReflect,RandomizeCannon,RandomizeConstrucPusher,RandomizeLamp,RandomizePylon,RandomizePillar,RandomizeGreen,RandomizeSoullessPusher,
-          //RandomizeDhuumKite,RandomizeQadimKite,RandomizeSword,RandomizeShield
+        public static void PrepRoles()
+        {
+            //This method prepares the roles to pass to the randomizer. It converts the checkboxes to activated roles to randomize, loads the saved player names into the list of valid options for each role
+            //and then sorts them from smallest to largest, removing any role list that has no players. This information is then stored in a list called GenerationSequence, which is passed to the randomizer
+            //to be sorted one last time before the randomizer class actually performs the necessary actions to randomize a member into each role.
             RoleRandomizerMain.RandomizedResultsLabels = new Label[22];
             Rolestoberandomized = new List<SettingEntry<bool>[]>();
             GenerationSequence = new List<List<string>>();
-            GenerationFunctions = new List<Action>();
             IDictionary<CustomCheckbox, SettingEntry<bool>[]> ActiveRolesDictionary = new Dictionary<CustomCheckbox, SettingEntry<bool>[]>() 
             {
                 {RoleRandomizerMain.RolestoRandomizeSelectionCheckboxesArray[0], RoleRandomizerMain.HandKiteRoles },
@@ -1528,56 +1527,7 @@ namespace Falson.Squad_Role_Randomizer
                 {RoleRandomizerMain.SwordRoles, RoleRandomizerMain.SwordValid },
                 {RoleRandomizerMain.ShieldRoles,  RoleRandomizerMain.ShieldValid}
             };
-            IDictionary<List<string>, string> ValidRoleLists_to_FriendlyNamesDictionary = new Dictionary<List<string>, string>() 
-            {
-                {RoleRandomizerMain.HandKiteValid, "HandKite"},
-                {RoleRandomizerMain.OilKiteValid, "OilKite"},
-                {RoleRandomizerMain.FlakKiteValid, "FlakKite"},
-                {RoleRandomizerMain.TankValid, "Tank"},
-                {RoleRandomizerMain.HealAlacValid, "HealAlac"},
-                {RoleRandomizerMain.HealQuickValid, "HealQuick"},
-                {RoleRandomizerMain.DPSAlacValid, "DPSAlac"},
-                {RoleRandomizerMain.DPSQuickValid, "DPSQuick"},
-                {RoleRandomizerMain.MushroomValid, "Mushroom"},
-                {RoleRandomizerMain.TowerValid, "Tower"},
-                {RoleRandomizerMain.ReflectValid, "Reflect"},
-                {RoleRandomizerMain.CannonValid, "Cannon"},
-                {RoleRandomizerMain.ConstrucPusherValid, "ConstrucPusher"},
-                {RoleRandomizerMain.LampValid, "Lamp"},
-                {RoleRandomizerMain.PylonValid, "Pylon"},
-                {RoleRandomizerMain.PillarValid, "Pillar"},
-                {RoleRandomizerMain.GreenValid, "Green"},
-                {RoleRandomizerMain.SoullessPusherValid, "SoullessPusher"},
-                {RoleRandomizerMain.DhuumKiteValid, "DhuumKite"},
-                {RoleRandomizerMain.QadimKiteValid, "QadimKite"},
-                {RoleRandomizerMain.SwordValid, "Sword"},
-                {RoleRandomizerMain.ShieldValid, "Shield"},
-            };
-            IDictionary<string, Action> FriendlyNames_to_ActionsDictionary = new Dictionary<string, Action>() 
-            {
-                {"HealAlac" , () =>GenerateHealAlac()},
-                {"HandKite", () =>GenerateHandKite()},
-                {"OilKite", () =>GenerateOilKite()},
-                {"FlakKite", () =>GenerateFlakKite()},
-                {"Tank", () =>GenerateTank()},
-                {"HealQuick", () =>GenerateHealQuick()},
-                {"DPSAlac", () =>GenerateDPSAlac()},
-                {"DPSQuick", () =>GenerateDPSQuick()},
-                {"Mushroom", () =>GenerateMushroom()},
-                {"Tower", () =>GenerateTower()},
-                {"Reflect", () =>GenerateReflect()},
-                {"Cannon", () =>GenerateCannon()},
-                {"ConstrucPusher", () =>GenerateConstrucPusher()},
-                {"Lamp", () =>GenerateLamp()},
-                {"Pylon", () =>GeneratePylon()},
-                {"Pillar", () =>GeneratePillar()},
-                {"Green", () =>GenerateGreen()},
-                {"SoullessPusher", () =>GenerateSoullessPusher()},
-                {"DhuumKite", () =>GenerateDhuumKite()},
-                {"QadimKite", () =>GenerateQadimKite()},
-                {"Sword", () =>GenerateSword()},
-                {"Shield", () =>GenerateShield()},
-            };
+            
 
             for (int i = 0; i < 22; i++)
             {
@@ -1604,112 +1554,10 @@ namespace Falson.Squad_Role_Randomizer
                     GenerationSequence.Add(item); //converts the current (role)valid list into a string name for the role to be generated and adds to the sequence, from shortest lists to longest.
                 }
             }
-
-
-            
-
-
-
-
-            //Check list rolestoberandomized to decide which checks to make
-            //Then check their lengths/run sanity checking to determine which order to generate in
-            //Then add them to GenerationFunctions Action List in the order that they need to be generated
-            foreach (var item in GenerationFunctions) //Takes the final sequence that gets loaded into the actions list and invokes each of them in order. This step must come last!
-            {
-                item.Invoke();
-            }
-            RoleRandomizerMain.RandomizerResultsWindow.Show();
+            var TheRandomizer = new Randomizer.Randomizer();
+            TheRandomizer.MainMethod();
         }
-        #region RoleGeneratorMethods
-        public static void GenerateHandKite() 
-        {
-            Debug.WriteLine("Generating Hand Kite");
-        }
-        public static void GenerateOilKite() 
-        {
-            Debug.WriteLine("Generating Oil Kite");
-        }
-        public static void GenerateFlakKite() 
-        {
-            Debug.WriteLine("Generating Flak Kite");
-        }
-        public static void GenerateTank() 
-        {
-            Debug.WriteLine("Generating Tank");
-        }
-        public static void GenerateHealAlac() 
-        {
-            Debug.WriteLine("Generating HealAlac");
-        }
-        public static void GenerateHealQuick() 
-        {
-            Debug.WriteLine("Generating HealQuick");
-        }
-        public static void GenerateDPSAlac() 
-        {
-            Debug.WriteLine("Generating DPSAlac");
-        }
-        public static void GenerateDPSQuick() 
-        {
-            Debug.WriteLine("Generating DPSQuick");
-        }
-        public static void GenerateMushroom() 
-        {
-            Debug.WriteLine("Generating Mushroom");
-        }
-        public static void GenerateTower() 
-        {
-            Debug.WriteLine("Generating Tower");
-        }
-        public static void GenerateReflect() 
-        {
-            Debug.WriteLine("Generating Reflect");
-        }
-        public static void GenerateCannon() 
-        {
-            Debug.WriteLine("Generating Cannons");
-        }
-        public static void GenerateConstrucPusher() 
-        {
-            Debug.WriteLine("Generating KC Pusher");
-        }
-        public static void GenerateLamp() 
-        {
-            Debug.WriteLine("Generating Lamp");
-        }
-        public static void GeneratePylon() 
-        {
-            Debug.WriteLine("Generating Pylons");
-        }
-        public static void GeneratePillar() 
-        {
-            Debug.WriteLine("Generating Pillars");
-        }
-        public static void GenerateGreen() 
-        {
-            Debug.WriteLine("Generating Greens");
-        }
-        public static void GenerateSoullessPusher() 
-        {
-            Debug.WriteLine("Generating SH Pusher");
-        }
-        public static void GenerateDhuumKite() 
-        {
-            Debug.WriteLine("Generating Dhuum Kite");
-        }
-        public static void GenerateQadimKite() 
-        {
-            Debug.WriteLine("Generating Qadim Kite");
-        }
-        public static void GenerateSword() 
-        {
-            Debug.WriteLine("Generating Sword Kite");
-        }
-        public static void GenerateShield() 
-        {
-            Debug.WriteLine("Generating Shield Kite");
-        }
-        #endregion
+        
 
         
     }

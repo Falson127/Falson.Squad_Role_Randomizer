@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
 using falson = Falson.Squad_Role_Randomizer.RoleRandomizerMain;
-using falsonG = Falson.Squad_Role_Randomizer.GenerateRoles;
+using falsonG = Falson.Squad_Role_Randomizer.PrepareRoles;
 
-namespace Falson.Randomizer.Randomizer
+namespace Falson.Randomizer
 {
     class Randomizer
     {
@@ -42,7 +42,14 @@ namespace Falson.Randomizer.Randomizer
         private static List<List<string>> SwordExclusivityBubble;
         private static List<List<string>> ShieldExclusivityBubble;
         private List<List<List<string>>> ListofExclusivityBubbles;
+        public static List<Action> GenerationFunctions;
 
+
+        public void MainMethod() 
+        {
+            DefineExlusiveLists();
+            BeginRandomization();
+        }
         public void DefineExlusiveLists() 
         {
             HandKiteExclusivityBubble = new List<List<string>> { falson.TankValid, falson.OilKiteValid, falson.HealAlacValid, falson.HealQuickValid, falson.DPSAlacValid, falson.DPSQuickValid };
@@ -66,7 +73,7 @@ namespace Falson.Randomizer.Randomizer
             SwordExclusivityBubble = new List<List<string>> { falson.HealAlacValid, falson.HealQuickValid };
             ShieldExclusivityBubble = new List<List<string>> { falson.HealAlacValid, falson.HealQuickValid };
             ListofExclusivityBubbles = new List<List<List<string>>> { HandKiteExclusivityBubble, OilKiteExclusivityBubble, FlakKiteExclusivityBubble, TankExclusivityBubble, HealAlacExclusivityBubble, HealQuickExclusivityBubble, DPSAlacExclusivityBubble, DPSQuickExclusivityBubble, MushroomExclusivityBubble, ReflectExclusivityBubble, CannonExclusivityBubble, LampExclusivityBubble, PylonExclusivityBubble, PillarExclusivityBubble, GreenExclusivityBubble, SoullessPusherExclusivityBubble, DhuumKiteExclusivityBubble, QadimKiteExclusivityBubble, SwordExclusivityBubble, ShieldExclusivityBubble };
-
+            GenerationFunctions = new List<Action>();
         }
 
         public void BeginRandomization() 
@@ -95,6 +102,56 @@ namespace Falson.Randomizer.Randomizer
                 {SwordExclusivityBubble,falson.SwordValid},
                 {ShieldExclusivityBubble,falson.ShieldValid}
             };
+            IDictionary<List<string>, string> ValidRoleLists_to_FriendlyNamesDictionary = new Dictionary<List<string>, string>()
+            {
+                {falson.HandKiteValid, "HandKite"},
+                {falson.OilKiteValid, "OilKite"},
+                {falson.FlakKiteValid, "FlakKite"},
+                {falson.TankValid, "Tank"},
+                {falson.HealAlacValid, "HealAlac"},
+                {falson.HealQuickValid, "HealQuick"},
+                {falson.DPSAlacValid, "DPSAlac"},
+                {falson.DPSQuickValid, "DPSQuick"},
+                {falson.MushroomValid, "Mushroom"},
+                {falson.TowerValid, "Tower"},
+                {falson.ReflectValid, "Reflect"},
+                {falson.CannonValid, "Cannon"},
+                {falson.ConstrucPusherValid, "ConstrucPusher"},
+                {falson.LampValid, "Lamp"},
+                {falson.PylonValid, "Pylon"},
+                {falson.PillarValid, "Pillar"},
+                {falson.GreenValid, "Green"},
+                {falson.SoullessPusherValid, "SoullessPusher"},
+                {falson.DhuumKiteValid, "DhuumKite"},
+                {falson.QadimKiteValid, "QadimKite"},
+                {falson.SwordValid, "Sword"},
+                {falson.ShieldValid, "Shield"},
+            };
+            IDictionary<string, Action> FriendlyNames_to_ActionsDictionary = new Dictionary<string, Action>()
+            {
+                {"HealAlac" , () =>GenerateHealAlac()},
+                {"HandKite", () =>GenerateHandKite()},
+                {"OilKite", () =>GenerateOilKite()},
+                {"FlakKite", () =>GenerateFlakKite()},
+                {"Tank", () =>GenerateTank()},
+                {"HealQuick", () =>GenerateHealQuick()},
+                {"DPSAlac", () =>GenerateDPSAlac()},
+                {"DPSQuick", () =>GenerateDPSQuick()},
+                {"Mushroom", () =>GenerateMushroom()},
+                {"Tower", () =>GenerateTower()},
+                {"Reflect", () =>GenerateReflect()},
+                {"Cannon", () =>GenerateCannon()},
+                {"ConstrucPusher", () =>GenerateConstrucPusher()},
+                {"Lamp", () =>GenerateLamp()},
+                {"Pylon", () =>GeneratePylon()},
+                {"Pillar", () =>GeneratePillar()},
+                {"Green", () =>GenerateGreen()},
+                {"SoullessPusher", () =>GenerateSoullessPusher()},
+                {"DhuumKite", () =>GenerateDhuumKite()},
+                {"QadimKite", () =>GenerateQadimKite()},
+                {"Sword", () =>GenerateSword()},
+                {"Shield", () =>GenerateShield()},
+            };
             IDictionary<int, List<List<string>>> listsize_to_Listsoflistsize = new Dictionary<int, List<List<string>>> 
             {
                 {1 , ListsOfLength1},
@@ -121,24 +178,122 @@ namespace Falson.Randomizer.Randomizer
                 {ListsOfLength9, 9 },
                 {ListsOfLength10,10}
             };
+            //These Role Lists are then sorted into 10 lists according to size
             List<List<List<string>>> ListsOfLengthX = new List<List<List<string>>>(){ListsOfLength1,ListsOfLength2,ListsOfLength3,ListsOfLength4,ListsOfLength5,ListsOfLength6,ListsOfLength7,ListsOfLength8,ListsOfLength9,ListsOfLength10};
             foreach (var ValidNameList in falsonG.GenerationSequence)
             {
                 listsize_to_Listsoflistsize[ValidNameList.Count()].Add(ValidNameList); //populates the ListsOfLengthXs
             }
+            //Each size list is then further sorted from largest # of conflicting roles to smallest
             var sortedNameList = new List<List<string>>();
             foreach (var nameList in ListsOfLengthX)
             {
                 sortedNameList = ListofExclusivityBubbles.OrderByDescending(l => l.Count).Select(l => RolesDictionary[l]).ToList(); //If I understand it correctly, this should take l, a list of list<string>'s within LoEB's, order it by descending sizes
             }                                                                                                                       //and then for each l, return the dictionary linked rolevalid list sorted by which has the higher number of conflicts.
+            //these doubly sorted lists are then added to the GenerationActions list by translating a role list to a generation method
+            //allowing them to generate in sequence of the double sort
             foreach (var item in sortedNameList)
             {
                 Debug.WriteLine(item.ToString());
             }
-            //foreach (var item in falsonG.GenerationSequence)
-            //{
-            //    falsonG.GenerationFunctions.Add(FriendlyNames_to_ActionsDictionary[item]);
-            //}
+            //Finally we place a try statement to attempt to run method.Invoke for each Action in our GenerationActions List
+            //if successful, all roles will be pulled. If an exception is thrown, it will be output to a log so I can determine
+            //where the sanity checking failed and maybe bandaid the (hopefully very few) edge cases that arise
+            foreach (var item in GenerationFunctions) //Takes the final sequence that gets loaded into the actions list and invokes each of them in order. This step must come last!
+            {
+                item.Invoke();
+            }
+
         }
+        #region RoleGeneratorMethods
+        public static void GenerateHandKite()
+        {
+            Debug.WriteLine("Generating Hand Kite");
+        }
+        public static void GenerateOilKite()
+        {
+            Debug.WriteLine("Generating Oil Kite");
+        }
+        public static void GenerateFlakKite()
+        {
+            Debug.WriteLine("Generating Flak Kite");
+        }
+        public static void GenerateTank()
+        {
+            Debug.WriteLine("Generating Tank");
+        }
+        public static void GenerateHealAlac()
+        {
+            Debug.WriteLine("Generating HealAlac");
+        }
+        public static void GenerateHealQuick()
+        {
+            Debug.WriteLine("Generating HealQuick");
+        }
+        public static void GenerateDPSAlac()
+        {
+            Debug.WriteLine("Generating DPSAlac");
+        }
+        public static void GenerateDPSQuick()
+        {
+            Debug.WriteLine("Generating DPSQuick");
+        }
+        public static void GenerateMushroom()
+        {
+            Debug.WriteLine("Generating Mushroom");
+        }
+        public static void GenerateTower()
+        {
+            Debug.WriteLine("Generating Tower");
+        }
+        public static void GenerateReflect()
+        {
+            Debug.WriteLine("Generating Reflect");
+        }
+        public static void GenerateCannon()
+        {
+            Debug.WriteLine("Generating Cannons");
+        }
+        public static void GenerateConstrucPusher()
+        {
+            Debug.WriteLine("Generating KC Pusher");
+        }
+        public static void GenerateLamp()
+        {
+            Debug.WriteLine("Generating Lamp");
+        }
+        public static void GeneratePylon()
+        {
+            Debug.WriteLine("Generating Pylons");
+        }
+        public static void GeneratePillar()
+        {
+            Debug.WriteLine("Generating Pillars");
+        }
+        public static void GenerateGreen()
+        {
+            Debug.WriteLine("Generating Greens");
+        }
+        public static void GenerateSoullessPusher()
+        {
+            Debug.WriteLine("Generating SH Pusher");
+        }
+        public static void GenerateDhuumKite()
+        {
+            Debug.WriteLine("Generating Dhuum Kite");
+        }
+        public static void GenerateQadimKite()
+        {
+            Debug.WriteLine("Generating Qadim Kite");
+        }
+        public static void GenerateSword()
+        {
+            Debug.WriteLine("Generating Sword Kite");
+        }
+        public static void GenerateShield()
+        {
+            Debug.WriteLine("Generating Shield Kite");
+        }
+        #endregion
     }
 }
