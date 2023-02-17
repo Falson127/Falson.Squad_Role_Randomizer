@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using Blish_HUD;
 using falson = Falson.Squad_Role_Randomizer.RoleRandomizerMain;
 using falsonG = Falson.Squad_Role_Randomizer.PrepareRoles;
 
@@ -43,6 +44,8 @@ namespace Falson.Randomizer
         private static List<List<string>> ShieldExclusivityBubble;
         private List<List<List<string>>> ListofExclusivityBubbles;
         public static List<Action> GenerationFunctions;
+
+        private static readonly Logger Logger = Logger.GetLogger<Blish_HUD.Modules.Module>();
 
 
         public void MainMethod() 
@@ -194,14 +197,21 @@ namespace Falson.Randomizer
             //allowing them to generate in sequence of the double sort
             foreach (var item in sortedNameList)
             {
-                Debug.WriteLine(item.ToString());
+                GenerationFunctions.Add(FriendlyNames_to_ActionsDictionary[ValidRoleLists_to_FriendlyNamesDictionary[item]]);
             }
             //Finally we place a try statement to attempt to run method.Invoke for each Action in our GenerationActions List
             //if successful, all roles will be pulled. If an exception is thrown, it will be output to a log so I can determine
             //where the sanity checking failed and maybe bandaid the (hopefully very few) edge cases that arise
-            foreach (var item in GenerationFunctions) //Takes the final sequence that gets loaded into the actions list and invokes each of them in order. This step must come last!
+            try
             {
-                item.Invoke();
+                foreach (var item in GenerationFunctions) //Takes the final sequence that gets loaded into the actions list and invokes each of them in order. This step must come last!
+                {
+                    item.Invoke();
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex, "One of the role lists was depleted of all names before its role could be generated. Send your settings.json file to @Falson in the Blish HUD Discord to examine this");
             }
 
         }
