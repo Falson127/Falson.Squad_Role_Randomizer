@@ -154,6 +154,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Randomizer.cs" />
     <Compile Include="Module.cs" />
     <Compile Include="SanityChecker.cs" />
   </ItemGroup>

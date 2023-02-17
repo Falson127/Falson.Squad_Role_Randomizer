@@ -52,37 +52,10 @@ namespace Falson.Randomizer.Sanity_Checker
             QadimKiteExclusivityBubble = new List<List<string>>{falson.TankValid,falson.HealAlacValid,falson.HealQuickValid,falson.DPSAlacValid,falson.DPSQuickValid,falson.LampValid};
             SwordExclusivityBubble = new List<List<string>>{falson.HealAlacValid,falson.HealQuickValid};
             ShieldExclusivityBubble = new List<List<string>>{falson.HealAlacValid,falson.HealQuickValid};
-            ListofExclusivityBubbles = new List<List<List<string>>>
-            { HandKiteExclusivityBubble,
-              OilKiteExclusivityBubble,
-              FlakKiteExclusivityBubble,
-              TankExclusivityBubble,
-              HealAlacExclusivityBubble,
-              HealQuickExclusivityBubble,
-              DPSAlacExclusivityBubble,
-              DPSQuickExclusivityBubble,
-              MushroomExclusivityBubble,
-              ReflectExclusivityBubble,
-              CannonExclusivityBubble,
-              LampExclusivityBubble,
-              PylonExclusivityBubble,
-              PillarExclusivityBubble,
-              GreenExclusivityBubble,
-              SoullessPusherExclusivityBubble,
-              DhuumKiteExclusivityBubble,
-              QadimKiteExclusivityBubble,
-              SwordExclusivityBubble,
-              ShieldExclusivityBubble
-            };
+            ListofExclusivityBubbles = new List<List<List<string>>>{ HandKiteExclusivityBubble,OilKiteExclusivityBubble,FlakKiteExclusivityBubble,TankExclusivityBubble,HealAlacExclusivityBubble,HealQuickExclusivityBubble,DPSAlacExclusivityBubble,DPSQuickExclusivityBubble,MushroomExclusivityBubble,ReflectExclusivityBubble,CannonExclusivityBubble,LampExclusivityBubble,PylonExclusivityBubble,PillarExclusivityBubble,GreenExclusivityBubble,SoullessPusherExclusivityBubble,DhuumKiteExclusivityBubble,QadimKiteExclusivityBubble,SwordExclusivityBubble,ShieldExclusivityBubble};
 
 
-            foreach (var item in ListofExclusivityBubbles)
-            {
-                for (int i = 0; i < item.Count; i++)
-                {
-                    item.Distinct
-                }
-            }
+
 
             //Check Sums of Linked Roles (I.E. How many HealAlac/HealQuick selected? Sum of their counter boxes should only be 2 due to 2 healers)
             //Same for DPSAlac/DPSHeal, and then insure that only 2 for summing HealAlac/DPSalac and HealQuick/DPSQuick
@@ -91,9 +64,9 @@ namespace Falson.Randomizer.Sanity_Checker
         }
         private bool ContainsUniqueName(List<string> target, List<string> Comparator) 
         {
-            foreach (var item in target)
+            foreach (var name in target)
             {
-                if (!Comparator.Contains(item))
+                if (!Comparator.Contains(name))
                 {
                     return true;
                 }

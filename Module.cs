@@ -1430,7 +1430,7 @@ namespace Falson.Squad_Role_Randomizer
         public static List<Action> GenerationFunctions;
         public static List<SettingEntry<bool>[]> Rolestoberandomized;
         public static List<int> Length_of_Roles_Arrays;
-        public static List<string> GenerationSequence;
+        public static List<List<string>> GenerationSequence;
 
         public static void RandomizeTheRoles()
         { //RandomizeHandKite,RandomizeOilKite,RandomizeFlakKite,RandomizeTank,RandomizeHealAlac,RandomizeHealQuick,RandomizeDPSAlac,RandomizeDPSQuick,RandomizeMushroom,
@@ -1438,7 +1438,7 @@ namespace Falson.Squad_Role_Randomizer
           //RandomizeDhuumKite,RandomizeQadimKite,RandomizeSword,RandomizeShield
             RoleRandomizerMain.RandomizedResultsLabels = new Label[22];
             Rolestoberandomized = new List<SettingEntry<bool>[]>();
-            GenerationSequence = new List<string>();
+            GenerationSequence = new List<List<string>>();
             GenerationFunctions = new List<Action>();
             IDictionary<CustomCheckbox, SettingEntry<bool>[]> ActiveRolesDictionary = new Dictionary<CustomCheckbox, SettingEntry<bool>[]>() 
             {
@@ -1594,21 +1594,6 @@ namespace Falson.Squad_Role_Randomizer
                             RolesArrays_to_ValidLists[temprole].Add(ArrayPos_to_PlayerNameDictionary[s]); //adds the player that has checked true for a role to the role valid list for that particular role.
                         }
                     }
-                    if (ContainsOnePlayerChecked == 1)
-                    {
-                        Rolestoberandomized.Add(temprole);
-                    }
-                }
-            }
-
-            foreach (var item in Rolestoberandomized)
-            {
-                for (int i = 0; i < 10; i++)
-                {
-                    if (item[i].Value)
-                    {
-                        RoleRandomizerMain.ListofRoleValidLists[RolesArrays_to_ArrayListPosDictionary[item]].Add(ArrayPos_to_PlayerNameDictionary[i]);
-                    };
                 }
             }
             IEnumerable<List<string>> SortedList = RoleRandomizerMain.ListofRoleValidLists.OrderBy(x => x.Count);  //sorts the populated lists by length
@@ -1616,13 +1601,10 @@ namespace Falson.Squad_Role_Randomizer
             {
                 if (item.Count != 0)
                 {
-                    GenerationSequence.Add(ValidRoleLists_to_FriendlyNamesDictionary[item]); //converts the current (role)valid list into a string name for the role to be generated and adds to the sequence, from shortest lists to longest.
+                    GenerationSequence.Add(item); //converts the current (role)valid list into a string name for the role to be generated and adds to the sequence, from shortest lists to longest.
                 }
             }
-            foreach (var item in GenerationSequence)
-            {
-                GenerationFunctions.Add(FriendlyNames_to_ActionsDictionary[item]);
-            }
+
 
             
 
