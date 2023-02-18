@@ -52,7 +52,7 @@ namespace Falson.Squad_Role_Randomizer
         private StandardButton GenerateRolesButton;
         public StandardButton GenerateRandomRoles;
         public SettingCollection InternalPlayerRolesSettings;
-        public SettingEntry<int>[] CounterBoxesSettings;
+        public static SettingEntry<int>[] CounterBoxesSettings;
         public static SettingEntry<bool>[] RolesToGenerate;
         public static SettingEntry<bool>[] HandKiteRoles;
         public static SettingEntry<bool>[] OilKiteRoles;

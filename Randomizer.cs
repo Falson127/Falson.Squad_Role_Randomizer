@@ -278,86 +278,321 @@ namespace Falson.Randomizer
         public static void GenerateOilKite()
         {
             Debug.WriteLine("Generating Oil Kite");
+            string selectedoilkite = falson.OilKiteValid[rand.Next(0, (falson.HandKiteValid.Count - 1))];
+            foreach (List<string> list in OilKiteExclusivityBubble)
+            {
+                if (list.Contains(selectedoilkite))
+                {
+                    list.Remove(selectedoilkite);
+                }
+            }
+            RoleName_to_SelectedPlayer.Add("OilKite", "The Oil Kiter is: " + selectedoilkite);
         }
         public static void GenerateFlakKite()
         {
             Debug.WriteLine("Generating Flak Kite");
+            string selectedflakkite = falson.FlakKiteValid[rand.Next(0, (falson.FlakKiteValid.Count - 1))];
+            foreach (List<string> list in FlakKiteExclusivityBubble)
+            {
+                if (list.Contains(selectedflakkite))
+                {
+                    list.Remove(selectedflakkite);
+                }
+            }
+            RoleName_to_SelectedPlayer.Add("FlakKite", "The Flak Kiter is: " + selectedflakkite);
         }
         public static void GenerateTank()
         {
             Debug.WriteLine("Generating Tank");
+            string selectedtank = falson.TankValid[rand.Next(0, (falson.TankValid.Count - 1))];
+            foreach (List<string> list in TankExclusivityBubble)
+            {
+                if (list.Contains(selectedtank))
+                {
+                    list.Remove(selectedtank);
+                }
+            }
+            RoleName_to_SelectedPlayer.Add("Tank", "The Tank is: " + selectedtank);
         }
         public static void GenerateHealAlac() //2
         {
             Debug.WriteLine("Generating HealAlac");
+            int numbertogenerate = falson.CounterBoxesSettings[0].Value;
+            for (int i = 0; i < numbertogenerate; i++)
+            {
+                string selectedhealalac = falson.HealAlacValid[rand.Next(0, (falson.HealAlacValid.Count - 1))];
+                foreach (List<string> list in HealAlacExclusivityBubble)
+                {
+                    if (list.Contains(selectedhealalac))
+                    {
+                        list.Remove(selectedhealalac);
+                    }
+                }
+                RoleName_to_SelectedPlayer.Add("HealAlac" + i.ToString(), "The Heal Alac " + i.ToString() + " is: " + selectedhealalac);
+                falson.HealAlacValid.Remove(selectedhealalac);
+            }
         }
         public static void GenerateHealQuick() //2
         {
             Debug.WriteLine("Generating HealQuick");
+            int numbertogenerate = falson.CounterBoxesSettings[1].Value;
+            for (int i = 0; i < numbertogenerate; i++)
+            {
+                string selectedhealquick = falson.HealQuickValid[rand.Next(0, (falson.HealQuickValid.Count - 1))];
+                foreach (List<string> list in HealQuickExclusivityBubble)
+                {
+                    if (list.Contains(selectedhealquick))
+                    {
+                        list.Remove(selectedhealquick);
+                    }
+                }
+                RoleName_to_SelectedPlayer.Add("HealQuick" + i.ToString(), "The Heal Quick " + i.ToString() + " is: " + selectedhealquick);
+                falson.HealQuickValid.Remove(selectedhealquick);
+            }
         }
         public static void GenerateDPSAlac() //2
         {
             Debug.WriteLine("Generating DPSAlac");
+            int numbertogenerate = falson.CounterBoxesSettings[2].Value;
+            for (int i = 0; i < numbertogenerate; i++)
+            {
+                string selecteddpsalac = falson.DPSAlacValid[rand.Next(0, (falson.DPSAlacValid.Count - 1))];
+                foreach (List<string> list in DPSAlacExclusivityBubble)
+                {
+                    if (list.Contains(selecteddpsalac))
+                    {
+                        list.Remove(selecteddpsalac);
+                    }
+                }
+                RoleName_to_SelectedPlayer.Add("DPSAlac" + i.ToString(), "The DPS Alac " + i.ToString() + " is: " + selecteddpsalac);
+                falson.DPSAlacValid.Remove(selecteddpsalac);
+            }
         }
         public static void GenerateDPSQuick() //2
         {
             Debug.WriteLine("Generating DPSQuick");
+            int numbertogenerate = falson.CounterBoxesSettings[3].Value;
+            for (int i = 0; i < numbertogenerate; i++)
+            {
+                string selecteddpsquick = falson.DPSQuickValid[rand.Next(0, (falson.DPSQuickValid.Count - 1))];
+                foreach (List<string> list in DPSQuickExclusivityBubble)
+                {
+                    if (list.Contains(selecteddpsquick))
+                    {
+                        list.Remove(selecteddpsquick);
+                    }
+                }
+                RoleName_to_SelectedPlayer.Add("DPSQuick" + i.ToString(), "The DPS Quick " + i.ToString() + " is: " + selecteddpsquick);
+                falson.DPSQuickValid.Remove(selecteddpsquick);
+            }
         }
         public static void GenerateMushroom() //4
         {
             Debug.WriteLine("Generating Mushroom");
+            int numbertogenerate = falson.CounterBoxesSettings[4].Value;
+            for (int i = 0; i < numbertogenerate; i++)
+            {
+                string selectedmushroom = falson.MushroomValid[rand.Next(0, (falson.MushroomValid.Count - 1))];
+                foreach (List<string> list in MushroomExclusivityBubble)
+                {
+                    if (list.Contains(selectedmushroom))
+                    {
+                        list.Remove(selectedmushroom);
+                    }
+                }
+                RoleName_to_SelectedPlayer.Add("Mushroom" + i.ToString(), "Mushroom " + i.ToString() + " is: " + selectedmushroom);
+                falson.MushroomValid.Remove(selectedmushroom);
+            }
         }
         public static void GenerateTower()
         {
             Debug.WriteLine("Generating Tower");
+            string selectedtower = falson.TowerValid[rand.Next(0, (falson.TowerValid.Count - 1))];
+            RoleName_to_SelectedPlayer.Add("Tower", "The Tower Mesmer is: " + selectedtower);
         }
         public static void GenerateReflect()
         {
             Debug.WriteLine("Generating Reflect");
+            string selectedreflect = falson.ReflectValid[rand.Next(0, (falson.ReflectValid.Count - 1))];
+            foreach (List<string> list in ReflectExclusivityBubble)
+            {
+                if (list.Contains(selectedreflect))
+                {
+                    list.Remove(selectedreflect);
+                }
+            }
+            RoleName_to_SelectedPlayer.Add("Reflect", "The Matthias Reflect Mesmer is: " + selectedreflect);
         }
         public static void GenerateCannon() //2
         {
             Debug.WriteLine("Generating Cannons");
+            int numbertogenerate = falson.CounterBoxesSettings[5].Value;
+            for (int i = 0; i < numbertogenerate; i++)
+            {
+                string selectedcannon = falson.CannonValid[rand.Next(0, (falson.CannonValid.Count - 1))];
+                foreach (List<string> list in CannonExclusivityBubble)
+                {
+                    if (list.Contains(selectedcannon))
+                    {
+                        list.Remove(selectedcannon);
+                    }
+                }
+                RoleName_to_SelectedPlayer.Add("Cannon" + i.ToString(), "Cannon " + i.ToString() + " is: " + selectedcannon);
+                falson.CannonValid.Remove(selectedcannon);
+            }
         }
         public static void GenerateConstrucPusher()
         {
             Debug.WriteLine("Generating KC Pusher");
+            string selectedkcpusher = falson.ConstrucPusherValid[rand.Next(0, (falson.ConstrucPusherValid.Count - 1))];
+            RoleName_to_SelectedPlayer.Add("ConstructPusher", "The KC Core Pusher is: " + selectedkcpusher);
         }
         public static void GenerateLamp() //3
         {
             Debug.WriteLine("Generating Lamp");
+            int numbertogenerate = falson.CounterBoxesSettings[6].Value;
+            for (int i = 0; i < numbertogenerate; i++)
+            {
+                string selectedlamp = falson.LampValid[rand.Next(0, (falson.LampValid.Count - 1))];
+                foreach (List<string> list in LampExclusivityBubble)
+                {
+                    if (list.Contains(selectedlamp))
+                    {
+                        list.Remove(selectedlamp);
+                    }
+                }
+                RoleName_to_SelectedPlayer.Add("Lamp" + i.ToString(), "Lamp " + i.ToString() + " is: " + selectedlamp);
+                falson.LampValid.Remove(selectedlamp);
+            }
         }
         public static void GeneratePylon() //3
         {
             Debug.WriteLine("Generating Pylons");
+            int numbertogenerate = falson.CounterBoxesSettings[7].Value;
+            for (int i = 0; i < numbertogenerate; i++)
+            {
+                string selectedpylon = falson.PylonValid[rand.Next(0, (falson.PylonValid.Count - 1))];
+                foreach (List<string> list in PylonExclusivityBubble)
+                {
+                    if (list.Contains(selectedpylon))
+                    {
+                        list.Remove(selectedpylon);
+                    }
+                }
+                RoleName_to_SelectedPlayer.Add("Pylon" + i.ToString(), "Pylon " + i.ToString() + " is: " + selectedpylon);
+                falson.PylonValid.Remove(selectedpylon);
+            }
         }
         public static void GeneratePillar() //5
         {
             Debug.WriteLine("Generating Pillars");
+            int numbertogenerate = falson.CounterBoxesSettings[8].Value;
+            for (int i = 0; i < numbertogenerate; i++)
+            {
+                string selectedpillar = falson.PillarValid[rand.Next(0, (falson.PillarValid.Count - 1))];
+                foreach (List<string> list in PillarExclusivityBubble)
+                {
+                    if (list.Contains(selectedpillar))
+                    {
+                        list.Remove(selectedpillar);
+                    }
+                }
+                RoleName_to_SelectedPlayer.Add("Pillar" + i.ToString(), "Pillar " + i.ToString() + " is: " + selectedpillar);
+                falson.PillarValid.Remove(selectedpillar);
+            }
         }
         public static void GenerateGreen() //2
         {
             Debug.WriteLine("Generating Greens");
+            int numbertogenerate = falson.CounterBoxesSettings[9].Value;
+            for (int i = 0; i < numbertogenerate; i++)
+            {
+                string selectedgreen = falson.GreenValid[rand.Next(0, (falson.GreenValid.Count - 1))];
+                foreach (List<string> list in GreenExclusivityBubble)
+                {
+                    if (list.Contains(selectedgreen))
+                    {
+                        list.Remove(selectedgreen);
+                    }
+                }
+                RoleName_to_SelectedPlayer.Add("Green" + i.ToString(), "Green " + i.ToString() + " is: " + selectedgreen);
+                falson.GreenValid.Remove(selectedgreen);
+            }
         }
         public static void GenerateSoullessPusher()
         {
             Debug.WriteLine("Generating SH Pusher");
+            string selectedpusher = falson.SoullessPusherValid[rand.Next(0, (falson.SoullessPusherValid.Count - 1))];
+            foreach (List<string> list in SoullessPusherExclusivityBubble)
+            {
+                if (list.Contains(selectedpusher))
+                {
+                    list.Remove(selectedpusher);
+                }
+            }
+            RoleName_to_SelectedPlayer.Add("SoullessPusher", "The SH Tormented Dead Pusher is: " + selectedpusher);
         }
         public static void GenerateDhuumKite()
         {
             Debug.WriteLine("Generating Dhuum Kite");
+            string selecteddhuumkite = falson.DhuumKiteValid[rand.Next(0, (falson.DhuumKiteValid.Count - 1))];
+            foreach (List<string> list in DhuumKiteExclusivityBubble)
+            {
+                if (list.Contains(selecteddhuumkite))
+                {
+                    list.Remove(selecteddhuumkite);
+                }
+            }
+            RoleName_to_SelectedPlayer.Add("DhuumKite", "The Dhuum Messenger Kiter is: " + selecteddhuumkite);
         }
         public static void GenerateQadimKite()
         {
             Debug.WriteLine("Generating Qadim Kite");
+            string selectedqadimkite = falson.QadimKiteValid[rand.Next(0, (falson.QadimKiteValid.Count - 1))];
+            foreach (List<string> list in QadimKiteExclusivityBubble)
+            {
+                if (list.Contains(selectedqadimkite))
+                {
+                    list.Remove(selectedqadimkite);
+                }
+            }
+            RoleName_to_SelectedPlayer.Add("QadimKite", "The Qadim Kiter is: " + selectedqadimkite);
         }
         public static void GenerateSword() //2
         {
             Debug.WriteLine("Generating Sword Kite");
+            int numbertogenerate = falson.CounterBoxesSettings[10].Value;
+            for (int i = 0; i < numbertogenerate; i++)
+            {
+                string selectedsword = falson.SwordValid[rand.Next(0, (falson.SwordValid.Count - 1))];
+                foreach (List<string> list in SwordExclusivityBubble)
+                {
+                    if (list.Contains(selectedsword))
+                    {
+                        list.Remove(selectedsword);
+                    }
+                }
+                RoleName_to_SelectedPlayer.Add("Sword" + i.ToString(), "Sword Collector " + i.ToString() + " is: " + selectedsword);
+                falson.SwordValid.Remove(selectedsword);
+            }
         }
         public static void GenerateShield() //2
         {
             Debug.WriteLine("Generating Shield Kite");
+            int numbertogenerate = falson.CounterBoxesSettings[11].Value;
+            for (int i = 0; i < numbertogenerate; i++)
+            {
+                string selectedshield = falson.ShieldValid[rand.Next(0, (falson.ShieldValid.Count - 1))];
+                foreach (List<string> list in ShieldExclusivityBubble)
+                {
+                    if (list.Contains(selectedshield))
+                    {
+                        list.Remove(selectedshield);
+                    }
+                }
+                RoleName_to_SelectedPlayer.Add("Shield" + i.ToString(), "Shield Collector " + i.ToString() + " is: " + selectedshield);
+                falson.ShieldValid.Remove(selectedshield);
+            }
         }
         #endregion
     }
