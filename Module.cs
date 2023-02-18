@@ -46,7 +46,7 @@ namespace Falson.Squad_Role_Randomizer
         public static List<string> QadimKiteValid;
         public static List<string> SwordValid;
         public static List<string> ShieldValid;
-        public static Label[] RandomizedResultsLabels;
+        public static Label RandomizationOutputLabel;
         public CounterBox[] CounterBoxes; //need 12 items in this
         public Label[] CounterBoxLabels;
         private StandardButton GenerateRolesButton;
@@ -362,7 +362,6 @@ namespace Falson.Squad_Role_Randomizer
         {
             CounterBoxes = new CounterBox[12];
             CounterBoxLabels = new Label[12];
-            RandomizedResultsLabels = new Label[22];
             RandomizerSettingsWindow = new StandardWindow(ContentsManager.GetTexture("155985.png"), new Rectangle(40, 26, 913, 691), new Rectangle(70, 71, 839, 605))
             {
                 Title = "Randomization Settings",
@@ -1178,15 +1177,12 @@ namespace Falson.Squad_Role_Randomizer
             #endregion
             #region Labels
 
-            for (int i = 0; i < 22; i++)
+            RandomizationOutputLabel = new Label 
             {
-                RandomizedResultsLabels[i] = new Label 
-                {
-                    Parent = ResultsFlowPanel,
-                    Size = new Point(200,25),
-                    Text = "Placeholder"
-                };
-            }
+            Parent = ResultsFlowPanel,
+            Location = new Point(0,0),
+            Size = new Point(200,200)
+            };
             IDictionary<int, int> CounterBoxLabel_X_PositionDictionary = new Dictionary<int, int> 
             {
                 {0, 0},
@@ -1237,13 +1233,8 @@ namespace Falson.Squad_Role_Randomizer
             };
             TestingCornerIcon.Click += delegate
             {
-                GenerateRolesButton.Size = new Point(80, 100);
-                GenerateRolesButton.Location = new Point(890, 40);
-                MasterFlowPanel.Size = new Point(1000,400);
-                MasterFlowPanel.Location = new Point(0, 255);
-                MasterFlowPanel.BackgroundColor = Color.Red;
-                MasterFlowPanel.ClipsBounds = true;
-                RandomizeCheckboxesPanel.Location = new Point(0, 166);
+                RandomizationOutputLabel.Parent = GameService.Graphics.SpriteScreen;
+                RandomizationOutputLabel.Show();
             };
             Player1NameBox.TextChanged += Player1NameBox_TextChanged;
             Player2NameBox.TextChanged += Player2NameBox_TextChanged;
@@ -1435,7 +1426,6 @@ namespace Falson.Squad_Role_Randomizer
             //This method prepares the roles to pass to the randomizer. It converts the checkboxes to activated roles to randomize, loads the saved player names into the list of valid options for each role
             //and then sorts them from smallest to largest, removing any role list that has no players. This information is then stored in a list called GenerationSequence, which is passed to the randomizer
             //to be sorted one last time before the randomizer class actually performs the necessary actions to randomize a member into each role.
-            RoleRandomizerMain.RandomizedResultsLabels = new Label[22];
             //Rolestoberandomized = new List<SettingEntry<bool>[]>();
             GenerationSequence = new List<List<string>>();
             ListofValidLists = new List<List<string>>{RoleRandomizerMain.HandKiteValid,RoleRandomizerMain.OilKiteValid,RoleRandomizerMain.FlakKiteValid,RoleRandomizerMain.TankValid,RoleRandomizerMain.HealAlacValid,RoleRandomizerMain.HealQuickValid,RoleRandomizerMain.DPSAlacValid,RoleRandomizerMain.DPSQuickValid,RoleRandomizerMain.MushroomValid,RoleRandomizerMain.TowerValid,RoleRandomizerMain.ReflectValid,RoleRandomizerMain.CannonValid,RoleRandomizerMain.ConstrucPusherValid,RoleRandomizerMain.LampValid,RoleRandomizerMain.PylonValid,RoleRandomizerMain.PillarValid,RoleRandomizerMain.GreenValid,RoleRandomizerMain.SoullessPusherValid,RoleRandomizerMain.DhuumKiteValid,RoleRandomizerMain.QadimKiteValid,RoleRandomizerMain.SwordValid,RoleRandomizerMain.ShieldValid,};
@@ -1559,6 +1549,14 @@ namespace Falson.Squad_Role_Randomizer
             }
             var TheRandomizer = new Randomizer.Randomizer();
             TheRandomizer.MainMethod();
+            //output the results in RoleName_to_SelectedPlayer dictionary into the results window.
+            string Outputtext = "Randomization Results:";
+            foreach (KeyValuePair<string,string> entry in Falson.Randomizer.Randomizer.RoleName_to_SelectedPlayer)
+	        {
+                Outputtext = Outputtext + "\n" + entry.Value;
+	        }
+            RoleRandomizerMain.RandomizationOutputLabel.Text = Outputtext;
+            RoleRandomizerMain.RandomizerResultsWindow.Show();
         }
         
 
