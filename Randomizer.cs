@@ -88,7 +88,8 @@ namespace Falson.Randomizer
             ListsOfLength9 = new List<List<string>>();
             ListsOfLength10 = new List<List<string>>();
         }
-
+        
+        public static IDictionary<string, string> RoleName_to_SelectedPlayer = new Dictionary<string, string>();
         public void BeginRandomization() 
         {
             //ValidRoleLists, which have been sorted smallest to largest, are brought in using falsonG.GenerationSequence
@@ -214,6 +215,7 @@ namespace Falson.Randomizer
                 {ListsOfLength9, 9 },
                 {ListsOfLength10,10}
             };
+
             //These Role Lists are then sorted into 10 lists according to size
             List<List<List<string>>> ListsOfLengthX = new List<List<List<string>>>(){ListsOfLength1,ListsOfLength2,ListsOfLength3,ListsOfLength4,ListsOfLength5,ListsOfLength6,ListsOfLength7,ListsOfLength8,ListsOfLength9,ListsOfLength10};
             foreach (List<string> ValidNameList in falsonG.GenerationSequence)
@@ -245,6 +247,7 @@ namespace Falson.Randomizer
             //Finally we place a try statement to attempt to run method.Invoke for each Action in our GenerationActions List
             //if successful, all roles will be pulled. If an exception is thrown, it will be output to a log so I can determine
             //where the sanity checking failed and maybe bandaid the (hopefully very few) edge cases that arise
+            RoleName_to_SelectedPlayer.Clear();
             try
             {
                 foreach (var item in GenerationFunctions) //Takes the final sequence that gets loaded into the actions list and invokes each of them in order. This step must come last!
@@ -256,12 +259,21 @@ namespace Falson.Randomizer
             {
                 Logger.Error(ex, "One of the role lists was depleted of all names before its role could be generated. Send your settings.json file to @Falson in the Blish HUD Discord to examine this");
             }
-
         }
         #region RoleGeneratorMethods
+        public static Random rand = new Random();
         public static void GenerateHandKite()
         {
             Debug.WriteLine("Generating Hand Kite");
+            string selectedhandkite = falson.HandKiteValid[rand.Next(0, (falson.HandKiteValid.Count - 1))]; //pick handkite
+            foreach (List<string> list in HandKiteExclusivityBubble) //check all conflicting lists
+            {
+                if (list.Contains(selectedhandkite)) //if player is in a conflicting list
+                {
+                    list.Remove(selectedhandkite); //remove that player from the conflicting list
+                }
+            }
+            RoleName_to_SelectedPlayer.Add("HandKite", "The Hand Kiter is: " + selectedhandkite); //output result to dictionary
         }
         public static void GenerateOilKite()
         {
@@ -275,23 +287,23 @@ namespace Falson.Randomizer
         {
             Debug.WriteLine("Generating Tank");
         }
-        public static void GenerateHealAlac()
+        public static void GenerateHealAlac() //2
         {
             Debug.WriteLine("Generating HealAlac");
         }
-        public static void GenerateHealQuick()
+        public static void GenerateHealQuick() //2
         {
             Debug.WriteLine("Generating HealQuick");
         }
-        public static void GenerateDPSAlac()
+        public static void GenerateDPSAlac() //2
         {
             Debug.WriteLine("Generating DPSAlac");
         }
-        public static void GenerateDPSQuick()
+        public static void GenerateDPSQuick() //2
         {
             Debug.WriteLine("Generating DPSQuick");
         }
-        public static void GenerateMushroom()
+        public static void GenerateMushroom() //4
         {
             Debug.WriteLine("Generating Mushroom");
         }
@@ -303,7 +315,7 @@ namespace Falson.Randomizer
         {
             Debug.WriteLine("Generating Reflect");
         }
-        public static void GenerateCannon()
+        public static void GenerateCannon() //2
         {
             Debug.WriteLine("Generating Cannons");
         }
@@ -311,19 +323,19 @@ namespace Falson.Randomizer
         {
             Debug.WriteLine("Generating KC Pusher");
         }
-        public static void GenerateLamp()
+        public static void GenerateLamp() //3
         {
             Debug.WriteLine("Generating Lamp");
         }
-        public static void GeneratePylon()
+        public static void GeneratePylon() //3
         {
             Debug.WriteLine("Generating Pylons");
         }
-        public static void GeneratePillar()
+        public static void GeneratePillar() //5
         {
             Debug.WriteLine("Generating Pillars");
         }
-        public static void GenerateGreen()
+        public static void GenerateGreen() //2
         {
             Debug.WriteLine("Generating Greens");
         }
@@ -339,11 +351,11 @@ namespace Falson.Randomizer
         {
             Debug.WriteLine("Generating Qadim Kite");
         }
-        public static void GenerateSword()
+        public static void GenerateSword() //2
         {
             Debug.WriteLine("Generating Sword Kite");
         }
-        public static void GenerateShield()
+        public static void GenerateShield() //2
         {
             Debug.WriteLine("Generating Shield Kite");
         }
