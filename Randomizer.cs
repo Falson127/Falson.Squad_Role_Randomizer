@@ -77,12 +77,22 @@ namespace Falson.Randomizer
             ShieldExclusivityBubble = new List<List<string>> { falson.HealAlacValid, falson.HealQuickValid };
             ListofExclusivityBubbles = new List<List<List<string>>> { HandKiteExclusivityBubble, OilKiteExclusivityBubble, FlakKiteExclusivityBubble, TankExclusivityBubble, HealAlacExclusivityBubble, HealQuickExclusivityBubble, DPSAlacExclusivityBubble, DPSQuickExclusivityBubble, MushroomExclusivityBubble, ReflectExclusivityBubble, CannonExclusivityBubble, LampExclusivityBubble, PylonExclusivityBubble, PillarExclusivityBubble, GreenExclusivityBubble, SoullessPusherExclusivityBubble, DhuumKiteExclusivityBubble, QadimKiteExclusivityBubble, SwordExclusivityBubble, ShieldExclusivityBubble };
             GenerationFunctions = new List<Action>();
+            ListsOfLength1 = new List<List<string>>();
+            ListsOfLength2 = new List<List<string>>();
+            ListsOfLength3 = new List<List<string>>();
+            ListsOfLength4 = new List<List<string>>();
+            ListsOfLength5 = new List<List<string>>();
+            ListsOfLength6 = new List<List<string>>();
+            ListsOfLength7 = new List<List<string>>();
+            ListsOfLength8 = new List<List<string>>();
+            ListsOfLength9 = new List<List<string>>();
+            ListsOfLength10 = new List<List<string>>();
         }
 
         public void BeginRandomization() 
         {
             //ValidRoleLists, which have been sorted smallest to largest, are brought in using falsonG.GenerationSequence
-            IDictionary<List<List<string>>, List<string>> RolesDictionary = new Dictionary<List<List<string>>, List<string>>
+            IDictionary<List<List<string>>, List<string>> RolesDictionary_Bubble_to_Valid = new Dictionary<List<List<string>>, List<string>>
             {
                 {HandKiteExclusivityBubble,falson.HandKiteValid},
                 {OilKiteExclusivityBubble, falson.OilKiteValid},
@@ -104,6 +114,29 @@ namespace Falson.Randomizer
                 {QadimKiteExclusivityBubble,falson.QadimKiteValid},
                 {SwordExclusivityBubble,falson.SwordValid},
                 {ShieldExclusivityBubble,falson.ShieldValid}
+            };
+            IDictionary<List<string>, List<List<string>>> RolesDictionary_Valid_to_Bubble = new Dictionary<List<string>, List<List<string>>>
+            {
+                {falson.HandKiteValid,HandKiteExclusivityBubble},
+                {falson.OilKiteValid,OilKiteExclusivityBubble},
+                {falson.FlakKiteValid,FlakKiteExclusivityBubble},
+                {falson.TankValid,TankExclusivityBubble},
+                {falson.HealAlacValid,HealAlacExclusivityBubble},
+                {falson.HealQuickValid,HealQuickExclusivityBubble},
+                {falson.DPSAlacValid,DPSAlacExclusivityBubble},
+                {falson.DPSQuickValid,DPSQuickExclusivityBubble},
+                {falson.MushroomValid,MushroomExclusivityBubble},
+                {falson.ReflectValid,ReflectExclusivityBubble},
+                {falson.CannonValid,CannonExclusivityBubble},
+                {falson.LampValid,LampExclusivityBubble},
+                {falson.PylonValid,PylonExclusivityBubble},
+                {falson.PillarValid,PillarExclusivityBubble},
+                {falson.GreenValid,GreenExclusivityBubble},
+                {falson.SoullessPusherValid,SoullessPusherExclusivityBubble},
+                {falson.DhuumKiteValid,DhuumKiteExclusivityBubble},
+                {falson.QadimKiteValid,QadimKiteExclusivityBubble},
+                {falson.SwordValid,SwordExclusivityBubble},
+                { falson.ShieldValid,ShieldExclusivityBubble}
             };
             IDictionary<List<string>, string> ValidRoleLists_to_FriendlyNamesDictionary = new Dictionary<List<string>, string>()
             {
@@ -183,22 +216,32 @@ namespace Falson.Randomizer
             };
             //These Role Lists are then sorted into 10 lists according to size
             List<List<List<string>>> ListsOfLengthX = new List<List<List<string>>>(){ListsOfLength1,ListsOfLength2,ListsOfLength3,ListsOfLength4,ListsOfLength5,ListsOfLength6,ListsOfLength7,ListsOfLength8,ListsOfLength9,ListsOfLength10};
-            foreach (var ValidNameList in falsonG.GenerationSequence)
+            foreach (List<string> ValidNameList in falsonG.GenerationSequence)
             {
                 listsize_to_Listsoflistsize[ValidNameList.Count()].Add(ValidNameList); //populates the ListsOfLengthXs
             }
             //Each size list is then further sorted from largest # of conflicting roles to smallest
+            var IntermediateSortedList = new List<List<List<string>>>();
             var sortedNameList = new List<List<string>>();
-            foreach (var nameList in ListsOfLengthX)
+            foreach (List<List<string>> listofnamelists in ListsOfLengthX)
             {
-                sortedNameList = ListofExclusivityBubbles.OrderByDescending(l => l.Count).Select(l => RolesDictionary[l]).ToList(); //If I understand it correctly, this should take l, a list of list<string>'s within LoEB's, order it by descending sizes
-            }                                                                                                                       //and then for each l, return the dictionary linked rolevalid list sorted by which has the higher number of conflicts.
-            //these doubly sorted lists are then added to the GenerationActions list by translating a role list to a generation method
-            //allowing them to generate in sequence of the double sort
-            foreach (var item in sortedNameList)
-            {
-                GenerationFunctions.Add(FriendlyNames_to_ActionsDictionary[ValidRoleLists_to_FriendlyNamesDictionary[item]]);
-            }
+                foreach (List<string> namelist in listofnamelists)
+                {
+                    IntermediateSortedList.Add(RolesDictionary_Valid_to_Bubble[namelist]); //convert the names in a given listoflengthx into their corresponding lists of exlusivity bubbles
+                }
+                IntermediateSortedList = IntermediateSortedList.OrderByDescending(l => l.Count()).ToList(); //sort those exclusivity bubbles by descending size
+                foreach (var ExclusivityBubble in IntermediateSortedList)
+                {
+                    sortedNameList.Add(RolesDictionary_Bubble_to_Valid[ExclusivityBubble]); //convert those newly sorted bubbles back into their name lists (which are of the same length)
+                }
+                foreach (var item in sortedNameList)
+                {
+                    GenerationFunctions.Add(FriendlyNames_to_ActionsDictionary[ValidRoleLists_to_FriendlyNamesDictionary[item]]); //add the finally double-sorted name lists to the generation function list using the dictionaries to convert.
+                }
+                IntermediateSortedList.Clear();
+                sortedNameList.Clear();
+            } //end of loop, do the same thing for all of the lists of lengths 1-10                                                                                                        
+
             //Finally we place a try statement to attempt to run method.Invoke for each Action in our GenerationActions List
             //if successful, all roles will be pulled. If an exception is thrown, it will be output to a log so I can determine
             //where the sanity checking failed and maybe bandaid the (hopefully very few) edge cases that arise

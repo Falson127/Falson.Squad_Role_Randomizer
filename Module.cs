@@ -22,8 +22,8 @@ namespace Falson.Squad_Role_Randomizer
         public static StandardWindow RandomizerSettingsWindow;
         private CornerIcon RandomizerSettingIcon;
         private CornerIcon TestingCornerIcon;
-        public static List<string> HealValid;
-        public static List<string> DPSValid;
+        //public static List<string> HealValid;
+        //public static List<string> DPSValid;
         public static List<string> HandKiteValid;
         public static List<string> OilKiteValid;
         public static List<string> FlakKiteValid;
@@ -224,8 +224,6 @@ namespace Falson.Squad_Role_Randomizer
             Player8Name = InternalPlayerRolesSettings.DefineSetting("Player 8 Name", "Player 8");
             Player9Name = InternalPlayerRolesSettings.DefineSetting("Player 9 Name", "Player 9");
             Player10Name = InternalPlayerRolesSettings.DefineSetting("Player 10 Name", "Player 10");
-            HealValid = new List<string>();
-            DPSValid = new List<string>();
             HandKiteValid = new List<string>();
             OilKiteValid = new List<string>();
             FlakKiteValid = new List<string>();
@@ -1430,6 +1428,7 @@ namespace Falson.Squad_Role_Randomizer
         public static List<SettingEntry<bool>[]> Rolestoberandomized;
         public static List<int> Length_of_Roles_Arrays;
         public static List<List<string>> GenerationSequence;
+        public static List<List<string>> ListofValidLists;
 
         public static void PrepRoles()
         {
@@ -1437,8 +1436,9 @@ namespace Falson.Squad_Role_Randomizer
             //and then sorts them from smallest to largest, removing any role list that has no players. This information is then stored in a list called GenerationSequence, which is passed to the randomizer
             //to be sorted one last time before the randomizer class actually performs the necessary actions to randomize a member into each role.
             RoleRandomizerMain.RandomizedResultsLabels = new Label[22];
-            Rolestoberandomized = new List<SettingEntry<bool>[]>();
+            //Rolestoberandomized = new List<SettingEntry<bool>[]>();
             GenerationSequence = new List<List<string>>();
+            ListofValidLists = new List<List<string>>{RoleRandomizerMain.HandKiteValid,RoleRandomizerMain.OilKiteValid,RoleRandomizerMain.FlakKiteValid,RoleRandomizerMain.TankValid,RoleRandomizerMain.HealAlacValid,RoleRandomizerMain.HealQuickValid,RoleRandomizerMain.DPSAlacValid,RoleRandomizerMain.DPSQuickValid,RoleRandomizerMain.MushroomValid,RoleRandomizerMain.TowerValid,RoleRandomizerMain.ReflectValid,RoleRandomizerMain.CannonValid,RoleRandomizerMain.ConstrucPusherValid,RoleRandomizerMain.LampValid,RoleRandomizerMain.PylonValid,RoleRandomizerMain.PillarValid,RoleRandomizerMain.GreenValid,RoleRandomizerMain.SoullessPusherValid,RoleRandomizerMain.DhuumKiteValid,RoleRandomizerMain.QadimKiteValid,RoleRandomizerMain.SwordValid,RoleRandomizerMain.ShieldValid,};
             IDictionary<CustomCheckbox, SettingEntry<bool>[]> ActiveRolesDictionary = new Dictionary<CustomCheckbox, SettingEntry<bool>[]>() 
             {
                 {RoleRandomizerMain.RolestoRandomizeSelectionCheckboxesArray[0], RoleRandomizerMain.HandKiteRoles },
@@ -1527,8 +1527,11 @@ namespace Falson.Squad_Role_Randomizer
                 {RoleRandomizerMain.SwordRoles, RoleRandomizerMain.SwordValid },
                 {RoleRandomizerMain.ShieldRoles,  RoleRandomizerMain.ShieldValid}
             };
-            
-
+            GenerationSequence.Clear();
+            foreach (List<string> list in ListofValidLists)
+            {
+                list.Clear();
+            }
             for (int i = 0; i < 22; i++)
             {
                 if (RoleRandomizerMain.RolestoRandomizeSelectionCheckboxesArray[i].Checked)
@@ -1546,8 +1549,8 @@ namespace Falson.Squad_Role_Randomizer
                     }
                 }
             }
-            IEnumerable<List<string>> SortedList = RoleRandomizerMain.ListofRoleValidLists.OrderBy(x => x.Count);  //sorts the populated lists by length
-            foreach (var item in SortedList)
+            var mySortedList = RoleRandomizerMain.ListofRoleValidLists.OrderBy(x => x.Count).ToList();  //sorts the populated lists by length
+            foreach (List<string> item in mySortedList)
             {
                 if (item.Count != 0)
                 {
