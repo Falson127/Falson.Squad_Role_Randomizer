@@ -1577,6 +1577,7 @@ namespace Falson.Squad_Role_Randomizer
             Player10Name = null;
             ListofRoleValidLists = null;
             RolestoRandomizeSelectionCheckboxesArray = null;
+            Randomizer.Randomizer.RoleName_to_SelectedPlayer = null;
             #endregion
             #region Events
             Player1NameBox.TextChanged -= Player1NameBox_TextChanged;
