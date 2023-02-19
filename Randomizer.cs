@@ -44,6 +44,8 @@ namespace Falson.Randomizer
         private static List<List<string>> ShieldExclusivityBubble;
         private List<List<List<string>>> ListofExclusivityBubbles;
         public static List<Action> GenerationFunctions;
+        public static IDictionary<string, string> RoleName_to_SelectedPlayer;
+        public static Random rand;
 
         private static readonly Logger Logger = Logger.GetLogger<Blish_HUD.Modules.Module>();
 
@@ -52,6 +54,33 @@ namespace Falson.Randomizer
         {
             DefineExlusiveLists();
             BeginRandomization();
+            UnloadRandomizer();
+        }
+        protected void UnloadRandomizer() 
+        {
+            HandKiteExclusivityBubble = null;
+            OilKiteExclusivityBubble = null;
+            FlakKiteExclusivityBubble = null;
+            TankExclusivityBubble = null;
+            HealAlacExclusivityBubble = null;
+            HealQuickExclusivityBubble = null;
+            DPSAlacExclusivityBubble = null;
+            DPSQuickExclusivityBubble = null;
+            MushroomExclusivityBubble = null;
+            ReflectExclusivityBubble = null;
+            CannonExclusivityBubble = null;
+            LampExclusivityBubble = null;
+            PylonExclusivityBubble = null;
+            PillarExclusivityBubble = null;
+            GreenExclusivityBubble = null;
+            SoullessPusherExclusivityBubble = null;
+            DhuumKiteExclusivityBubble = null;
+            QadimKiteExclusivityBubble = null;
+            SwordExclusivityBubble = null;
+            ShieldExclusivityBubble = null;
+            ListofExclusivityBubbles = null;
+            GenerationFunctions = null;
+            rand = null;
         }
         public void DefineExlusiveLists() 
         {
@@ -89,7 +118,7 @@ namespace Falson.Randomizer
             ListsOfLength10 = new List<List<string>>();
         }
         
-        public static IDictionary<string, string> RoleName_to_SelectedPlayer = new Dictionary<string, string>();
+         
         public void BeginRandomization() 
         {
             //ValidRoleLists, which have been sorted smallest to largest, are brought in using falsonG.GenerationSequence
@@ -215,7 +244,8 @@ namespace Falson.Randomizer
                 {ListsOfLength9, 9 },
                 {ListsOfLength10,10}
             };
-
+            RoleName_to_SelectedPlayer = new Dictionary<string, string>();
+            rand = new Random();
             //These Role Lists are then sorted into 10 lists according to size
             List<List<List<string>>> ListsOfLengthX = new List<List<List<string>>>(){ListsOfLength1,ListsOfLength2,ListsOfLength3,ListsOfLength4,ListsOfLength5,ListsOfLength6,ListsOfLength7,ListsOfLength8,ListsOfLength9,ListsOfLength10};
             foreach (List<string> ValidNameList in falsonG.GenerationSequence)
@@ -274,7 +304,6 @@ namespace Falson.Randomizer
             }
         }
         #region RoleGeneratorMethods
-        public static Random rand = new Random();
         public static void GenerateHandKite()
         {
             Debug.WriteLine("Generating Hand Kite");
