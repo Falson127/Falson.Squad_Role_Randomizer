@@ -52,6 +52,34 @@ namespace Falson.Randomizer
         {
             DefineExlusiveLists();
             BeginRandomization();
+            UnloadRandomizer();
+        }
+        protected void UnloadRandomizer() 
+        {
+            HandKiteExclusivityBubble = null;
+            OilKiteExclusivityBubble = null;
+            FlakKiteExclusivityBubble = null;
+            TankExclusivityBubble = null;
+            HealAlacExclusivityBubble = null;
+            HealQuickExclusivityBubble = null;
+            DPSAlacExclusivityBubble = null;
+            DPSQuickExclusivityBubble = null;
+            MushroomExclusivityBubble = null;
+            ReflectExclusivityBubble = null;
+            CannonExclusivityBubble = null;
+            LampExclusivityBubble = null;
+            PylonExclusivityBubble = null;
+            PillarExclusivityBubble = null;
+            GreenExclusivityBubble = null;
+            SoullessPusherExclusivityBubble = null;
+            DhuumKiteExclusivityBubble = null;
+            QadimKiteExclusivityBubble = null;
+            SwordExclusivityBubble = null;
+            ShieldExclusivityBubble = null;
+            ListofExclusivityBubbles = null;
+            GenerationFunctions = null;
+            RoleName_to_SelectedPlayer = null;
+            rand = null;
         }
         public void DefineExlusiveLists() 
         {

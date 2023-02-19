@@ -327,6 +327,17 @@ namespace Falson.Squad_Role_Randomizer
 
         protected override void Initialize()
         {
+
+        }
+
+        private void GenerateRolesButton_Click(object sender, Blish_HUD.Input.MouseEventArgs e)
+        {
+            PrepareRoles.PrepRoles();
+        }
+
+        protected override async Task LoadAsync()
+
+        {
             CounterBoxes = new CounterBox[12];
             CounterBoxLabels = new Label[12];
             RandomizerSettingsWindow = new StandardWindow(ContentsManager.GetTexture("155985.png"), new Rectangle(40, 26, 913, 691), new Rectangle(70, 71, 839, 605))
@@ -343,76 +354,76 @@ namespace Falson.Squad_Role_Randomizer
                 Title = "Randomized Roles",
                 Parent = GameService.Graphics.SpriteScreen,
                 Size = new Point(450, 800),
-                Location = new Point(100,100),
+                Location = new Point(100, 100),
                 SavesPosition = true,
                 Id = "Falson.RoleRandomizer.ResultsWindow"
             };
-            RolesWithNumbers = new Panel 
+            RolesWithNumbers = new Panel
             {
                 Title = "Number of each role to generate",
                 Parent = RandomizerSettingsWindow,
-                Size = new Point(480,165),
-                Location = new Point(401,0),
+                Size = new Point(480, 165),
+                Location = new Point(401, 0),
             };
-            GenerateRolesButton = new StandardButton 
+            GenerateRolesButton = new StandardButton
             {
                 Text = "Generate \n  Roles",
-                Size = new Point(80,100),
-                Location = new Point(890,40),
+                Size = new Point(80, 100),
+                Location = new Point(890, 40),
                 Parent = RandomizerSettingsWindow,
             };
             GenerateRolesButton.Click += GenerateRolesButton_Click;
-            PlayerNameTextBoxPanel = new Panel 
+            PlayerNameTextBoxPanel = new Panel
             {
                 Title = "Enter Player Names",
-                Size = new Point(400,165),
-                Location = new Point(0,0),
+                Size = new Point(400, 165),
+                Location = new Point(0, 0),
                 Parent = RandomizerSettingsWindow,
             };
             RandomizeCheckboxesPanel = new FlowPanel
             {
                 Title = "Select roles to be randomized",
-                Size = new Point(1000,120),
+                Size = new Point(1000, 120),
                 Parent = RandomizerSettingsWindow,
-                Location = new Point(0,166),
+                Location = new Point(0, 166),
                 FlowDirection = ControlFlowDirection.LeftToRight
             };
-            MasterFlowPanel = new FlowPanel 
+            MasterFlowPanel = new FlowPanel
             {
                 ShowBorder = true,
                 Title = "Set Roles for Each Player  (Click to Expand)",
-                Size = new Point(1000,400),
-                Location = new Point(0,255),
+                Size = new Point(1000, 400),
+                Location = new Point(0, 255),
                 Parent = RandomizerSettingsWindow,
                 CanScroll = true,
                 CanCollapse = false,
                 FlowDirection = ControlFlowDirection.SingleTopToBottom
             };
             #region Player Panels
-            Player1FlowPanel = new FlowPanel 
+            Player1FlowPanel = new FlowPanel
             {
                 Title = Player1Name.Value,
-                Size = new Point(1050,150),
+                Size = new Point(1050, 150),
                 Parent = MasterFlowPanel,
                 ShowBorder = true,
                 CanCollapse = true,
                 Collapsed = true,
                 FlowDirection = ControlFlowDirection.LeftToRight
             };
-            Player2FlowPanel = new FlowPanel 
+            Player2FlowPanel = new FlowPanel
             {
                 Title = Player2Name.Value,
-                Size = new Point(1050,150),
+                Size = new Point(1050, 150),
                 Parent = MasterFlowPanel,
                 ShowBorder = true,
                 CanCollapse = true,
                 Collapsed = true,
                 FlowDirection = ControlFlowDirection.LeftToRight
             };
-            Player3FlowPanel = new FlowPanel 
+            Player3FlowPanel = new FlowPanel
             {
                 Title = Player3Name.Value,
-                Size = new Point(1050,150),
+                Size = new Point(1050, 150),
                 Parent = MasterFlowPanel,
                 ShowBorder = true,
                 CanCollapse = true,
@@ -420,10 +431,10 @@ namespace Falson.Squad_Role_Randomizer
                 FlowDirection = ControlFlowDirection.LeftToRight
 
             };
-            Player4FlowPanel = new FlowPanel 
+            Player4FlowPanel = new FlowPanel
             {
                 Title = Player4Name.Value,
-                Size = new Point(1050,150),
+                Size = new Point(1050, 150),
                 Parent = MasterFlowPanel,
                 ShowBorder = true,
                 CanCollapse = true,
@@ -431,10 +442,10 @@ namespace Falson.Squad_Role_Randomizer
                 FlowDirection = ControlFlowDirection.LeftToRight
 
             };
-            Player5FlowPanel = new FlowPanel 
+            Player5FlowPanel = new FlowPanel
             {
                 Title = Player5Name.Value,
-                Size = new Point(1050,150),
+                Size = new Point(1050, 150),
                 Parent = MasterFlowPanel,
                 ShowBorder = true,
                 CanCollapse = true,
@@ -442,10 +453,10 @@ namespace Falson.Squad_Role_Randomizer
                 FlowDirection = ControlFlowDirection.LeftToRight
 
             };
-            Player6FlowPanel = new FlowPanel 
+            Player6FlowPanel = new FlowPanel
             {
                 Title = Player6Name.Value,
-                Size = new Point(1050,150),
+                Size = new Point(1050, 150),
                 Parent = MasterFlowPanel,
                 ShowBorder = true,
                 CanCollapse = true,
@@ -453,10 +464,10 @@ namespace Falson.Squad_Role_Randomizer
                 FlowDirection = ControlFlowDirection.LeftToRight
 
             };
-            Player7FlowPanel = new FlowPanel 
+            Player7FlowPanel = new FlowPanel
             {
                 Title = Player7Name.Value,
-                Size = new Point(1050,150),
+                Size = new Point(1050, 150),
                 Parent = MasterFlowPanel,
                 ShowBorder = true,
                 CanCollapse = true,
@@ -464,10 +475,10 @@ namespace Falson.Squad_Role_Randomizer
                 FlowDirection = ControlFlowDirection.LeftToRight
 
             };
-            Player8FlowPanel = new FlowPanel 
+            Player8FlowPanel = new FlowPanel
             {
                 Title = Player8Name.Value,
-                Size = new Point(1050,150),
+                Size = new Point(1050, 150),
                 Parent = MasterFlowPanel,
                 ShowBorder = true,
                 CanCollapse = true,
@@ -475,10 +486,10 @@ namespace Falson.Squad_Role_Randomizer
                 FlowDirection = ControlFlowDirection.LeftToRight
 
             };
-            Player9FlowPanel = new FlowPanel 
+            Player9FlowPanel = new FlowPanel
             {
                 Title = Player9Name.Value,
-                Size = new Point(1050,150),
+                Size = new Point(1050, 150),
                 Parent = MasterFlowPanel,
                 ShowBorder = true,
                 CanCollapse = true,
@@ -486,10 +497,10 @@ namespace Falson.Squad_Role_Randomizer
                 FlowDirection = ControlFlowDirection.LeftToRight
 
             };
-            Player10FlowPanel = new FlowPanel 
+            Player10FlowPanel = new FlowPanel
             {
                 Title = Player10Name.Value,
-                Size = new Point(1050,150),
+                Size = new Point(1050, 150),
                 Parent = MasterFlowPanel,
                 ShowBorder = true,
                 CanCollapse = true,
@@ -498,81 +509,81 @@ namespace Falson.Squad_Role_Randomizer
             };
             #endregion
             #region HoT_FlowPanels
-            HoT_PlayerRolesPanel1 = new FlowPanel() 
+            HoT_PlayerRolesPanel1 = new FlowPanel()
             {
-                Size = new Point(510,150),
+                Size = new Point(510, 150),
                 Parent = Player1FlowPanel,
                 ShowBorder = true,
                 FlowDirection = ControlFlowDirection.LeftToRight,
                 Title = "HoT Roles"
             };
-            HoT_PlayerRolesPanel2 = new FlowPanel() 
+            HoT_PlayerRolesPanel2 = new FlowPanel()
             {
-                Size = new Point(510,150),
+                Size = new Point(510, 150),
                 Parent = Player2FlowPanel,
                 ShowBorder = true,
                 FlowDirection = ControlFlowDirection.LeftToRight,
                 Title = "HoT Roles"
             };
-            HoT_PlayerRolesPanel3 = new FlowPanel() 
+            HoT_PlayerRolesPanel3 = new FlowPanel()
             {
-                Size = new Point(510,150),
+                Size = new Point(510, 150),
                 Parent = Player3FlowPanel,
                 ShowBorder = true,
                 FlowDirection = ControlFlowDirection.LeftToRight,
                 Title = "HoT Roles"
             };
-            HoT_PlayerRolesPanel4 = new FlowPanel() 
+            HoT_PlayerRolesPanel4 = new FlowPanel()
             {
-                Size = new Point(510,150),
+                Size = new Point(510, 150),
                 Parent = Player4FlowPanel,
                 ShowBorder = true,
                 FlowDirection = ControlFlowDirection.LeftToRight,
                 Title = "HoT Roles"
             };
-            HoT_PlayerRolesPanel5 = new FlowPanel() 
+            HoT_PlayerRolesPanel5 = new FlowPanel()
             {
-                Size = new Point(510,150),
+                Size = new Point(510, 150),
                 Parent = Player5FlowPanel,
                 ShowBorder = true,
                 FlowDirection = ControlFlowDirection.LeftToRight,
                 Title = "HoT Roles"
             };
-            HoT_PlayerRolesPanel6 = new FlowPanel() 
+            HoT_PlayerRolesPanel6 = new FlowPanel()
             {
-                Size = new Point(510,150),
+                Size = new Point(510, 150),
                 Parent = Player6FlowPanel,
                 ShowBorder = true,
                 FlowDirection = ControlFlowDirection.LeftToRight,
                 Title = "HoT Roles"
             };
-            HoT_PlayerRolesPanel7 = new FlowPanel() 
+            HoT_PlayerRolesPanel7 = new FlowPanel()
             {
-                Size = new Point(510,150),
+                Size = new Point(510, 150),
                 Parent = Player7FlowPanel,
                 ShowBorder = true,
                 FlowDirection = ControlFlowDirection.LeftToRight,
                 Title = "HoT Roles"
             };
-            HoT_PlayerRolesPanel8 = new FlowPanel() 
+            HoT_PlayerRolesPanel8 = new FlowPanel()
             {
-                Size = new Point(510,150),
+                Size = new Point(510, 150),
                 Parent = Player8FlowPanel,
                 ShowBorder = true,
                 FlowDirection = ControlFlowDirection.LeftToRight,
                 Title = "HoT Roles"
             };
-            HoT_PlayerRolesPanel9 = new FlowPanel() 
+            HoT_PlayerRolesPanel9 = new FlowPanel()
             {
-                Size = new Point(510,150),
+                Size = new Point(510, 150),
                 Parent = Player9FlowPanel,
                 ShowBorder = true,
                 FlowDirection = ControlFlowDirection.LeftToRight,
                 Title = "HoT Roles",
             };
-            HoT_PlayerRolesPanel10 = new FlowPanel() 
+            HoT_PlayerRolesPanel10 = new FlowPanel()
             {
-                Size = new Point(510,150),
+                Size = new Point(510, 150),
                 Parent = Player10FlowPanel,
                 ShowBorder = true,
                 FlowDirection = ControlFlowDirection.LeftToRight,
@@ -661,19 +672,6 @@ namespace Falson.Squad_Role_Randomizer
                 FlowDirection = ControlFlowDirection.LeftToRight
             };
             #endregion
-        }
-
-        private void GenerateRolesButton_Click(object sender, Blish_HUD.Input.MouseEventArgs e)
-        {
-            PrepareRoles.PrepRoles();
-        }
-
-        protected override async Task LoadAsync()
-        //Label Dimensions(width, height): (100, 25)
-        //HoT Panel Dimensions(width, height): (510, 100)
-        //PoF Panel Dimensions(width, height): (510, 75)
-        {
-            //Initialize Windows Here first, Then initialize panels, then labels and checkboxes
             #region Box and Label Arrays
             RolestoRandomizeSelectionCheckboxesArray = new CustomCheckbox[22];
             //RolestoRandomizeSelectionCheckboxesArray = new Checkbox[22] {RandomizeHandKite,RandomizeOilKite,RandomizeFlakKite,RandomizeTank,RandomizeHealAlac,RandomizeHealQuick,RandomizeDPSAlac,RandomizeDPSQuick,RandomizeMushroom,RandomizeTower,RandomizeReflect,RandomizeCannon,RandomizeConstrucPusher,RandomizeLamp,RandomizePylon,RandomizePillar,RandomizeGreen,RandomizeSoullessPusher,RandomizeDhuumKite,RandomizeQadimKite,RandomizeSword,RandomizeShield};
@@ -1363,161 +1361,161 @@ namespace Falson.Squad_Role_Randomizer
             #region Checkboxes
             foreach (var item in CounterBoxes)
             {
-                item.Dispose();
+                item?.Dispose();
             }
             foreach (var item in CounterBoxLabels)
             {
-                item.Dispose();
+                item?.Dispose();
             }
             foreach (var item in HandKiteBoxArray) 
             {
-                item.Dispose();
+                item?.Dispose();
             }
             foreach(var item in OilKiteBoxArray)
             {
-                item.Dispose();
+                item?.Dispose();
             }
             foreach(var item in FlakKiteBoxArray)
             {
-                item.Dispose();
+                item?.Dispose();
             }
             foreach(var item in TankBoxArray)
             {
-                item.Dispose();
+                item?.Dispose();
             }
             foreach(var item in HealAlacBoxArray)
             {
-                item.Dispose();
+                item?.Dispose();
             } 
             foreach(var item in HealQuickBoxArray)
             {
-                item.Dispose();
+                item?.Dispose();
             } 
             foreach(var item in DPSAlacBoxArray)
             {
-                item.Dispose();
+                item?.Dispose();
             } 
             foreach(var item in DPSQuickBoxArray)
             {
-                item.Dispose();
+                item?.Dispose();
             } 
             foreach(var item in MushroomBoxArray)
             {
-                item.Dispose();
+                item?.Dispose();
             } 
             foreach(var item in TowerBoxArray)
             {
-                item.Dispose();
+                item?.Dispose();
             }
             foreach(var item in ReflectBoxArray)
             {
-                item.Dispose();
+                item?.Dispose();
             }
             foreach(var item in CannonBoxArray)
             {
-                item.Dispose();
+                item?.Dispose();
             } 
             foreach(var item in ConstrucPusherBoxArray)
             {
-                item.Dispose();
+                item?.Dispose();
             }
             foreach(var item in LampBoxArray)
             {
-                item.Dispose();
+                item?.Dispose();
             } 
             foreach(var item in PylonBoxArray)
             {
-                item.Dispose();
+                item?.Dispose();
             } 
             foreach(var item in PillarBoxArray)
             {
-                item.Dispose();
+                item?.Dispose();
             } 
             foreach(var item in GreenBoxArray)
             {
-                item.Dispose();
+                item?.Dispose();
             } 
             foreach(var item in SoullessPusherBoxArray)
             {
-                item.Dispose();
+                item?.Dispose();
             }
             foreach(var item in DhuumKiteBoxArray)
             {
-                item.Dispose();
+                item?.Dispose();
             }
             foreach(var item in QadimKiteBoxArray)
             {
-                item.Dispose();
+                item?.Dispose();
             }
             foreach(var item in SwordBoxArray)
             {
-                item.Dispose();
+                item?.Dispose();
             } 
             foreach(var item in ShieldBoxArray)
             {
-                item.Dispose();
+                item?.Dispose();
             } 
             foreach(var item in RolestoRandomizeSelectionCheckboxesArray)
             {
-                item.Dispose();
+                item?.Dispose();
             }
             foreach(var item in HoTPannelArray)
             {
-                item.Dispose();
+                item?.Dispose();
             }
             foreach(var item in PoFPannelArray)
             {
-                item.Dispose();
+                item?.Dispose();
             }
             #endregion
-            RandomizerSettingIcon.Dispose();
-            RandomizerResultsWindow.Dispose();
-            RandomizerSettingsWindow.Dispose();
-            MasterFlowPanel.Dispose();
-            GenerateRolesButton.Dispose();
-            Player1NameBox.Dispose();
-            Player2NameBox.Dispose();
-            Player3NameBox.Dispose();
-            Player4NameBox.Dispose();
-            Player5NameBox.Dispose();
-            Player6NameBox.Dispose();
-            Player7NameBox.Dispose();
-            Player8NameBox.Dispose();
-            Player9NameBox.Dispose();
-            Player10NameBox.Dispose();
-            PlayerNameTextBoxPanel.Dispose();
-            Player1FlowPanel.Dispose();
-            Player2FlowPanel.Dispose();
-            Player3FlowPanel.Dispose();
-            Player4FlowPanel.Dispose();
-            Player5FlowPanel.Dispose();
-            Player6FlowPanel.Dispose();
-            Player7FlowPanel.Dispose();
-            Player8FlowPanel.Dispose();
-            Player9FlowPanel.Dispose();
-            Player10FlowPanel.Dispose();
-            MasterFlowPanel.Dispose();
-            RandomizeCheckboxesPanel.Dispose();
-            HoT_PlayerRolesPanel1.Dispose();
-            PoF_PlayerRolesPanel1.Dispose();
-            HoT_PlayerRolesPanel2.Dispose();
-            PoF_PlayerRolesPanel2.Dispose();
-            HoT_PlayerRolesPanel3.Dispose();
-            PoF_PlayerRolesPanel3.Dispose();
-            HoT_PlayerRolesPanel4.Dispose();
-            PoF_PlayerRolesPanel4.Dispose();
-            HoT_PlayerRolesPanel5.Dispose();
-            PoF_PlayerRolesPanel5.Dispose();
-            HoT_PlayerRolesPanel6.Dispose();
-            PoF_PlayerRolesPanel6.Dispose();
-            HoT_PlayerRolesPanel7.Dispose();
-            PoF_PlayerRolesPanel7.Dispose();
-            HoT_PlayerRolesPanel8.Dispose();
-            PoF_PlayerRolesPanel8.Dispose();
-            HoT_PlayerRolesPanel9.Dispose();
-            PoF_PlayerRolesPanel9.Dispose();
-            HoT_PlayerRolesPanel10.Dispose();
-            PoF_PlayerRolesPanel10.Dispose();
+            RandomizerSettingIcon?.Dispose();
+            RandomizerResultsWindow?.Dispose();
+            RandomizerSettingsWindow?.Dispose();
+            MasterFlowPanel?.Dispose();
+            GenerateRolesButton?.Dispose();
+            Player1NameBox?.Dispose();
+            Player2NameBox?.Dispose();
+            Player3NameBox?.Dispose();
+            Player4NameBox?.Dispose();
+            Player5NameBox?.Dispose();
+            Player6NameBox?.Dispose();
+            Player7NameBox?.Dispose();
+            Player8NameBox?.Dispose();
+            Player9NameBox?.Dispose();
+            Player10NameBox?.Dispose();
+            PlayerNameTextBoxPanel?.Dispose();
+            Player1FlowPanel?.Dispose();
+            Player2FlowPanel?.Dispose();
+            Player3FlowPanel?.Dispose();
+            Player4FlowPanel?.Dispose();
+            Player5FlowPanel?.Dispose();
+            Player6FlowPanel?.Dispose();
+            Player7FlowPanel?.Dispose();
+            Player8FlowPanel?.Dispose();
+            Player9FlowPanel?.Dispose();
+            Player10FlowPanel?.Dispose();
+            MasterFlowPanel?.Dispose();
+            RandomizeCheckboxesPanel?.Dispose();
+            HoT_PlayerRolesPanel1?.Dispose();
+            PoF_PlayerRolesPanel1?.Dispose();
+            HoT_PlayerRolesPanel2?.Dispose();
+            PoF_PlayerRolesPanel2?.Dispose();
+            HoT_PlayerRolesPanel3?.Dispose();
+            PoF_PlayerRolesPanel3?.Dispose();
+            HoT_PlayerRolesPanel4?.Dispose();
+            PoF_PlayerRolesPanel4?.Dispose();
+            HoT_PlayerRolesPanel5?.Dispose();
+            PoF_PlayerRolesPanel5?.Dispose();
+            HoT_PlayerRolesPanel6?.Dispose();
+            PoF_PlayerRolesPanel6?.Dispose();
+            HoT_PlayerRolesPanel7?.Dispose();
+            PoF_PlayerRolesPanel7?.Dispose();
+            HoT_PlayerRolesPanel8?.Dispose();
+            PoF_PlayerRolesPanel8?.Dispose();
+            HoT_PlayerRolesPanel9?.Dispose();
+            PoF_PlayerRolesPanel9?.Dispose();
+            HoT_PlayerRolesPanel10?.Dispose();
+            PoF_PlayerRolesPanel10?.Dispose();
             #endregion
             #region Static Members
             HandKiteValid = null;
