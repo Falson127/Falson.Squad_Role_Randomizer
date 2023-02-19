@@ -254,10 +254,23 @@ namespace Falson.Randomizer
                 {
                     item.Invoke();
                 }
+                //output the results in RoleName_to_SelectedPlayer dictionary into the results window.
+                string Outputtext = "Randomization Results:";
+                foreach (KeyValuePair<string, string> entry in RoleName_to_SelectedPlayer)
+                {
+                    Outputtext = Outputtext + "\n" + entry.Value;
+                }
+                falson.RandomizationOutputLabel.Text = Outputtext;
+                falson.RandomizerResultsWindow.Show();
             }
             catch (Exception ex)
             {
                 Logger.Error(ex, "One of the role lists was depleted of all names before its role could be generated. Send your settings.json file to @Falson in the Blish HUD Discord to examine this");
+                string Outputtext = "At least one role failed to generate.\nThis can happen if you don't have at least 1 player\nsigned up for each role you are trying to randomize.\nAnd in the case of roles with multiple players, make sure \nthere are at least the same number of players signed up \nas you selected to generate in the counter boxes." +
+                    "\n\nIf this issue persists, then a list has been \ndepleted during generation due to certain roles inherently \nconflicting with others. " +
+                    "try running the randomization again, \nand if the issue continues please reach out on the BlishHUD \nDiscord server.";
+                falson.RandomizationOutputLabel.Text = Outputtext;
+                falson.RandomizerResultsWindow.Show();
             }
         }
         #region RoleGeneratorMethods
@@ -328,7 +341,7 @@ namespace Falson.Randomizer
                         list.Remove(selectedhealalac);
                     }
                 }
-                RoleName_to_SelectedPlayer.Add("HealAlac" + i.ToString(), "The Heal Alac " + i.ToString() + " is: " + selectedhealalac);
+                RoleName_to_SelectedPlayer.Add("HealAlac" + (i+1).ToString(), "Heal Alac " + (i+1).ToString() + " is: " + selectedhealalac);
                 falson.HealAlacValid.Remove(selectedhealalac);
             }
         }
@@ -346,7 +359,7 @@ namespace Falson.Randomizer
                         list.Remove(selectedhealquick);
                     }
                 }
-                RoleName_to_SelectedPlayer.Add("HealQuick" + i.ToString(), "The Heal Quick " + i.ToString() + " is: " + selectedhealquick);
+                RoleName_to_SelectedPlayer.Add("HealQuick" + (i + 1).ToString(), "Heal Quick " + (i + 1).ToString() + " is: " + selectedhealquick);
                 falson.HealQuickValid.Remove(selectedhealquick);
             }
         }
@@ -364,7 +377,7 @@ namespace Falson.Randomizer
                         list.Remove(selecteddpsalac);
                     }
                 }
-                RoleName_to_SelectedPlayer.Add("DPSAlac" + i.ToString(), "The DPS Alac " + i.ToString() + " is: " + selecteddpsalac);
+                RoleName_to_SelectedPlayer.Add("DPSAlac" + (i + 1).ToString(), "Alac DPS " + (i + 1).ToString() + " is: " + selecteddpsalac);
                 falson.DPSAlacValid.Remove(selecteddpsalac);
             }
         }
@@ -382,7 +395,7 @@ namespace Falson.Randomizer
                         list.Remove(selecteddpsquick);
                     }
                 }
-                RoleName_to_SelectedPlayer.Add("DPSQuick" + i.ToString(), "The DPS Quick " + i.ToString() + " is: " + selecteddpsquick);
+                RoleName_to_SelectedPlayer.Add("DPSQuick" + (i + 1).ToString(), "Quick DPS " + (i + 1).ToString() + " is: " + selecteddpsquick);
                 falson.DPSQuickValid.Remove(selecteddpsquick);
             }
         }
@@ -400,7 +413,7 @@ namespace Falson.Randomizer
                         list.Remove(selectedmushroom);
                     }
                 }
-                RoleName_to_SelectedPlayer.Add("Mushroom" + i.ToString(), "Mushroom " + i.ToString() + " is: " + selectedmushroom);
+                RoleName_to_SelectedPlayer.Add("Mushroom" + (i + 1).ToString(), "Mushroom " + (i + 1).ToString() + " is: " + selectedmushroom);
                 falson.MushroomValid.Remove(selectedmushroom);
             }
         }
@@ -437,7 +450,7 @@ namespace Falson.Randomizer
                         list.Remove(selectedcannon);
                     }
                 }
-                RoleName_to_SelectedPlayer.Add("Cannon" + i.ToString(), "Cannon " + i.ToString() + " is: " + selectedcannon);
+                RoleName_to_SelectedPlayer.Add("Cannon" + (i + 1).ToString(), "Cannon " + (i + 1).ToString() + " is: " + selectedcannon);
                 falson.CannonValid.Remove(selectedcannon);
             }
         }
@@ -461,7 +474,7 @@ namespace Falson.Randomizer
                         list.Remove(selectedlamp);
                     }
                 }
-                RoleName_to_SelectedPlayer.Add("Lamp" + i.ToString(), "Lamp " + i.ToString() + " is: " + selectedlamp);
+                RoleName_to_SelectedPlayer.Add("Lamp" + (i + 1).ToString(), "Lamp " + (i + 1).ToString() + " is: " + selectedlamp);
                 falson.LampValid.Remove(selectedlamp);
             }
         }
@@ -479,7 +492,7 @@ namespace Falson.Randomizer
                         list.Remove(selectedpylon);
                     }
                 }
-                RoleName_to_SelectedPlayer.Add("Pylon" + i.ToString(), "Pylon " + i.ToString() + " is: " + selectedpylon);
+                RoleName_to_SelectedPlayer.Add("Pylon" + (i + 1).ToString(), "Pylon " + (i + 1).ToString() + " is: " + selectedpylon);
                 falson.PylonValid.Remove(selectedpylon);
             }
         }
@@ -497,7 +510,7 @@ namespace Falson.Randomizer
                         list.Remove(selectedpillar);
                     }
                 }
-                RoleName_to_SelectedPlayer.Add("Pillar" + i.ToString(), "Pillar " + i.ToString() + " is: " + selectedpillar);
+                RoleName_to_SelectedPlayer.Add("Pillar" + (i + 1).ToString(), "Pillar " + (i + 1).ToString() + " is: " + selectedpillar);
                 falson.PillarValid.Remove(selectedpillar);
             }
         }
@@ -515,7 +528,7 @@ namespace Falson.Randomizer
                         list.Remove(selectedgreen);
                     }
                 }
-                RoleName_to_SelectedPlayer.Add("Green" + i.ToString(), "Green " + i.ToString() + " is: " + selectedgreen);
+                RoleName_to_SelectedPlayer.Add("Green" + (i + 1).ToString(), "Green " + (i + 1).ToString() + " is: " + selectedgreen);
                 falson.GreenValid.Remove(selectedgreen);
             }
         }
@@ -572,7 +585,7 @@ namespace Falson.Randomizer
                         list.Remove(selectedsword);
                     }
                 }
-                RoleName_to_SelectedPlayer.Add("Sword" + i.ToString(), "Sword Collector " + i.ToString() + " is: " + selectedsword);
+                RoleName_to_SelectedPlayer.Add("Sword" + (i + 1).ToString(), "Sword Collector " + (i + 1).ToString() + " is: " + selectedsword);
                 falson.SwordValid.Remove(selectedsword);
             }
         }
@@ -590,7 +603,7 @@ namespace Falson.Randomizer
                         list.Remove(selectedshield);
                     }
                 }
-                RoleName_to_SelectedPlayer.Add("Shield" + i.ToString(), "Shield Collector " + i.ToString() + " is: " + selectedshield);
+                RoleName_to_SelectedPlayer.Add("Shield" + (i + 1).ToString(), "Shield Collector " + (i + 1).ToString() + " is: " + selectedshield);
                 falson.ShieldValid.Remove(selectedshield);
             }
         }

@@ -156,7 +156,6 @@
   <ItemGroup>
     <Compile Include="Randomizer.cs" />
     <Compile Include="Module.cs" />
-    <Compile Include="SanityChecker.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="AsyncClipboardService, Version=1.7.1.0, Culture=neutral, processorArchitecture=MSIL">

@@ -10,7 +10,6 @@ using System.ComponentModel.Composition;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
-
 using System.Diagnostics;
 
 namespace Falson.Squad_Role_Randomizer
@@ -21,9 +20,6 @@ namespace Falson.Squad_Role_Randomizer
         public static StandardWindow RandomizerResultsWindow;
         public static StandardWindow RandomizerSettingsWindow;
         private CornerIcon RandomizerSettingIcon;
-        private CornerIcon TestingCornerIcon;
-        //public static List<string> HealValid;
-        //public static List<string> DPSValid;
         public static List<string> HandKiteValid;
         public static List<string> OilKiteValid;
         public static List<string> FlakKiteValid;
@@ -50,7 +46,6 @@ namespace Falson.Squad_Role_Randomizer
         public CounterBox[] CounterBoxes; //need 12 items in this
         public Label[] CounterBoxLabels;
         private StandardButton GenerateRolesButton;
-        public StandardButton GenerateRandomRoles;
         public SettingCollection InternalPlayerRolesSettings;
         public static SettingEntry<int>[] CounterBoxesSettings;
         public static SettingEntry<bool>[] RolesToGenerate;
@@ -89,7 +84,6 @@ namespace Falson.Squad_Role_Randomizer
         public List<CustomCheckbox[]> ListofCheckboxArrays;
         public List<SettingEntry<bool>[]> ListofRolesSettings;
         public static List<List<string>> ListofRoleValidLists;
-        //public List<List<string>> SelectedRolesToRandomize;
         public TextBox Player1NameBox;
         public TextBox Player2NameBox;
         public TextBox Player3NameBox;
@@ -199,7 +193,6 @@ namespace Falson.Squad_Role_Randomizer
 
         [ImportingConstructor]
         public RoleRandomizerMain([Import("ModuleParameters")] ModuleParameters moduleParameters) : base(moduleParameters) { }
-
         protected override void DefineSettings(SettingCollection settings)
         {   
             InternalPlayerRolesSettings = settings.AddSubCollection("Internal Setting Collection", false);
@@ -375,7 +368,7 @@ namespace Falson.Squad_Role_Randomizer
             {
                 Title = "Randomized Roles",
                 Parent = GameService.Graphics.SpriteScreen,
-                Size = new Point(1000,900),
+                Size = new Point(450, 800),
                 Location = new Point(100,100),
                 SavesPosition = true,
                 Id = "Falson.RoleRandomizer.ResultsWindow"
@@ -386,14 +379,6 @@ namespace Falson.Squad_Role_Randomizer
                 Parent = RandomizerSettingsWindow,
                 Size = new Point(480,165),
                 Location = new Point(401,0),
-            };
-            ResultsFlowPanel = new FlowPanel
-            {
-                Title = "Generated Results",
-                Parent = RandomizerResultsWindow,
-                FlowDirection = ControlFlowDirection.TopToBottom,
-                Size = new Point(900,600),
-                Location = new Point(0,0)
             };
             GenerateRolesButton = new StandardButton 
             {
@@ -1179,9 +1164,10 @@ namespace Falson.Squad_Role_Randomizer
 
             RandomizationOutputLabel = new Label 
             {
-            Parent = ResultsFlowPanel,
+            Parent = RandomizerResultsWindow,
             Location = new Point(0,0),
-            Size = new Point(200,200)
+            Size = new Point(375, 650),
+            VerticalAlignment = VerticalAlignment.Top
             };
             IDictionary<int, int> CounterBoxLabel_X_PositionDictionary = new Dictionary<int, int> 
             {
@@ -1226,16 +1212,6 @@ namespace Falson.Squad_Role_Randomizer
                 };
             }
             #endregion
-            TestingCornerIcon = new CornerIcon
-            {
-                Icon = ContentsManager.GetTexture("Emblem.png"),
-                BasicTooltipText = "Click for debugging functions"
-            };
-            TestingCornerIcon.Click += delegate
-            {
-                RandomizationOutputLabel.Parent = GameService.Graphics.SpriteScreen;
-                RandomizationOutputLabel.Show();
-            };
             Player1NameBox.TextChanged += Player1NameBox_TextChanged;
             Player2NameBox.TextChanged += Player2NameBox_TextChanged;
             Player3NameBox.TextChanged += Player3NameBox_TextChanged;
@@ -1392,6 +1368,7 @@ namespace Falson.Squad_Role_Randomizer
             RandomizerSettingIcon.Click += delegate 
             {
                 RandomizerSettingsWindow.Show();
+
             };
 
 
@@ -1409,6 +1386,9 @@ namespace Falson.Squad_Role_Randomizer
         protected override void Unload()
         {
             // Unload here
+            RandomizerSettingIcon.Dispose();
+            RandomizerResultsWindow.Dispose();
+            RandomizerSettingsWindow.Dispose();
 
             // All static members must be manually unset
         }
@@ -1420,8 +1400,7 @@ namespace Falson.Squad_Role_Randomizer
         public static List<int> Length_of_Roles_Arrays;
         public static List<List<string>> GenerationSequence;
         public static List<List<string>> ListofValidLists;
-
-        public static void PrepRoles()
+        public static void PrepRoles() 
         {
             //This method prepares the roles to pass to the randomizer. It converts the checkboxes to activated roles to randomize, loads the saved player names into the list of valid options for each role
             //and then sorts them from smallest to largest, removing any role list that has no players. This information is then stored in a list called GenerationSequence, which is passed to the randomizer
@@ -1549,14 +1528,6 @@ namespace Falson.Squad_Role_Randomizer
             }
             var TheRandomizer = new Randomizer.Randomizer();
             TheRandomizer.MainMethod();
-            //output the results in RoleName_to_SelectedPlayer dictionary into the results window.
-            string Outputtext = "Randomization Results:";
-            foreach (KeyValuePair<string,string> entry in Falson.Randomizer.Randomizer.RoleName_to_SelectedPlayer)
-	        {
-                Outputtext = Outputtext + "\n" + entry.Value;
-	        }
-            RoleRandomizerMain.RandomizationOutputLabel.Text = Outputtext;
-            RoleRandomizerMain.RandomizerResultsWindow.Show();
         }
         
 
