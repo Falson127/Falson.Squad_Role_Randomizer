@@ -179,7 +179,7 @@ namespace Falson.Squad_Role_Randomizer
             RolesToGenerate = new SettingEntry<bool>[22];
             for (int i = 0; i < 22; i++)
             {
-                RolesToGenerate[i] = InternalPlayerRolesSettings.DefineSetting("Role to Generate " + (i+1), true);
+                RolesToGenerate[i] = InternalPlayerRolesSettings.DefineSetting("Role to Generate " + (i+1), false);
             }
             Player1Name = InternalPlayerRolesSettings.DefineSetting("Player 1 Name", "Player 1");
             Player2Name = InternalPlayerRolesSettings.DefineSetting("Player 2 Name", "Player 2");
@@ -1339,7 +1339,7 @@ namespace Falson.Squad_Role_Randomizer
             };
             RandomizerSettingIcon.Click += delegate 
             {
-                RandomizerSettingsWindow.Show();
+                RandomizerSettingsWindow.ToggleWindow();
 
             };
 
