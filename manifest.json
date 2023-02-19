@@ -2,14 +2,14 @@
   "name": "Raid Squad Role Randomizer",
   "version": "0.1.0",
   "namespace": "Falson.Squad_Role_Randomizer",
-  "package": "Falson.Squad Role Randomizer.dll",
+  "package": "Falson.Squad_Role_Randomizer.dll",
   "manifest_version": 1,
 
   "description": "Allows you to randomly assign roles to your raid static based upon the roles each member is able to play. Click the new corner icon to access the randomizer setup window.",
   "dependencies": {
-    "bh.blishhud": ">=0.5.2"
+    "bh.blishhud": ">=1.0.0"
   },
-  "url": "",
+  "url": "https://github.com/Falson127/Falson.Squad_Role_Randomizer",
   "contributors": [
     {
       "name": "Falson"

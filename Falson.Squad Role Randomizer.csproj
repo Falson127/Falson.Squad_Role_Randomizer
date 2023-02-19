@@ -7,7 +7,7 @@
     <ProjectGuid>{777B0986-4F67-47B7-909A-C57BA4D6B71E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>Falson.Falson.Squad_Role_Randomizer</RootNamespace>
-    <AssemblyName>Falson.Squad Role Randomizer</AssemblyName>
+    <AssemblyName>Falson.Squad_Role_Randomizer</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
