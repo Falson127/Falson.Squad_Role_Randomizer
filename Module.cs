@@ -1721,12 +1721,11 @@ namespace Falson.Squad_Role_Randomizer
                 {
                     var tempkey = RoleRandomizerMain.RolestoRandomizeSelectionCheckboxesArray[i];
                     var temprole = ActiveRolesDictionary[tempkey];
-                    var ContainsOnePlayerChecked = 0;
                     for (int s = 0; s < 10; s++)
                     {
                         if (temprole[s].Value)
                         {
-                            ContainsOnePlayerChecked = 1;
+
                             RolesArrays_to_ValidLists[temprole].Add(ArrayPos_to_PlayerNameDictionary[s]); //adds the player that has checked true for a role to the role valid list for that particular role.
                         }
                     }
@@ -1735,7 +1734,7 @@ namespace Falson.Squad_Role_Randomizer
             var mySortedList = RoleRandomizerMain.ListofRoleValidLists.OrderBy(x => x.Count).ToList();  //sorts the populated lists by length
             foreach (List<string> item in mySortedList)
             {
-                if (item.Count != 0)
+                if (item.Count != 0) //only roles that have at least 1 player signed up get added to the sequence for generation
                 {
                     GenerationSequence.Add(item); //converts the current (role)valid list into a string name for the role to be generated and adds to the sequence, from shortest lists to longest.
                 }
