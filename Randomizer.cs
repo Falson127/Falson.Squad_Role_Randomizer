@@ -42,6 +42,8 @@ namespace Falson.Randomizer
         private static List<List<string>> QadimKiteExclusivityBubble;
         private static List<List<string>> SwordExclusivityBubble;
         private static List<List<string>> ShieldExclusivityBubble;
+        private static List<List<string>> TowerExclusivityBubble;
+        private static List<List<string>> ConstrucPusherExclusivityBubble;
         private List<List<List<string>>> ListofExclusivityBubbles;
         public static List<Action> GenerationFunctions;
         public static IDictionary<string, string> RoleName_to_SelectedPlayer;
@@ -104,6 +106,9 @@ namespace Falson.Randomizer
             QadimKiteExclusivityBubble = new List<List<string>> { falson.TankValid, falson.HealAlacValid, falson.HealQuickValid, falson.DPSAlacValid, falson.DPSQuickValid, falson.LampValid };
             SwordExclusivityBubble = new List<List<string>> { falson.HealAlacValid, falson.HealQuickValid };
             ShieldExclusivityBubble = new List<List<string>> { falson.HealAlacValid, falson.HealQuickValid };
+            TowerExclusivityBubble = new List<List<string>> { };
+            ConstrucPusherExclusivityBubble = new List<List<string>> { };
+
             ListofExclusivityBubbles = new List<List<List<string>>> { HandKiteExclusivityBubble, OilKiteExclusivityBubble, FlakKiteExclusivityBubble, TankExclusivityBubble, HealAlacExclusivityBubble, HealQuickExclusivityBubble, DPSAlacExclusivityBubble, DPSQuickExclusivityBubble, MushroomExclusivityBubble, ReflectExclusivityBubble, CannonExclusivityBubble, LampExclusivityBubble, PylonExclusivityBubble, PillarExclusivityBubble, GreenExclusivityBubble, SoullessPusherExclusivityBubble, DhuumKiteExclusivityBubble, QadimKiteExclusivityBubble, SwordExclusivityBubble, ShieldExclusivityBubble };
             GenerationFunctions = new List<Action>();
             ListsOfLength1 = new List<List<string>>();
@@ -143,7 +148,9 @@ namespace Falson.Randomizer
                 {DhuumKiteExclusivityBubble,falson.DhuumKiteValid},
                 {QadimKiteExclusivityBubble,falson.QadimKiteValid},
                 {SwordExclusivityBubble,falson.SwordValid},
-                {ShieldExclusivityBubble,falson.ShieldValid}
+                {ShieldExclusivityBubble,falson.ShieldValid},
+                {TowerExclusivityBubble, falson.TowerValid},
+                {ConstrucPusherExclusivityBubble, falson.ConstrucPusherValid }
             };
             IDictionary<List<string>, List<List<string>>> RolesDictionary_Valid_to_Bubble = new Dictionary<List<string>, List<List<string>>>
             {
@@ -166,7 +173,9 @@ namespace Falson.Randomizer
                 {falson.DhuumKiteValid,DhuumKiteExclusivityBubble},
                 {falson.QadimKiteValid,QadimKiteExclusivityBubble},
                 {falson.SwordValid,SwordExclusivityBubble},
-                { falson.ShieldValid,ShieldExclusivityBubble}
+                {falson.ShieldValid,ShieldExclusivityBubble},
+                {falson.TowerValid, TowerExclusivityBubble},
+                {falson.ConstrucPusherValid,ConstrucPusherExclusivityBubble}
             };
             IDictionary<List<string>, string> ValidRoleLists_to_FriendlyNamesDictionary = new Dictionary<List<string>, string>()
             {
@@ -259,7 +268,9 @@ namespace Falson.Randomizer
             {
                 foreach (List<string> namelist in listofnamelists)
                 {
-                    IntermediateSortedList.Add(RolesDictionary_Valid_to_Bubble[namelist]); //convert the names in a given listoflengthx into their corresponding lists of exlusivity bubbles
+
+                    IntermediateSortedList.Add(RolesDictionary_Valid_to_Bubble[namelist]); //convert the names in a given listoflengthx into their corresponding lists of exlusivity 
+                    
                 }
                 IntermediateSortedList = IntermediateSortedList.OrderByDescending(l => l.Count()).ToList(); //sort those exclusivity bubbles by descending size
                 foreach (var ExclusivityBubble in IntermediateSortedList)
