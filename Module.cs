@@ -47,7 +47,7 @@ namespace Falson.Squad_Role_Randomizer
         public Label[] CounterBoxLabels;
         private StandardButton GenerateRolesButton;
         public SettingCollection InternalPlayerRolesSettings;
-        public static SettingEntry<int>[] CounterBoxesSettings;
+        public static SettingEntry<int>[]  CounterBoxesSettings;
         public static SettingEntry<bool>[] RolesToGenerate;
         public static SettingEntry<bool>[] HandKiteRoles;
         public static SettingEntry<bool>[] OilKiteRoles;
@@ -107,7 +107,6 @@ namespace Falson.Squad_Role_Randomizer
         public FlowPanel Player10FlowPanel;
         public FlowPanel MasterFlowPanel;
         public FlowPanel RandomizeCheckboxesPanel;
-        public FlowPanel ResultsFlowPanel;
         public FlowPanel HoT_PlayerRolesPanel1;
         public FlowPanel PoF_PlayerRolesPanel1;
         public FlowPanel HoT_PlayerRolesPanel2;
@@ -155,32 +154,7 @@ namespace Falson.Squad_Role_Randomizer
         public Panel[] HoTPannelArray;
         public Panel[] PoFPannelArray;
         public Panel RolesWithNumbers;
-        //Roles Per Pannel: HoT: 13
-        //Dimensions 5, 5, 3
-        //Roles Per Pannel: PoF: 9
-        //Dimensions 5, 4
-        public Checkbox RandomizeHandKite;
-        public Checkbox RandomizeOilKite;
-        public Checkbox RandomizeFlakKite;
-        public Checkbox RandomizeTank;
-        public Checkbox RandomizeHealAlac;
-        public Checkbox RandomizeHealQuick;
-        public Checkbox RandomizeDPSAlac;
-        public Checkbox RandomizeDPSQuick;
-        public Checkbox RandomizeMushroom;
-        public Checkbox RandomizeTower;
-        public Checkbox RandomizeReflect;
-        public Checkbox RandomizeCannon;
-        public Checkbox RandomizeConstrucPusher;
-        public Checkbox RandomizeLamp;
-        public Checkbox RandomizePylon;
-        public Checkbox RandomizePillar;
-        public Checkbox RandomizeGreen;
-        public Checkbox RandomizeSoullessPusher;
-        public Checkbox RandomizeDhuumKite;
-        public Checkbox RandomizeQadimKite;
-        public Checkbox RandomizeSword;
-        public Checkbox RandomizeShield;
+        
 
         private static readonly Logger Logger = Logger.GetLogger<Module>();
 
@@ -1385,12 +1359,253 @@ namespace Falson.Squad_Role_Randomizer
         /// <inheritdoc />
         protected override void Unload()
         {
-            // Unload here
+            #region Disposables
+            #region Checkboxes
+            foreach (var item in CounterBoxes)
+            {
+                item.Dispose();
+            }
+            foreach (var item in CounterBoxLabels)
+            {
+                item.Dispose();
+            }
+            foreach (var item in HandKiteBoxArray) 
+            {
+                item.Dispose();
+            }
+            foreach(var item in OilKiteBoxArray)
+            {
+                item.Dispose();
+            }
+            foreach(var item in FlakKiteBoxArray)
+            {
+                item.Dispose();
+            }
+            foreach(var item in TankBoxArray)
+            {
+                item.Dispose();
+            }
+            foreach(var item in HealAlacBoxArray)
+            {
+                item.Dispose();
+            } 
+            foreach(var item in HealQuickBoxArray)
+            {
+                item.Dispose();
+            } 
+            foreach(var item in DPSAlacBoxArray)
+            {
+                item.Dispose();
+            } 
+            foreach(var item in DPSQuickBoxArray)
+            {
+                item.Dispose();
+            } 
+            foreach(var item in MushroomBoxArray)
+            {
+                item.Dispose();
+            } 
+            foreach(var item in TowerBoxArray)
+            {
+                item.Dispose();
+            }
+            foreach(var item in ReflectBoxArray)
+            {
+                item.Dispose();
+            }
+            foreach(var item in CannonBoxArray)
+            {
+                item.Dispose();
+            } 
+            foreach(var item in ConstrucPusherBoxArray)
+            {
+                item.Dispose();
+            }
+            foreach(var item in LampBoxArray)
+            {
+                item.Dispose();
+            } 
+            foreach(var item in PylonBoxArray)
+            {
+                item.Dispose();
+            } 
+            foreach(var item in PillarBoxArray)
+            {
+                item.Dispose();
+            } 
+            foreach(var item in GreenBoxArray)
+            {
+                item.Dispose();
+            } 
+            foreach(var item in SoullessPusherBoxArray)
+            {
+                item.Dispose();
+            }
+            foreach(var item in DhuumKiteBoxArray)
+            {
+                item.Dispose();
+            }
+            foreach(var item in QadimKiteBoxArray)
+            {
+                item.Dispose();
+            }
+            foreach(var item in SwordBoxArray)
+            {
+                item.Dispose();
+            } 
+            foreach(var item in ShieldBoxArray)
+            {
+                item.Dispose();
+            } 
+            foreach(var item in RolestoRandomizeSelectionCheckboxesArray)
+            {
+                item.Dispose();
+            }
+            foreach(var item in HoTPannelArray)
+            {
+                item.Dispose();
+            }
+            foreach(var item in PoFPannelArray)
+            {
+                item.Dispose();
+            }
+            #endregion
             RandomizerSettingIcon.Dispose();
             RandomizerResultsWindow.Dispose();
             RandomizerSettingsWindow.Dispose();
-
-            // All static members must be manually unset
+            MasterFlowPanel.Dispose();
+            GenerateRolesButton.Dispose();
+            Player1NameBox.Dispose();
+            Player2NameBox.Dispose();
+            Player3NameBox.Dispose();
+            Player4NameBox.Dispose();
+            Player5NameBox.Dispose();
+            Player6NameBox.Dispose();
+            Player7NameBox.Dispose();
+            Player8NameBox.Dispose();
+            Player9NameBox.Dispose();
+            Player10NameBox.Dispose();
+            PlayerNameTextBoxPanel.Dispose();
+            Player1FlowPanel.Dispose();
+            Player2FlowPanel.Dispose();
+            Player3FlowPanel.Dispose();
+            Player4FlowPanel.Dispose();
+            Player5FlowPanel.Dispose();
+            Player6FlowPanel.Dispose();
+            Player7FlowPanel.Dispose();
+            Player8FlowPanel.Dispose();
+            Player9FlowPanel.Dispose();
+            Player10FlowPanel.Dispose();
+            MasterFlowPanel.Dispose();
+            RandomizeCheckboxesPanel.Dispose();
+            HoT_PlayerRolesPanel1.Dispose();
+            PoF_PlayerRolesPanel1.Dispose();
+            HoT_PlayerRolesPanel2.Dispose();
+            PoF_PlayerRolesPanel2.Dispose();
+            HoT_PlayerRolesPanel3.Dispose();
+            PoF_PlayerRolesPanel3.Dispose();
+            HoT_PlayerRolesPanel4.Dispose();
+            PoF_PlayerRolesPanel4.Dispose();
+            HoT_PlayerRolesPanel5.Dispose();
+            PoF_PlayerRolesPanel5.Dispose();
+            HoT_PlayerRolesPanel6.Dispose();
+            PoF_PlayerRolesPanel6.Dispose();
+            HoT_PlayerRolesPanel7.Dispose();
+            PoF_PlayerRolesPanel7.Dispose();
+            HoT_PlayerRolesPanel8.Dispose();
+            PoF_PlayerRolesPanel8.Dispose();
+            HoT_PlayerRolesPanel9.Dispose();
+            PoF_PlayerRolesPanel9.Dispose();
+            HoT_PlayerRolesPanel10.Dispose();
+            PoF_PlayerRolesPanel10.Dispose();
+            #endregion
+            #region Static Members
+            HandKiteValid = null;
+            OilKiteValid = null;
+            FlakKiteValid = null;
+            TankValid = null;
+            HealAlacValid = null;
+            HealQuickValid = null;
+            DPSAlacValid = null;
+            DPSQuickValid = null;
+            MushroomValid = null;
+            TowerValid = null;
+            ReflectValid = null;
+            CannonValid = null;
+            ConstrucPusherValid = null;
+            LampValid = null;
+            PylonValid = null;
+            PillarValid = null;
+            GreenValid = null;
+            SoullessPusherValid = null;
+            DhuumKiteValid = null;
+            QadimKiteValid = null;
+            SwordValid = null;
+            ShieldValid = null;
+            RandomizationOutputLabel = null;
+            CounterBoxesSettings = null;
+            RolesToGenerate = null;
+            HandKiteRoles = null;
+            OilKiteRoles = null;
+            FlakKiteRoles = null;
+            TankRoles = null;
+            HealAlacRoles = null;
+            HealQuickRoles = null;
+            DPSAlacRoles = null;
+            DPSQuickRoles = null;
+            MushroomRoles = null;
+            TowerRoles = null;
+            ReflectRoles = null;
+            CannonRoles = null;
+            ConstrucPusherRoles = null;
+            LampRoles = null;
+            PylonRoles = null;
+            PillarRoles = null;
+            GreenRoles = null;
+            SoullessPusherRoles = null;
+            DhuumKiteRoles = null;
+            QadimKiteRoles = null;
+            SwordRoles = null;
+            ShieldRoles = null;
+            Player1Name = null;
+            Player2Name = null;
+            Player3Name = null;
+            Player4Name = null;
+            Player5Name = null;
+            Player6Name = null;
+            Player7Name = null;
+            Player8Name = null;
+            Player9Name = null;
+            Player10Name = null;
+            ListofRoleValidLists = null;
+            RolestoRandomizeSelectionCheckboxesArray = null;
+            #endregion
+            #region Events
+            Player1NameBox.TextChanged -= Player1NameBox_TextChanged;
+            Player2NameBox.TextChanged -= Player2NameBox_TextChanged;
+            Player3NameBox.TextChanged -= Player3NameBox_TextChanged;
+            Player4NameBox.TextChanged -= Player4NameBox_TextChanged;
+            Player5NameBox.TextChanged -= Player5NameBox_TextChanged;
+            Player6NameBox.TextChanged -= Player6NameBox_TextChanged;
+            Player7NameBox.TextChanged -= Player7NameBox_TextChanged;
+            Player8NameBox.TextChanged -= Player8NameBox_TextChanged;
+            Player9NameBox.TextChanged -= Player9NameBox_TextChanged;
+            Player10NameBox.TextChanged -= Player10NameBox_TextChanged;
+            CounterBoxes[0].Click -= CounterBox1Click;
+            CounterBoxes[1].Click -= CounterBox2Click;
+            CounterBoxes[2].Click -= CounterBox3Click;
+            CounterBoxes[3].Click -= CounterBox4Click;
+            CounterBoxes[4].Click -= CounterBox5Click;
+            CounterBoxes[5].Click -= CounterBox6Click;
+            CounterBoxes[6].Click -= CounterBox7Click;
+            CounterBoxes[7].Click -= CounterBox8Click;
+            CounterBoxes[8].Click -= CounterBox9Click;
+            CounterBoxes[9].Click -= CounterBox10Click;
+            CounterBoxes[10].Click -= CounterBox11Click;
+            CounterBoxes[11].Click -= CounterBox12Click;
+            GenerateRolesButton.Click -= GenerateRolesButton_Click;
+            RandomizerSettingIcon.Click -= delegate{RandomizerSettingsWindow.Show();};
+            #endregion
         }
     }
 
@@ -1540,13 +1755,10 @@ namespace Falson.Squad_Role_Randomizer
         public CustomCheckbox(SettingEntry<bool> settingsEntry)
         {
             _settingEntry = settingsEntry;
-            Debug.WriteLine("Initialized as: " + _settingEntry.Value);
         }
         protected override void OnCheckedChanged(CheckChangedEvent e)
         {
             _settingEntry.Value = Checked;
-            Debug.WriteLine("Changing value of " + _settingEntry.EntryKey + "to: " + _settingEntry.Value.ToString());
-            Debug.WriteLine(_settingEntry.Value.ToString());
             base.OnCheckedChanged(e);
         }
     }
