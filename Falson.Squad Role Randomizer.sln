@@ -5,8 +5,6 @@ VisualStudioVersion = 16.0.32929.386
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Falson.Squad Role Randomizer", "Falson.Squad Role Randomizer.csproj", "{777B0986-4F67-47B7-909A-C57BA4D6B71E}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5A721FD7-8F80-4259-84D0-0206BE09E395}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
