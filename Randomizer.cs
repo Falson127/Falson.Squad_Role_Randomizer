@@ -5,8 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
 using Blish_HUD;
-using falson = Falson.Squad_Role_Randomizer.RoleRandomizerMain;
-using falsonG = Falson.Squad_Role_Randomizer.PrepareRoles;
+using falson = Falson.SquadRoleRandomizer.RoleRandomizerMain;
+using falsonG = Falson.SquadRoleRandomizer.PrepareRoles;
 
 namespace Falson.Randomizer
 {
