@@ -181,7 +181,6 @@ namespace Falson.SquadRoleRandomizer
         }
 
         protected override async Task LoadAsync()
-
         {
             CounterBoxes = new CounterBox[12];
             CounterBoxLabels = new Label[12];
@@ -192,7 +191,8 @@ namespace Falson.SquadRoleRandomizer
                 Parent = GameService.Graphics.SpriteScreen,
                 Size = new Point(1050, 800),
                 SavesPosition = true,
-                Id = "Falson.RoleRandomizer.SettingsWindow"
+                Id = "Falson.RoleRandomizer.SettingsWindow",
+                Emblem = ContentsManager.GetTexture("Emblem.png")
             };
             RandomizerResultsWindow = new StandardWindow(ContentsManager.GetTexture("155985.png"), new Rectangle(40, 26, 913, 691), new Rectangle(70, 71, 839, 605))
             {
@@ -201,7 +201,9 @@ namespace Falson.SquadRoleRandomizer
                 Size = new Point(450, 800),
                 Location = new Point(100, 100),
                 SavesPosition = true,
-                Id = "Falson.RoleRandomizer.ResultsWindow"
+                Id = "Falson.RoleRandomizer.ResultsWindow",
+                Emblem = ContentsManager.GetTexture("Emblem.png")
+
             };
             RolesWithNumbers = new Panel
             {
