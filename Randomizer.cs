@@ -7,6 +7,7 @@ using System.Diagnostics;
 using Blish_HUD;
 using falson = Falson.SquadRoleRandomizer.RoleRandomizerMain;
 using falsonG = Falson.SquadRoleRandomizer.PrepareRoles;
+using System.Web;
 
 namespace Falson.Randomizer
 {
@@ -46,7 +47,9 @@ namespace Falson.Randomizer
         private static List<List<string>> ConstrucPusherExclusivityBubble;
         private List<List<List<string>>> ListofExclusivityBubbles;
         public static List<Action> GenerationFunctions;
-        public static IDictionary<string, string> RoleName_to_SelectedPlayer;
+        public static IDictionary<string, string> RoleName_to_SelectedPlayer = new Dictionary<string, string>();
+        public static IDictionary<string, string> HoTMechanic_to_SelectedPlayer = new Dictionary<string,string>();
+        public static IDictionary<string, string> PoFMechanic_to_SelectedPlayer = new Dictionary<string,string>();
         public static Random rand;
 
         private static readonly Logger Logger = Logger.GetLogger<Blish_HUD.Modules.Module>();
@@ -240,20 +243,6 @@ namespace Falson.Randomizer
                 {9 , ListsOfLength9},
                 {10, ListsOfLength10}
             };
-            IDictionary<List<List<string>>, int> ListsofLengthX_to_minUniqueNames = new Dictionary<List<List<string>>, int>
-            {
-                {ListsOfLength1, 1 },
-                {ListsOfLength2, 2 },
-                {ListsOfLength3, 3 },
-                {ListsOfLength4, 4 },
-                {ListsOfLength5, 5 },
-                {ListsOfLength6, 6 },
-                {ListsOfLength7, 7 },
-                {ListsOfLength8, 8 },
-                {ListsOfLength9, 9 },
-                {ListsOfLength10,10}
-            };
-            RoleName_to_SelectedPlayer = new Dictionary<string, string>();
             rand = new Random();
             //These Role Lists are then sorted into 10 lists according to size
             List<List<List<string>>> ListsOfLengthX = new List<List<List<string>>>(){ListsOfLength1,ListsOfLength2,ListsOfLength3,ListsOfLength4,ListsOfLength5,ListsOfLength6,ListsOfLength7,ListsOfLength8,ListsOfLength9,ListsOfLength10};
@@ -289,6 +278,8 @@ namespace Falson.Randomizer
             //if successful, all roles will be pulled. If an exception is thrown, it will be output to a log so I can determine
             //where the sanity checking failed and maybe bandaid the (hopefully very few) edge cases that arise
             RoleName_to_SelectedPlayer.Clear();
+            HoTMechanic_to_SelectedPlayer.Clear();
+            PoFMechanic_to_SelectedPlayer.Clear();
             try
             {
                 foreach (var item in GenerationFunctions) //Takes the final sequence that gets loaded into the actions list and invokes each of them in order. This step must come last!
@@ -296,8 +287,18 @@ namespace Falson.Randomizer
                     item.Invoke();
                 }
                 //output the results in RoleName_to_SelectedPlayer dictionary into the results window.
-                string Outputtext = "Randomization Results:";
+                string Outputtext = "Standard Roles:";
                 foreach (KeyValuePair<string, string> entry in RoleName_to_SelectedPlayer)
+                {
+                    Outputtext = Outputtext + "\n" + entry.Value;
+                }
+                Outputtext = Outputtext + "\n\nHoT Mechanics: ";
+                foreach (KeyValuePair<string,string> entry in HoTMechanic_to_SelectedPlayer)
+                {
+                    Outputtext = Outputtext + "\n" + entry.Value;
+                }
+                Outputtext = Outputtext + "\n\nPoF Mechanics: ";
+                foreach (KeyValuePair<string,string> entry in PoFMechanic_to_SelectedPlayer)
                 {
                     Outputtext = Outputtext + "\n" + entry.Value;
                 }
@@ -326,7 +327,7 @@ namespace Falson.Randomizer
                     list.Remove(selectedhandkite); //remove that player from the conflicting list
                 }
             }
-            RoleName_to_SelectedPlayer.Add("HandKite", "The Hand Kiter is: " + selectedhandkite); //output result to dictionary
+            HoTMechanic_to_SelectedPlayer.Add("HandKite", "The Hand Kiter is: " + selectedhandkite); //output result to dictionary
         }
         public static void GenerateOilKite()
         {
@@ -339,7 +340,7 @@ namespace Falson.Randomizer
                     list.Remove(selectedoilkite);
                 }
             }
-            RoleName_to_SelectedPlayer.Add("OilKite", "The Oil Kiter is: " + selectedoilkite);
+            HoTMechanic_to_SelectedPlayer.Add("OilKite", "The Oil Kiter is: " + selectedoilkite);
         }
         public static void GenerateFlakKite()
         {
@@ -352,7 +353,7 @@ namespace Falson.Randomizer
                     list.Remove(selectedflakkite);
                 }
             }
-            RoleName_to_SelectedPlayer.Add("FlakKite", "The Flak Kiter is: " + selectedflakkite);
+            HoTMechanic_to_SelectedPlayer.Add("FlakKite", "The Flak Kiter is: " + selectedflakkite);
         }
         public static void GenerateTank()
         {
@@ -453,7 +454,7 @@ namespace Falson.Randomizer
                         list.Remove(selectedmushroom);
                     }
                 }
-                RoleName_to_SelectedPlayer.Add("Mushroom" + (i + 1).ToString(), "Mushroom " + (i + 1).ToString() + " is: " + selectedmushroom);
+                HoTMechanic_to_SelectedPlayer.Add("Mushroom" + (i + 1).ToString(), "Mushroom " + (i + 1).ToString() + " is: " + selectedmushroom);
                 falson.MushroomValid.Remove(selectedmushroom);
             }
         }
@@ -461,7 +462,7 @@ namespace Falson.Randomizer
         {
             Debug.WriteLine("Generating Tower");
             string selectedtower = falson.TowerValid[rand.Next(0, (falson.TowerValid.Count - 1))];
-            RoleName_to_SelectedPlayer.Add("Tower", "The Tower Mesmer is: " + selectedtower);
+            HoTMechanic_to_SelectedPlayer.Add("Tower", "The Tower Mesmer is: " + selectedtower);
         }
         public static void GenerateReflect()
         {
@@ -474,7 +475,7 @@ namespace Falson.Randomizer
                     list.Remove(selectedreflect);
                 }
             }
-            RoleName_to_SelectedPlayer.Add("Reflect", "The Matthias Reflect Mesmer is: " + selectedreflect);
+            HoTMechanic_to_SelectedPlayer.Add("Reflect", "The Matthias Reflect Mesmer is: " + selectedreflect);
         }
         public static void GenerateCannon() //2
         {
@@ -490,7 +491,7 @@ namespace Falson.Randomizer
                         list.Remove(selectedcannon);
                     }
                 }
-                RoleName_to_SelectedPlayer.Add("Cannon" + (i + 1).ToString(), "Cannon " + (i + 1).ToString() + " is: " + selectedcannon);
+                HoTMechanic_to_SelectedPlayer.Add("Cannon" + (i + 1).ToString(), "Cannon " + (i + 1).ToString() + " is: " + selectedcannon);
                 falson.CannonValid.Remove(selectedcannon);
             }
         }
@@ -498,7 +499,7 @@ namespace Falson.Randomizer
         {
             Debug.WriteLine("Generating KC Pusher");
             string selectedkcpusher = falson.ConstrucPusherValid[rand.Next(0, (falson.ConstrucPusherValid.Count - 1))];
-            RoleName_to_SelectedPlayer.Add("ConstructPusher", "The KC Core Pusher is: " + selectedkcpusher);
+            HoTMechanic_to_SelectedPlayer.Add("ConstructPusher", "The KC Core Pusher is: " + selectedkcpusher);
         }
         public static void GenerateLamp() //3
         {
@@ -514,7 +515,7 @@ namespace Falson.Randomizer
                         list.Remove(selectedlamp);
                     }
                 }
-                RoleName_to_SelectedPlayer.Add("Lamp" + (i + 1).ToString(), "Lamp " + (i + 1).ToString() + " is: " + selectedlamp);
+                PoFMechanic_to_SelectedPlayer.Add("Lamp" + (i + 1).ToString(), "Lamp " + (i + 1).ToString() + " is: " + selectedlamp);
                 falson.LampValid.Remove(selectedlamp);
             }
         }
@@ -532,7 +533,7 @@ namespace Falson.Randomizer
                         list.Remove(selectedpylon);
                     }
                 }
-                RoleName_to_SelectedPlayer.Add("Pylon" + (i + 1).ToString(), "Pylon " + (i + 1).ToString() + " is: " + selectedpylon);
+                PoFMechanic_to_SelectedPlayer.Add("Pylon" + (i + 1).ToString(), "Pylon " + (i + 1).ToString() + " is: " + selectedpylon);
                 falson.PylonValid.Remove(selectedpylon);
             }
         }
@@ -550,7 +551,7 @@ namespace Falson.Randomizer
                         list.Remove(selectedpillar);
                     }
                 }
-                RoleName_to_SelectedPlayer.Add("Pillar" + (i + 1).ToString(), "Pillar " + (i + 1).ToString() + " is: " + selectedpillar);
+                PoFMechanic_to_SelectedPlayer.Add("Pillar" + (i + 1).ToString(), "Pillar " + (i + 1).ToString() + " is: " + selectedpillar);
                 falson.PillarValid.Remove(selectedpillar);
             }
         }
@@ -568,7 +569,7 @@ namespace Falson.Randomizer
                         list.Remove(selectedgreen);
                     }
                 }
-                RoleName_to_SelectedPlayer.Add("Green" + (i + 1).ToString(), "Green " + (i + 1).ToString() + " is: " + selectedgreen);
+                PoFMechanic_to_SelectedPlayer.Add("Green" + (i + 1).ToString(), "Green " + (i + 1).ToString() + " is: " + selectedgreen);
                 falson.GreenValid.Remove(selectedgreen);
             }
         }
@@ -583,7 +584,7 @@ namespace Falson.Randomizer
                     list.Remove(selectedpusher);
                 }
             }
-            RoleName_to_SelectedPlayer.Add("SoullessPusher", "The SH Tormented Dead Pusher is: " + selectedpusher);
+            PoFMechanic_to_SelectedPlayer.Add("SoullessPusher", "The SH Tormented Dead Pusher is: " + selectedpusher);
         }
         public static void GenerateDhuumKite()
         {
@@ -596,7 +597,7 @@ namespace Falson.Randomizer
                     list.Remove(selecteddhuumkite);
                 }
             }
-            RoleName_to_SelectedPlayer.Add("DhuumKite", "The Dhuum Messenger Kiter is: " + selecteddhuumkite);
+            PoFMechanic_to_SelectedPlayer.Add("DhuumKite", "The Dhuum Messenger Kiter is: " + selecteddhuumkite);
         }
         public static void GenerateQadimKite()
         {
@@ -609,7 +610,7 @@ namespace Falson.Randomizer
                     list.Remove(selectedqadimkite);
                 }
             }
-            RoleName_to_SelectedPlayer.Add("QadimKite", "The Qadim Kiter is: " + selectedqadimkite);
+            PoFMechanic_to_SelectedPlayer.Add("QadimKite", "The Qadim Kiter is: " + selectedqadimkite);
         }
         public static void GenerateSword() //2
         {
@@ -625,7 +626,7 @@ namespace Falson.Randomizer
                         list.Remove(selectedsword);
                     }
                 }
-                RoleName_to_SelectedPlayer.Add("Sword" + (i + 1).ToString(), "Sword Collector " + (i + 1).ToString() + " is: " + selectedsword);
+                PoFMechanic_to_SelectedPlayer.Add("Sword" + (i + 1).ToString(), "Sword Collector " + (i + 1).ToString() + " is: " + selectedsword);
                 falson.SwordValid.Remove(selectedsword);
             }
         }
@@ -643,7 +644,7 @@ namespace Falson.Randomizer
                         list.Remove(selectedshield);
                     }
                 }
-                RoleName_to_SelectedPlayer.Add("Shield" + (i + 1).ToString(), "Shield Collector " + (i + 1).ToString() + " is: " + selectedshield);
+                PoFMechanic_to_SelectedPlayer.Add("Shield" + (i + 1).ToString(), "Shield Collector " + (i + 1).ToString() + " is: " + selectedshield);
                 falson.ShieldValid.Remove(selectedshield);
             }
         }
