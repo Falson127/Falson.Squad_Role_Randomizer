@@ -72,16 +72,7 @@ namespace Falson.SquadRoleRandomizer
         public static SettingEntry<bool>[] SwordRoles;
         public static SettingEntry<bool>[] ShieldRoles;
         public static SettingEntry<string>[] PlayerNames = new SettingEntry<string>[10];
-        public static SettingEntry<string> Player1Name; 
-        public static SettingEntry<string> Player2Name;
-        public static SettingEntry<string> Player3Name;
-        public static SettingEntry<string> Player4Name;
-        public static SettingEntry<string> Player5Name;
-        public static SettingEntry<string> Player6Name;
-        public static SettingEntry<string> Player7Name;
-        public static SettingEntry<string> Player8Name;
-        public static SettingEntry<string> Player9Name;
-        public static SettingEntry<string> Player10Name;
+
         public List<CustomCheckbox[]> ListofCheckboxArrays;
         public List<SettingEntry<bool>[]> ListofRolesSettings;
         public static List<List<string>> ListofRoleValidLists;
@@ -184,16 +175,6 @@ namespace Falson.SquadRoleRandomizer
             {
                 PlayerNames[i] = InternalPlayerRolesSettings.DefineSetting($"Player {i} Name", $"Player {i}");
             }
-            Player1Name = InternalPlayerRolesSettings.DefineSetting("Player 1 Name", "Player 1");
-            Player2Name = InternalPlayerRolesSettings.DefineSetting("Player 2 Name", "Player 2");
-            Player3Name = InternalPlayerRolesSettings.DefineSetting("Player 3 Name", "Player 3");
-            Player4Name = InternalPlayerRolesSettings.DefineSetting("Player 4 Name", "Player 4");
-            Player5Name = InternalPlayerRolesSettings.DefineSetting("Player 5 Name", "Player 5");
-            Player6Name = InternalPlayerRolesSettings.DefineSetting("Player 6 Name", "Player 6");
-            Player7Name = InternalPlayerRolesSettings.DefineSetting("Player 7 Name", "Player 7");
-            Player8Name = InternalPlayerRolesSettings.DefineSetting("Player 8 Name", "Player 8");
-            Player9Name = InternalPlayerRolesSettings.DefineSetting("Player 9 Name", "Player 9");
-            Player10Name = InternalPlayerRolesSettings.DefineSetting("Player 10 Name", "Player 10");
             HandKiteValid = new List<string>();
             OilKiteValid = new List<string>();
             FlakKiteValid = new List<string>();

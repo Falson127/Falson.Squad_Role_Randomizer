@@ -50,16 +50,16 @@ namespace Falson.SquadRoleRandomizer
             };
             IDictionary<int, string> ArrayPos_to_PlayerNameDictionary = new Dictionary<int, string>()
             {
-                {0, RoleRandomizerMain.Player1Name.Value},
-                {1, RoleRandomizerMain.Player2Name.Value},
-                {2, RoleRandomizerMain.Player3Name.Value},
-                {3, RoleRandomizerMain.Player4Name.Value},
-                {4, RoleRandomizerMain.Player5Name.Value},
-                {5, RoleRandomizerMain.Player6Name.Value},
-                {6, RoleRandomizerMain.Player7Name.Value},
-                {7, RoleRandomizerMain.Player8Name.Value},
-                {8, RoleRandomizerMain.Player9Name.Value},
-                {9, RoleRandomizerMain.Player10Name.Value}
+                {0, RoleRandomizerMain.PlayerNames[0].Value},
+                {1, RoleRandomizerMain.PlayerNames[1].Value},
+                {2, RoleRandomizerMain.PlayerNames[2].Value},
+                {3, RoleRandomizerMain.PlayerNames[3].Value},
+                {4, RoleRandomizerMain.PlayerNames[4].Value},
+                {5, RoleRandomizerMain.PlayerNames[5].Value},
+                {6, RoleRandomizerMain.PlayerNames[6].Value},
+                {7, RoleRandomizerMain.PlayerNames[7].Value},
+                {8, RoleRandomizerMain.PlayerNames[8].Value},
+                {9, RoleRandomizerMain.PlayerNames[9].Value}
             };
             IDictionary<SettingEntry<bool>[], int> RolesArrays_to_ArrayListPosDictionary = new Dictionary<SettingEntry<bool>[], int>()
             {
