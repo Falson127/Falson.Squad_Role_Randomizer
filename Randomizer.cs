@@ -331,7 +331,7 @@ namespace Falson.Randomizer
         public static void GenerateOilKite()
         {
             Debug.WriteLine("Generating Oil Kite");
-            string selectedoilkite = falson.OilKiteValid[rand.Next(0, (falson.HandKiteValid.Count - 1))];
+            string selectedoilkite = falson.OilKiteValid[rand.Next(0, (falson.OilKiteValid.Count - 1))];
             foreach (List<string> list in OilKiteExclusivityBubble)
             {
                 if (list.Contains(selectedoilkite))
