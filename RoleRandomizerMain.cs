@@ -46,7 +46,7 @@ namespace Falson.SquadRoleRandomizer
         public static List<string> QadimKiteValid = new List<string>();
         public static List<string> SwordValid = new List<string>();
         public static List<string> ShieldValid = new List<string>();
-        public CounterBox[] CounterBoxes; //need 12 items in this
+        public static CounterBox[] CounterBoxes; //need 12 items in this
         public Label[] CounterBoxLabels;
         private StandardButton GenerateRolesButton;
         public SettingCollection InternalPlayerRolesSettings;
@@ -176,8 +176,9 @@ namespace Falson.SquadRoleRandomizer
 
         }
         private void GenerateRolesButton_Click(object sender, Blish_HUD.Input.MouseEventArgs e)
-        {
-            PrepareRoles.PrepRoles();
+        { 
+                //SuperDebugger.Debug();
+                PrepareRoles.PrepRoles();
         }
 
         protected override async Task LoadAsync()
