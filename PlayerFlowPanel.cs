@@ -9,9 +9,9 @@ using System.Windows.Forms;
 
 namespace Falson.SquadRoleRandomizer
 {
-    public class PlayerFlowPanel : FlowPanel
+    public class PlayerPanel : Blish_HUD.Controls.Panel
     {
-        public PlayerFlowPanel(string playerName, Container parent)
+        public PlayerPanel(string playerName, Container parent)
         {
             Title = playerName;
             Size = new Point(1050, 150);
@@ -19,7 +19,6 @@ namespace Falson.SquadRoleRandomizer
             ShowBorder = true;
             CanCollapse= true;
             Collapsed= true;
-            FlowDirection = ControlFlowDirection.LeftToRight;
         }
     
     }
