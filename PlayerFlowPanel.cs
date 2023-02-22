@@ -23,4 +23,5 @@ namespace Falson.SquadRoleRandomizer
         }
     
     }
+    public class CheckboxGridPanel : TableLayoutPanel
 }

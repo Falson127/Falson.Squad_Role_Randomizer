@@ -3,7 +3,6 @@ using Blish_HUD.Settings;
 using Microsoft.Xna.Framework;
 using System;
 using System.Windows.Forms;
-using System.Windows.Controls;
 
 namespace Falson.SquadRoleRandomizer
 {
@@ -20,24 +19,14 @@ namespace Falson.SquadRoleRandomizer
             _settingEntry = playerName;
             _flowPanel= linkedPanel;
         }
-        protected virtual void OnTextChanged(EventArgs) 
+        private void OnTextChanged(object sender, EventArgs e) 
         {
             if (this.Text == "")
-                {
-                    this.Text = "Enter Player Name...";
-                }
-                _flowPanel.Title = this.Text;
-                _settingEntry.Value = this.Text;
+            {
+                this.Text = "Enter Player Name";
+            }
+            _flowPanel.Title = this.Text;
+            _settingEntry.Value = this.Text;
         }
-
-        //protected override void TextChanged(EventArgs e) 
-        //{
-        //    if (this.Text == "")
-        //    {
-        //        this.Text = "Enter Player Name...";
-        //    }
-        //    _flowPanel.Title = this.Text;
-        //    _settingEntry.Value = this.Text;
-        //}
     }
 }
