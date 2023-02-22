@@ -46,7 +46,6 @@ namespace Falson.SquadRoleRandomizer
         public static List<string> QadimKiteValid = new List<string>();
         public static List<string> SwordValid = new List<string>();
         public static List<string> ShieldValid = new List<string>();
-        public static Label RandomizationOutputLabel;
         public CounterBox[] CounterBoxes; //need 12 items in this
         public Label[] CounterBoxLabels;
         private StandardButton GenerateRolesButton;
@@ -91,6 +90,7 @@ namespace Falson.SquadRoleRandomizer
         public TextBox Player10NameBox;
         public Panel PlayerNameTextBoxPanel;
         public FlowPanel MasterFlowPanel;
+        public static FlowPanel ResultsFlowPanel;
         public Panel RandomizeCheckboxesPanel = new Panel();
         public PlayerPanel[] PlayerPanels = new PlayerPanel[10];
         public Panel[] StandardRolesPanel = new Panel[10]; //5 items
@@ -198,12 +198,22 @@ namespace Falson.SquadRoleRandomizer
             {
                 Title = "Randomized Roles",
                 Parent = GameService.Graphics.SpriteScreen,
-                Size = new Point(450, 800),
+                //Size = new Point(450, 800),
+                HeightSizingMode = SizingMode.AutoSize,
+                WidthSizingMode = SizingMode.AutoSize,
                 Location = new Point(100, 100),
                 SavesPosition = true,
                 Id = "Falson.RoleRandomizer.ResultsWindow",
                 Emblem = ContentsManager.GetTexture("Emblem.png")
 
+            };
+            ResultsFlowPanel = new FlowPanel 
+            {
+                Location = new Point(0,0),
+                Parent = RandomizerResultsWindow,
+                FlowDirection = ControlFlowDirection.SingleTopToBottom,
+                HeightSizingMode = SizingMode.AutoSize,
+                WidthSizingMode = SizingMode.AutoSize
             };
             RolesWithNumbers = new Panel
             {
@@ -561,13 +571,6 @@ namespace Falson.SquadRoleRandomizer
             #endregion
             #region Labels
 
-            RandomizationOutputLabel = new Label 
-            {
-            Parent = RandomizerResultsWindow,
-            Location = new Point(0,0),
-            Size = new Point(375, 650),
-            VerticalAlignment = VerticalAlignment.Top
-            };
             IDictionary<int, int> CounterBoxLabel_X_PositionDictionary = new Dictionary<int, int> 
             {
                 {0, 0},
@@ -946,7 +949,6 @@ namespace Falson.SquadRoleRandomizer
             QadimKiteValid = null;
             SwordValid = null;
             ShieldValid = null;
-            RandomizationOutputLabel = null;
             CounterBoxesSettings = null;
             RolesToGenerate = null;
             HandKiteRoles = null;
