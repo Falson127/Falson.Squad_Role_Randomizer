@@ -281,9 +281,11 @@ namespace Falson.Randomizer
             //Finally we place a try statement to attempt to run method.Invoke for each Action in our GenerationActions List
             //if successful, all roles will be pulled. If an exception is thrown, it will be output to a log so I can determine
             //where the sanity checking failed and maybe bandaid the (hopefully very few) edge cases that arise
+            falson.ResultsFlowPanel.ClearChildren();
             RoleName_to_SelectedPlayer.Clear();
             HoTMechanic_to_SelectedPlayer.Clear();
             PoFMechanic_to_SelectedPlayer.Clear();
+
             try
             {
                 foreach (var item in GenerationFunctions) //Takes the final sequence that gets loaded into the actions list and invokes each of them in order. This step must come last!
@@ -293,7 +295,7 @@ namespace Falson.Randomizer
                 //output the results in RoleName_to_SelectedPlayer dictionary into the results window.
                 if (RoleName_to_SelectedPlayer.Count != 0)
                 {
-                    DynamicLabel1 = new Label[(RoleName_to_SelectedPlayer.Count + 1)];
+                    DynamicLabel1 = new Label[(RoleName_to_SelectedPlayer.Count + 2)];
                     DynamicLabel1[0] = new Label { Text = "Standard Roles:", Parent = falson.ResultsFlowPanel, AutoSizeHeight = true, AutoSizeWidth = true };
                     var RoleCounter = 1;
                     foreach (KeyValuePair<string, string> entry in RoleName_to_SelectedPlayer)
@@ -301,10 +303,11 @@ namespace Falson.Randomizer
                         DynamicLabel1[RoleCounter] = new Label { Text = entry.Value, Parent = falson.ResultsFlowPanel, AutoSizeHeight = true, AutoSizeWidth = true };
                         RoleCounter++;
                     }
+                    DynamicLabel1[RoleCounter] = new Label { Text = "", Parent = falson.ResultsFlowPanel, Height = 25, AutoSizeWidth = true };
                 }
                 if (HoTMechanic_to_SelectedPlayer.Count != 0)
                 {
-                    DynamicLabel2 = new Label[(HoTMechanic_to_SelectedPlayer.Count + 1)];
+                    DynamicLabel2 = new Label[(HoTMechanic_to_SelectedPlayer.Count + 2)];
                     DynamicLabel2[0] = new Label { Text = "HoT Mechanics:", Parent = falson.ResultsFlowPanel, AutoSizeHeight = true, AutoSizeWidth = true };
                     var HoTCounter = 1;
                     foreach (KeyValuePair<string,string> entry in HoTMechanic_to_SelectedPlayer)
@@ -312,10 +315,11 @@ namespace Falson.Randomizer
                         DynamicLabel2[HoTCounter] = new Label { Text = entry.Value, Parent = falson.ResultsFlowPanel, AutoSizeHeight = true, AutoSizeWidth = true };
                         HoTCounter++;
                     }
+                    DynamicLabel2[HoTCounter] = new Label { Text = "", Parent = falson.ResultsFlowPanel, Height = 25, AutoSizeWidth = true };
                 }
                 if (PoFMechanic_to_SelectedPlayer.Count != 0)
                 {
-                    DynamicLabel3 = new Label[(HoTMechanic_to_SelectedPlayer.Count + 1)];
+                    DynamicLabel3 = new Label[(HoTMechanic_to_SelectedPlayer.Count + 2)];
                     DynamicLabel3[0] = new Label { Text = "PoF Mechanics:", Parent = falson.ResultsFlowPanel, AutoSizeHeight = true, AutoSizeWidth = true };
                     var PoFCounter = 1;
                     foreach (KeyValuePair<string,string> entry in PoFMechanic_to_SelectedPlayer)
@@ -323,6 +327,7 @@ namespace Falson.Randomizer
                         DynamicLabel3[PoFCounter] = new Label { Text = entry.Value, Parent = falson.ResultsFlowPanel, AutoSizeHeight = true, AutoSizeWidth = true };
                         PoFCounter++;
                     }
+                    DynamicLabel3[PoFCounter] = new Label { Text = "", Parent = falson.ResultsFlowPanel, Height = 25, AutoSizeWidth = true };
                 }
                 falson.RandomizerResultsWindow.Show();
             }
@@ -332,7 +337,7 @@ namespace Falson.Randomizer
                 string Outputtext = "At least one role failed to generate.\nThis can happen if you don't have at least 1 player\nsigned up for each role you are trying to randomize.\nAnd in the case of roles with multiple players, make sure \nthere are at least the same number of players signed up \nas you selected to generate in the counter boxes." +
                     "\n\nIf this issue persists, then a list has been \ndepleted during generation due to certain roles inherently \nconflicting with others. " +
                     "try running the randomization again, \nand if the issue continues please reach out on the BlishHUD \nDiscord server.";
-                    new Label { Text = Outputtext, Parent = falson.ResultsFlowPanel,AutoSizeHeight = true, AutoSizeWidth = true };
+                    //new Label { Text = Outputtext, Parent = falson.ResultsFlowPanel,AutoSizeHeight = true, AutoSizeWidth = true };
 
                 falson.RandomizerResultsWindow.Show();
             }

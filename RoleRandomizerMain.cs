@@ -213,7 +213,8 @@ namespace Falson.SquadRoleRandomizer
                 Parent = RandomizerResultsWindow,
                 FlowDirection = ControlFlowDirection.SingleTopToBottom,
                 HeightSizingMode = SizingMode.AutoSize,
-                WidthSizingMode = SizingMode.AutoSize
+                WidthSizingMode = SizingMode.AutoSize,
+                CanScroll = true
             };
             RolesWithNumbers = new Panel
             {
