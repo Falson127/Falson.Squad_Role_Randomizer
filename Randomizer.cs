@@ -333,11 +333,12 @@ namespace Falson.Randomizer
             }
             catch (Exception ex)
             {
+                falson.ResultsFlowPanel.ClearChildren();
                 Logger.Error(ex, "One of the role lists was depleted of all names before its role could be generated. Send your settings.json file to @Falson in the Blish HUD Discord to examine this");
                 string Outputtext = "At least one role failed to generate.\nThis can happen if you don't have at least 1 player\nsigned up for each role you are trying to randomize.\nAnd in the case of roles with multiple players, make sure \nthere are at least the same number of players signed up \nas you selected to generate in the counter boxes." +
                     "\n\nIf this issue persists, then a list has been \ndepleted during generation due to certain roles inherently \nconflicting with others. " +
                     "try running the randomization again, \nand if the issue continues please reach out on the BlishHUD \nDiscord server.";
-                    //new Label { Text = Outputtext, Parent = falson.ResultsFlowPanel,AutoSizeHeight = true, AutoSizeWidth = true };
+                    var errorlabel = new Label { Text = Outputtext, Parent = falson.ResultsFlowPanel,AutoSizeHeight = true, AutoSizeWidth = true };
 
                 falson.RandomizerResultsWindow.Show();
             }
