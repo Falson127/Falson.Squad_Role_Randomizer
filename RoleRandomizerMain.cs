@@ -17,32 +17,31 @@ namespace Falson.SquadRoleRandomizer
     [Export(typeof(Blish_HUD.Modules.Module))]
     public class RoleRandomizerMain : Blish_HUD.Modules.Module
     {
-        public GridPanel testgridpanel;
         public static StandardWindow RandomizerResultsWindow;
         public static StandardWindow RandomizerSettingsWindow;
         private CornerIcon RandomizerSettingIcon;
-        public static List<string> HandKiteValid;
-        public static List<string> OilKiteValid;
-        public static List<string> FlakKiteValid;
-        public static List<string> TankValid;
-        public static List<string> HealAlacValid;
-        public static List<string> HealQuickValid;
-        public static List<string> DPSAlacValid;
-        public static List<string> DPSQuickValid;
-        public static List<string> MushroomValid;
-        public static List<string> TowerValid;
-        public static List<string> ReflectValid;
-        public static List<string> CannonValid;
-        public static List<string> ConstrucPusherValid;
-        public static List<string> LampValid;
-        public static List<string> PylonValid;
-        public static List<string> PillarValid;
-        public static List<string> GreenValid;
-        public static List<string> SoullessPusherValid;
-        public static List<string> DhuumKiteValid;
-        public static List<string> QadimKiteValid;
-        public static List<string> SwordValid;
-        public static List<string> ShieldValid;
+        public static List<string> HandKiteValid = new List<string>();
+        public static List<string> OilKiteValid = new List<string>();
+        public static List<string> FlakKiteValid = new List<string>();
+        public static List<string> TankValid = new List<string>();
+        public static List<string> HealAlacValid = new List<string>();
+        public static List<string> HealQuickValid = new List<string>();
+        public static List<string> DPSAlacValid = new List<string>();
+        public static List<string> DPSQuickValid = new List<string>();
+        public static List<string> MushroomValid = new List<string>();
+        public static List<string> TowerValid = new List<string>();
+        public static List<string> ReflectValid = new List<string>();
+        public static List<string> CannonValid = new List<string>();
+        public static List<string> ConstrucPusherValid = new List<string>();
+        public static List<string> LampValid = new List<string>();
+        public static List<string> PylonValid = new List<string>();
+        public static List<string> PillarValid = new List<string>();
+        public static List<string> GreenValid = new List<string>();
+        public static List<string> SoullessPusherValid = new List<string>();
+        public static List<string> DhuumKiteValid = new List<string>();
+        public static List<string> QadimKiteValid = new List<string>();
+        public static List<string> SwordValid = new List<string>();
+        public static List<string> ShieldValid = new List<string>();
         public static Label RandomizationOutputLabel;
         public CounterBox[] CounterBoxes; //need 12 items in this
         public Label[] CounterBoxLabels;
@@ -50,30 +49,29 @@ namespace Falson.SquadRoleRandomizer
         public SettingCollection InternalPlayerRolesSettings;
         public static SettingEntry<int>[]  CounterBoxesSettings = new SettingEntry<int>[12];
         public static SettingEntry<bool>[] RolesToGenerate = new SettingEntry<bool>[22];
-        public static SettingEntry<bool>[] HandKiteRoles;
-        public static SettingEntry<bool>[] OilKiteRoles;
-        public static SettingEntry<bool>[] FlakKiteRoles;
-        public static SettingEntry<bool>[] TankRoles;
-        public static SettingEntry<bool>[] HealAlacRoles;
-        public static SettingEntry<bool>[] HealQuickRoles;
-        public static SettingEntry<bool>[] DPSAlacRoles;
-        public static SettingEntry<bool>[] DPSQuickRoles;
-        public static SettingEntry<bool>[] MushroomRoles;
-        public static SettingEntry<bool>[] TowerRoles;
-        public static SettingEntry<bool>[] ReflectRoles;
-        public static SettingEntry<bool>[] CannonRoles;
-        public static SettingEntry<bool>[] ConstrucPusherRoles;
-        public static SettingEntry<bool>[] LampRoles;
-        public static SettingEntry<bool>[] PylonRoles;
-        public static SettingEntry<bool>[] PillarRoles;
-        public static SettingEntry<bool>[] GreenRoles;
-        public static SettingEntry<bool>[] SoullessPusherRoles;
-        public static SettingEntry<bool>[] DhuumKiteRoles;
-        public static SettingEntry<bool>[] QadimKiteRoles;
-        public static SettingEntry<bool>[] SwordRoles;
-        public static SettingEntry<bool>[] ShieldRoles;
+        public static SettingEntry<bool>[] HandKiteRoles = new SettingEntry<bool>[10];
+        public static SettingEntry<bool>[] OilKiteRoles = new SettingEntry<bool>[10];
+        public static SettingEntry<bool>[] FlakKiteRoles = new SettingEntry<bool>[10];
+        public static SettingEntry<bool>[] TankRoles = new SettingEntry<bool>[10];
+        public static SettingEntry<bool>[] HealAlacRoles = new SettingEntry<bool>[10];
+        public static SettingEntry<bool>[] HealQuickRoles = new SettingEntry<bool>[10];
+        public static SettingEntry<bool>[] DPSAlacRoles = new SettingEntry<bool>[10];
+        public static SettingEntry<bool>[] DPSQuickRoles = new SettingEntry<bool>[10];
+        public static SettingEntry<bool>[] MushroomRoles = new SettingEntry<bool>[10];
+        public static SettingEntry<bool>[] TowerRoles = new SettingEntry<bool>[10];
+        public static SettingEntry<bool>[] ReflectRoles = new SettingEntry<bool>[10];
+        public static SettingEntry<bool>[] CannonRoles = new SettingEntry<bool>[10];
+        public static SettingEntry<bool>[] ConstrucPusherRoles = new SettingEntry<bool>[10];
+        public static SettingEntry<bool>[] LampRoles = new SettingEntry<bool>[10];
+        public static SettingEntry<bool>[] PylonRoles = new SettingEntry<bool>[10];
+        public static SettingEntry<bool>[] PillarRoles = new SettingEntry<bool>[10];
+        public static SettingEntry<bool>[] GreenRoles = new SettingEntry<bool>[10];
+        public static SettingEntry<bool>[] SoullessPusherRoles = new SettingEntry<bool>[10];
+        public static SettingEntry<bool>[] DhuumKiteRoles = new SettingEntry<bool>[10];
+        public static SettingEntry<bool>[] QadimKiteRoles = new SettingEntry<bool>[10];
+        public static SettingEntry<bool>[] SwordRoles = new SettingEntry<bool>[10];
+        public static SettingEntry<bool>[] ShieldRoles = new SettingEntry<bool>[10];
         public static SettingEntry<string>[] PlayerNames = new SettingEntry<string>[10];
-
         public List<CustomCheckbox[]> ListofCheckboxArrays;
         public List<SettingEntry<bool>[]> ListofRolesSettings;
         public static List<List<string>> ListofRoleValidLists;
@@ -166,148 +164,41 @@ namespace Falson.SquadRoleRandomizer
             InternalPlayerRolesSettings.RenderInUi = false;
             for (int i = 0; i < 12; i++)
             {
-                CounterBoxesSettings[i] = InternalPlayerRolesSettings.DefineSetting("Counter Box " + (i+1) + "setting", 1);
+                CounterBoxesSettings[i] = InternalPlayerRolesSettings.DefineSetting($"Counter Box {i+1} setting", 1);
             }
             for (int i = 0; i < 22; i++)
             {
-                RolesToGenerate[i] = InternalPlayerRolesSettings.DefineSetting("Role to Generate " + (i+1), false);
+                RolesToGenerate[i] = InternalPlayerRolesSettings.DefineSetting($"Role to Generate{i+1} ", false);
             }
             for (int i = 0; i < 10; i++)
             {
+                //Build role settings + Playername settings
+                HandKiteRoles[i] = InternalPlayerRolesSettings.DefineSetting($"Hand_Kite Player {i+1}" , false);
+                OilKiteRoles[i] = InternalPlayerRolesSettings.DefineSetting($"OilKite Player {i+1}" , false);
+                FlakKiteRoles[i] = InternalPlayerRolesSettings.DefineSetting($"FlakKite Player {i+1}" , false);
+                TankRoles[i] = InternalPlayerRolesSettings.DefineSetting($"Tank Player {i+1}" , false);
+                HealAlacRoles[i] = InternalPlayerRolesSettings.DefineSetting($"HealAlac Player {i+1}" , false);
+                HealQuickRoles[i] = InternalPlayerRolesSettings.DefineSetting($"HealQuick Player {i+1}" , false);
+                DPSAlacRoles[i] = InternalPlayerRolesSettings.DefineSetting($"DPSAlac Player {i+1}" , false);
+                DPSQuickRoles[i] = InternalPlayerRolesSettings.DefineSetting($"DPSQuick Player {i+1}" , false);
+                MushroomRoles[i] = InternalPlayerRolesSettings.DefineSetting($"Mushroom Player {i+1}" , false);
+                TowerRoles[i] = InternalPlayerRolesSettings.DefineSetting($"Tower Player {i+1}" , false);
+                ReflectRoles[i] = InternalPlayerRolesSettings.DefineSetting($"Reflect Player {i+1}" , false);
+                CannonRoles[i] = InternalPlayerRolesSettings.DefineSetting($"Cannon Player {i+1}" , false);
+                ConstrucPusherRoles[i] = InternalPlayerRolesSettings.DefineSetting($"ConstrucPusher Player {i+1}" , false);
+                LampRoles[i] = InternalPlayerRolesSettings.DefineSetting($"Lamp Player {i+1}" , false);
+                PylonRoles[i] = InternalPlayerRolesSettings.DefineSetting($"Pylon Player {i+1}" , false);
+                PillarRoles[i] = InternalPlayerRolesSettings.DefineSetting($"Pillar Player {i+1}" , false);
+                GreenRoles[i] = InternalPlayerRolesSettings.DefineSetting($"Green Player {i+1}" , false);
+                SoullessPusherRoles[i] = InternalPlayerRolesSettings.DefineSetting($"SoullessPusher Player {i+1}" , false);
+                DhuumKiteRoles[i] = InternalPlayerRolesSettings.DefineSetting($"DhuumKite Player {i+1}" , false);
+                QadimKiteRoles[i] = InternalPlayerRolesSettings.DefineSetting($"QadimKite Player {i+1}" , false);
+                SwordRoles[i] = InternalPlayerRolesSettings.DefineSetting($"Sword Player {i+1}" , false);
+                ShieldRoles[i] = InternalPlayerRolesSettings.DefineSetting($"Shield Player {i+1}" , false);
                 PlayerNames[i] = InternalPlayerRolesSettings.DefineSetting($"Player {i} Name", $"Player {i}");
+
             }
-            HandKiteValid = new List<string>();
-            OilKiteValid = new List<string>();
-            FlakKiteValid = new List<string>();
-            TankValid = new List<string>();
-            HealAlacValid = new List<string>();
-            HealQuickValid = new List<string>();
-            DPSAlacValid = new List<string>();
-            DPSQuickValid = new List<string>();
-            MushroomValid = new List<string>();
-            TowerValid = new List<string>();
-            ReflectValid = new List<string>();
-            CannonValid = new List<string>();
-            ConstrucPusherValid = new List<string>();
-            LampValid = new List<string>();
-            PylonValid = new List<string>();
-            PillarValid = new List<string>();
-            GreenValid = new List<string>();
-            SoullessPusherValid = new List<string>();
-            DhuumKiteValid = new List<string>();
-            QadimKiteValid = new List<string>();
-            SwordValid = new List<string>();
-            ShieldValid = new List<string>();
-            HandKiteRoles = new SettingEntry<bool>[10];
-            for (int i = 0; i < 10; i++)
-            {
-                HandKiteRoles[i] = InternalPlayerRolesSettings.DefineSetting("Hand_Kite Player" + (i + 1).ToString(), false);
-            }
-            OilKiteRoles = new SettingEntry<bool>[10];
-            for (int i = 0; i < 10; i++)
-            {
-                OilKiteRoles[i] = InternalPlayerRolesSettings.DefineSetting("OilKite Player" + (i + 1).ToString(), false);
-            }
-            FlakKiteRoles = new SettingEntry<bool>[10];
-            for (int i = 0; i < 10; i++)
-            {
-                FlakKiteRoles[i] = InternalPlayerRolesSettings.DefineSetting("FlakKite Player" + (i + 1).ToString(), false);
-            }
-            TankRoles = new SettingEntry<bool>[10];
-            for (int i = 0; i < 10; i++)
-            {
-                TankRoles[i] = InternalPlayerRolesSettings.DefineSetting("Tank Player" + (i + 1).ToString(), false);
-            }
-            HealAlacRoles = new SettingEntry<bool>[10];
-            for (int i = 0; i < 10; i++)
-            {
-                HealAlacRoles[i] = InternalPlayerRolesSettings.DefineSetting("HealAlac Player" + (i + 1).ToString(), false);
-            }
-            HealQuickRoles = new SettingEntry<bool>[10];
-            for (int i = 0; i < 10; i++)
-            {
-                HealQuickRoles[i] = InternalPlayerRolesSettings.DefineSetting("HealQuick Player" + (i + 1).ToString(), false);
-            }
-            DPSAlacRoles = new SettingEntry<bool>[10];
-            for (int i = 0; i < 10; i++)
-            {
-                DPSAlacRoles[i] = InternalPlayerRolesSettings.DefineSetting("DPSAlac Player" + (i + 1).ToString(), false);
-            }
-            DPSQuickRoles = new SettingEntry<bool>[10];
-            for (int i = 0; i < 10; i++)
-            {
-                DPSQuickRoles[i] = InternalPlayerRolesSettings.DefineSetting("DPSQuick Player" + (i + 1).ToString(), false);
-            }
-            MushroomRoles = new SettingEntry<bool>[10];
-            for (int i = 0; i < 10; i++)
-            {
-                MushroomRoles[i] = InternalPlayerRolesSettings.DefineSetting("Mushroom Player" + (i + 1).ToString(), false);
-            }
-            TowerRoles = new SettingEntry<bool>[10];
-            for (int i = 0; i < 10; i++)
-            {
-                TowerRoles[i] = InternalPlayerRolesSettings.DefineSetting("Tower Player" + (i + 1).ToString(), false);
-            }
-            ReflectRoles = new SettingEntry<bool>[10];
-            for (int i = 0; i < 10; i++)
-            {
-                ReflectRoles[i] = InternalPlayerRolesSettings.DefineSetting("Reflect Player" + (i + 1).ToString(), false);
-            }
-            CannonRoles = new SettingEntry<bool>[10];
-            for (int i = 0; i < 10; i++)
-            {
-                CannonRoles[i] = InternalPlayerRolesSettings.DefineSetting("Cannon Player" + (i + 1).ToString(), false);
-            }
-            ConstrucPusherRoles = new SettingEntry<bool>[10];
-            for (int i = 0; i < 10; i++)
-            {
-                ConstrucPusherRoles[i] = InternalPlayerRolesSettings.DefineSetting("ConstrucPusher Player" + (i + 1).ToString(), false);
-            }
-            LampRoles = new SettingEntry<bool>[10];
-            for (int i = 0; i < 10; i++)
-            {
-                LampRoles[i] = InternalPlayerRolesSettings.DefineSetting("Lamp Player" + (i + 1).ToString(), false);
-            }
-            PylonRoles = new SettingEntry<bool>[10];
-            for (int i = 0; i < 10; i++)
-            {
-                PylonRoles[i] = InternalPlayerRolesSettings.DefineSetting("Pylon Player" + (i + 1).ToString(), false);
-            }
-            PillarRoles = new SettingEntry<bool>[10];
-            for (int i = 0; i < 10; i++)
-            {
-                PillarRoles[i] = InternalPlayerRolesSettings.DefineSetting("Pillar Player" + (i + 1).ToString(), false);
-            }
-            GreenRoles = new SettingEntry<bool>[10];
-            for (int i = 0; i < 10; i++)
-            {
-                GreenRoles[i] = InternalPlayerRolesSettings.DefineSetting("Green Player" + (i + 1).ToString(), false);
-            }
-            SoullessPusherRoles = new SettingEntry<bool>[10];
-            for (int i = 0; i < 10; i++)
-            {
-                SoullessPusherRoles[i] = InternalPlayerRolesSettings.DefineSetting("SoullessPusher Player" + (i + 1).ToString(), false);
-            }
-            DhuumKiteRoles = new SettingEntry<bool>[10];
-            for (int i = 0; i < 10; i++)
-            {
-                DhuumKiteRoles[i] = InternalPlayerRolesSettings.DefineSetting("DhuumKite Player" + (i + 1).ToString(), false);
-            }
-            QadimKiteRoles = new SettingEntry<bool>[10];
-            for (int i = 0; i < 10; i++)
-            {
-                QadimKiteRoles[i] = InternalPlayerRolesSettings.DefineSetting("QadimKite Player" + (i + 1).ToString(), false);
-            }
-            SwordRoles = new SettingEntry<bool>[10];
-            for (int i = 0; i < 10; i++)
-            {
-                SwordRoles[i] = InternalPlayerRolesSettings.DefineSetting("Sword Player" + (i + 1).ToString(), false);
-            }
-            ShieldRoles = new SettingEntry<bool>[10];
-            for (int i = 0; i < 10; i++)
-            {
-                ShieldRoles[i] = InternalPlayerRolesSettings.DefineSetting("Shield Player" + (i + 1).ToString(), false);
-            }
+
         }
         private void GenerateRolesButton_Click(object sender, Blish_HUD.Input.MouseEventArgs e)
         {
@@ -589,245 +480,29 @@ namespace Falson.SquadRoleRandomizer
 
             for (int i = 0; i < 10; i++)
             {
-                HandKiteBoxArray[i] = new CustomCheckbox(HandKiteRoles[i]) 
-                {
-                    Text = "Hand Kite",
-                    Location = new Point(0,0),
-                    BasicTooltipText = "Hand Kite",
-                    Parent = HoTPannelArray[i],
-                    Checked = HandKiteRoles[i].Value
-                };
-            }
-            for (int i = 0; i < 10; i++)
-            {
-                OilKiteBoxArray[i] = new CustomCheckbox(OilKiteRoles[i])
-                {
-                    Text = "Oil Kite",
-                    Location = new Point(100,0),
-                    BasicTooltipText = "Oil Kite",
-                    Parent = HoTPannelArray[i],
-                    Checked = OilKiteRoles[i].Value
-                };
-            }
-            for (int i = 0; i < 10; i++)
-            {
-                FlakKiteBoxArray[i] = new CustomCheckbox(FlakKiteRoles[i])
-                {
-                    Text = "Flak Kite",
-                    Location = new Point(200,0),
-                    BasicTooltipText = "Flak Kite",
-                    Parent = HoTPannelArray[i],
-                    Checked = FlakKiteRoles[i].Value
-                };
-            }
-            for (int i = 0; i < 10; i++)
-            {
-                TankBoxArray[i] = new CustomCheckbox(TankRoles[i]) 
-                {
-                    Text = "Tank",
-                    Location = new Point(300, 0),
-                    BasicTooltipText = "Tank",
-                    Parent = HoTPannelArray[i],
-                    Checked = TankRoles[i].Value
-                };
-            }
-            for (int i = 0; i < 10; i++)
-            {
-                HealAlacBoxArray[i] = new CustomCheckbox(HealAlacRoles[i])
-                {
-                    Text = "Heal + Alac",
-                    Location = new Point(400,0),
-                    BasicTooltipText = "Heal + Alac",
-                    Parent = HoTPannelArray[i],
-                    Checked = HealAlacRoles[i].Value
-                };
-            }
-            for (int i = 0; i < 10; i++)
-            {
-                HealQuickBoxArray[i] = new CustomCheckbox(HealQuickRoles[i])
-                {
-                    Text = "Heal + Quick",
-                    Location = new Point(0, 50),
-                    BasicTooltipText = "Heal + Quick",
-                    Parent = HoTPannelArray[i],
-                    Checked = HealQuickRoles[i].Value
-                };
-            }
-            for (int i = 0; i < 10; i++)
-            {
-                DPSAlacBoxArray[i] = new CustomCheckbox(DPSAlacRoles[i])
-                {
-                    Text = "DPS + Alac",
-                    Location = new Point(100,50),
-                    BasicTooltipText = "DPS + Alac",
-                    Parent = HoTPannelArray[i],
-                    Checked = DPSAlacRoles[i].Value
-                };
-            }
-            for (int i = 0; i < 10; i++)
-            {
-                DPSQuickBoxArray[i] = new CustomCheckbox(DPSQuickRoles[i])
-                {
-                    Text = "DPS + Quick",
-                    Location = new Point(200,50),
-                    BasicTooltipText = "DPS + Quick",
-                    Parent = HoTPannelArray[i],
-                    Checked = DPSQuickRoles[i].Value
-                };
-            }
-            for (int i = 0; i < 10; i++)
-            {
-                MushroomBoxArray[i] = new CustomCheckbox(MushroomRoles[i])
-                {
-                    Text = "Slothosaur Mushroom",
-                    Location = new Point(300, 50),
-                    BasicTooltipText = "Slothosaur Mushroom",
-                    Parent = HoTPannelArray[i],
-                    Checked = MushroomRoles[i].Value
-                };
-            }
-            for (int i = 0; i < 10; i++)
-            {
-                TowerBoxArray[i] = new CustomCheckbox(TowerRoles[i])
-                {
-                    Text = "Tower Mesmer",
-                    Location = new Point(400, 50),
-                    BasicTooltipText = "Tower Mesmer",
-                    Parent = HoTPannelArray[i],
-                    Checked = TowerRoles[i].Value
-                };
-            }
-            for (int i = 0; i < 10; i++)
-            {
-                ReflectBoxArray[i] = new CustomCheckbox(ReflectRoles[i])
-                {
-                    Text = "Matthias Reflect",
-                    Location = new Point(0, 100),
-                    BasicTooltipText = "Matthias Reflect",
-                    Parent = HoTPannelArray[i],
-                    Checked = ReflectRoles[i].Value
-                };
-            }
-            for (int i = 0; i < 10; i++)
-            {
-                CannonBoxArray[i] = new CustomCheckbox(CannonRoles[i])
-                {
-                    Text = "Sabetha Cannons",
-                    Location = new Point(100,100),
-                    BasicTooltipText = "Sabetha Cannons",
-                    Parent = HoTPannelArray[i],
-                    Checked = CannonRoles[i].Value
-                };
-            }
-            for (int i = 0; i < 10; i++)
-            {
-                ConstrucPusherBoxArray[i] = new CustomCheckbox(ConstrucPusherRoles[i])
-                {
-                    Text = "Keep Construct Pusher",
-                    Location = new Point(200, 100),
-                    BasicTooltipText = "Keep Construct Pusher",
-                    Parent = HoTPannelArray[i],
-                    Checked = ConstrucPusherRoles[i].Value
-                };
-            }
-            for (int i = 0; i < 10; i++)
-            {
-                LampBoxArray[i] = new CustomCheckbox(LampRoles[i])
-                {
-                    Text = "Qadim Lamp",
-                    Location = new Point(0,0),
-                    BasicTooltipText = "Qadim Lamp",
-                    Parent = PoFPannelArray[i],
-                    Checked = LampRoles[i].Value
-                };
-            }
-            for (int i = 0; i < 10; i++)
-            {
-                PylonBoxArray[i] = new CustomCheckbox(PylonRoles[i])
-                {
-                    Text = "Qadim Pylon",
-                    Location = new Point(100,0),
-                    BasicTooltipText = "Qadim Pylon",
-                    Parent = PoFPannelArray[i],
-                    Checked = PylonRoles[i].Value
-                };
-            }
-            for (int i = 0; i < 10; i++)
-            {
-                PillarBoxArray[i] = new CustomCheckbox(PillarRoles[i])
-                {
-                    Text = "Adina Pillar",
-                    Location = new Point(200,0),
-                    BasicTooltipText = "Adina Pillar",
-                    Parent = PoFPannelArray[i],
-                    Checked = PillarRoles[i].Value
-                };
-            }
-            for (int i = 0; i < 10; i++)
-            {
-                GreenBoxArray[i] = new CustomCheckbox(GreenRoles[i])
-                {
-                    Text = "Dhuum Green",
-                    Location = new Point(300,0),
-                    BasicTooltipText = "Dhuum Green",
-                    Parent = PoFPannelArray[i],
-                    Checked = GreenRoles[i].Value
-                };
-            }
-            for (int i = 0; i < 10; i++)
-            {
-                SoullessPusherBoxArray[i] = new CustomCheckbox(SoullessPusherRoles[i])
-                {
-                    Text = "Soulless Horror Pusher",
-                    Location = new Point(400,0),
-                    BasicTooltipText = "Soulless Horror Pusher",
-                    Parent = PoFPannelArray[i],
-                    Checked = SoullessPusherRoles[i].Value
-                };
-            }
-            for (int i = 0; i < 10; i++)
-            {
-                DhuumKiteBoxArray[i] = new CustomCheckbox(DhuumKiteRoles[i])
-                {
-                    Text = "Dhuum Messenger Kiter",
-                    Location = new Point(0,50),
-                    BasicTooltipText = "Dhuum Messenger Kiter",
-                    Parent = PoFPannelArray[i],
-                    Checked = DhuumKiteRoles[i].Value
-                };
-            }
-            for (int i = 0; i < 10; i++)
-            {
-                QadimKiteBoxArray[i] = new CustomCheckbox(QadimKiteRoles[i])
-                {
-                    Text = "Qadim Kiter",
-                    Location = new Point(100,50),
-                    BasicTooltipText = "Qadim Kiter",
-                    Parent = PoFPannelArray[i],
-                    Checked = QadimKiteRoles[i].Value
-                };
-            }
-            for (int i = 0; i < 10; i++)
-            {
-                SwordBoxArray[i] = new CustomCheckbox(SwordRoles[i])
-                {
-                    Text = "CA Sword Collector",
-                    Location = new Point(200,50),
-                    BasicTooltipText = "CA Sword Collector",
-                    Parent = PoFPannelArray[i],
-                    Checked = SwordRoles[i].Value
-                };
-            }
-            for (int i = 0; i < 10; i++)
-            {
-                ShieldBoxArray[i] = new CustomCheckbox(ShieldRoles[i])
-                {
-                    Text = "CA Shield Collector",
-                    Location = new Point(300, 50),
-                    BasicTooltipText = "CA Shield Collector",
-                    Parent = PoFPannelArray[i],
-                    Checked = ShieldRoles[i].Value
-                };
+                HandKiteBoxArray[i] = new CustomCheckbox(HandKiteRoles[i]) { Text = "Hand Kite", Location = new Point(0,0), BasicTooltipText = "Hand Kite", Parent = HoTPannelArray[i], Checked = HandKiteRoles[i].Value };
+                OilKiteBoxArray[i] = new CustomCheckbox(OilKiteRoles[i]) { Text = "Oil Kite", Location = new Point(100, 0), BasicTooltipText = "Oil Kite", Parent = HoTPannelArray[i], Checked = OilKiteRoles[i].Value };
+                FlakKiteBoxArray[i] = new CustomCheckbox(FlakKiteRoles[i]) { Text = "Flak Kite", Location = new Point(200, 0), BasicTooltipText = "Flak Kite", Parent = HoTPannelArray[i], Checked = FlakKiteRoles[i].Value };
+                TankBoxArray[i] = new CustomCheckbox(TankRoles[i]) { Text = "Tank", Location = new Point(300, 0), BasicTooltipText = "Tank", Parent = HoTPannelArray[i], Checked = TankRoles[i].Value };
+                HealAlacBoxArray[i] = new CustomCheckbox(HealAlacRoles[i]) { Text = "Heal + Alac", Location = new Point(400, 0), BasicTooltipText = "Heal + Alac", Parent = HoTPannelArray[i], Checked = HealAlacRoles[i].Value };
+                HealQuickBoxArray[i] = new CustomCheckbox(HealQuickRoles[i]) { Text = "Heal + Quick", Location = new Point(0, 50), BasicTooltipText = "Heal + Quick", Parent = HoTPannelArray[i], Checked = HealQuickRoles[i].Value };
+                DPSAlacBoxArray[i] = new CustomCheckbox(DPSAlacRoles[i]) { Text = "DPS + Alac", Location = new Point(100, 50), BasicTooltipText = "DPS + Alac", Parent = HoTPannelArray[i], Checked = DPSAlacRoles[i].Value };
+                DPSQuickBoxArray[i] = new CustomCheckbox(DPSQuickRoles[i]) { Text = "DPS + Quick", Location = new Point(200, 50), BasicTooltipText = "DPS + Quick", Parent = HoTPannelArray[i], Checked = DPSQuickRoles[i].Value };
+                MushroomBoxArray[i] = new CustomCheckbox(MushroomRoles[i]) { Text = "Slothosaur Mushroom", Location = new Point(300, 50), BasicTooltipText = "Slothosaur Mushroom", Parent = HoTPannelArray[i], Checked = MushroomRoles[i].Value };
+                TowerBoxArray[i] = new CustomCheckbox(TowerRoles[i]) { Text = "Tower Mesmer", Location = new Point(400, 50), BasicTooltipText = "Tower Mesmer", Parent = HoTPannelArray[i], Checked = TowerRoles[i].Value };
+                ReflectBoxArray[i] = new CustomCheckbox(ReflectRoles[i]) { Text = "Matthias Reflect", Location = new Point(0, 100), BasicTooltipText = "Matthias Reflect", Parent = HoTPannelArray[i], Checked = ReflectRoles[i].Value };
+                CannonBoxArray[i] = new CustomCheckbox(CannonRoles[i]) { Text = "Sabetha Cannons", Location = new Point(100, 100), BasicTooltipText = "Sabetha Cannons", Parent = HoTPannelArray[i], Checked = CannonRoles[i].Value };
+                ConstrucPusherBoxArray[i] = new CustomCheckbox(ConstrucPusherRoles[i]) { Text = "Keep Construct Pusher", Location = new Point(200, 100), BasicTooltipText = "Keep Construct Pusher", Parent = HoTPannelArray[i], Checked = ConstrucPusherRoles[i].Value };
+                LampBoxArray[i] = new CustomCheckbox(LampRoles[i]) { Text = "Qadim Lamp", Location = new Point(0, 0), BasicTooltipText = "Qadim Lamp", Parent = PoFPannelArray[i], Checked = LampRoles[i].Value };
+                PylonBoxArray[i] = new CustomCheckbox(PylonRoles[i]) { Text = "Qadim Pylon", Location = new Point(100, 0), BasicTooltipText = "Qadim Pylon", Parent = PoFPannelArray[i], Checked = PylonRoles[i].Value };
+                PillarBoxArray[i] = new CustomCheckbox(PillarRoles[i]) { Text = "Adina Pillar", Location = new Point(200, 0), BasicTooltipText = "Adina Pillar", Parent = PoFPannelArray[i], Checked = PillarRoles[i].Value };
+                GreenBoxArray[i] = new CustomCheckbox(GreenRoles[i]) { Text = "Dhuum Green", Location = new Point(300, 0), BasicTooltipText = "Dhuum Green", Parent = PoFPannelArray[i], Checked = GreenRoles[i].Value };
+                SoullessPusherBoxArray[i] = new CustomCheckbox(SoullessPusherRoles[i]) { Text = "Soulless Horror Pusher", Location = new Point(400, 0), BasicTooltipText = "Soulless Horror Pusher", Parent = PoFPannelArray[i], Checked = SoullessPusherRoles[i].Value };
+                DhuumKiteBoxArray[i] = new CustomCheckbox(DhuumKiteRoles[i]) { Text = "Dhuum Messenger Kiter", Location = new Point(0, 50), BasicTooltipText = "Dhuum Messenger Kiter", Parent = PoFPannelArray[i], Checked = DhuumKiteRoles[i].Value };
+                QadimKiteBoxArray[i] = new CustomCheckbox(QadimKiteRoles[i]) { Text = "Qadim Kiter", Location = new Point(100, 50), BasicTooltipText = "Qadim Kiter", Parent = PoFPannelArray[i], Checked = QadimKiteRoles[i].Value };
+                SwordBoxArray[i] = new CustomCheckbox(SwordRoles[i]) { Text = "CA Sword Collector", Location = new Point(200, 50), BasicTooltipText = "CA Sword Collector", Parent = PoFPannelArray[i], Checked = SwordRoles[i].Value };
+                ShieldBoxArray[i] = new CustomCheckbox(ShieldRoles[i]) { Text = "CA Shield Collector", Location = new Point(300, 50), BasicTooltipText = "CA Shield Collector", Parent = PoFPannelArray[i], Checked = ShieldRoles[i].Value };
+
             }
             IDictionary<int, string> RandomizeSelectionBoxesInt_to_StringDictionary = new Dictionary<int, string> 
             {
@@ -1154,7 +829,7 @@ namespace Falson.SquadRoleRandomizer
         private void Player10NameBox_TextChanged(object sender, EventArgs e)
         {
             Player10FlowPanel.Title = Player10NameBox.Text;
-            Player10Name.Value = Player10NameBox.Text;
+            PlayerNames[9].Value = Player10NameBox.Text;
             if (Player10NameBox.Text == "") 
             {
                 Player10NameBox.Text = "Enter Player Name...";
@@ -1165,7 +840,7 @@ namespace Falson.SquadRoleRandomizer
         private void Player9NameBox_TextChanged(object sender, EventArgs e)
         {
             Player9FlowPanel.Title = Player9NameBox.Text;
-            Player9Name.Value = Player9NameBox.Text;
+            PlayerNames[8].Value = Player9NameBox.Text;
             if(Player9NameBox.Text == "") 
             {
                 Player9NameBox.Text = "Enter Player Name...";
@@ -1175,7 +850,7 @@ namespace Falson.SquadRoleRandomizer
         private void Player8NameBox_TextChanged(object sender, EventArgs e)
         {
             Player8FlowPanel.Title = Player8NameBox.Text;
-            Player8Name.Value = Player8NameBox.Text;
+            PlayerNames[7].Value = Player8NameBox.Text;
             if(Player8NameBox.Text == "") 
             {
                 Player8NameBox.Text = "Enter Player Name...";
@@ -1185,7 +860,7 @@ namespace Falson.SquadRoleRandomizer
         private void Player7NameBox_TextChanged(object sender, EventArgs e)
         {
             Player7FlowPanel.Title = Player7NameBox.Text;
-            Player7Name.Value = Player7NameBox.Text;
+            PlayerNames[6].Value = Player7NameBox.Text;
             if(Player7NameBox.Text == "") 
             {
                 Player7NameBox.Text = "Enter Player Name...";
@@ -1195,7 +870,7 @@ namespace Falson.SquadRoleRandomizer
         private void Player6NameBox_TextChanged(object sender, EventArgs e)
         {
             Player6FlowPanel.Title = Player6NameBox.Text;
-            Player6Name.Value = Player6NameBox.Text;
+            PlayerNames[5].Value = Player6NameBox.Text;
             if(Player6NameBox.Text == "") 
             {
                 Player6NameBox.Text = "Enter Player Name...";
@@ -1205,7 +880,7 @@ namespace Falson.SquadRoleRandomizer
         private void Player5NameBox_TextChanged(object sender, EventArgs e)
         {
             Player5FlowPanel.Title = Player5NameBox.Text;
-            Player5Name.Value = Player5NameBox.Text;
+            PlayerNames[4].Value = Player5NameBox.Text;
             if(Player5NameBox.Text == "") 
             {
                 Player5NameBox.Text = "Enter Player Name...";
@@ -1215,7 +890,7 @@ namespace Falson.SquadRoleRandomizer
         private void Player4NameBox_TextChanged(object sender, EventArgs e)
         {
             Player4FlowPanel.Title = Player4NameBox.Text;
-            Player4Name.Value = Player4NameBox.Text;
+            PlayerNames[3].Value = Player4NameBox.Text;
             if(Player4NameBox.Text == "") 
             {
                 Player4NameBox.Text = "Enter Player Name...";
@@ -1225,7 +900,7 @@ namespace Falson.SquadRoleRandomizer
         private void Player3NameBox_TextChanged(object sender, EventArgs e)
         {
             Player3FlowPanel.Title = Player3NameBox.Text;
-            Player3Name.Value = Player3NameBox.Text;
+            PlayerNames[2].Value = Player3NameBox.Text;
             if(Player3NameBox.Text == "") 
             {
                 Player3NameBox.Text = "Enter Player Name...";
@@ -1235,7 +910,7 @@ namespace Falson.SquadRoleRandomizer
         private void Player2NameBox_TextChanged(object sender, EventArgs e)
         {
             Player2FlowPanel.Title = Player2NameBox.Text;
-            Player2Name.Value = Player2NameBox.Text;
+            PlayerNames[1].Value = Player2NameBox.Text;
             if(Player2NameBox.Text == "") 
             {
                 Player2NameBox.Text = "Enter Player Name...";
@@ -1245,7 +920,7 @@ namespace Falson.SquadRoleRandomizer
         private void Player1NameBox_TextChanged(object sender, EventArgs e)
         {
             Player1FlowPanel.Title = Player1NameBox.Text;
-            Player1Name.Value = Player1NameBox.Text;
+            PlayerNames[0].Value = Player1NameBox.Text;
             if(Player1NameBox.Text == "") 
             {
                 Player1NameBox.Text = "Enter Player Name...";
@@ -1488,16 +1163,10 @@ namespace Falson.SquadRoleRandomizer
             QadimKiteRoles = null;
             SwordRoles = null;
             ShieldRoles = null;
-            Player1Name = null;
-            Player2Name = null;
-            Player3Name = null;
-            Player4Name = null;
-            Player5Name = null;
-            Player6Name = null;
-            Player7Name = null;
-            Player8Name = null;
-            Player9Name = null;
-            Player10Name = null;
+            for (int i = 0; i < 10; i++)
+            {
+                PlayerNames[i] = null;
+            }
             ListofRoleValidLists = null;
             RolestoRandomizeSelectionCheckboxesArray = null;
             Randomizer.Randomizer.RoleName_to_SelectedPlayer = null;
