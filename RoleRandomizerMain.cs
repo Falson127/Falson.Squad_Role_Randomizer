@@ -86,6 +86,7 @@ namespace Falson.SquadRoleRandomizer
         public TextBox Player9NameBox;
         public TextBox Player10NameBox;
         public Panel PlayerNameTextBoxPanel;
+        public PlayerFlowPanel[] PlayerPanels = new PlayerFlowPanel[10];
         public PlayerFlowPanel Player1FlowPanel;
         public PlayerFlowPanel Player2FlowPanel;
         public PlayerFlowPanel Player3FlowPanel;
@@ -98,6 +99,9 @@ namespace Falson.SquadRoleRandomizer
         public PlayerFlowPanel Player10FlowPanel;
         public FlowPanel MasterFlowPanel;
         public FlowPanel RandomizeCheckboxesPanel;
+        public Panel[] StandardRolesPanel = new Panel[10]; //5 items
+        public Panel[] HoTMechanicsPanel = new Panel[10]; //8 items
+        public Panel[] PoFMechanicsPanel = new Panel[10]; //9 items
         public FlowPanel HoT_PlayerRolesPanel1;
         public FlowPanel PoF_PlayerRolesPanel1;
         public FlowPanel HoT_PlayerRolesPanel2;
@@ -119,29 +123,29 @@ namespace Falson.SquadRoleRandomizer
         public FlowPanel HoT_PlayerRolesPanel10;
         public FlowPanel PoF_PlayerRolesPanel10;
         //Checkbox Arrays
-        public CustomCheckbox[] HandKiteBoxArray;
-        public CustomCheckbox[] OilKiteBoxArray;
-        public CustomCheckbox[] FlakKiteBoxArray;
-        public CustomCheckbox[] TankBoxArray;
-        public CustomCheckbox[] HealAlacBoxArray; //1-2
-        public CustomCheckbox[] HealQuickBoxArray; //1-2
-        public CustomCheckbox[] DPSAlacBoxArray; //1-2
-        public CustomCheckbox[] DPSQuickBoxArray; //1-2
-        public CustomCheckbox[] MushroomBoxArray; //1-4
-        public CustomCheckbox[] TowerBoxArray;
-        public CustomCheckbox[] ReflectBoxArray;
-        public CustomCheckbox[] CannonBoxArray; //1-2
-        public CustomCheckbox[] ConstrucPusherBoxArray;
-        public CustomCheckbox[] LampBoxArray; //1-3
-        public CustomCheckbox[] PylonBoxArray; //1-3
-        public CustomCheckbox[] PillarBoxArray; //1-5
-        public CustomCheckbox[] GreenBoxArray; //1-2
-        public CustomCheckbox[] SoullessPusherBoxArray;
-        public CustomCheckbox[] DhuumKiteBoxArray;
-        public CustomCheckbox[] QadimKiteBoxArray;
-        public CustomCheckbox[] SwordBoxArray; //1-2
-        public CustomCheckbox[] ShieldBoxArray; //1-2
-        public static CustomCheckbox[] RolestoRandomizeSelectionCheckboxesArray;
+        public CustomCheckbox[] HandKiteBoxArray = new CustomCheckbox[10];
+        public CustomCheckbox[] OilKiteBoxArray = new CustomCheckbox[10];
+        public CustomCheckbox[] FlakKiteBoxArray = new CustomCheckbox[10];
+        public CustomCheckbox[] TankBoxArray = new CustomCheckbox[10];
+        public CustomCheckbox[] HealAlacBoxArray = new CustomCheckbox[10]; //1-2
+        public CustomCheckbox[] HealQuickBoxArray = new CustomCheckbox[10]; //1-2
+        public CustomCheckbox[] DPSAlacBoxArray = new CustomCheckbox[10]; //1-2
+        public CustomCheckbox[] DPSQuickBoxArray = new CustomCheckbox[10]; //1-2
+        public CustomCheckbox[] MushroomBoxArray = new CustomCheckbox[10]; //1-4
+        public CustomCheckbox[] TowerBoxArray = new CustomCheckbox[10];
+        public CustomCheckbox[] ReflectBoxArray = new CustomCheckbox[10];
+        public CustomCheckbox[] CannonBoxArray = new CustomCheckbox[10]; //1-2
+        public CustomCheckbox[] ConstrucPusherBoxArray = new CustomCheckbox[10];
+        public CustomCheckbox[] LampBoxArray = new CustomCheckbox[10]; //1-3
+        public CustomCheckbox[] PylonBoxArray = new CustomCheckbox[10]; //1-3
+        public CustomCheckbox[] PillarBoxArray = new CustomCheckbox[10]; //1-5
+        public CustomCheckbox[] GreenBoxArray = new CustomCheckbox[10]; //1-2
+        public CustomCheckbox[] SoullessPusherBoxArray = new CustomCheckbox[10];
+        public CustomCheckbox[] DhuumKiteBoxArray = new CustomCheckbox[10];
+        public CustomCheckbox[] QadimKiteBoxArray = new CustomCheckbox[10];
+        public CustomCheckbox[] SwordBoxArray = new CustomCheckbox[10]; //1-2
+        public CustomCheckbox[] ShieldBoxArray = new CustomCheckbox[10]; //1-2
+        public static CustomCheckbox[] RolestoRandomizeSelectionCheckboxesArray = new CustomCheckbox[22];
         public Panel[] HoTPannelArray;
         public Panel[] PoFPannelArray;
         public Panel RolesWithNumbers;
@@ -270,239 +274,72 @@ namespace Falson.SquadRoleRandomizer
                 FlowDirection = ControlFlowDirection.SingleTopToBottom
             };
             #region Player Panels
-            Player1FlowPanel = new PlayerFlowPanel(PlayerNames[0].Value, MasterFlowPanel);
-            Player2FlowPanel = new PlayerFlowPanel(PlayerNames[1].Value, MasterFlowPanel);
-            Player3FlowPanel = new PlayerFlowPanel(PlayerNames[2].Value, MasterFlowPanel);
-            Player4FlowPanel = new PlayerFlowPanel(PlayerNames[3].Value, MasterFlowPanel);
-            Player5FlowPanel = new PlayerFlowPanel(PlayerNames[4].Value, MasterFlowPanel);
-            Player6FlowPanel = new PlayerFlowPanel(PlayerNames[5].Value, MasterFlowPanel);
-            Player7FlowPanel = new PlayerFlowPanel(PlayerNames[6].Value, MasterFlowPanel);
-            Player8FlowPanel = new PlayerFlowPanel(PlayerNames[7].Value, MasterFlowPanel);
-            Player9FlowPanel = new PlayerFlowPanel(PlayerNames[8].Value, MasterFlowPanel);
-            Player10FlowPanel = new PlayerFlowPanel(PlayerNames[9].Value, MasterFlowPanel);
+            for (int i = 0; i < 10; i++)
+            {
+                PlayerPanels[i] = new PlayerFlowPanel(PlayerNames[i].Value, MasterFlowPanel);
+            }
             #endregion
-            #region HoT_FlowPanels
-            HoT_PlayerRolesPanel1 = new FlowPanel()
+            #region Role Panels
+            for (int i = 0; i < 10; i++)
             {
-                Size = new Point(510, 150),
-                Parent = Player1FlowPanel,
-                ShowBorder = true,
-                FlowDirection = ControlFlowDirection.LeftToRight,
-                Title = "HoT Roles"
-            };
-            HoT_PlayerRolesPanel2 = new FlowPanel()
-            {
-                Size = new Point(510, 150),
-                Parent = Player2FlowPanel,
-                ShowBorder = true,
-                FlowDirection = ControlFlowDirection.LeftToRight,
-                Title = "HoT Roles"
-            };
-            HoT_PlayerRolesPanel3 = new FlowPanel()
-            {
-                Size = new Point(510, 150),
-                Parent = Player3FlowPanel,
-                ShowBorder = true,
-                FlowDirection = ControlFlowDirection.LeftToRight,
-                Title = "HoT Roles"
-            };
-            HoT_PlayerRolesPanel4 = new FlowPanel()
-            {
-                Size = new Point(510, 150),
-                Parent = Player4FlowPanel,
-                ShowBorder = true,
-                FlowDirection = ControlFlowDirection.LeftToRight,
-                Title = "HoT Roles"
-            };
-            HoT_PlayerRolesPanel5 = new FlowPanel()
-            {
-                Size = new Point(510, 150),
-                Parent = Player5FlowPanel,
-                ShowBorder = true,
-                FlowDirection = ControlFlowDirection.LeftToRight,
-                Title = "HoT Roles"
-            };
-            HoT_PlayerRolesPanel6 = new FlowPanel()
-            {
-                Size = new Point(510, 150),
-                Parent = Player6FlowPanel,
-                ShowBorder = true,
-                FlowDirection = ControlFlowDirection.LeftToRight,
-                Title = "HoT Roles"
-            };
-            HoT_PlayerRolesPanel7 = new FlowPanel()
-            {
-                Size = new Point(510, 150),
-                Parent = Player7FlowPanel,
-                ShowBorder = true,
-                FlowDirection = ControlFlowDirection.LeftToRight,
-                Title = "HoT Roles"
-            };
-            HoT_PlayerRolesPanel8 = new FlowPanel()
-            {
-                Size = new Point(510, 150),
-                Parent = Player8FlowPanel,
-                ShowBorder = true,
-                FlowDirection = ControlFlowDirection.LeftToRight,
-                Title = "HoT Roles"
-            };
-            HoT_PlayerRolesPanel9 = new FlowPanel()
-            {
-                Size = new Point(510, 150),
-                Parent = Player9FlowPanel,
-                ShowBorder = true,
-                FlowDirection = ControlFlowDirection.LeftToRight,
-                Title = "HoT Roles",
-            };
-            HoT_PlayerRolesPanel10 = new FlowPanel()
-            {
-                Size = new Point(510, 150),
-                Parent = Player10FlowPanel,
-                ShowBorder = true,
-                FlowDirection = ControlFlowDirection.LeftToRight,
-                Title = "HoT Roles"
-            };
+                StandardRolesPanel[i] = new Panel
+                {
+                    Size = new Point(100,100),
+                    Parent = PlayerPanels[i],
+                    ShowBorder = true,
+                    Title = "Standard Roles",
+                    Visible = true,
+                    BackgroundColor = Color.Red
+                };
+                HoTMechanicsPanel[i] = new Panel
+                {
+                    Size = new Point(100,100),
+                    Parent = PlayerPanels[i],
+                    ShowBorder = true,
+                    Title = "HoT Mechanics"
+                };
+                PoFMechanicsPanel[i] = new Panel 
+                {
+                    Size = new Point(100,100),
+                    Parent = PlayerPanels[i],
+                    ShowBorder = true,
+                    Title = "PoF Mechanics"
+                };
+            }
             #endregion
-            #region PoF_FlowPanels
-            PoF_PlayerRolesPanel1 = new FlowPanel()
-            {
-                Size = new Point(510, 150),
-                Parent = Player1FlowPanel,
-                ShowBorder = true,
-                Title = "PoF Roles",
-                FlowDirection = ControlFlowDirection.LeftToRight
-            };
-            PoF_PlayerRolesPanel2 = new FlowPanel()
-            {
-                Size = new Point(510, 150),
-                Parent = Player2FlowPanel,
-                ShowBorder = true,
-                Title = "PoF Roles",
-                FlowDirection = ControlFlowDirection.LeftToRight
-            };
-            PoF_PlayerRolesPanel3 = new FlowPanel()
-            {
-                Size = new Point(510, 150),
-                Parent = Player3FlowPanel,
-                ShowBorder = true,
-                Title = "PoF Roles",
-                FlowDirection = ControlFlowDirection.LeftToRight
-            };
-            PoF_PlayerRolesPanel4 = new FlowPanel()
-            {
-                Size = new Point(510, 150),
-                Parent = Player4FlowPanel,
-                ShowBorder = true,
-                Title = "PoF Roles",
-                FlowDirection = ControlFlowDirection.LeftToRight
-            };
-            PoF_PlayerRolesPanel5 = new FlowPanel()
-            {
-                Size = new Point(510, 150),
-                Parent = Player5FlowPanel,
-                ShowBorder = true,
-                Title = "PoF Roles",
-                FlowDirection = ControlFlowDirection.LeftToRight
-            };
-            PoF_PlayerRolesPanel6 = new FlowPanel()
-            {
-                Size = new Point(510, 150),
-                Parent = Player6FlowPanel,
-                ShowBorder = true,
-                Title = "PoF Roles",
-                FlowDirection = ControlFlowDirection.LeftToRight
-            };
-            PoF_PlayerRolesPanel7 = new FlowPanel()
-            {
-                Size = new Point(510, 150),
-                Parent = Player7FlowPanel,
-                ShowBorder = true,
-                Title = "PoF Roles",
-                FlowDirection = ControlFlowDirection.LeftToRight
-            };
-            PoF_PlayerRolesPanel8 = new FlowPanel()
-            {
-                Size = new Point(510, 150),
-                Parent = Player8FlowPanel,
-                ShowBorder = true,
-                Title = "PoF Roles",
-                FlowDirection = ControlFlowDirection.LeftToRight
-            };
-            PoF_PlayerRolesPanel9 = new FlowPanel()
-            {
-                Size = new Point(510, 150),
-                Parent = Player9FlowPanel,
-                ShowBorder = true,
-                Title = "PoF Roles",
-                FlowDirection = ControlFlowDirection.LeftToRight
-            };
-            PoF_PlayerRolesPanel10 = new FlowPanel()
-            {
-                Size = new Point(510, 150),
-                Parent = Player10FlowPanel,
-                ShowBorder = true,
-                Title = "PoF Roles",
-                FlowDirection = ControlFlowDirection.LeftToRight
-            };
-            #endregion
-            #region Box and Label Arrays
-            RolestoRandomizeSelectionCheckboxesArray = new CustomCheckbox[22];
-            //RolestoRandomizeSelectionCheckboxesArray = new Checkbox[22] {RandomizeHandKite,RandomizeOilKite,RandomizeFlakKite,RandomizeTank,RandomizeHealAlac,RandomizeHealQuick,RandomizeDPSAlac,RandomizeDPSQuick,RandomizeMushroom,RandomizeTower,RandomizeReflect,RandomizeCannon,RandomizeConstrucPusher,RandomizeLamp,RandomizePylon,RandomizePillar,RandomizeGreen,RandomizeSoullessPusher,RandomizeDhuumKite,RandomizeQadimKite,RandomizeSword,RandomizeShield};
-            HandKiteBoxArray = new CustomCheckbox[10];
-            OilKiteBoxArray = new CustomCheckbox[10];
-            FlakKiteBoxArray = new CustomCheckbox[10];
-            TankBoxArray = new CustomCheckbox[10];
-            HealAlacBoxArray = new CustomCheckbox[10];
-            HealQuickBoxArray = new CustomCheckbox[10];
-            DPSAlacBoxArray = new CustomCheckbox[10];
-            DPSQuickBoxArray = new CustomCheckbox[10];
-            MushroomBoxArray = new CustomCheckbox[10];
-            TowerBoxArray = new CustomCheckbox[10];
-            ReflectBoxArray = new CustomCheckbox[10];
-            CannonBoxArray = new CustomCheckbox[10];
-            ConstrucPusherBoxArray = new CustomCheckbox[10];
-            LampBoxArray = new CustomCheckbox[10];
-            PylonBoxArray = new CustomCheckbox[10];
-            PillarBoxArray = new CustomCheckbox[10];
-            GreenBoxArray = new CustomCheckbox[10];
-            SoullessPusherBoxArray = new CustomCheckbox[10];
-            DhuumKiteBoxArray = new CustomCheckbox[10];
-            QadimKiteBoxArray = new CustomCheckbox[10];
-            SwordBoxArray = new CustomCheckbox[10];
-            ShieldBoxArray = new CustomCheckbox[10];
+            #region ListsOf: Box Arrays, Role Arrays, and Valid Lists
             ListofCheckboxArrays = new List<CustomCheckbox[]> {HandKiteBoxArray,OilKiteBoxArray,FlakKiteBoxArray,TankBoxArray,HealAlacBoxArray,HealQuickBoxArray,DPSAlacBoxArray,DPSQuickBoxArray,MushroomBoxArray,TowerBoxArray,ReflectBoxArray,CannonBoxArray,ConstrucPusherBoxArray,LampBoxArray,PylonBoxArray,PillarBoxArray,GreenBoxArray,SoullessPusherBoxArray,DhuumKiteBoxArray,QadimKiteBoxArray,SwordBoxArray,ShieldBoxArray };
             ListofRolesSettings = new List<SettingEntry<bool>[]> {HandKiteRoles,OilKiteRoles,FlakKiteRoles,TankRoles,HealAlacRoles,HealQuickRoles,DPSAlacRoles,DPSQuickRoles,MushroomRoles,TowerRoles,ReflectRoles,CannonRoles,ConstrucPusherRoles,LampRoles,PylonRoles,PillarRoles,GreenRoles,SoullessPusherRoles,DhuumKiteRoles,QadimKiteRoles,SwordRoles,ShieldRoles };
             ListofRoleValidLists = new List<List<string>> { HandKiteValid,OilKiteValid,FlakKiteValid,TankValid,HealAlacValid,HealQuickValid,DPSAlacValid,DPSQuickValid,MushroomValid,TowerValid,ReflectValid,CannonValid,ConstrucPusherValid,LampValid,PylonValid,PillarValid,GreenValid,SoullessPusherValid,DhuumKiteValid,QadimKiteValid,SwordValid,ShieldValid};
             #endregion
-            #region Checkboxes
-            HoTPannelArray = new Panel[10] { HoT_PlayerRolesPanel1, HoT_PlayerRolesPanel2, HoT_PlayerRolesPanel3, HoT_PlayerRolesPanel4, HoT_PlayerRolesPanel5, HoT_PlayerRolesPanel6, HoT_PlayerRolesPanel7, HoT_PlayerRolesPanel8, HoT_PlayerRolesPanel9, HoT_PlayerRolesPanel10 };
-            PoFPannelArray = new Panel[10] { PoF_PlayerRolesPanel1, PoF_PlayerRolesPanel2, PoF_PlayerRolesPanel3, PoF_PlayerRolesPanel4, PoF_PlayerRolesPanel5, PoF_PlayerRolesPanel6, PoF_PlayerRolesPanel7, PoF_PlayerRolesPanel8, PoF_PlayerRolesPanel9, PoF_PlayerRolesPanel10 };
 
+            #region Checkboxes
             for (int i = 0; i < 10; i++)
             {
-                HandKiteBoxArray[i] = new CustomCheckbox(HandKiteRoles[i]) { Text = "Hand Kite", Location = new Point(0,0), BasicTooltipText = "Hand Kite", Parent = HoTPannelArray[i], Checked = HandKiteRoles[i].Value };
-                OilKiteBoxArray[i] = new CustomCheckbox(OilKiteRoles[i]) { Text = "Oil Kite", Location = new Point(100, 0), BasicTooltipText = "Oil Kite", Parent = HoTPannelArray[i], Checked = OilKiteRoles[i].Value };
-                FlakKiteBoxArray[i] = new CustomCheckbox(FlakKiteRoles[i]) { Text = "Flak Kite", Location = new Point(200, 0), BasicTooltipText = "Flak Kite", Parent = HoTPannelArray[i], Checked = FlakKiteRoles[i].Value };
-                TankBoxArray[i] = new CustomCheckbox(TankRoles[i]) { Text = "Tank", Location = new Point(300, 0), BasicTooltipText = "Tank", Parent = HoTPannelArray[i], Checked = TankRoles[i].Value };
-                HealAlacBoxArray[i] = new CustomCheckbox(HealAlacRoles[i]) { Text = "Heal + Alac", Location = new Point(400, 0), BasicTooltipText = "Heal + Alac", Parent = HoTPannelArray[i], Checked = HealAlacRoles[i].Value };
-                HealQuickBoxArray[i] = new CustomCheckbox(HealQuickRoles[i]) { Text = "Heal + Quick", Location = new Point(0, 50), BasicTooltipText = "Heal + Quick", Parent = HoTPannelArray[i], Checked = HealQuickRoles[i].Value };
-                DPSAlacBoxArray[i] = new CustomCheckbox(DPSAlacRoles[i]) { Text = "DPS + Alac", Location = new Point(100, 50), BasicTooltipText = "DPS + Alac", Parent = HoTPannelArray[i], Checked = DPSAlacRoles[i].Value };
-                DPSQuickBoxArray[i] = new CustomCheckbox(DPSQuickRoles[i]) { Text = "DPS + Quick", Location = new Point(200, 50), BasicTooltipText = "DPS + Quick", Parent = HoTPannelArray[i], Checked = DPSQuickRoles[i].Value };
-                MushroomBoxArray[i] = new CustomCheckbox(MushroomRoles[i]) { Text = "Slothosaur Mushroom", Location = new Point(300, 50), BasicTooltipText = "Slothosaur Mushroom", Parent = HoTPannelArray[i], Checked = MushroomRoles[i].Value };
-                TowerBoxArray[i] = new CustomCheckbox(TowerRoles[i]) { Text = "Tower Mesmer", Location = new Point(400, 50), BasicTooltipText = "Tower Mesmer", Parent = HoTPannelArray[i], Checked = TowerRoles[i].Value };
-                ReflectBoxArray[i] = new CustomCheckbox(ReflectRoles[i]) { Text = "Matthias Reflect", Location = new Point(0, 100), BasicTooltipText = "Matthias Reflect", Parent = HoTPannelArray[i], Checked = ReflectRoles[i].Value };
-                CannonBoxArray[i] = new CustomCheckbox(CannonRoles[i]) { Text = "Sabetha Cannons", Location = new Point(100, 100), BasicTooltipText = "Sabetha Cannons", Parent = HoTPannelArray[i], Checked = CannonRoles[i].Value };
-                ConstrucPusherBoxArray[i] = new CustomCheckbox(ConstrucPusherRoles[i]) { Text = "Keep Construct Pusher", Location = new Point(200, 100), BasicTooltipText = "Keep Construct Pusher", Parent = HoTPannelArray[i], Checked = ConstrucPusherRoles[i].Value };
-                LampBoxArray[i] = new CustomCheckbox(LampRoles[i]) { Text = "Qadim Lamp", Location = new Point(0, 0), BasicTooltipText = "Qadim Lamp", Parent = PoFPannelArray[i], Checked = LampRoles[i].Value };
-                PylonBoxArray[i] = new CustomCheckbox(PylonRoles[i]) { Text = "Qadim Pylon", Location = new Point(100, 0), BasicTooltipText = "Qadim Pylon", Parent = PoFPannelArray[i], Checked = PylonRoles[i].Value };
-                PillarBoxArray[i] = new CustomCheckbox(PillarRoles[i]) { Text = "Adina Pillar", Location = new Point(200, 0), BasicTooltipText = "Adina Pillar", Parent = PoFPannelArray[i], Checked = PillarRoles[i].Value };
-                GreenBoxArray[i] = new CustomCheckbox(GreenRoles[i]) { Text = "Dhuum Green", Location = new Point(300, 0), BasicTooltipText = "Dhuum Green", Parent = PoFPannelArray[i], Checked = GreenRoles[i].Value };
-                SoullessPusherBoxArray[i] = new CustomCheckbox(SoullessPusherRoles[i]) { Text = "Soulless Horror Pusher", Location = new Point(400, 0), BasicTooltipText = "Soulless Horror Pusher", Parent = PoFPannelArray[i], Checked = SoullessPusherRoles[i].Value };
-                DhuumKiteBoxArray[i] = new CustomCheckbox(DhuumKiteRoles[i]) { Text = "Dhuum Messenger Kiter", Location = new Point(0, 50), BasicTooltipText = "Dhuum Messenger Kiter", Parent = PoFPannelArray[i], Checked = DhuumKiteRoles[i].Value };
-                QadimKiteBoxArray[i] = new CustomCheckbox(QadimKiteRoles[i]) { Text = "Qadim Kiter", Location = new Point(100, 50), BasicTooltipText = "Qadim Kiter", Parent = PoFPannelArray[i], Checked = QadimKiteRoles[i].Value };
-                SwordBoxArray[i] = new CustomCheckbox(SwordRoles[i]) { Text = "CA Sword Collector", Location = new Point(200, 50), BasicTooltipText = "CA Sword Collector", Parent = PoFPannelArray[i], Checked = SwordRoles[i].Value };
-                ShieldBoxArray[i] = new CustomCheckbox(ShieldRoles[i]) { Text = "CA Shield Collector", Location = new Point(300, 50), BasicTooltipText = "CA Shield Collector", Parent = PoFPannelArray[i], Checked = ShieldRoles[i].Value };
-
+                TankBoxArray[i] = new CustomCheckbox(TankRoles[i]) { Text = "Tank", Location = new Point(300, 0), BasicTooltipText = "Tank", Parent = StandardRolesPanel[i], Checked = TankRoles[i].Value };
+                HealAlacBoxArray[i] = new CustomCheckbox(HealAlacRoles[i]) { Text = "Heal + Alac", Location = new Point(400, 0), BasicTooltipText = "Heal + Alac", Parent = StandardRolesPanel[i], Checked = HealAlacRoles[i].Value };
+                HealQuickBoxArray[i] = new CustomCheckbox(HealQuickRoles[i]) { Text = "Heal + Quick", Location = new Point(0, 50), BasicTooltipText = "Heal + Quick", Parent = StandardRolesPanel[i], Checked = HealQuickRoles[i].Value };
+                DPSAlacBoxArray[i] = new CustomCheckbox(DPSAlacRoles[i]) { Text = "DPS + Alac", Location = new Point(100, 50), BasicTooltipText = "DPS + Alac", Parent = StandardRolesPanel[i], Checked = DPSAlacRoles[i].Value };
+                DPSQuickBoxArray[i] = new CustomCheckbox(DPSQuickRoles[i]) { Text = "DPS + Quick", Location = new Point(200, 50), BasicTooltipText = "DPS + Quick", Parent = StandardRolesPanel[i], Checked = DPSQuickRoles[i].Value };
+                
+                HandKiteBoxArray[i] = new CustomCheckbox(HandKiteRoles[i]) { Text = "Hand Kite", Location = new Point(0,0), BasicTooltipText = "Hand Kite", Parent = HoTMechanicsPanel[i], Checked = HandKiteRoles[i].Value };
+                OilKiteBoxArray[i] = new CustomCheckbox(OilKiteRoles[i]) { Text = "Oil Kite", Location = new Point(100, 0), BasicTooltipText = "Oil Kite", Parent = HoTMechanicsPanel[i], Checked = OilKiteRoles[i].Value };
+                FlakKiteBoxArray[i] = new CustomCheckbox(FlakKiteRoles[i]) { Text = "Flak Kite", Location = new Point(200, 0), BasicTooltipText = "Flak Kite", Parent = HoTMechanicsPanel[i], Checked = FlakKiteRoles[i].Value };
+                MushroomBoxArray[i] = new CustomCheckbox(MushroomRoles[i]) { Text = "Slothosaur Mushroom", Location = new Point(300, 50), BasicTooltipText = "Slothosaur Mushroom", Parent = HoTMechanicsPanel[i], Checked = MushroomRoles[i].Value };
+                TowerBoxArray[i] = new CustomCheckbox(TowerRoles[i]) { Text = "Tower Mesmer", Location = new Point(400, 50), BasicTooltipText = "Tower Mesmer", Parent = HoTMechanicsPanel[i], Checked = TowerRoles[i].Value };
+                ReflectBoxArray[i] = new CustomCheckbox(ReflectRoles[i]) { Text = "Matthias Reflect", Location = new Point(0, 100), BasicTooltipText = "Matthias Reflect", Parent = HoTMechanicsPanel[i], Checked = ReflectRoles[i].Value };
+                CannonBoxArray[i] = new CustomCheckbox(CannonRoles[i]) { Text = "Sabetha Cannons", Location = new Point(100, 100), BasicTooltipText = "Sabetha Cannons", Parent = HoTMechanicsPanel[i], Checked = CannonRoles[i].Value };
+                ConstrucPusherBoxArray[i] = new CustomCheckbox(ConstrucPusherRoles[i]) { Text = "Keep Construct Pusher", Location = new Point(200, 100), BasicTooltipText = "Keep Construct Pusher", Parent = HoTMechanicsPanel[i], Checked = ConstrucPusherRoles[i].Value };
+                
+                LampBoxArray[i] = new CustomCheckbox(LampRoles[i]) { Text = "Qadim Lamp", Location = new Point(0, 0), BasicTooltipText = "Qadim Lamp", Parent = PoFMechanicsPanel[i], Checked = LampRoles[i].Value };
+                PylonBoxArray[i] = new CustomCheckbox(PylonRoles[i]) { Text = "Qadim Pylon", Location = new Point(100, 0), BasicTooltipText = "Qadim Pylon", Parent = PoFMechanicsPanel[i], Checked = PylonRoles[i].Value };
+                PillarBoxArray[i] = new CustomCheckbox(PillarRoles[i]) { Text = "Adina Pillar", Location = new Point(200, 0), BasicTooltipText = "Adina Pillar", Parent = PoFMechanicsPanel[i], Checked = PillarRoles[i].Value };
+                GreenBoxArray[i] = new CustomCheckbox(GreenRoles[i]) { Text = "Dhuum Green", Location = new Point(300, 0), BasicTooltipText = "Dhuum Green", Parent = PoFMechanicsPanel[i], Checked = GreenRoles[i].Value };
+                SoullessPusherBoxArray[i] = new CustomCheckbox(SoullessPusherRoles[i]) { Text = "Soulless Horror Pusher", Location = new Point(400, 0), BasicTooltipText = "Soulless Horror Pusher", Parent = PoFMechanicsPanel[i], Checked = SoullessPusherRoles[i].Value };
+                DhuumKiteBoxArray[i] = new CustomCheckbox(DhuumKiteRoles[i]) { Text = "Dhuum Messenger Kiter", Location = new Point(0, 50), BasicTooltipText = "Dhuum Messenger Kiter", Parent = PoFMechanicsPanel[i], Checked = DhuumKiteRoles[i].Value };
+                QadimKiteBoxArray[i] = new CustomCheckbox(QadimKiteRoles[i]) { Text = "Qadim Kiter", Location = new Point(100, 50), BasicTooltipText = "Qadim Kiter", Parent = PoFMechanicsPanel[i], Checked = QadimKiteRoles[i].Value };
+                SwordBoxArray[i] = new CustomCheckbox(SwordRoles[i]) { Text = "CA Sword Collector", Location = new Point(200, 50), BasicTooltipText = "CA Sword Collector", Parent = PoFMechanicsPanel[i], Checked = SwordRoles[i].Value };
+                ShieldBoxArray[i] = new CustomCheckbox(ShieldRoles[i]) { Text = "CA Shield Collector", Location = new Point(300, 50), BasicTooltipText = "CA Shield Collector", Parent = PoFMechanicsPanel[i], Checked = ShieldRoles[i].Value };
             }
             IDictionary<int, string> RandomizeSelectionBoxesInt_to_StringDictionary = new Dictionary<int, string> 
             {
@@ -529,7 +366,6 @@ namespace Falson.SquadRoleRandomizer
                 {20,"Sword Collector(s)"},
                 {21,"Shield Collector(s)"},
             };
-
             IDictionary<int, int> CounterBoxes_MaxAllowedIntValues = new Dictionary<int, int>
             {
                 {0, 2},
@@ -741,6 +577,7 @@ namespace Falson.SquadRoleRandomizer
                 };
             }
             #endregion
+            #region Event Subscriptions
             Player1NameBox.TextChanged += Player1NameBox_TextChanged;
             Player2NameBox.TextChanged += Player2NameBox_TextChanged;
             Player3NameBox.TextChanged += Player3NameBox_TextChanged;
@@ -763,6 +600,7 @@ namespace Falson.SquadRoleRandomizer
             CounterBoxes[9].Click += CounterBox10Click;
             CounterBoxes[10].Click += CounterBox11Click;
             CounterBoxes[11].Click += CounterBox12Click;
+            #endregion
         }
         #region CounterBox Click Functions
         private void CounterBox12Click(object sender, Blish_HUD.Input.MouseEventArgs e)
@@ -828,108 +666,67 @@ namespace Falson.SquadRoleRandomizer
         #region Textbox text changed functions
         private void Player10NameBox_TextChanged(object sender, EventArgs e)
         {
-            Player10FlowPanel.Title = Player10NameBox.Text;
+            PlayerPanels[9].Title = Player10NameBox.Text;
             PlayerNames[9].Value = Player10NameBox.Text;
-            if (Player10NameBox.Text == "") 
-            {
-                Player10NameBox.Text = "Enter Player Name...";
-            }
 
         }
 
         private void Player9NameBox_TextChanged(object sender, EventArgs e)
         {
-            Player9FlowPanel.Title = Player9NameBox.Text;
+            PlayerPanels[8].Title = Player9NameBox.Text;
             PlayerNames[8].Value = Player9NameBox.Text;
-            if(Player9NameBox.Text == "") 
-            {
-                Player9NameBox.Text = "Enter Player Name...";
-            }
         }
 
         private void Player8NameBox_TextChanged(object sender, EventArgs e)
         {
-            Player8FlowPanel.Title = Player8NameBox.Text;
+            PlayerPanels[7].Title = Player8NameBox.Text;
             PlayerNames[7].Value = Player8NameBox.Text;
-            if(Player8NameBox.Text == "") 
-            {
-                Player8NameBox.Text = "Enter Player Name...";
-            }
         }
 
         private void Player7NameBox_TextChanged(object sender, EventArgs e)
         {
-            Player7FlowPanel.Title = Player7NameBox.Text;
+            PlayerPanels[6].Title = Player7NameBox.Text;
             PlayerNames[6].Value = Player7NameBox.Text;
-            if(Player7NameBox.Text == "") 
-            {
-                Player7NameBox.Text = "Enter Player Name...";
-            }
         }
 
         private void Player6NameBox_TextChanged(object sender, EventArgs e)
         {
-            Player6FlowPanel.Title = Player6NameBox.Text;
+            PlayerPanels[5].Title = Player6NameBox.Text;
             PlayerNames[5].Value = Player6NameBox.Text;
-            if(Player6NameBox.Text == "") 
-            {
-                Player6NameBox.Text = "Enter Player Name...";
-            }
         }
 
         private void Player5NameBox_TextChanged(object sender, EventArgs e)
         {
-            Player5FlowPanel.Title = Player5NameBox.Text;
+            PlayerPanels[4].Title = Player5NameBox.Text;
             PlayerNames[4].Value = Player5NameBox.Text;
-            if(Player5NameBox.Text == "") 
-            {
-                Player5NameBox.Text = "Enter Player Name...";
-            }
         }
 
         private void Player4NameBox_TextChanged(object sender, EventArgs e)
         {
-            Player4FlowPanel.Title = Player4NameBox.Text;
+            PlayerPanels[3].Title = Player4NameBox.Text;
             PlayerNames[3].Value = Player4NameBox.Text;
-            if(Player4NameBox.Text == "") 
-            {
-                Player4NameBox.Text = "Enter Player Name...";
-            }
         }
 
         private void Player3NameBox_TextChanged(object sender, EventArgs e)
         {
-            Player3FlowPanel.Title = Player3NameBox.Text;
+            PlayerPanels[2].Title = Player3NameBox.Text;
             PlayerNames[2].Value = Player3NameBox.Text;
-            if(Player3NameBox.Text == "") 
-            {
-                Player3NameBox.Text = "Enter Player Name...";
-            }
         }
 
         private void Player2NameBox_TextChanged(object sender, EventArgs e)
         {
-            Player2FlowPanel.Title = Player2NameBox.Text;
+            PlayerPanels[1].Title = Player2NameBox.Text;
             PlayerNames[1].Value = Player2NameBox.Text;
-            if(Player2NameBox.Text == "") 
-            {
-                Player2NameBox.Text = "Enter Player Name...";
-            }
         }
 
         private void Player1NameBox_TextChanged(object sender, EventArgs e)
         {
-            Player1FlowPanel.Title = Player1NameBox.Text;
+            PlayerPanels[0].Title = Player1NameBox.Text;
             PlayerNames[0].Value = Player1NameBox.Text;
-            if(Player1NameBox.Text == "") 
-            {
-                Player1NameBox.Text = "Enter Player Name...";
-            }
         }
         #endregion
         protected override void OnModuleLoaded(EventArgs e)
         {
-            //GenerateRoles.RandomizeTheRoles();
             RandomizerSettingIcon = new CornerIcon 
             {
                 Icon = ContentsManager.GetTexture("Emblem.png"),
@@ -938,11 +735,7 @@ namespace Falson.SquadRoleRandomizer
             RandomizerSettingIcon.Click += delegate 
             {
                 RandomizerSettingsWindow.ToggleWindow();
-
             };
-
-
-
             // Base handler must be called
             base.OnModuleLoaded(e);
         }
@@ -1057,11 +850,15 @@ namespace Falson.SquadRoleRandomizer
             {
                 item?.Dispose();
             }
-            foreach(var item in HoTPannelArray)
+            foreach(var item in HoTMechanicsPanel)
             {
                 item?.Dispose();
             }
-            foreach(var item in PoFPannelArray)
+            foreach(var item in PoFMechanicsPanel)
+            {
+                item?.Dispose();
+            }
+            foreach (var item in StandardRolesPanel)
             {
                 item?.Dispose();
             }
