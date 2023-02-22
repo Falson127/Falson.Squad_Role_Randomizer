@@ -5,10 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
+using System.Windows.Forms;
 
 namespace Falson.SquadRoleRandomizer
 {
-    public class PlayerFlowPanel : FlowPanel 
+    public class PlayerFlowPanel : FlowPanel
     {
         public PlayerFlowPanel(string playerName, Container parent)
         {
@@ -22,4 +23,5 @@ namespace Falson.SquadRoleRandomizer
         }
     
     }
+    public class CheckboxGridPanel : TableLayoutPanel
 }

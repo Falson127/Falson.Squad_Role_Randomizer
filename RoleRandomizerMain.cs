@@ -17,6 +17,7 @@ namespace Falson.SquadRoleRandomizer
     [Export(typeof(Blish_HUD.Modules.Module))]
     public class RoleRandomizerMain : Blish_HUD.Modules.Module
     {
+        public GridPanel testgridpanel;
         public static StandardWindow RandomizerResultsWindow;
         public static StandardWindow RandomizerSettingsWindow;
         private CornerIcon RandomizerSettingIcon;
@@ -87,16 +88,16 @@ namespace Falson.SquadRoleRandomizer
         public TextBox Player9NameBox;
         public TextBox Player10NameBox;
         public Panel PlayerNameTextBoxPanel;
-        public FlowPanel Player1FlowPanel;
-        public FlowPanel Player2FlowPanel;
-        public FlowPanel Player3FlowPanel;
-        public FlowPanel Player4FlowPanel;
-        public FlowPanel Player5FlowPanel;
-        public FlowPanel Player6FlowPanel;
-        public FlowPanel Player7FlowPanel;
-        public FlowPanel Player8FlowPanel;
-        public FlowPanel Player9FlowPanel;
-        public FlowPanel Player10FlowPanel;
+        public PlayerFlowPanel Player1FlowPanel;
+        public PlayerFlowPanel Player2FlowPanel;
+        public PlayerFlowPanel Player3FlowPanel;
+        public PlayerFlowPanel Player4FlowPanel;
+        public PlayerFlowPanel Player5FlowPanel;
+        public PlayerFlowPanel Player6FlowPanel;
+        public PlayerFlowPanel Player7FlowPanel;
+        public PlayerFlowPanel Player8FlowPanel;
+        public PlayerFlowPanel Player9FlowPanel;
+        public PlayerFlowPanel Player10FlowPanel;
         public FlowPanel MasterFlowPanel;
         public FlowPanel RandomizeCheckboxesPanel;
         public FlowPanel HoT_PlayerRolesPanel1;
@@ -388,113 +389,6 @@ namespace Falson.SquadRoleRandomizer
             Player8FlowPanel = new PlayerFlowPanel(PlayerNames[7].Value, MasterFlowPanel);
             Player9FlowPanel = new PlayerFlowPanel(PlayerNames[8].Value, MasterFlowPanel);
             Player10FlowPanel = new PlayerFlowPanel(PlayerNames[9].Value, MasterFlowPanel);
-            Player1FlowPanel = new FlowPanel
-            {
-                Title = Player1Name.Value,
-                Size = new Point(1050, 150),
-                Parent = MasterFlowPanel,
-                ShowBorder = true,
-                CanCollapse = true,
-                Collapsed = true,
-                FlowDirection = ControlFlowDirection.LeftToRight
-            };
-            Player2FlowPanel = new FlowPanel
-            {
-                Title = Player2Name.Value,
-                Size = new Point(1050, 150),
-                Parent = MasterFlowPanel,
-                ShowBorder = true,
-                CanCollapse = true,
-                Collapsed = true,
-                FlowDirection = ControlFlowDirection.LeftToRight
-            };
-            Player3FlowPanel = new FlowPanel
-            {
-                Title = Player3Name.Value,
-                Size = new Point(1050, 150),
-                Parent = MasterFlowPanel,
-                ShowBorder = true,
-                CanCollapse = true,
-                Collapsed = true,
-                FlowDirection = ControlFlowDirection.LeftToRight
-
-            };
-            Player4FlowPanel = new FlowPanel
-            {
-                Title = Player4Name.Value,
-                Size = new Point(1050, 150),
-                Parent = MasterFlowPanel,
-                ShowBorder = true,
-                CanCollapse = true,
-                Collapsed = true,
-                FlowDirection = ControlFlowDirection.LeftToRight
-
-            };
-            Player5FlowPanel = new FlowPanel
-            {
-                Title = Player5Name.Value,
-                Size = new Point(1050, 150),
-                Parent = MasterFlowPanel,
-                ShowBorder = true,
-                CanCollapse = true,
-                Collapsed = true,
-                FlowDirection = ControlFlowDirection.LeftToRight
-
-            };
-            Player6FlowPanel = new FlowPanel
-            {
-                Title = Player6Name.Value,
-                Size = new Point(1050, 150),
-                Parent = MasterFlowPanel,
-                ShowBorder = true,
-                CanCollapse = true,
-                Collapsed = true,
-                FlowDirection = ControlFlowDirection.LeftToRight
-
-            };
-            Player7FlowPanel = new FlowPanel
-            {
-                Title = Player7Name.Value,
-                Size = new Point(1050, 150),
-                Parent = MasterFlowPanel,
-                ShowBorder = true,
-                CanCollapse = true,
-                Collapsed = true,
-                FlowDirection = ControlFlowDirection.LeftToRight
-
-            };
-            Player8FlowPanel = new FlowPanel
-            {
-                Title = Player8Name.Value,
-                Size = new Point(1050, 150),
-                Parent = MasterFlowPanel,
-                ShowBorder = true,
-                CanCollapse = true,
-                Collapsed = true,
-                FlowDirection = ControlFlowDirection.LeftToRight
-
-            };
-            Player9FlowPanel = new FlowPanel
-            {
-                Title = Player9Name.Value,
-                Size = new Point(1050, 150),
-                Parent = MasterFlowPanel,
-                ShowBorder = true,
-                CanCollapse = true,
-                Collapsed = true,
-                FlowDirection = ControlFlowDirection.LeftToRight
-
-            };
-            Player10FlowPanel = new FlowPanel
-            {
-                Title = Player10Name.Value,
-                Size = new Point(1050, 150),
-                Parent = MasterFlowPanel,
-                ShowBorder = true,
-                CanCollapse = true,
-                Collapsed = true,
-                FlowDirection = ControlFlowDirection.LeftToRight
-            };
             #endregion
             #region HoT_FlowPanels
             HoT_PlayerRolesPanel1 = new FlowPanel()
@@ -1051,70 +945,70 @@ namespace Falson.SquadRoleRandomizer
             #region Textboxes
             Player1NameBox = new TextBox 
             {
-                PlaceholderText = Player1Name.Value,
+                PlaceholderText = PlayerNames[0].Value,
                 Size = new Point(200,25),
                 Parent = PlayerNameTextBoxPanel,
                 Location = new Point(0,0)
             };
             Player2NameBox = new TextBox 
             {
-                PlaceholderText = Player2Name.Value,
+                PlaceholderText = PlayerNames[1].Value,
                 Size = new Point(200,25),
                 Parent = PlayerNameTextBoxPanel,
                 Location = new Point(0, 25)
             };
             Player3NameBox = new TextBox 
             {
-                PlaceholderText = Player3Name.Value,
+                PlaceholderText = PlayerNames[2].Value,
                 Size = new Point(200,25),
                 Parent = PlayerNameTextBoxPanel,
                 Location = new Point(0, 50)
             };
             Player4NameBox = new TextBox 
             {
-                PlaceholderText = Player4Name.Value,
+                PlaceholderText = PlayerNames[3].Value,
                 Size = new Point(200,25),
                 Parent = PlayerNameTextBoxPanel,
                 Location = new Point(0, 75)
             };
             Player5NameBox = new TextBox 
             {
-                PlaceholderText = Player5Name.Value,
+                PlaceholderText = PlayerNames[4].Value,
                 Size = new Point(200,25),
                 Parent = PlayerNameTextBoxPanel,
                 Location = new Point(0, 100)
             };
             Player6NameBox = new TextBox 
             {
-                PlaceholderText = Player6Name.Value,
+                PlaceholderText = PlayerNames[5].Value,
                 Size = new Point(200,25),
                 Parent = PlayerNameTextBoxPanel,
                 Location = new Point(200, 0)
             };
             Player7NameBox = new TextBox 
             {
-                PlaceholderText = Player7Name.Value,
+                PlaceholderText = PlayerNames[6].Value,
                 Size = new Point(200,25),
                 Parent = PlayerNameTextBoxPanel,
                 Location = new Point(200, 25)
             };
             Player8NameBox = new TextBox 
             {
-                PlaceholderText = Player8Name.Value,
+                PlaceholderText = PlayerNames[7].Value,
                 Size = new Point(200,25),
                 Parent = PlayerNameTextBoxPanel,
                 Location = new Point(200, 50)
             };
             Player9NameBox = new TextBox 
             {
-                PlaceholderText = Player9Name.Value,
+                PlaceholderText = PlayerNames[8].Value,
                 Size = new Point(200,25),
                 Parent = PlayerNameTextBoxPanel,
                 Location = new Point(200, 75)
             };
             Player10NameBox = new TextBox 
             {
-                PlaceholderText = Player10Name.Value,
+                PlaceholderText = PlayerNames[9].Value,
                 Size = new Point(200,25),
                 Parent = PlayerNameTextBoxPanel,
                 Location = new Point(200, 100)
