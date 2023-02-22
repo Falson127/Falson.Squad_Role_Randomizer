@@ -378,6 +378,16 @@ namespace Falson.SquadRoleRandomizer
                 FlowDirection = ControlFlowDirection.SingleTopToBottom
             };
             #region Player Panels
+            Player1FlowPanel = new PlayerFlowPanel(PlayerNames[0].Value, MasterFlowPanel);
+            Player2FlowPanel = new PlayerFlowPanel(PlayerNames[1].Value, MasterFlowPanel);
+            Player3FlowPanel = new PlayerFlowPanel(PlayerNames[2].Value, MasterFlowPanel);
+            Player4FlowPanel = new PlayerFlowPanel(PlayerNames[3].Value, MasterFlowPanel);
+            Player5FlowPanel = new PlayerFlowPanel(PlayerNames[4].Value, MasterFlowPanel);
+            Player6FlowPanel = new PlayerFlowPanel(PlayerNames[5].Value, MasterFlowPanel);
+            Player7FlowPanel = new PlayerFlowPanel(PlayerNames[6].Value, MasterFlowPanel);
+            Player8FlowPanel = new PlayerFlowPanel(PlayerNames[7].Value, MasterFlowPanel);
+            Player9FlowPanel = new PlayerFlowPanel(PlayerNames[8].Value, MasterFlowPanel);
+            Player10FlowPanel = new PlayerFlowPanel(PlayerNames[9].Value, MasterFlowPanel);
             Player1FlowPanel = new FlowPanel
             {
                 Title = Player1Name.Value,
