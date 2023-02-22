@@ -17,7 +17,7 @@ namespace Falson.SquadRoleRandomizer
     [Export(typeof(Blish_HUD.Modules.Module))]
     public class RoleRandomizerMain : Blish_HUD.Modules.Module
     {
-        public GridPanel testgridpanel;
+        //public GridPanel testgridpanel;
         public static StandardWindow RandomizerResultsWindow;
         public static StandardWindow RandomizerSettingsWindow;
         private CornerIcon RandomizerSettingIcon;
@@ -77,16 +77,16 @@ namespace Falson.SquadRoleRandomizer
         public List<CustomCheckbox[]> ListofCheckboxArrays;
         public List<SettingEntry<bool>[]> ListofRolesSettings;
         public static List<List<string>> ListofRoleValidLists;
-        public TextBox Player1NameBox;
-        public TextBox Player2NameBox;
-        public TextBox Player3NameBox;
-        public TextBox Player4NameBox;
-        public TextBox Player5NameBox;
-        public TextBox Player6NameBox;
-        public TextBox Player7NameBox;
-        public TextBox Player8NameBox;
-        public TextBox Player9NameBox;
-        public TextBox Player10NameBox;
+        public CustomTextbox Player1NameBox;
+        public CustomTextbox Player2NameBox;
+        public CustomTextbox Player3NameBox;
+        public CustomTextbox Player4NameBox;
+        public CustomTextbox Player5NameBox;
+        public CustomTextbox Player6NameBox;
+        public CustomTextbox Player7NameBox;
+        public CustomTextbox Player8NameBox;
+        public CustomTextbox Player9NameBox;
+        public CustomTextbox Player10NameBox;
         public Panel PlayerNameTextBoxPanel;
         public PlayerFlowPanel Player1FlowPanel;
         public PlayerFlowPanel Player2FlowPanel;
@@ -943,76 +943,17 @@ namespace Falson.SquadRoleRandomizer
             }
             #endregion
             #region Textboxes
-            Player1NameBox = new TextBox 
-            {
-                PlaceholderText = PlayerNames[0].Value,
-                Size = new Point(200,25),
-                Parent = PlayerNameTextBoxPanel,
-                Location = new Point(0,0)
-            };
-            Player2NameBox = new TextBox 
-            {
-                PlaceholderText = PlayerNames[1].Value,
-                Size = new Point(200,25),
-                Parent = PlayerNameTextBoxPanel,
-                Location = new Point(0, 25)
-            };
-            Player3NameBox = new TextBox 
-            {
-                PlaceholderText = PlayerNames[2].Value,
-                Size = new Point(200,25),
-                Parent = PlayerNameTextBoxPanel,
-                Location = new Point(0, 50)
-            };
-            Player4NameBox = new TextBox 
-            {
-                PlaceholderText = PlayerNames[3].Value,
-                Size = new Point(200,25),
-                Parent = PlayerNameTextBoxPanel,
-                Location = new Point(0, 75)
-            };
-            Player5NameBox = new TextBox 
-            {
-                PlaceholderText = PlayerNames[4].Value,
-                Size = new Point(200,25),
-                Parent = PlayerNameTextBoxPanel,
-                Location = new Point(0, 100)
-            };
-            Player6NameBox = new TextBox 
-            {
-                PlaceholderText = PlayerNames[5].Value,
-                Size = new Point(200,25),
-                Parent = PlayerNameTextBoxPanel,
-                Location = new Point(200, 0)
-            };
-            Player7NameBox = new TextBox 
-            {
-                PlaceholderText = PlayerNames[6].Value,
-                Size = new Point(200,25),
-                Parent = PlayerNameTextBoxPanel,
-                Location = new Point(200, 25)
-            };
-            Player8NameBox = new TextBox 
-            {
-                PlaceholderText = PlayerNames[7].Value,
-                Size = new Point(200,25),
-                Parent = PlayerNameTextBoxPanel,
-                Location = new Point(200, 50)
-            };
-            Player9NameBox = new TextBox 
-            {
-                PlaceholderText = PlayerNames[8].Value,
-                Size = new Point(200,25),
-                Parent = PlayerNameTextBoxPanel,
-                Location = new Point(200, 75)
-            };
-            Player10NameBox = new TextBox 
-            {
-                PlaceholderText = PlayerNames[9].Value,
-                Size = new Point(200,25),
-                Parent = PlayerNameTextBoxPanel,
-                Location = new Point(200, 100)
-            };
+            Player1NameBox = new CustomTextbox(PlayerNames[0], Player1FlowPanel, PlayerNameTextBoxPanel, new Point(0, 0));
+            Player2NameBox = new CustomTextbox(PlayerNames[1],Player2FlowPanel,PlayerNameTextBoxPanel,new Point(0,25));
+            Player2NameBox = new CustomTextbox(PlayerNames[2],Player3FlowPanel,PlayerNameTextBoxPanel,new Point(0,50));
+            Player2NameBox = new CustomTextbox(PlayerNames[3],Player4FlowPanel,PlayerNameTextBoxPanel,new Point(0,75));
+            Player2NameBox = new CustomTextbox(PlayerNames[4],Player5FlowPanel,PlayerNameTextBoxPanel,new Point(0,100));
+            Player2NameBox = new CustomTextbox(PlayerNames[5],Player6FlowPanel,PlayerNameTextBoxPanel,new Point(200,0));
+            Player2NameBox = new CustomTextbox(PlayerNames[6],Player7FlowPanel,PlayerNameTextBoxPanel,new Point(200,25));
+            Player2NameBox = new CustomTextbox(PlayerNames[7],Player8FlowPanel,PlayerNameTextBoxPanel,new Point(200,50));
+            Player2NameBox = new CustomTextbox(PlayerNames[8],Player9FlowPanel,PlayerNameTextBoxPanel,new Point(200,75));
+            Player2NameBox = new CustomTextbox(PlayerNames[9],Player10FlowPanel,PlayerNameTextBoxPanel,new Point(200,100));
+            var namebox = new TextBox();
             #endregion
             #region Labels
 
@@ -1066,16 +1007,6 @@ namespace Falson.SquadRoleRandomizer
                 };
             }
             #endregion
-            Player1NameBox.TextChanged += Player1NameBox_TextChanged;
-            Player2NameBox.TextChanged += Player2NameBox_TextChanged;
-            Player3NameBox.TextChanged += Player3NameBox_TextChanged;
-            Player4NameBox.TextChanged += Player4NameBox_TextChanged;
-            Player5NameBox.TextChanged += Player5NameBox_TextChanged;
-            Player6NameBox.TextChanged += Player6NameBox_TextChanged;
-            Player7NameBox.TextChanged += Player7NameBox_TextChanged;
-            Player8NameBox.TextChanged += Player8NameBox_TextChanged;
-            Player9NameBox.TextChanged += Player9NameBox_TextChanged;
-            Player10NameBox.TextChanged += Player10NameBox_TextChanged;
             CounterBoxes[0].Click += CounterBox1Click;
             CounterBoxes[1].Click += CounterBox2Click;
             CounterBoxes[2].Click += CounterBox3Click;
@@ -1150,108 +1081,7 @@ namespace Falson.SquadRoleRandomizer
             CounterBoxesSettings[0].Value = CounterBoxes[0].Value;
         }
         #endregion
-        #region Textbox text changed functions
-        private void Player10NameBox_TextChanged(object sender, EventArgs e)
-        {
-            Player10FlowPanel.Title = Player10NameBox.Text;
-            Player10Name.Value = Player10NameBox.Text;
-            if (Player10NameBox.Text == "") 
-            {
-                Player10NameBox.Text = "Enter Player Name...";
-            }
 
-        }
-
-        private void Player9NameBox_TextChanged(object sender, EventArgs e)
-        {
-            Player9FlowPanel.Title = Player9NameBox.Text;
-            Player9Name.Value = Player9NameBox.Text;
-            if(Player9NameBox.Text == "") 
-            {
-                Player9NameBox.Text = "Enter Player Name...";
-            }
-        }
-
-        private void Player8NameBox_TextChanged(object sender, EventArgs e)
-        {
-            Player8FlowPanel.Title = Player8NameBox.Text;
-            Player8Name.Value = Player8NameBox.Text;
-            if(Player8NameBox.Text == "") 
-            {
-                Player8NameBox.Text = "Enter Player Name...";
-            }
-        }
-
-        private void Player7NameBox_TextChanged(object sender, EventArgs e)
-        {
-            Player7FlowPanel.Title = Player7NameBox.Text;
-            Player7Name.Value = Player7NameBox.Text;
-            if(Player7NameBox.Text == "") 
-            {
-                Player7NameBox.Text = "Enter Player Name...";
-            }
-        }
-
-        private void Player6NameBox_TextChanged(object sender, EventArgs e)
-        {
-            Player6FlowPanel.Title = Player6NameBox.Text;
-            Player6Name.Value = Player6NameBox.Text;
-            if(Player6NameBox.Text == "") 
-            {
-                Player6NameBox.Text = "Enter Player Name...";
-            }
-        }
-
-        private void Player5NameBox_TextChanged(object sender, EventArgs e)
-        {
-            Player5FlowPanel.Title = Player5NameBox.Text;
-            Player5Name.Value = Player5NameBox.Text;
-            if(Player5NameBox.Text == "") 
-            {
-                Player5NameBox.Text = "Enter Player Name...";
-            }
-        }
-
-        private void Player4NameBox_TextChanged(object sender, EventArgs e)
-        {
-            Player4FlowPanel.Title = Player4NameBox.Text;
-            Player4Name.Value = Player4NameBox.Text;
-            if(Player4NameBox.Text == "") 
-            {
-                Player4NameBox.Text = "Enter Player Name...";
-            }
-        }
-
-        private void Player3NameBox_TextChanged(object sender, EventArgs e)
-        {
-            Player3FlowPanel.Title = Player3NameBox.Text;
-            Player3Name.Value = Player3NameBox.Text;
-            if(Player3NameBox.Text == "") 
-            {
-                Player3NameBox.Text = "Enter Player Name...";
-            }
-        }
-
-        private void Player2NameBox_TextChanged(object sender, EventArgs e)
-        {
-            Player2FlowPanel.Title = Player2NameBox.Text;
-            Player2Name.Value = Player2NameBox.Text;
-            if(Player2NameBox.Text == "") 
-            {
-                Player2NameBox.Text = "Enter Player Name...";
-            }
-        }
-
-        private void Player1NameBox_TextChanged(object sender, EventArgs e)
-        {
-            Player1FlowPanel.Title = Player1NameBox.Text;
-            Player1Name.Value = Player1NameBox.Text;
-            if(Player1NameBox.Text == "") 
-            {
-                Player1NameBox.Text = "Enter Player Name...";
-            }
-        }
-        #endregion
         protected override void OnModuleLoaded(EventArgs e)
         {
             //GenerateRoles.RandomizeTheRoles();
@@ -1265,9 +1095,6 @@ namespace Falson.SquadRoleRandomizer
                 RandomizerSettingsWindow.ToggleWindow();
 
             };
-
-
-
             // Base handler must be called
             base.OnModuleLoaded(e);
         }
@@ -1488,31 +1315,15 @@ namespace Falson.SquadRoleRandomizer
             QadimKiteRoles = null;
             SwordRoles = null;
             ShieldRoles = null;
-            Player1Name = null;
-            Player2Name = null;
-            Player3Name = null;
-            Player4Name = null;
-            Player5Name = null;
-            Player6Name = null;
-            Player7Name = null;
-            Player8Name = null;
-            Player9Name = null;
-            Player10Name = null;
+            for (int i = 0; i < 10; i++)
+            {
+                PlayerNames[i] = null;
+            }
             ListofRoleValidLists = null;
             RolestoRandomizeSelectionCheckboxesArray = null;
             Randomizer.Randomizer.RoleName_to_SelectedPlayer = null;
             #endregion
             #region Events
-            Player1NameBox.TextChanged -= Player1NameBox_TextChanged;
-            Player2NameBox.TextChanged -= Player2NameBox_TextChanged;
-            Player3NameBox.TextChanged -= Player3NameBox_TextChanged;
-            Player4NameBox.TextChanged -= Player4NameBox_TextChanged;
-            Player5NameBox.TextChanged -= Player5NameBox_TextChanged;
-            Player6NameBox.TextChanged -= Player6NameBox_TextChanged;
-            Player7NameBox.TextChanged -= Player7NameBox_TextChanged;
-            Player8NameBox.TextChanged -= Player8NameBox_TextChanged;
-            Player9NameBox.TextChanged -= Player9NameBox_TextChanged;
-            Player10NameBox.TextChanged -= Player10NameBox_TextChanged;
             CounterBoxes[0].Click -= CounterBox1Click;
             CounterBoxes[1].Click -= CounterBox2Click;
             CounterBoxes[2].Click -= CounterBox3Click;
