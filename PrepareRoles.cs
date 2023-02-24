@@ -1,5 +1,6 @@
 ﻿using Blish_HUD.Controls;
 using Blish_HUD.Settings;
+using NAudio.CoreAudioApi;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,8 @@ namespace Falson.SquadRoleRandomizer
         public static List<int> Length_of_Roles_Arrays;
         public static List<List<string>> GenerationSequence;
         public static List<List<string>> ListofValidLists;
+        public static List<int> intGenerationSequence;
+        public static List<Tuple<int, string>> intRoles;
         public static void PrepRoles()
         {
             //This method prepares the roles to pass to the randomizer. It converts the checkboxes to activated roles to randomize, loads the saved player names into the list of valid options for each role
@@ -86,6 +89,31 @@ namespace Falson.SquadRoleRandomizer
                 {RoleRandomizerMain.SwordRoles, 20},
                 {RoleRandomizerMain.ShieldRoles, 21}
             };
+            IDictionary<List<string>, int> rolelistname_to_roleidentifiernumber = new Dictionary<List<string>, int>()
+            {
+                {RoleRandomizerMain.HandKiteValid, 0},
+                {RoleRandomizerMain.OilKiteValid, 1},
+                {RoleRandomizerMain.FlakKiteValid, 2},
+                {RoleRandomizerMain.TankValid, 3},
+                {RoleRandomizerMain.HealAlacValid, 4},
+                {RoleRandomizerMain.HealQuickValid, 5},
+                {RoleRandomizerMain.DPSAlacValid, 6},
+                {RoleRandomizerMain.DPSQuickValid, 7},
+                {RoleRandomizerMain.MushroomValid, 8},
+                {RoleRandomizerMain.TowerValid, 9},
+                {RoleRandomizerMain.ReflectValid, 10},
+                {RoleRandomizerMain.CannonValid, 11},
+                {RoleRandomizerMain.ConstrucPusherValid, 12},
+                {RoleRandomizerMain.LampValid, 13},
+                {RoleRandomizerMain.PylonValid, 14},
+                {RoleRandomizerMain.PillarValid, 15},
+                {RoleRandomizerMain.GreenValid, 16},
+                {RoleRandomizerMain.SoullessPusherValid, 17},
+                {RoleRandomizerMain.DhuumKiteValid, 18},
+                {RoleRandomizerMain.QadimKiteValid, 19},
+                {RoleRandomizerMain.SwordValid, 20},
+                {RoleRandomizerMain.ShieldValid, 21}
+            };
             IDictionary<SettingEntry<bool>[], List<string>> RolesArrays_to_ValidLists = new Dictionary<SettingEntry<bool>[], List<string>>()
             {
                 {RoleRandomizerMain.HandKiteRoles, RoleRandomizerMain.HandKiteValid},
@@ -138,8 +166,99 @@ namespace Falson.SquadRoleRandomizer
                 if (item.Count != 0) //only roles that have at least 1 player signed up get added to the sequence for generation
                 {
                     GenerationSequence.Add(item); //converts the current (role)valid list into a string name for the role to be generated and adds to the sequence, from shortest lists to longest.
+                    intGenerationSequence.Add(rolelistname_to_roleidentifiernumber[item]); //new standard, GenSequence above will depreciate once RR.cs is done
                 }
             }
+            #region build intRoles list
+            foreach (var name in RoleRandomizerMain.HandKiteValid)
+            {
+                intRoles.Add(Tuple.Create(0, name));
+            }
+            foreach (var name in RoleRandomizerMain.OilKiteValid)
+            {
+                intRoles.Add(Tuple.Create(1, name));
+            }
+            foreach (var name in RoleRandomizerMain.FlakKiteValid)
+            {
+                intRoles.Add(Tuple.Create(2, name));
+            }
+            foreach (var name in RoleRandomizerMain.TankValid)
+            {
+                intRoles.Add(Tuple.Create(3, name));
+            }
+            foreach (var name in RoleRandomizerMain.HealAlacValid)
+            {
+                intRoles.Add(Tuple.Create(4, name));
+            }
+            foreach (var name in RoleRandomizerMain.HealQuickValid)
+            {
+                intRoles.Add(Tuple.Create(5, name));
+            }
+            foreach (var name in RoleRandomizerMain.DPSAlacValid)
+            {
+                intRoles.Add(Tuple.Create(6, name));
+            }
+            foreach (var name in RoleRandomizerMain.DPSQuickValid)
+            {
+                intRoles.Add(Tuple.Create(7, name));
+            }
+            foreach (var name in RoleRandomizerMain.MushroomValid)
+            {
+                intRoles.Add(Tuple.Create(8, name));
+            }
+            foreach (var name in RoleRandomizerMain.TowerValid)
+            {
+                intRoles.Add(Tuple.Create(9, name));
+            }
+            foreach (var name in RoleRandomizerMain.ReflectValid)
+            {
+                intRoles.Add(Tuple.Create(10, name));
+            }
+            foreach (var name in RoleRandomizerMain.CannonValid)
+            {
+                intRoles.Add(Tuple.Create(11, name));
+            }
+            foreach (var name in RoleRandomizerMain.ConstrucPusherValid)
+            {
+                intRoles.Add(Tuple.Create(12, name));
+            }
+            foreach (var name in RoleRandomizerMain.LampValid)
+            {
+                intRoles.Add(Tuple.Create(13, name));
+            }
+            foreach (var name in RoleRandomizerMain.PylonValid)
+            {
+                intRoles.Add(Tuple.Create(14, name));
+            }
+            foreach (var name in RoleRandomizerMain.PillarValid)
+            {
+                intRoles.Add(Tuple.Create(15, name));
+            }
+            foreach (var name in RoleRandomizerMain.GreenValid)
+            {
+                intRoles.Add(Tuple.Create(16, name));
+            }
+            foreach (var name in RoleRandomizerMain.SoullessPusherValid)
+            {
+                intRoles.Add(Tuple.Create(17, name));
+            }
+            foreach (var name in RoleRandomizerMain.DhuumKiteValid)
+            {
+                intRoles.Add(Tuple.Create(18, name));
+            }
+            foreach (var name in RoleRandomizerMain.QadimKiteValid)
+            {
+                intRoles.Add(Tuple.Create(19, name));
+            }
+            foreach (var name in RoleRandomizerMain.SwordValid)
+            {
+                intRoles.Add(Tuple.Create(20, name));
+            }
+            foreach (var name in RoleRandomizerMain.ShieldValid)
+            {
+                intRoles.Add(Tuple.Create(21, name));
+            }
+            #endregion
             var TheRandomizer = new Randomizer.Randomizer();
             TheRandomizer.MainMethod();
         }

@@ -3,12 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using falsonP = Falson.SquadRoleRandomizer.PrepareRoles;
 
 namespace Falson.Randomizer
 {
     public class RecursiveRandomizer 
     {
-        private int[,] _conflicts = new int[22,22];
+        private int[,] _conflicts = new int[22,22]; //format: [x,y] x=role of interest, y=test role. If [x,y] = 0, then role y does not conflcit with x. if = 1, then role y does conflict with x
+        private List<Tuple<int,string>> _roles = new List<Tuple<int,string>>();
+        private List<int> _generationsequence = new List<int>();
+
+
 
         private void setconflicts()
         {
@@ -162,8 +167,15 @@ namespace Falson.Randomizer
             _conflicts[21,5] = 1;
             #endregion
         }
-    }
 
+        private void GenerateRoles()
+        {
+            _generationsequence = falsonP.intGenerationSequence; //list with integers from 0-21 in the sequence they need to be accessed.
+            _roles = falsonP.intRoles; //roles in tuple form (x,name) where x is role id# and name is a player signed up for that role
+            //var result = _roles.Where(x => x.Item1 == 0); format to get items of desired role by int
+
+        }
+    }
     //0 HandKiteValid 
     //1 OilKiteValid 
     //2 FlakKiteValid
