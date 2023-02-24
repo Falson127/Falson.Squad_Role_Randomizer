@@ -173,6 +173,9 @@ namespace Falson.Randomizer
             _generationsequence = falsonP.intGenerationSequence; //list with integers from 0-21 in the sequence they need to be accessed.
             _roles = falsonP.intRoles; //roles in tuple form (x,name) where x is role id# and name is a player signed up for that role
             //var result = _roles.Where(x => x.Item1 == 0); format to get items of desired role by int
+            var genspacedepth = _generationsequence.Count();
+            var genindex = 0;
+
 
         }
     }
@@ -198,80 +201,62 @@ namespace Falson.Randomizer
     //19 QadimKiteValid 
     //20 SwordValid 
     //21 ShieldValid 
-    class Program
-    {
-        // Define the roles and conflicts
-        static string[] Roles = Enumerable.Range(0, 22).Select(i => $"role{i}").ToArray();
-        static int[,] Conflicts = new int[22, 22];
-        // set conflicts between roles (for example)
-        static void SetConflicts(int[,] conflicts)
-        {
-            conflicts[0, 1] = 1;
-            conflicts[1, 0] = 1;
-        }
 
-        static bool CanAssign(string person, int role, string[] assignments)
+public class Program
+    {
+        private static readonly int[,] Conflicts = new int[22, 22];
+
+        private static bool IsAssignmentValid(int roleIndex, string person, List<Tuple<int, string>> assignedRoles)
         {
-            // Check if the person can be assigned to the role
-            for (int i = 0; i < assignments.Length; i++)
+            // Check if the person has already been assigned to a conflicting role
+            if (assignedRoles.Any(a => Conflicts[roleIndex, a.Item1] == 1 && a.Item2 == person))
             {
-                if (Conflicts[i, role] == 1 && assignments[i] == person)
-                    return false;
-                if (assignments[i] == person && i != role)
-                    return false;
+                return false;
             }
+
+            // Check if any other assigned person has already been assigned to this role
+            if (assignedRoles.Any(a => a.Item1 == roleIndex && a.Item2 != person))
+            {
+                return false;
+            }
+
             return true;
         }
 
-        static bool AssignRoles(int roleIndex, List<string> assignments, List<string> availablePeople)
+        private static bool AssignRoles(int roleIndex, List<Tuple<int, string>> availablePeople, List<Tuple<int, string>> assignedRoles)
         {
-            // Recursive function to assign people to roles
-            if (roleIndex >= Roles.Length)
-                return true;
-            availablePeople.Shuffle();
-            foreach (var person in availablePeople)
+            if (roleIndex >= assignedRoles.Count)
             {
-                if (CanAssign(person, roleIndex, assignments.ToArray()))
+                return true; // All roles have been assigned
+            }
+
+            var roleAvailablePeople = availablePeople.Where(ap => ap.Item1 == roleIndex).Select(ap => ap.Item2).ToList();
+
+            ShuffleList(roleAvailablePeople);
+
+            foreach (var person in roleAvailablePeople)
+            {
+                if (IsAssignmentValid(roleIndex, person, assignedRoles))
                 {
-                    assignments.Add(person);
-                    var remainingPeople = availablePeople.Where(p => p != person).ToList();
-                    if (AssignRoles(roleIndex + 1, assignments, remainingPeople))
-                        return true;
-                    assignments.RemoveAt(assignments.Count - 1);
+                    assignedRoles.Add(Tuple.Create(roleIndex, person));
+                    availablePeople.RemoveAll(ap => ap.Item1 == roleIndex && ap.Item2 == person);
+
+                    if (AssignRoles(roleIndex + 1, availablePeople, assignedRoles))
+                    {
+                        return true; // Successfully assigned all roles
+                    }
+
+                    assignedRoles.RemoveAt(assignedRoles.Count - 1);
+                    availablePeople.Add(Tuple.Create(roleIndex, person));
                 }
             }
-            return false;
+
+            return false; // Couldn't assign the current role
         }
 
-        static void Main()
+        private static void ShuffleList<T>(List<T> list)
         {
-            SetConflicts(Conflicts);
-
-            var availablePeople = Enumerable.Range(0, 10).Select(i => $"person{i}").ToList();
-            availablePeople.Shuffle();
-            var assignments = new List<string>();
-
-            if (AssignRoles(0, assignments, availablePeople))
-            {
-                for (int i = 0; i < assignments.Count; i++)
-                {
-                    Console.WriteLine($"Role {Roles[i]} assigned to {assignments[i]}");
-                }
-            }
-            else
-            {
-                Console.WriteLine("No valid assignments found.");
-            }
-        }
-    }
-
-    // Extension method to shuffle a list
-    static class ListExtensions
-    {
-        private static Random rng = new Random();
-
-        public static void Shuffle<T>(this IList<T> list)
-        {
+            var rng = new Random();
             int n = list.Count;
             while (n > 1)
             {
@@ -282,6 +267,25 @@ namespace Falson.Randomizer
                 list[n] = value;
             }
         }
+
+        public static void Main()
+        {
+            // Define available people for each role
+            var availablePeople = new List<Tuple<int, string>>();
+            availablePeople.Add(Tuple.Create(0, "Person 1"));
+            availablePeople.Add(Tuple.Create(0, "Person 2"));
+            availablePeople.Add(Tuple.Create(0, "Person 3"));
+            // Add available people for other roles...
+
+            // Assign the roles
+            var assignedRoles = new List<Tuple<int, string>>();
+            AssignRoles(0, availablePeople, assignedRoles);
+
+            // Output the assigned roles
+            foreach (var assignment in assignedRoles)
+            {
+                Console.WriteLine($"Role {assignment.Item1}: {assignment.Item2}");
+            }
+        }
     }
 
-}
