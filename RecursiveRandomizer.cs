@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using falsonP = Falson.SquadRoleRandomizer.PrepareRoles;
 
 namespace Falson.Randomizer
@@ -12,9 +13,79 @@ namespace Falson.Randomizer
         private int[,] _conflicts = new int[22, 22]; //format: [x,y] x=role of interest, y=test role. If [x,y] = 0, then role y does not conflcit with x. if = 1, then role y does conflict with x
         private List<Tuple<int, string>> _roles = new List<Tuple<int, string>>();
         private List<int> _generationsequence = new List<int>();
+        private List<Tuple<int, string>> _assignedRoles = new List<Tuple<int, string>>();
+        int roleindex = 0;
+        int generatorspace = 0;
 
+        public void Main()
+        {
+            _roles.Clear();
+            _roles = falsonP.intRoles;
+            AssignRoles(roleindex,_roles,_assignedRoles);
+        }
 
+        private bool IsAssignmentValid(int roleIndex, string person, List<Tuple<int, string>> assignedRoles)
+        {
+            // Check if the person has already been assigned to a conflicting role
+            if (assignedRoles.Any(a => _conflicts[a.Item1, roleIndex] == 1 && a.Item2 == person))
+            {
+                return false;
+            }
 
+            // Check if any other assigned person has already been assigned to this role
+            if (assignedRoles.Any(a => a.Item1 == roleIndex && a.Item2 != person))
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        private bool AssignRoles(int roleIndex, List<Tuple<int, string>> availablePeople, List<Tuple<int, string>> assignedRoles)
+        {
+            if (roleIndex >= assignedRoles.Count)
+            {
+                return true; // All roles have been assigned
+            }
+
+            var roleAvailablePeople = availablePeople.Where(ap => ap.Item1 == roleIndex).Select(ap => ap.Item2).ToList();
+
+            ShuffleList(roleAvailablePeople);
+
+            foreach (var person in roleAvailablePeople)
+            {
+                if (IsAssignmentValid(roleIndex, person, assignedRoles))
+                {
+                    assignedRoles.Add(Tuple.Create(roleIndex, person));
+                    availablePeople.RemoveAll(ap => ap.Item1 == roleIndex && ap.Item2 == person);
+
+                    if (AssignRoles(roleIndex + 1, availablePeople, assignedRoles))
+                    {
+                        return true; // Successfully assigned all roles
+                    }
+                    else
+                    {
+                        assignedRoles.RemoveAt(assignedRoles.Count - 1);
+                        availablePeople.Add(Tuple.Create(roleIndex, person));
+                    }
+                }
+            }
+
+            return false; // Couldn't assign the current role
+        }
+        private static void ShuffleList<T>(List<T> list)
+        {
+            var rng = new Random();
+            int n = list.Count;
+            while (n > 1)
+            {
+                n--;
+                int k = rng.Next(n + 1);
+                T value = list[k];
+                list[k] = list[n];
+                list[n] = value;
+            }
+        }
         private void setconflicts()
         {
             //start with no conflicts
@@ -175,9 +246,8 @@ namespace Falson.Randomizer
             //var result = _roles.Where(x => x.Item1 == 0); format to get items of desired role by int
             var genspacedepth = _generationsequence.Count();
             var genindex = 0;
-
-
         }
+
     }
     //0 HandKiteValid 
     //1 OilKiteValid 
@@ -209,7 +279,7 @@ namespace Falson.Randomizer
         private static bool IsAssignmentValid(int roleIndex, string person, List<Tuple<int, string>> assignedRoles)
         {
             // Check if the person has already been assigned to a conflicting role
-            if (assignedRoles.Any(a => Conflicts[roleIndex, a.Item1] == 1 && a.Item2 == person))
+            if (assignedRoles.Any(a => Conflicts[a.Item1, roleIndex] == 1 && a.Item2 == person))
             {
                 return false;
             }
