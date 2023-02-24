@@ -8,7 +8,7 @@ using falsonP = Falson.SquadRoleRandomizer.PrepareRoles;
 namespace Falson.Randomizer
 {
     public class RecursiveRandomizer 
-    {
+    { //make _conflicts readonly for pretection, then in setConflicts() method make a temp int[,] array to add into. Then set _conflicts = tempconflicts. Remove initializtion =new int[22,22] to avoid readonly taking effect early
         private int[,] _conflicts = new int[22,22]; //format: [x,y] x=role of interest, y=test role. If [x,y] = 0, then role y does not conflcit with x. if = 1, then role y does conflict with x
         private List<Tuple<int,string>> _roles = new List<Tuple<int,string>>();
         private List<int> _generationsequence = new List<int>();
