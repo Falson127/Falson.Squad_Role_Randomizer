@@ -20,6 +20,11 @@ namespace Falson.SquadRoleRandomizer
             CanCollapse= true;
             Collapsed= true;
         }
+
+        public void MainMethod() 
+        {
+            
+        }
     
     }
 }

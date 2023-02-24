@@ -707,60 +707,100 @@ namespace Falson.SquadRoleRandomizer
             PlayerPanels[9].Title = Player10NameBox.Text;
             PlayerNames[9].Value = Player10NameBox.Text;
 
+            if (PlayerNames[9].Value == "") 
+            {
+                Player10NameBox.Text = "Enter Player Name";
+            };
         }
 
         private void Player9NameBox_TextChanged(object sender, EventArgs e)
         {
             PlayerPanels[8].Title = Player9NameBox.Text;
             PlayerNames[8].Value = Player9NameBox.Text;
+            if(PlayerNames[8].Value == "")
+            {
+                Player9NameBox.Text = "Enter Player Name";
+            };
         }
 
         private void Player8NameBox_TextChanged(object sender, EventArgs e)
         {
             PlayerPanels[7].Title = Player8NameBox.Text;
             PlayerNames[7].Value = Player8NameBox.Text;
+            if(PlayerNames[7].Value == "")
+            {
+                Player8NameBox.Text = "Enter Player Name";
+            };
         }
 
         private void Player7NameBox_TextChanged(object sender, EventArgs e)
         {
             PlayerPanels[6].Title = Player7NameBox.Text;
             PlayerNames[6].Value = Player7NameBox.Text;
+            if(PlayerNames[6].Value == "")
+            {
+                Player7NameBox.Text = "Enter Player Name";
+            };
         }
 
         private void Player6NameBox_TextChanged(object sender, EventArgs e)
         {
             PlayerPanels[5].Title = Player6NameBox.Text;
             PlayerNames[5].Value = Player6NameBox.Text;
+            if(PlayerNames[5].Value == "")
+            {
+                Player6NameBox.Text = "Enter Player Name";
+            };
         }
 
         private void Player5NameBox_TextChanged(object sender, EventArgs e)
         {
             PlayerPanels[4].Title = Player5NameBox.Text;
             PlayerNames[4].Value = Player5NameBox.Text;
+            if(PlayerNames[4].Value == "")
+            {
+                Player5NameBox.Text = "Enter Player Name";
+            };
         }
 
         private void Player4NameBox_TextChanged(object sender, EventArgs e)
         {
             PlayerPanels[3].Title = Player4NameBox.Text;
             PlayerNames[3].Value = Player4NameBox.Text;
+            if(PlayerNames[3].Value == "")
+            {
+                Player4NameBox.Text = "Enter Player Name";
+            };
         }
 
         private void Player3NameBox_TextChanged(object sender, EventArgs e)
         {
             PlayerPanels[2].Title = Player3NameBox.Text;
             PlayerNames[2].Value = Player3NameBox.Text;
+            if(PlayerNames[2].Value == "")
+            {
+                Player3NameBox.Text = "Enter Player Name";
+            };
         }
 
         private void Player2NameBox_TextChanged(object sender, EventArgs e)
         {
             PlayerPanels[1].Title = Player2NameBox.Text;
             PlayerNames[1].Value = Player2NameBox.Text;
+            if(PlayerNames[1].Value == "")
+            {
+                Player2NameBox.Text = "Enter Player Name";
+            };
         }
 
         private void Player1NameBox_TextChanged(object sender, EventArgs e)
         {
             PlayerPanels[0].Title = Player1NameBox.Text;
             PlayerNames[0].Value = Player1NameBox.Text;
+            if(PlayerNames[0].Value == "")
+            {
+                Player1NameBox.Text = "Enter Player Name";
+            };
         }
         #endregion
         protected override void OnModuleLoaded(EventArgs e)
