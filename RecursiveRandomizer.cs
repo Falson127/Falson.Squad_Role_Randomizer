@@ -8,13 +8,31 @@ namespace Falson.Randomizer
 {
     public class RecursiveRandomizer 
     {
-        public void MainMethod()
-        {
-
-        }
+        
     }
 
-
+    //0 HandKiteValid 
+    //1 OilKiteValid 
+    //2 FlakKiteValid
+    //3 TankValid 
+    //4 HealAlacValid
+    //5 HealQuickValid
+    //6 DPSAlacValid 
+    //7 DPSQuickValid
+    //8 MushroomValid
+    //9 TowerValid 
+    //10 ReflectValid
+    //11 CannonValid
+    //12 ConstrucPusherValid
+    //13 LampValid 
+    //14 PylonValid
+    //15 PillarValid
+    //16 GreenValid 
+    //17 SoullessPusherValid
+    //18 DhuumKiteValid 
+    //19 QadimKiteValid 
+    //20 SwordValid 
+    //21 ShieldValid 
     class Program
     {
         // Define the roles and conflicts
