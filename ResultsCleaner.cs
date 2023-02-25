@@ -73,6 +73,7 @@ namespace Falson.SquadRoleRandomizer
             CleanedRoles.Clear();
             CleanedHoTMechanics.Clear();
             CleanedPoFMechanics.Clear();
+            filldictionary();
             _assignedRoles = Falson.Randomizer.RecursiveRandomizer._assignedRoles;
             for (int i = 0; i < _assignedRoles.Count(); i++) //takes all assigned roles and breaks them into their assignments for each role
             {
@@ -140,6 +141,7 @@ namespace Falson.SquadRoleRandomizer
                 }
                 DynamicLabel3[pofcounter] = new Label { Text = "", Parent = falson.ResultsFlowPanel, AutoSizeHeight = true, AutoSizeWidth = true };
             }
+            falson.RandomizerResultsWindow.Show();
         }
         private void HandKite() 
         {
