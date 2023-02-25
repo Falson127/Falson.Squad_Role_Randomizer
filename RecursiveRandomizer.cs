@@ -15,20 +15,101 @@ namespace Falson.Randomizer
         private List<Tuple<int, string>> _roles = new List<Tuple<int, string>>();
         private List<int> _generationsequence = new List<int>();
         private List<Tuple<int, string>> _assignedRoles = new List<Tuple<int, string>>();
+        public IDictionary<string, string> RoleName_to_SelectedPlayer = new Dictionary<string, string>();
+        public IDictionary<string, string> HoTMechanic_to_SelectedPlayer = new Dictionary<string, string>();
+        public IDictionary<string, string> PoFMechanic_to_SelectedPlayer = new Dictionary<string, string>();
+        private List<string> _handKiteIs = new List<string>();
+        private List<string> _oilKiteIs = new List<string>();
+        private List<string> _flakKiteIs = new List<string>();
+        private List<string> _tankIs = new List<string>();
+        private List<string> _healAlacIs = new List<string>();
+        private List<string> _healQuickIs = new List<string>();
+        private List<string> _dpsAlacIs = new List<string>();
+        private List<string> _dpsQuickIs = new List<string>();
+        private List<string> _mushroomIs = new List<string>();
+        private List<string> _towerIs = new List<string>();
+        private List<string> _reflectIs = new List<string>();
+        private List<string> _cannonIs = new List<string>();
+        private List<string> _construcPusherIs = new List<string>();
+        private List<string> _lampIs = new List<string>();
+        private List<string> _pylonIs = new List<string>();
+        private List<string> _pillarIs = new List<string>();
+        private List<string> _greenIs = new List<string>();
+        private List<string> _shPusherIs = new List<string>();
+        private List<string> _dhuumKiteIs = new List<string>();
+        private List<string> _qadimKiteIs = new List<string>();
+        private List<string> _swordIs = new List<string>();
+        private List<string> _shieldIs = new List<string>();
+        private List<string> CleanedRoles = new List<string>();
+        private Label[] DynamicLabel;
         int roleindex = 0;
         //int generatorspace = 0;
+        IDictionary<int, List<string>> roleindexint_to_rolelist = new Dictionary<int, List<string>>();
+        IDictionary<int,string> roleindexint_to_rolename = new Dictionary<int, string> 
+        {
+            {0,"The Hand Kite is: " },
+            {1,"The Oil Kite is: " },
+            {2,"The Flak Kite is: " },
+            {3,"The Tank is: " },
+            {4,"Heal Alac " },
+            {5,"Heal Quick " },
+            {6,"DPS Alac " },
+            {7,"DPS Quick " },
+            {8,"Mushroom " },
+            {9,"Tower " },
+            {10,"Reflect " },
+            {11,"Cannon " },
+            {12,"The KC Pusher is: " },
+            {13,"Lamp " },
+            {14,"Pylon " },
+            {15,"Pillar " },
+            {16,"Green " },
+            {17,"The SH Pusher is: " },
+            {18,"The Dhuum Kite is: " },
+            {19,"The Qadim Kite is: " },
+            {20,"Sword " },
+            {21,"Shield " }
+        };
+        public void filldictionary()
+        {
 
+            roleindexint_to_rolelist.Add(0, _handKiteIs);
+            roleindexint_to_rolelist.Add(1, _oilKiteIs);
+            roleindexint_to_rolelist.Add(2 , _flakKiteIs);
+            roleindexint_to_rolelist.Add(3 , _tankIs);
+            roleindexint_to_rolelist.Add(4 , _healAlacIs);
+            roleindexint_to_rolelist.Add(5 , _healQuickIs);
+            roleindexint_to_rolelist.Add(6 , _dpsAlacIs);
+            roleindexint_to_rolelist.Add(7 , _dpsQuickIs);
+            roleindexint_to_rolelist.Add(8 , _mushroomIs);
+            roleindexint_to_rolelist.Add(9 , _towerIs);
+            roleindexint_to_rolelist.Add(10, _reflectIs);
+            roleindexint_to_rolelist.Add(11, _cannonIs);
+            roleindexint_to_rolelist.Add(12, _construcPusherIs);
+            roleindexint_to_rolelist.Add(13, _lampIs);
+            roleindexint_to_rolelist.Add(14, _pylonIs);
+            roleindexint_to_rolelist.Add(15, _pillarIs);
+            roleindexint_to_rolelist.Add(16, _greenIs);
+            roleindexint_to_rolelist.Add(17, _shPusherIs);
+            roleindexint_to_rolelist.Add(18, _dhuumKiteIs);
+            roleindexint_to_rolelist.Add(19, _qadimKiteIs);
+            roleindexint_to_rolelist.Add(20, _swordIs);
+            roleindexint_to_rolelist.Add(21, _shieldIs);
+        
+        }
         public void Main()
         {
             _roles.Clear();
             _generationsequence.Clear();
             setconflicts();
+            filldictionary();
             _roles = falsonP.intRoles;
             _generationsequence = falsonP.intGenerationSequence;
             AssignRoles(roleindex,_roles,_assignedRoles);
-            foreach (var role in _assignedRoles)
+            DynamicLabel = new Label[_assignedRoles.Count()]; //create enough dynamic labels for each individual role that has been assigned
+            for (int i = 0; i < _assignedRoles.Count(); i++) //takes all assigned roles and breaks them into their assignments for each role
             {
-                Debug.WriteLine(role);
+                roleindexint_to_rolelist[_assignedRoles[i].Item1].Add(_assignedRoles[i].Item2);
             }
         }
 
