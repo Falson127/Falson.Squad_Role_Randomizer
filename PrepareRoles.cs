@@ -24,7 +24,7 @@ namespace Falson.SquadRoleRandomizer
             //This method prepares the roles to pass to the randomizer. It converts the checkboxes to activated roles to randomize, loads the saved player names into the list of valid options for each role
             //and then sorts them from smallest to largest, removing any role list that has no players. This information is then stored in a list called GenerationSequence, which is passed to the randomizer
             //to be sorted one last time before the randomizer class actually performs the necessary actions to randomize a member into each role.
-
+            intRoles.Clear();
             GenerationSequence = new List<List<string>>();
             ListofValidLists = new List<List<string>> { RoleRandomizerMain.HandKiteValid, RoleRandomizerMain.OilKiteValid, RoleRandomizerMain.FlakKiteValid, RoleRandomizerMain.TankValid, RoleRandomizerMain.HealAlacValid, RoleRandomizerMain.HealQuickValid, RoleRandomizerMain.DPSAlacValid, RoleRandomizerMain.DPSQuickValid, RoleRandomizerMain.MushroomValid, RoleRandomizerMain.TowerValid, RoleRandomizerMain.ReflectValid, RoleRandomizerMain.CannonValid, RoleRandomizerMain.ConstrucPusherValid, RoleRandomizerMain.LampValid, RoleRandomizerMain.PylonValid, RoleRandomizerMain.PillarValid, RoleRandomizerMain.GreenValid, RoleRandomizerMain.SoullessPusherValid, RoleRandomizerMain.DhuumKiteValid, RoleRandomizerMain.QadimKiteValid, RoleRandomizerMain.SwordValid, RoleRandomizerMain.ShieldValid, };
             IDictionary<CustomCheckbox, SettingEntry<bool>[]> ActiveRolesDictionary = new Dictionary<CustomCheckbox, SettingEntry<bool>[]>()
