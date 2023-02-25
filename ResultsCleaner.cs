@@ -40,31 +40,7 @@ namespace Falson.SquadRoleRandomizer
         private List<string> _swordIs = new List<string>();
         private List<string> _shieldIs = new List<string>();
         IDictionary<int, List<string>> roleindexint_to_rolelist = new Dictionary<int, List<string>>();
-        IDictionary<int, string> roleindexint_to_rolename = new Dictionary<int, string>
-        {
-            {0,"The Hand Kite is: " },
-            {1,"The Oil Kite is: " },
-            {2,"The Flak Kite is: " },
-            {3,"The Tank is: " },
-            {4,"Heal Alac " },
-            {5,"Heal Quick " },
-            {6,"DPS Alac " },
-            {7,"DPS Quick " },
-            {8,"Mushroom " },
-            {9,"Tower " },
-            {10,"Reflect " },
-            {11,"Cannon " },
-            {12,"The KC Pusher is: " },
-            {13,"Lamp " },
-            {14,"Pylon " },
-            {15,"Pillar " },
-            {16,"Green " },
-            {17,"The SH Pusher is: " },
-            {18,"The Dhuum Kite is: " },
-            {19,"The Qadim Kite is: " },
-            {20,"Sword " },
-            {21,"Shield " }
-        };
+
 
 
         public void filldictionary()
