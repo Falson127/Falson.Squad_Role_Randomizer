@@ -18,31 +18,7 @@ namespace Falson.SquadRoleRandomizer
         public static List<List<string>> ListofValidLists;
         public static List<int> intGenerationSequence = new List<int>();
         public static List<Tuple<int, string>> intRoles = new List<Tuple<int,string>>();
-        IDictionary<int,string> roleindexint_to_rolename = new Dictionary<int,string>
-        {
-            {0 , "HandKite"},
-            {1 , "OilKite"},
-            {2 , "FlakKite"},
-            {3 , "Tank"},
-            {4 , "HealAlac"},
-            {5 , "HealQuick"},
-            {6 , "DPSAlac"},
-            {7 , "DPSQuick"},
-            {8 , "Mushroom"},
-            {9 , "Tower"},
-            {10, "Reflect"},
-            {11, "Cannon"},
-            {12, "ConstrucPusher"},
-            {13, "Lamp"},
-            {14, "Pylon"},
-            {15, "Pillar"},
-            {16, "Green"},
-            {17, "SoullessPusher"},
-            {18, "DhuumKite"},
-            {19, "QadimKite"},
-            {20, "Sword"},
-            {21, "Shield"}
-        }
+        
         public static void PrepRoles()
         {
             //This method prepares the roles to pass to the randomizer. It converts the checkboxes to activated roles to randomize, loads the saved player names into the list of valid options for each role
