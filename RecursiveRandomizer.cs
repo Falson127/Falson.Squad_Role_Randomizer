@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Diagnostics;
 using falsonP = Falson.SquadRoleRandomizer.PrepareRoles;
 
 namespace Falson.Randomizer
@@ -15,13 +16,20 @@ namespace Falson.Randomizer
         private List<int> _generationsequence = new List<int>();
         private List<Tuple<int, string>> _assignedRoles = new List<Tuple<int, string>>();
         int roleindex = 0;
-        int generatorspace = 0;
+        //int generatorspace = 0;
 
         public void Main()
         {
             _roles.Clear();
+            _generationsequence.Clear();
+            setconflicts();
             _roles = falsonP.intRoles;
+            _generationsequence = falsonP.intGenerationSequence;
             AssignRoles(roleindex,_roles,_assignedRoles);
+            foreach (var role in _assignedRoles)
+            {
+                Debug.WriteLine(role);
+            }
         }
 
         private bool IsAssignmentValid(int roleIndex, string person, List<Tuple<int, string>> assignedRoles)
@@ -43,21 +51,23 @@ namespace Falson.Randomizer
 
         private bool AssignRoles(int roleIndex, List<Tuple<int, string>> availablePeople, List<Tuple<int, string>> assignedRoles)
         {
-            if (roleIndex >= assignedRoles.Count)
+            if (roleIndex == _generationsequence.Count)
             {
                 return true; // All roles have been assigned
             }
 
-            var roleAvailablePeople = availablePeople.Where(ap => ap.Item1 == roleIndex).Select(ap => ap.Item2).ToList();
+            int nextRoleIndex = _generationsequence[roleIndex];
+
+            var roleAvailablePeople = availablePeople.Where(ap => ap.Item1 == nextRoleIndex).Select(ap => ap.Item2).ToList();
 
             ShuffleList(roleAvailablePeople);
 
             foreach (var person in roleAvailablePeople)
             {
-                if (IsAssignmentValid(roleIndex, person, assignedRoles))
+                if (IsAssignmentValid(nextRoleIndex, person, assignedRoles))
                 {
-                    assignedRoles.Add(Tuple.Create(roleIndex, person));
-                    availablePeople.RemoveAll(ap => ap.Item1 == roleIndex && ap.Item2 == person);
+                    assignedRoles.Add(Tuple.Create(nextRoleIndex, person));
+                    availablePeople.RemoveAll(ap => ap.Item1 == nextRoleIndex && ap.Item2 == person);
 
                     if (AssignRoles(roleIndex + 1, availablePeople, assignedRoles))
                     {
@@ -66,14 +76,14 @@ namespace Falson.Randomizer
                     else
                     {
                         assignedRoles.RemoveAt(assignedRoles.Count - 1);
-                        availablePeople.Add(Tuple.Create(roleIndex, person));
+                        availablePeople.Add(Tuple.Create(nextRoleIndex, person));
                     }
                 }
             }
 
             return false; // Couldn't assign the current role
         }
-        private static void ShuffleList<T>(List<T> list)
+        private void ShuffleList<T>(List<T> list)
         {
             var rng = new Random();
             int n = list.Count;
@@ -237,15 +247,6 @@ namespace Falson.Randomizer
             _conflicts[21, 4] = 1;
             _conflicts[21, 5] = 1;
             #endregion
-        }
-
-        private void GenerateRoles()
-        {
-            _generationsequence = falsonP.intGenerationSequence; //list with integers from 0-21 in the sequence they need to be accessed.
-            _roles = falsonP.intRoles; //roles in tuple form (x,name) where x is role id# and name is a player signed up for that role
-            //var result = _roles.Where(x => x.Item1 == 0); format to get items of desired role by int
-            var genspacedepth = _generationsequence.Count();
-            var genindex = 0;
         }
 
     }

@@ -16,8 +16,8 @@ namespace Falson.SquadRoleRandomizer
         public static List<int> Length_of_Roles_Arrays;
         public static List<List<string>> GenerationSequence;
         public static List<List<string>> ListofValidLists;
-        public static List<int> intGenerationSequence;
-        public static List<Tuple<int, string>> intRoles;
+        public static List<int> intGenerationSequence = new List<int>();
+        public static List<Tuple<int, string>> intRoles = new List<Tuple<int,string>>();
         public static void PrepRoles()
         {
             //This method prepares the roles to pass to the randomizer. It converts the checkboxes to activated roles to randomize, loads the saved player names into the list of valid options for each role
@@ -259,8 +259,8 @@ namespace Falson.SquadRoleRandomizer
                 intRoles.Add(Tuple.Create(21, name));
             }
             #endregion
-            var TheRandomizer = new Randomizer.Randomizer();
-            TheRandomizer.MainMethod();
+            var TheRandomizer = new Randomizer.RecursiveRandomizer();
+            TheRandomizer.Main();
         }
 
         
