@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Blish_HUD.Controls;
+using falson = Falson.SquadRoleRandomizer.RoleRandomizerMain;
 
 namespace Falson.SquadRoleRandomizer
 {
@@ -11,7 +12,11 @@ namespace Falson.SquadRoleRandomizer
     {
         private List<Tuple<int, string>> _assignedRoles = new List<Tuple<int, string>>();
         private List<string> CleanedRoles = new List<string>();
-        private Label[] DynamicLabel;
+        private List<string> CleanedHoTMechanics = new List<string>();
+        private List<string> CleanedPoFMechanics = new List<string>();
+        private Label[] DynamicLabel1;
+        private Label[] DynamicLabel2;
+        private Label[] DynamicLabel3;
         private List<string> _handKiteIs = new List<string>();
         private List<string> _oilKiteIs = new List<string>();
         private List<string> _flakKiteIs = new List<string>();
@@ -89,33 +94,96 @@ namespace Falson.SquadRoleRandomizer
         }
         public void Main()
         {
+            CleanedRoles.Clear();
+            CleanedHoTMechanics.Clear();
+            CleanedPoFMechanics.Clear();
             _assignedRoles = Falson.Randomizer.RecursiveRandomizer._assignedRoles;
-            DynamicLabel = new Label[_assignedRoles.Count()]; //create enough dynamic labels for each individual role that has been assigned
             for (int i = 0; i < _assignedRoles.Count(); i++) //takes all assigned roles and breaks them into their assignments for each role
             {
                 roleindexint_to_rolelist[_assignedRoles[i].Item1].Add(_assignedRoles[i].Item2);
             }
+            #region Call all datamanip methods
+            Tank();
+            HealAlac();
+            HealQuick();
+            DPSAlac();
+            DPSQuick();
+            HandKite();
+            OilKite();
+            FlakKite();
+            Mushroom();
+            Tower();
+            Reflect();
+            Cannon();
+            KCPush();
+            Lamp();
+            Pylon();
+            Pillar();
+            Green();
+            SHPush();
+            DhuumKite();
+            QadimKite();
+            Sword();
+            Shield();
+            #endregion
 
+            //now make the dynamic labels to load into the results window.
+            if (CleanedRoles.Count != 0)
+            {
+                DynamicLabel1 = new Label[(CleanedRoles.Count + 2)];
+                DynamicLabel1[0] = new Label { Text = "Standard Roles:", Parent = falson.ResultsFlowPanel, AutoSizeHeight = true, AutoSizeWidth = true };
+                var rolecounter = 1;
+                foreach (var role in CleanedRoles)
+                {
+                    DynamicLabel1[rolecounter] = new Label { Text = role, Parent = falson.ResultsFlowPanel, AutoSizeHeight=true, AutoSizeWidth = true };
+                    rolecounter++;
+                }
+                DynamicLabel1[rolecounter] = new Label { Text = "", Parent= falson.ResultsFlowPanel,AutoSizeHeight=true,AutoSizeWidth = true };
+            }
+            if (CleanedHoTMechanics.Count != 0)
+            {
+                DynamicLabel2 = new Label[(CleanedHoTMechanics.Count + 2)];
+                DynamicLabel1[0] = new Label { Text = "HoT Mechanics:", Parent = falson.ResultsFlowPanel, AutoSizeHeight = true, AutoSizeWidth = true };
+                var hotcounter = 1;
+                foreach (var role in CleanedHoTMechanics)
+                {
+                    DynamicLabel2[hotcounter] = new Label { Text = role, Parent = falson.ResultsFlowPanel, AutoSizeHeight = true, AutoSizeWidth = true };
+                    hotcounter++;
+                }
+                DynamicLabel2[hotcounter] = new Label { Text = "", Parent = falson.ResultsFlowPanel, AutoSizeHeight = true, AutoSizeWidth = true };
+            }
+            if (CleanedPoFMechanics.Count != 0)
+            {
+                DynamicLabel3 = new Label[(CleanedPoFMechanics.Count + 2)];
+                DynamicLabel3[0] = new Label { Text = "Standard Roles:", Parent = falson.ResultsFlowPanel, AutoSizeHeight = true, AutoSizeWidth = true };
+                var pofcounter = 1;
+                foreach (var role in CleanedPoFMechanics)
+                {
+                    DynamicLabel3[pofcounter] = new Label { Text = role, Parent = falson.ResultsFlowPanel, AutoSizeHeight = true, AutoSizeWidth = true };
+                    pofcounter++;
+                }
+                DynamicLabel3[pofcounter] = new Label { Text = "", Parent = falson.ResultsFlowPanel, AutoSizeHeight = true, AutoSizeWidth = true };
+            }
         }
         private void HandKite() 
         {
             foreach (var player in _handKiteIs)
             {
-                CleanedRoles.Add("The Hand Kite is: " + player);
+                CleanedHoTMechanics.Add("The Hand Kite is: " + player);
             }
         }
         private void OilKite() 
         {
             foreach (var player in _oilKiteIs)
             {
-                CleanedRoles.Add("The Oil Kite is: " + player);
+                CleanedHoTMechanics.Add("The Oil Kite is: " + player);
             }
         }
         private void FlakKite() 
         {
             foreach (var player in _flakKiteIs)
             {
-                CleanedRoles.Add("The Flak Kite is: " + player);
+                CleanedHoTMechanics.Add("The Flak Kite is: " + player);
             }
         }
         private void Tank() 
@@ -157,98 +225,98 @@ namespace Falson.SquadRoleRandomizer
         {
             for (int i = 0; i < _mushroomIs.Count; i++)
             {
-                CleanedRoles.Add($"Mushroom {i + 1} is: {_mushroomIs[i]}");
+                CleanedHoTMechanics.Add($"Mushroom {i + 1} is: {_mushroomIs[i]}");
             }
         }
         private void Tower() 
         {
             foreach (var player in _towerIs)
             {
-                CleanedRoles.Add("The Tower Mesmer is: " + player);
+                CleanedHoTMechanics.Add("The Tower Mesmer is: " + player);
             }
         }
         private void Reflect() 
         {
             foreach (var player in _reflectIs)
             {
-                CleanedRoles.Add("The Matthias Reflect is: " + player);
+                CleanedHoTMechanics.Add("The Matthias Reflect is: " + player);
             }
         }
         private void Cannon() 
         {
             for (int i = 0; i < _cannonIs.Count; i++)
             {
-                CleanedRoles.Add($"Cannon {i + 1} is: {_cannonIs[i]}");
+                CleanedHoTMechanics.Add($"Cannon {i + 1} is: {_cannonIs[i]}");
             }
         }
         private void KCPush() 
         {
             foreach (var player in _construcPusherIs)
             {
-                CleanedRoles.Add("The KC Pusher is: " + player);
+                CleanedHoTMechanics.Add("The KC Pusher is: " + player);
             }
         }
         private void Lamp() 
         {
             for (int i = 0; i < _lampIs.Count; i++)
             {
-                CleanedRoles.Add($"Lamp {i + 1} is: {_lampIs[i]}");
+                CleanedPoFMechanics.Add($"Lamp {i + 1} is: {_lampIs[i]}");
             }
         }
         private void Pylon() 
         {
             for (int i = 0; i < _pylonIs.Count; i++)
             {
-                CleanedRoles.Add($"Pylon {i + 1} is: {_pylonIs[i]}");
+                CleanedPoFMechanics.Add($"Pylon {i + 1} is: {_pylonIs[i]}");
             }
         } 
         private void Pillar() 
         {
             for (int i = 0; i < _pillarIs.Count; i++)
             {
-                CleanedRoles.Add($"Pillar {i + 1} is: {_pillarIs[i]}");
+                CleanedPoFMechanics.Add($"Pillar {i + 1} is: {_pillarIs[i]}");
             }
         }
         private void Green() 
         {
             for (int i = 0; i < _greenIs.Count; i++)
             {
-                CleanedRoles.Add($"Green {i + 1} is: {_greenIs[i]}");
+                CleanedPoFMechanics.Add($"Green {i + 1} is: {_greenIs[i]}");
             }
         }
         private void SHPush() 
         {
             foreach (var player in _shPusherIs)
             {
-                CleanedRoles.Add("The SH Pusher is: " + player);
+                CleanedPoFMechanics.Add("The SH Pusher is: " + player);
             }
         }
         private void DhuumKite() 
         {
             foreach (var player in _dhuumKiteIs)
             {
-                CleanedRoles.Add("The Dhuum Kite is: " + player);
+                CleanedPoFMechanics.Add("The Dhuum Kite is: " + player);
             }
         }
         private void QadimKite() 
         {
             foreach (var player in _qadimKiteIs)
             {
-                CleanedRoles.Add("The Qadim Kite is: " + player);
+                CleanedPoFMechanics.Add("The Qadim Kite is: " + player);
             }
         }
         private void Sword() 
         {
             for (int i = 0; i < _swordIs.Count; i++)
             {
-                CleanedRoles.Add($"Sword {i + 1} is: {_swordIs[i]}");
+                CleanedPoFMechanics.Add($"Sword {i + 1} is: {_swordIs[i]}");
             }
         }
         private void Shield() 
         {
             for (int i = 0; i < _shieldIs.Count; i++)
             {
-                CleanedRoles.Add($"Shield {i + 1} is: {_shieldIs[i]}");
+                CleanedPoFMechanics.Add($"Shield {i + 1} is: {_shieldIs[i]}");
             }
         }
     }
