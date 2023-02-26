@@ -35,6 +35,11 @@ namespace Falson.Randomizer
             AssignRoles(roleindex,_roles,_assignedRoles);
             var Cleaner = new ResultsCleaner();
             Cleaner.Main();
+            UnloadRandomizer();
+        }
+        private void UnloadRandomizer() 
+        {
+            _assignedRoles = null;
         }
 
         private bool IsAssignmentValid(int roleIndex, string person, List<Tuple<int, string>> assignedRoles)

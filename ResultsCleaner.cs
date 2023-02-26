@@ -143,6 +143,7 @@ namespace Falson.SquadRoleRandomizer
             }
             falson.RandomizerResultsWindow.Show();
         }
+
         private void HandKite() 
         {
             foreach (var player in _handKiteIs)
