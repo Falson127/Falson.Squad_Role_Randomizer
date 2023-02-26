@@ -48,7 +48,7 @@ namespace Falson.Randomizer
             // Check if any other assigned person has already been assigned to this role
             if (assignedRoles.Any(a => a.Item1 == roleIndex && a.Item2 != person))
             {
-                return false;
+                //return false;
             }
 
             return true;
