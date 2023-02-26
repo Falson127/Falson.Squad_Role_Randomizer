@@ -170,7 +170,7 @@ namespace Falson.SquadRoleRandomizer
                 QadimKiteRoles[i] = InternalPlayerRolesSettings.DefineSetting($"QadimKite Player {i+1}" , false);
                 SwordRoles[i] = InternalPlayerRolesSettings.DefineSetting($"Sword Player {i+1}" , false);
                 ShieldRoles[i] = InternalPlayerRolesSettings.DefineSetting($"Shield Player {i+1}" , false);
-                PlayerNames[i] = InternalPlayerRolesSettings.DefineSetting($"Player {i} Name", $"Player {i}");
+                PlayerNames[i] = InternalPlayerRolesSettings.DefineSetting($"Player {i+1} Name", $"Player {i+1}");
 
             }
 
@@ -709,7 +709,7 @@ namespace Falson.SquadRoleRandomizer
 
             if (PlayerNames[9].Value == "") 
             {
-                Player10NameBox.Text = "Enter Player Name";
+                PlayerPanels[9].Title = "Enter Player Name";
             };
         }
 
@@ -719,7 +719,7 @@ namespace Falson.SquadRoleRandomizer
             PlayerNames[8].Value = Player9NameBox.Text;
             if(PlayerNames[8].Value == "")
             {
-                Player9NameBox.Text = "Enter Player Name";
+                PlayerPanels[8].Title = "Enter Player Name";
             };
         }
 
@@ -729,7 +729,7 @@ namespace Falson.SquadRoleRandomizer
             PlayerNames[7].Value = Player8NameBox.Text;
             if(PlayerNames[7].Value == "")
             {
-                Player8NameBox.Text = "Enter Player Name";
+                PlayerPanels[7].Title = "Enter Player Name";
             };
         }
 
@@ -739,7 +739,7 @@ namespace Falson.SquadRoleRandomizer
             PlayerNames[6].Value = Player7NameBox.Text;
             if(PlayerNames[6].Value == "")
             {
-                Player7NameBox.Text = "Enter Player Name";
+                PlayerPanels[6].Title = "Enter Player Name";
             };
         }
 
@@ -749,7 +749,7 @@ namespace Falson.SquadRoleRandomizer
             PlayerNames[5].Value = Player6NameBox.Text;
             if(PlayerNames[5].Value == "")
             {
-                Player6NameBox.Text = "Enter Player Name";
+                PlayerPanels[5].Title = "Enter Player Name";
             };
         }
 
@@ -759,7 +759,7 @@ namespace Falson.SquadRoleRandomizer
             PlayerNames[4].Value = Player5NameBox.Text;
             if(PlayerNames[4].Value == "")
             {
-                Player5NameBox.Text = "Enter Player Name";
+                PlayerPanels[4].Title = "Enter Player Name";
             };
         }
 
@@ -769,7 +769,7 @@ namespace Falson.SquadRoleRandomizer
             PlayerNames[3].Value = Player4NameBox.Text;
             if(PlayerNames[3].Value == "")
             {
-                Player4NameBox.Text = "Enter Player Name";
+                PlayerPanels[3].Title = "Enter Player Name";
             };
         }
 
@@ -779,7 +779,7 @@ namespace Falson.SquadRoleRandomizer
             PlayerNames[2].Value = Player3NameBox.Text;
             if(PlayerNames[2].Value == "")
             {
-                Player3NameBox.Text = "Enter Player Name";
+                PlayerPanels[2].Title = "Enter Player Name";
             };
         }
 
@@ -789,7 +789,7 @@ namespace Falson.SquadRoleRandomizer
             PlayerNames[1].Value = Player2NameBox.Text;
             if(PlayerNames[1].Value == "")
             {
-                Player2NameBox.Text = "Enter Player Name";
+                PlayerPanels[1].Title = "Enter Player Name";
             };
         }
 
@@ -799,7 +799,7 @@ namespace Falson.SquadRoleRandomizer
             PlayerNames[0].Value = Player1NameBox.Text;
             if(PlayerNames[0].Value == "")
             {
-                Player1NameBox.Text = "Enter Player Name";
+                PlayerPanels[0].Title = "Enter Player Name";
             };
         }
         #endregion
@@ -963,7 +963,11 @@ namespace Falson.SquadRoleRandomizer
                 StandardRolesPanel[i]?.Dispose();
                 HoTMechanicsPanel[i]?.Dispose();
                 PoFMechanicsPanel[i]?.Dispose();
+                CheckAllRoles[i]?.Dispose();
+                CheckAllHoT[i]?.Dispose();
+                CheckAllPoF[i]?.Dispose();
             }
+            CheckAllGenerateRoles?.Dispose();
             MasterFlowPanel?.Dispose();
             RandomizeCheckboxesPanel?.Dispose();
             #endregion
@@ -1045,7 +1049,7 @@ namespace Falson.SquadRoleRandomizer
             CounterBoxes[10].Click -= CounterBox11Click;
             CounterBoxes[11].Click -= CounterBox12Click;
             GenerateRolesButton.Click -= GenerateRolesButton_Click;
-            RandomizerSettingIcon.Click -= delegate{RandomizerSettingsWindow.Show();};
+            RandomizerSettingIcon.Click -= delegate{RandomizerSettingsWindow.ToggleWindow();};
             #endregion
         }
     }
