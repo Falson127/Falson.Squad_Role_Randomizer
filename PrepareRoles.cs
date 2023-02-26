@@ -141,6 +141,21 @@ namespace Falson.SquadRoleRandomizer
                 {RoleRandomizerMain.SwordRoles, RoleRandomizerMain.SwordValid },
                 {RoleRandomizerMain.ShieldRoles,  RoleRandomizerMain.ShieldValid}
             };
+            IDictionary<List<string>,SettingEntry<int>> rolestogeneratemultiple_to_numbertogenerate = new Dictionary<List<string>, SettingEntry<int>> 
+            {
+                {RoleRandomizerMain.HealAlacValid, RoleRandomizerMain.CounterBoxesSettings[0]},
+                {RoleRandomizerMain.HealQuickValid,RoleRandomizerMain.CounterBoxesSettings [1]},
+                {RoleRandomizerMain.DPSAlacValid,RoleRandomizerMain.CounterBoxesSettings[2] },
+                {RoleRandomizerMain.DPSQuickValid,RoleRandomizerMain.CounterBoxesSettings[3]},
+                {RoleRandomizerMain.MushroomValid,RoleRandomizerMain.CounterBoxesSettings[4]},
+                {RoleRandomizerMain.CannonValid,RoleRandomizerMain.CounterBoxesSettings[5]},
+                {RoleRandomizerMain.LampValid,RoleRandomizerMain.CounterBoxesSettings[6]},
+                {RoleRandomizerMain.PylonValid,RoleRandomizerMain.CounterBoxesSettings[7]},
+                {RoleRandomizerMain.PillarValid,RoleRandomizerMain.CounterBoxesSettings[8]},
+                {RoleRandomizerMain.GreenValid,RoleRandomizerMain.CounterBoxesSettings[9]},
+                {RoleRandomizerMain.SwordValid,RoleRandomizerMain.CounterBoxesSettings[10]},
+                {RoleRandomizerMain.ShieldValid,RoleRandomizerMain.CounterBoxesSettings[11]}
+            };
             GenerationSequence.Clear();
             foreach (List<string> list in ListofValidLists)
             {
@@ -168,9 +183,23 @@ namespace Falson.SquadRoleRandomizer
                 if (item.Count != 0) //only roles that have at least 1 player signed up get added to the sequence for generation
                 {
                     GenerationSequence.Add(item); //converts the current (role)valid list into a string name for the role to be generated and adds to the sequence, from shortest lists to longest.
-                    intGenerationSequence.Add(rolelistname_to_roleidentifiernumber[item]); //new standard, GenSequence above will depreciate once RR.cs is done
                 }
             }
+            foreach (var entry in GenerationSequence)
+            {
+                if (rolestogeneratemultiple_to_numbertogenerate.ContainsKey(entry))//check if list might need multiple
+                {
+                    for (int i = 0; i < rolestogeneratemultiple_to_numbertogenerate[entry].Value; i++) //if it might, get number requested
+                    {
+                        intGenerationSequence.Add(rolelistname_to_roleidentifiernumber[entry]); //add that role's index the number of times needed
+                    }
+                }
+                else
+                {
+                    intGenerationSequence.Add(rolelistname_to_roleidentifiernumber[entry]); //if it can't accept multiple, just add it once as integer index
+                }
+            }
+
             #region build intRoles list
             foreach (var name in RoleRandomizerMain.HandKiteValid)
             {
