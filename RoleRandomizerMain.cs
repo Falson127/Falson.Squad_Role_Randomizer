@@ -24,60 +24,61 @@ namespace Falson.SquadRoleRandomizer
         private CustomButton[] _checkAllHoT = new CustomButton[10];
         private CustomButton[] _checkAllPoF = new CustomButton[10];
         private CustomButton _checkAllGenerateRoles;
-        public static List<string> HandKiteValid = new List<string>();
-        public static List<string> OilKiteValid = new List<string>();
-        public static List<string> FlakKiteValid = new List<string>();
-        public static List<string> TankValid = new List<string>();
-        public static List<string> HealAlacValid = new List<string>();
-        public static List<string> HealQuickValid = new List<string>();
-        public static List<string> DPSAlacValid = new List<string>();
-        public static List<string> DPSQuickValid = new List<string>();
-        public static List<string> MushroomValid = new List<string>();
-        public static List<string> TowerValid = new List<string>();
-        public static List<string> ReflectValid = new List<string>();
-        public static List<string> CannonValid = new List<string>();
-        public static List<string> ConstrucPusherValid = new List<string>();
-        public static List<string> LampValid = new List<string>();
-        public static List<string> PylonValid = new List<string>();
-        public static List<string> PillarValid = new List<string>();
-        public static List<string> GreenValid = new List<string>();
-        public static List<string> SoullessPusherValid = new List<string>();
-        public static List<string> DhuumKiteValid = new List<string>();
-        public static List<string> QadimKiteValid = new List<string>();
-        public static List<string> SwordValid = new List<string>();
-        public static List<string> ShieldValid = new List<string>();
+        public List<string> HandKiteValid = new List<string>();
+        public List<string> OilKiteValid = new List<string>();
+        public List<string> FlakKiteValid = new List<string>();
+        public List<string> TankValid = new List<string>();
+        public List<string> HealAlacValid = new List<string>();
+        public List<string> HealQuickValid = new List<string>();
+        public List<string> DPSAlacValid = new List<string>();
+        public List<string> DPSQuickValid = new List<string>();
+        public List<string> MushroomValid = new List<string>();
+        public List<string> TowerValid = new List<string>();
+        public List<string> ReflectValid = new List<string>();
+        public List<string> CannonValid = new List<string>();
+        public List<string> ConstrucPusherValid = new List<string>();
+        public List<string> LampValid = new List<string>();
+        public List<string> PylonValid = new List<string>();
+        public List<string> PillarValid = new List<string>();
+        public List<string> GreenValid = new List<string>();
+        public List<string> SoullessPusherValid = new List<string>();
+        public List<string> DhuumKiteValid = new List<string>();
+        public List<string> QadimKiteValid = new List<string>();
+        public List<string> SwordValid = new List<string>();
+        public List<string> ShieldValid = new List<string>();
         private CounterBox[] _counterBoxes; //need 12 items in this
         private Label[] _counterBoxLabels;
         private StandardButton _generateRolesButton;
         public SettingCollection InternalPlayerRolesSettings;
         public static SettingEntry<int>[]  CounterBoxesSettings = new SettingEntry<int>[12];
         public static SettingEntry<bool>[] RolesToGenerate = new SettingEntry<bool>[22];
-        public static SettingEntry<bool>[] HandKiteRoles = new SettingEntry<bool>[10];
-        public static SettingEntry<bool>[] OilKiteRoles = new SettingEntry<bool>[10];
-        public static SettingEntry<bool>[] FlakKiteRoles = new SettingEntry<bool>[10];
-        public static SettingEntry<bool>[] TankRoles = new SettingEntry<bool>[10];
-        public static SettingEntry<bool>[] HealAlacRoles = new SettingEntry<bool>[10];
-        public static SettingEntry<bool>[] HealQuickRoles = new SettingEntry<bool>[10];
-        public static SettingEntry<bool>[] DPSAlacRoles = new SettingEntry<bool>[10];
-        public static SettingEntry<bool>[] DPSQuickRoles = new SettingEntry<bool>[10];
-        public static SettingEntry<bool>[] MushroomRoles = new SettingEntry<bool>[10];
-        public static SettingEntry<bool>[] TowerRoles = new SettingEntry<bool>[10];
-        public static SettingEntry<bool>[] ReflectRoles = new SettingEntry<bool>[10];
-        public static SettingEntry<bool>[] CannonRoles = new SettingEntry<bool>[10];
-        public static SettingEntry<bool>[] ConstrucPusherRoles = new SettingEntry<bool>[10];
-        public static SettingEntry<bool>[] LampRoles = new SettingEntry<bool>[10];
-        public static SettingEntry<bool>[] PylonRoles = new SettingEntry<bool>[10];
-        public static SettingEntry<bool>[] PillarRoles = new SettingEntry<bool>[10];
-        public static SettingEntry<bool>[] GreenRoles = new SettingEntry<bool>[10];
-        public static SettingEntry<bool>[] SoullessPusherRoles = new SettingEntry<bool>[10];
-        public static SettingEntry<bool>[] DhuumKiteRoles = new SettingEntry<bool>[10];
-        public static SettingEntry<bool>[] QadimKiteRoles = new SettingEntry<bool>[10];
-        public static SettingEntry<bool>[] SwordRoles = new SettingEntry<bool>[10];
-        public static SettingEntry<bool>[] ShieldRoles = new SettingEntry<bool>[10];
+        public SettingEntry<bool>[] HandKiteRoles = new SettingEntry<bool>[10];
+        public SettingEntry<bool>[] OilKiteRoles = new SettingEntry<bool>[10];
+        public SettingEntry<bool>[] FlakKiteRoles = new SettingEntry<bool>[10];
+        public SettingEntry<bool>[] TankRoles = new SettingEntry<bool>[10];
+        public SettingEntry<bool>[] HealAlacRoles = new SettingEntry<bool>[10];
+        public SettingEntry<bool>[] HealQuickRoles = new SettingEntry<bool>[10];
+        public SettingEntry<bool>[] DPSAlacRoles = new SettingEntry<bool>[10];
+        public SettingEntry<bool>[] DPSQuickRoles = new SettingEntry<bool>[10];
+        public SettingEntry<bool>[] MushroomRoles = new SettingEntry<bool>[10];
+        public SettingEntry<bool>[] TowerRoles = new SettingEntry<bool>[10];
+        public SettingEntry<bool>[] ReflectRoles = new SettingEntry<bool>[10];
+        public SettingEntry<bool>[] CannonRoles = new SettingEntry<bool>[10];
+        public SettingEntry<bool>[] ConstrucPusherRoles = new SettingEntry<bool>[10];
+        public SettingEntry<bool>[] LampRoles = new SettingEntry<bool>[10];
+        public SettingEntry<bool>[] PylonRoles = new SettingEntry<bool>[10];
+        public SettingEntry<bool>[] PillarRoles = new SettingEntry<bool>[10];
+        public SettingEntry<bool>[] GreenRoles = new SettingEntry<bool>[10];
+        public SettingEntry<bool>[] SoullessPusherRoles = new SettingEntry<bool>[10];
+        public SettingEntry<bool>[] DhuumKiteRoles = new SettingEntry<bool>[10];
+        public SettingEntry<bool>[] QadimKiteRoles = new SettingEntry<bool>[10];
+        public SettingEntry<bool>[] SwordRoles = new SettingEntry<bool>[10];
+        public SettingEntry<bool>[] ShieldRoles = new SettingEntry<bool>[10];
         public static SettingEntry<string>[] PlayerNames = new SettingEntry<string>[10];
         //private List<CustomCheckbox[]> ListofCheckboxArrays;
         //public List<SettingEntry<bool>[]> ListofRolesSettings;
         public static List<List<string>> ListofRoleValidLists;
+        public static List<SettingEntry<bool>[]> ListofRolesSettings;
         private TextBox _player1NameBox;
         private TextBox _player2NameBox;
         private TextBox _player3NameBox;
@@ -291,7 +292,7 @@ namespace Falson.SquadRoleRandomizer
             #endregion
             #region ListsOf: Box Arrays, Role Arrays, and Valid Lists
             //ListofCheckboxArrays = new List<CustomCheckbox[]> {_handKiteBoxArray,_oilKiteBoxArray,_flakKiteBoxArray,_tankBoxArray,_healAlacBoxArray,_healQuickBoxArray,_dpsAlacBoxArray,_dpsQuickBoxArray,_mushroomBoxArray,_towerBoxArray,_reflectBoxArray,_cannonBoxArray,_construcPusherBoxArray,_lampBoxArray,_pylonBoxArray,_pillarBoxArray,_greenBoxArray,_soullessPusherBoxArray,_dhuumKiteBoxArray,_qadimKiteBoxArray,_swordBoxArray,_shieldBoxArray };
-            //ListofRolesSettings = new List<SettingEntry<bool>[]> {HandKiteRoles,OilKiteRoles,FlakKiteRoles,TankRoles,HealAlacRoles,HealQuickRoles,DPSAlacRoles,DPSQuickRoles,MushroomRoles,TowerRoles,ReflectRoles,CannonRoles,ConstrucPusherRoles,LampRoles,PylonRoles,PillarRoles,GreenRoles,SoullessPusherRoles,DhuumKiteRoles,QadimKiteRoles,SwordRoles,ShieldRoles };
+            ListofRolesSettings = new List<SettingEntry<bool>[]> {HandKiteRoles,OilKiteRoles,FlakKiteRoles,TankRoles,HealAlacRoles,HealQuickRoles,DPSAlacRoles,DPSQuickRoles,MushroomRoles,TowerRoles,ReflectRoles,CannonRoles,ConstrucPusherRoles,LampRoles,PylonRoles,PillarRoles,GreenRoles,SoullessPusherRoles,DhuumKiteRoles,QadimKiteRoles,SwordRoles,ShieldRoles };
             ListofRoleValidLists = new List<List<string>> { HandKiteValid,OilKiteValid,FlakKiteValid,TankValid,HealAlacValid,HealQuickValid,DPSAlacValid,DPSQuickValid,MushroomValid,TowerValid,ReflectValid,CannonValid,ConstrucPusherValid,LampValid,PylonValid,PillarValid,GreenValid,SoullessPusherValid,DhuumKiteValid,QadimKiteValid,SwordValid,ShieldValid};
             #endregion
             #region _checkAllBoxesButtons
@@ -803,7 +804,8 @@ namespace Falson.SquadRoleRandomizer
         #endregion
         private void GenerateRolesButton_Click(object sender, Blish_HUD.Input.MouseEventArgs e)
         {
-            PrepareRoles.PrepRoles();
+            var prepRolesInstance = new PrepareRoles(ListofRoleValidLists, ListofRolesSettings);
+            prepRolesInstance.PrepRoles();
             _randomizerResultsWindow.Show();
         }
         private void _randomizerSettingIcon_Click(object sender, Blish_HUD.Input.MouseEventArgs e)

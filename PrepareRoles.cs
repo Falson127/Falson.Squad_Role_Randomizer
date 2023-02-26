@@ -11,21 +11,113 @@ namespace Falson.SquadRoleRandomizer
 {
     public class PrepareRoles 
     {
-        public RoleRandomizerMain mainInstance;
+        //public RoleRandomizerMain mainInstance;
 
         public static List<int> Length_of_Roles_Arrays;
         public static List<List<string>> GenerationSequence;
-        public static List<List<string>> ListofValidLists;
+        //public static List<List<string>> ListofValidLists;
         public static List<int> intGenerationSequence = new List<int>();
         public static List<Tuple<int, string>> intRoles = new List<Tuple<int,string>>();
 
+        //local instances of valid lists
+        private readonly List<string> _handKiteValid = new List<string>();
+        private readonly List<string> _oilKiteValid = new List<string>();
+        private readonly List<string> _flakKiteValid = new List<string>();
+        private readonly List<string> _tankValid = new List<string>();
+        private readonly List<string> _healAlacValid = new List<string>();
+        private readonly List<string> _healQuickValid = new List<string>();
+        private readonly List<string> _dpsAlacValid = new List<string>();
+        private readonly List<string> _dpsQuickValid = new List<string>();
+        private readonly List<string> _mushroomValid = new List<string>();
+        private readonly List<string> _towerValid = new List<string>();
+        private readonly List<string> _reflectValid = new List<string>();
+        private readonly List<string> _cannonValid = new List<string>();
+        private readonly List<string> _construcPusherValid = new List<string>();
+        private readonly List<string> _lampValid = new List<string>();
+        private readonly List<string> _pylonValid = new List<string>();
+        private readonly List<string> _pillarValid = new List<string>();
+        private readonly List<string> _greenValid = new List<string>();
+        private readonly List<string> _soullessPusherValid = new List<string>();
+        private readonly List<string> _dhuumKiteValid = new List<string>();
+        private readonly List<string> _qadimKiteValid = new List<string>();
+        private readonly List<string> _swordValid = new List<string>();
+        private readonly List<string> _shieldValid = new List<string>();
+        //local instances of role settings
+        private readonly SettingEntry<bool>[] _handKiteRoles = new SettingEntry<bool>[10];
+        private readonly SettingEntry<bool>[] _oilKiteRoles = new SettingEntry<bool>[10];
+        private readonly SettingEntry<bool>[] _flakKiteRoles = new SettingEntry<bool>[10];
+        private readonly SettingEntry<bool>[] _tankRoles = new SettingEntry<bool>[10];
+        private readonly SettingEntry<bool>[] _healAlacRoles = new SettingEntry<bool>[10];
+        private readonly SettingEntry<bool>[] _healQuickRoles = new SettingEntry<bool>[10];
+        private readonly SettingEntry<bool>[] _dpsAlacRoles = new SettingEntry<bool>[10];
+        private readonly SettingEntry<bool>[] _dpsQuickRoles = new SettingEntry<bool>[10];
+        private readonly SettingEntry<bool>[] _mushroomRoles = new SettingEntry<bool>[10];
+        private readonly SettingEntry<bool>[] _towerRoles = new SettingEntry<bool>[10];
+        private readonly SettingEntry<bool>[] _reflectRoles = new SettingEntry<bool>[10];
+        private readonly SettingEntry<bool>[] _cannonRoles = new SettingEntry<bool>[10];
+        private readonly SettingEntry<bool>[] _construcPusherRoles = new SettingEntry<bool>[10];
+        private readonly SettingEntry<bool>[] _lampRoles = new SettingEntry<bool>[10];
+        private readonly SettingEntry<bool>[] _pylonRoles = new SettingEntry<bool>[10];
+        private readonly SettingEntry<bool>[] _pillarRoles = new SettingEntry<bool>[10];
+        private readonly SettingEntry<bool>[] _greenRoles = new SettingEntry<bool>[10];
+        private readonly SettingEntry<bool>[] _soullessPusherRoles = new SettingEntry<bool>[10];
+        private readonly SettingEntry<bool>[] _dhuumKiteRoles = new SettingEntry<bool>[10];
+        private readonly SettingEntry<bool>[] _qadimKiteRoles = new SettingEntry<bool>[10];
+        private readonly SettingEntry<bool>[] _swordRoles = new SettingEntry<bool>[10];
+        private readonly SettingEntry<bool>[] _shieldRoles = new SettingEntry<bool>[10];
         //constructor
-        public PrepareRoles() 
+        public PrepareRoles(List<List<string>> listOfValidLists, List<SettingEntry<bool>[]> listofSettingEntries) 
         {
-        
+            _handKiteValid = listOfValidLists[0];
+            _oilKiteValid = listOfValidLists[1];
+            _flakKiteValid = listOfValidLists[2];
+            _tankValid = listOfValidLists[3];
+            _healAlacValid = listOfValidLists[4];
+            _healQuickValid = listOfValidLists[5];
+            _dpsAlacValid = listOfValidLists[6];
+            _dpsQuickValid = listOfValidLists[7];
+            _mushroomValid = listOfValidLists[8];
+            _towerValid = listOfValidLists[9];
+            _reflectValid = listOfValidLists[10];
+            _cannonValid = listOfValidLists[11];
+            _construcPusherValid = listOfValidLists[12];
+            _lampValid = listOfValidLists[13];
+            _pylonValid = listOfValidLists[14];
+            _pillarValid = listOfValidLists[15];
+            _greenValid = listOfValidLists[16];
+            _soullessPusherValid = listOfValidLists[17];
+            _dhuumKiteValid = listOfValidLists[18];
+            _qadimKiteValid = listOfValidLists[19];
+            _swordValid = listOfValidLists[20];
+            _shieldValid = listOfValidLists[21];
+
+            _handKiteRoles = listofSettingEntries[0];
+            _oilKiteRoles = listofSettingEntries[1];
+            _flakKiteRoles = listofSettingEntries[2];
+            _tankRoles = listofSettingEntries[3];
+            _healAlacRoles = listofSettingEntries[4];
+            _healQuickRoles = listofSettingEntries[5];
+            _dpsAlacRoles = listofSettingEntries[6];
+            _dpsQuickRoles = listofSettingEntries[7];
+            _mushroomRoles = listofSettingEntries[8];
+            _towerRoles = listofSettingEntries[9];
+            _reflectRoles = listofSettingEntries[10];
+            _cannonRoles = listofSettingEntries[11];
+            _construcPusherRoles = listofSettingEntries[12];
+            _lampRoles = listofSettingEntries[13];
+            _pylonRoles = listofSettingEntries[14];
+            _pillarRoles = listofSettingEntries[15];
+            _greenRoles = listofSettingEntries[16];
+            _soullessPusherRoles = listofSettingEntries[17];
+            _dhuumKiteRoles = listofSettingEntries[18];
+            _qadimKiteRoles = listofSettingEntries[19];
+            _swordRoles = listofSettingEntries[20];
+            _shieldRoles = listofSettingEntries[21];
+
+
         }
         
-        public static void PrepRoles()
+        public void PrepRoles()
         {
             //This method prepares the roles to pass to the randomizer. It converts the checkboxes to activated roles to randomize, loads the saved player names into the list of valid options for each role
             //and then sorts them from smallest to largest, removing any role list that has no players. This information is then stored in a list called GenerationSequence, which is passed to the randomizer
@@ -33,7 +125,7 @@ namespace Falson.SquadRoleRandomizer
             intRoles.Clear();
             intGenerationSequence.Clear();
             GenerationSequence = new List<List<string>>();
-            ListofValidLists = new List<List<string>> { RoleRandomizerMain.HandKiteValid, RoleRandomizerMain.OilKiteValid, RoleRandomizerMain.FlakKiteValid, RoleRandomizerMain.TankValid, RoleRandomizerMain.HealAlacValid, RoleRandomizerMain.HealQuickValid, RoleRandomizerMain.DPSAlacValid, RoleRandomizerMain.DPSQuickValid, RoleRandomizerMain.MushroomValid, RoleRandomizerMain.TowerValid, RoleRandomizerMain.ReflectValid, RoleRandomizerMain.CannonValid, RoleRandomizerMain.ConstrucPusherValid, RoleRandomizerMain.LampValid, RoleRandomizerMain.PylonValid, RoleRandomizerMain.PillarValid, RoleRandomizerMain.GreenValid, RoleRandomizerMain.SoullessPusherValid, RoleRandomizerMain.DhuumKiteValid, RoleRandomizerMain.QadimKiteValid, RoleRandomizerMain.SwordValid, RoleRandomizerMain.ShieldValid, };
+            //ListofValidLists = new List<List<string>> { RoleRandomizerMain.HandKiteValid, RoleRandomizerMain.OilKiteValid, RoleRandomizerMain.FlakKiteValid, RoleRandomizerMain.TankValid, RoleRandomizerMain.HealAlacValid, RoleRandomizerMain.HealQuickValid, RoleRandomizerMain.DPSAlacValid, RoleRandomizerMain.DPSQuickValid, RoleRandomizerMain.MushroomValid, RoleRandomizerMain.TowerValid, RoleRandomizerMain.ReflectValid, RoleRandomizerMain.CannonValid, RoleRandomizerMain.ConstrucPusherValid, RoleRandomizerMain.LampValid, RoleRandomizerMain.PylonValid, RoleRandomizerMain.PillarValid, RoleRandomizerMain.GreenValid, RoleRandomizerMain.SoullessPusherValid, RoleRandomizerMain.DhuumKiteValid, RoleRandomizerMain.QadimKiteValid, RoleRandomizerMain.SwordValid, RoleRandomizerMain.ShieldValid, };
             IDictionary<CustomCheckbox, SettingEntry<bool>[]> ActiveRolesDictionary = new Dictionary<CustomCheckbox, SettingEntry<bool>[]>()
             {
                 {RoleRandomizerMain.RolestoRandomizeSelectionCheckboxesArray[0], RoleRandomizerMain.HandKiteRoles },
