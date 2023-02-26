@@ -18,6 +18,12 @@ namespace Falson.SquadRoleRandomizer
         public static List<List<string>> ListofValidLists;
         public static List<int> intGenerationSequence = new List<int>();
         public static List<Tuple<int, string>> intRoles = new List<Tuple<int,string>>();
+
+        //constructor
+        public PrepareRoles() 
+        {
+        
+        }
         
         public static void PrepRoles()
         {
