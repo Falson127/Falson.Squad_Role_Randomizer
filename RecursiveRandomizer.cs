@@ -16,7 +16,7 @@ namespace Falson.Randomizer
         private int[,] _conflicts = new int[22, 22]; //format: [x,y] x=role of interest, y=test role. If [x,y] = 0, then role y does not conflcit with x. if = 1, then role y does conflict with x
         private List<Tuple<int, string>> _roles = new List<Tuple<int, string>>();
         private List<int> _generationsequence = new List<int>();
-        public static List<Tuple<int, string>> _assignedRoles = new List<Tuple<int, string>>();
+        public static List<Tuple<int, string>> _assignedRoles;
         public IDictionary<string, string> RoleName_to_SelectedPlayer = new Dictionary<string, string>();
         public IDictionary<string, string> HoTMechanic_to_SelectedPlayer = new Dictionary<string, string>();
         public IDictionary<string, string> PoFMechanic_to_SelectedPlayer = new Dictionary<string, string>();
@@ -27,7 +27,7 @@ namespace Falson.Randomizer
             falson.ResultsFlowPanel.ClearChildren();
             _roles.Clear();
             _generationsequence.Clear();
-            _assignedRoles.Clear();
+            _assignedRoles = new List<Tuple<int,string>>();
             setconflicts();
             _roles = falsonP.intRoles;
             _generationsequence = falsonP.intGenerationSequence;

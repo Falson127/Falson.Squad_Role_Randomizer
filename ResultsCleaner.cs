@@ -141,7 +141,6 @@ namespace Falson.SquadRoleRandomizer
                 }
                 DynamicLabel3[pofcounter] = new Label { Text = "", Parent = falson.ResultsFlowPanel, AutoSizeHeight = true, AutoSizeWidth = true };
             }
-            falson.RandomizerResultsWindow.Show();
         }
 
         private void HandKite() 

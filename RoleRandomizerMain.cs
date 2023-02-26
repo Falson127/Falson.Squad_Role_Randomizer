@@ -17,8 +17,8 @@ namespace Falson.SquadRoleRandomizer
     [Export(typeof(Blish_HUD.Modules.Module))]
     public class RoleRandomizerMain : Blish_HUD.Modules.Module
     {
-        public static StandardWindow RandomizerResultsWindow;
-        public static StandardWindow RandomizerSettingsWindow;
+        public StandardWindow RandomizerResultsWindow;
+        public StandardWindow RandomizerSettingsWindow;
         private CornerIcon RandomizerSettingIcon;
         private CustomButton[] CheckAllRoles = new CustomButton[10];
         private CustomButton[] CheckAllHoT = new CustomButton[10];
@@ -178,6 +178,7 @@ namespace Falson.SquadRoleRandomizer
         private void GenerateRolesButton_Click(object sender, Blish_HUD.Input.MouseEventArgs e)
         {
             PrepareRoles.PrepRoles();
+            RandomizerResultsWindow.Show();
         }
 
         protected override async Task LoadAsync()
@@ -975,6 +976,7 @@ namespace Falson.SquadRoleRandomizer
             RandomizeCheckboxesPanel?.Dispose();
             #endregion
             #region Static Members
+            //22 valid lists
             HandKiteValid = null;
             OilKiteValid = null;
             FlakKiteValid = null;
@@ -997,8 +999,11 @@ namespace Falson.SquadRoleRandomizer
             QadimKiteValid = null;
             SwordValid = null;
             ShieldValid = null;
+            //
+
             CounterBoxesSettings = null;
             RolesToGenerate = null;
+            //22 roles settings
             HandKiteRoles = null;
             OilKiteRoles = null;
             FlakKiteRoles = null;
@@ -1021,10 +1026,8 @@ namespace Falson.SquadRoleRandomizer
             QadimKiteRoles = null;
             SwordRoles = null;
             ShieldRoles = null;
-            for (int i = 0; i < 10; i++)
-            {
-                PlayerNames[i] = null;
-            }
+            //
+            PlayerNames = null;
             ListofRoleValidLists = null;
             RolestoRandomizeSelectionCheckboxesArray = null;
             #endregion
