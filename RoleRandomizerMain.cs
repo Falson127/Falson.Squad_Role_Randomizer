@@ -945,6 +945,9 @@ namespace Falson.SquadRoleRandomizer
             RandomizerResultsWindow?.Dispose();
             RandomizerSettingsWindow?.Dispose();
             MasterFlowPanel?.Dispose();
+            ResultsFlowPanel?.Dispose();
+            PlayerNameTextBoxPanel?.Dispose();
+            RolesWithNumbers?.Dispose();
             GenerateRolesButton?.Dispose();
             Player1NameBox?.Dispose();
             Player2NameBox?.Dispose();
