@@ -41,7 +41,10 @@ namespace Falson.SquadRoleRandomizer
         private List<string> _shieldIs = new List<string>();
         IDictionary<int, List<string>> roleindexint_to_rolelist = new Dictionary<int, List<string>>();
 
-
+        public ResultsCleaner(List<Tuple<int,string>> assignedRoles) 
+        {
+            _assignedRoles = assignedRoles;
+        }
 
         public void filldictionary()
         {
@@ -74,7 +77,7 @@ namespace Falson.SquadRoleRandomizer
             CleanedHoTMechanics.Clear();
             CleanedPoFMechanics.Clear();
             filldictionary();
-            _assignedRoles = Falson.Randomizer.RecursiveRandomizer._assignedRoles;
+            //_assignedRoles = Falson.Randomizer.RecursiveRandomizer._assignedRoles;
             for (int i = 0; i < _assignedRoles.Count(); i++) //takes all assigned roles and breaks them into their assignments for each role
             {
                 roleindexint_to_rolelist[_assignedRoles[i].Item1].Add(_assignedRoles[i].Item2);
