@@ -19,12 +19,6 @@ namespace Falson.SquadRoleRandomizer
             ShowBorder = true;
             CanCollapse= true;
             Collapsed= true;
-        }
-
-        public void MainMethod() 
-        {
-            
-        }
-    
+        }   
     }
 }
