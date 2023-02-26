@@ -999,11 +999,8 @@ namespace Falson.SquadRoleRandomizer
             QadimKiteValid = null;
             SwordValid = null;
             ShieldValid = null;
-            //
-
             CounterBoxesSettings = null;
             RolesToGenerate = null;
-            //22 roles settings
             HandKiteRoles = null;
             OilKiteRoles = null;
             FlakKiteRoles = null;
@@ -1026,10 +1023,10 @@ namespace Falson.SquadRoleRandomizer
             QadimKiteRoles = null;
             SwordRoles = null;
             ShieldRoles = null;
-            //
             PlayerNames = null;
             ListofRoleValidLists = null;
             RolestoRandomizeSelectionCheckboxesArray = null;
+            ResultsFlowPanel = null;
             #endregion
             #region Events
             Player1NameBox.TextChanged -= Player1NameBox_TextChanged;
