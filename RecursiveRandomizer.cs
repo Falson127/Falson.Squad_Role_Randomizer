@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
+//using System.Windows.Forms;
 using System.Diagnostics;
 using falsonP = Falson.SquadRoleRandomizer.PrepareRoles;
 using falson = Falson.SquadRoleRandomizer.RoleRandomizerMain;
+using Blish_HUD.Controls;
 using Falson.SquadRoleRandomizer;
 
 namespace Falson.Randomizer
@@ -32,10 +33,22 @@ namespace Falson.Randomizer
             _roles = falsonP.intRoles;
             _generationsequence = falsonP.intGenerationSequence;
             int roleindex = 0;
-            AssignRoles(roleindex,_roles,_assignedRoles);
+            if(AssignRoles(roleindex,_roles,_assignedRoles))
+            {
             var Cleaner = new ResultsCleaner();
             Cleaner.Main();
             UnloadRandomizer();
+            }
+            else
+            {
+                Label templabel = new Label() 
+                {
+                    Text = "The Randomizer failed to find a valid composition based on your configured settings. \nTry decreasing the number of roles being generated or increasing \nthe number of players signed up for each role.",
+                    Parent = falson.ResultsFlowPanel,
+                    AutoSizeWidth = true,
+                    AutoSizeHeight = true
+                };
+            }
         }
         private void UnloadRandomizer() 
         {

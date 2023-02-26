@@ -120,7 +120,7 @@ namespace Falson.SquadRoleRandomizer
             if (CleanedHoTMechanics.Count != 0)
             {
                 DynamicLabel2 = new Label[(CleanedHoTMechanics.Count + 2)];
-                DynamicLabel1[0] = new Label { Text = "HoT Mechanics:", Parent = falson.ResultsFlowPanel, AutoSizeHeight = true, AutoSizeWidth = true };
+                DynamicLabel2[0] = new Label { Text = "HoT Mechanics:", Parent = falson.ResultsFlowPanel, AutoSizeHeight = true, AutoSizeWidth = true };
                 var hotcounter = 1;
                 foreach (var role in CleanedHoTMechanics)
                 {
