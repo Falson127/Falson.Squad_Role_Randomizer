@@ -118,7 +118,7 @@ namespace Falson.SquadRoleRandomizer
                     DynamicLabel1[rolecounter] = new Label { Text = role, Parent = falson.ResultsFlowPanel, AutoSizeHeight=true, AutoSizeWidth = true };
                     rolecounter++;
                 }
-                DynamicLabel1[rolecounter] = new Label { Text = "", Parent= falson.ResultsFlowPanel,AutoSizeHeight=true,AutoSizeWidth = true };
+                DynamicLabel1[rolecounter] = new Label { Text = "", Parent= falson.ResultsFlowPanel,Height = 20,AutoSizeWidth = true };
             }
             if (CleanedHoTMechanics.Count != 0)
             {
@@ -130,19 +130,19 @@ namespace Falson.SquadRoleRandomizer
                     DynamicLabel2[hotcounter] = new Label { Text = role, Parent = falson.ResultsFlowPanel, AutoSizeHeight = true, AutoSizeWidth = true };
                     hotcounter++;
                 }
-                DynamicLabel2[hotcounter] = new Label { Text = "", Parent = falson.ResultsFlowPanel, AutoSizeHeight = true, AutoSizeWidth = true };
+                DynamicLabel2[hotcounter] = new Label { Text = "", Parent = falson.ResultsFlowPanel, Height = 20, AutoSizeWidth = true };
             }
             if (CleanedPoFMechanics.Count != 0)
             {
                 DynamicLabel3 = new Label[(CleanedPoFMechanics.Count + 2)];
-                DynamicLabel3[0] = new Label { Text = "Standard Roles:", Parent = falson.ResultsFlowPanel, AutoSizeHeight = true, AutoSizeWidth = true };
+                DynamicLabel3[0] = new Label { Text = "PoF Mechanics:", Parent = falson.ResultsFlowPanel, AutoSizeHeight = true, AutoSizeWidth = true };
                 var pofcounter = 1;
                 foreach (var role in CleanedPoFMechanics)
                 {
                     DynamicLabel3[pofcounter] = new Label { Text = role, Parent = falson.ResultsFlowPanel, AutoSizeHeight = true, AutoSizeWidth = true };
                     pofcounter++;
                 }
-                DynamicLabel3[pofcounter] = new Label { Text = "", Parent = falson.ResultsFlowPanel, AutoSizeHeight = true, AutoSizeWidth = true };
+                DynamicLabel3[pofcounter] = new Label { Text = "", Parent = falson.ResultsFlowPanel, Height = 20, AutoSizeWidth = true };
             }
         }
 

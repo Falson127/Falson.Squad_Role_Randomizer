@@ -13,12 +13,11 @@ namespace Falson.SquadRoleRandomizer
     {
         //public RoleRandomizerMain mainInstance;
 
-        //public static List<int> Length_of_Roles_Arrays;
-        public static List<List<string>> GenerationSequence;
+        private List<List<string>> _generationSequence = new List<List<string>>();
         private List<List<string>> _listOfValidLists;
-        public static List<int> intGenerationSequence = new List<int>();
-        public static List<Tuple<int, string>> intRoles = new List<Tuple<int,string>>();
-        IDictionary<bool, SettingEntry<bool>[]> ActiveRolesDictionary = new Dictionary<bool, SettingEntry<bool>[]>();
+        private List<int> _intGenerationSequence = new List<int>();
+        private List<Tuple<int, string>> intRoles = new List<Tuple<int,string>>();
+        IDictionary<SettingEntry<bool>, SettingEntry<bool>[]> ActiveRolesDictionary = new Dictionary<SettingEntry<bool>, SettingEntry<bool>[]>();
         IDictionary<SettingEntry<bool>[], int> RolesArrays_to_ArrayListPosDictionary = new Dictionary<SettingEntry<bool>[], int>();
         IDictionary<SettingEntry<bool>[], List<string>> RolesArrays_to_ValidLists = new Dictionary<SettingEntry<bool>[], List<string>>();
         IDictionary<List<string>, SettingEntry<int>> rolestogeneratemultiple_to_numbertogenerate = new Dictionary<List<string>, SettingEntry<int>>();
@@ -27,28 +26,28 @@ namespace Falson.SquadRoleRandomizer
 
 
         //local instances of valid lists
-        private readonly List<string> _handKiteValid = new List<string>();
-        private readonly List<string> _oilKiteValid = new List<string>();
-        private readonly List<string> _flakKiteValid = new List<string>();
-        private readonly List<string> _tankValid = new List<string>();
-        private readonly List<string> _healAlacValid = new List<string>();
-        private readonly List<string> _healQuickValid = new List<string>();
-        private readonly List<string> _dpsAlacValid = new List<string>();
-        private readonly List<string> _dpsQuickValid = new List<string>();
-        private readonly List<string> _mushroomValid = new List<string>();
-        private readonly List<string> _towerValid = new List<string>();
-        private readonly List<string> _reflectValid = new List<string>();
-        private readonly List<string> _cannonValid = new List<string>();
-        private readonly List<string> _construcPusherValid = new List<string>();
-        private readonly List<string> _lampValid = new List<string>();
-        private readonly List<string> _pylonValid = new List<string>();
-        private readonly List<string> _pillarValid = new List<string>();
-        private readonly List<string> _greenValid = new List<string>();
-        private readonly List<string> _soullessPusherValid = new List<string>();
-        private readonly List<string> _dhuumKiteValid = new List<string>();
-        private readonly List<string> _qadimKiteValid = new List<string>();
-        private readonly List<string> _swordValid = new List<string>();
-        private readonly List<string> _shieldValid = new List<string>();
+        private List<string> _handKiteValid = new List<string>();
+        private List<string> _oilKiteValid = new List<string>();
+        private List<string> _flakKiteValid = new List<string>();
+        private List<string> _tankValid = new List<string>();
+        private List<string> _healAlacValid = new List<string>();
+        private List<string> _healQuickValid = new List<string>();
+        private List<string> _dpsAlacValid = new List<string>();
+        private List<string> _dpsQuickValid = new List<string>();
+        private List<string> _mushroomValid = new List<string>();
+        private List<string> _towerValid = new List<string>();
+        private List<string> _reflectValid = new List<string>();
+        private List<string> _cannonValid = new List<string>();
+        private List<string> _construcPusherValid = new List<string>();
+        private List<string> _lampValid = new List<string>();
+        private List<string> _pylonValid = new List<string>();
+        private List<string> _pillarValid = new List<string>();
+        private List<string> _greenValid = new List<string>();
+        private List<string> _soullessPusherValid = new List<string>();
+        private List<string> _dhuumKiteValid = new List<string>();
+        private List<string> _qadimKiteValid = new List<string>();
+        private List<string> _swordValid = new List<string>();
+        private List<string> _shieldValid = new List<string>();
         //local instances of role settings
         private readonly SettingEntry<bool>[] _handKiteRoles = new SettingEntry<bool>[10];
         private readonly SettingEntry<bool>[] _oilKiteRoles = new SettingEntry<bool>[10];
@@ -76,34 +75,11 @@ namespace Falson.SquadRoleRandomizer
         private readonly SettingEntry<int>[] _counterBoxSettings = new SettingEntry<int>[12];
         private readonly SettingEntry<string>[] _playerNames = new SettingEntry<string>[10];
         //constructor
-        public PrepareRoles(List<List<string>> listOfValidLists, List<SettingEntry<bool>[]> listofSettingEntries, SettingEntry<bool>[] rolesToGenerateSettings, SettingEntry<int>[] counterboxsettings, SettingEntry<string>[] playerNames) 
+        public PrepareRoles(List<SettingEntry<bool>[]> listofSettingEntries, SettingEntry<bool>[] rolesToGenerateSettings, SettingEntry<int>[] counterboxsettings, SettingEntry<string>[] playerNames) 
         {
             _playerNames = playerNames;
             _rolesToGenerate = rolesToGenerateSettings;
             _counterBoxSettings = counterboxsettings;
-
-            _handKiteValid = listOfValidLists[0];
-            _oilKiteValid = listOfValidLists[1];
-            _flakKiteValid = listOfValidLists[2];
-            _tankValid = listOfValidLists[3];
-            _healAlacValid = listOfValidLists[4];
-            _healQuickValid = listOfValidLists[5];
-            _dpsAlacValid = listOfValidLists[6];
-            _dpsQuickValid = listOfValidLists[7];
-            _mushroomValid = listOfValidLists[8];
-            _towerValid = listOfValidLists[9];
-            _reflectValid = listOfValidLists[10];
-            _cannonValid = listOfValidLists[11];
-            _construcPusherValid = listOfValidLists[12];
-            _lampValid = listOfValidLists[13];
-            _pylonValid = listOfValidLists[14];
-            _pillarValid = listOfValidLists[15];
-            _greenValid = listOfValidLists[16];
-            _soullessPusherValid = listOfValidLists[17];
-            _dhuumKiteValid = listOfValidLists[18];
-            _qadimKiteValid = listOfValidLists[19];
-            _swordValid = listOfValidLists[20];
-            _shieldValid = listOfValidLists[21];
 
             _handKiteRoles = listofSettingEntries[0];
             _oilKiteRoles = listofSettingEntries[1];
@@ -129,36 +105,36 @@ namespace Falson.SquadRoleRandomizer
             _shieldRoles = listofSettingEntries[21];
         }
 
-        private void Main() 
+        public void Main() 
         {
             FillDictionaries();
             PrepRoles();
         }
 
-        public void FillDictionaries() 
+        private void FillDictionaries() 
         {
-            ActiveRolesDictionary.Add(_rolesToGenerate[0].Value, _handKiteRoles );
-            ActiveRolesDictionary.Add(_rolesToGenerate[1].Value, _oilKiteRoles );
-            ActiveRolesDictionary.Add(_rolesToGenerate[2].Value, _flakKiteRoles );
-            ActiveRolesDictionary.Add(_rolesToGenerate[3].Value, _tankRoles );
-            ActiveRolesDictionary.Add(_rolesToGenerate[4].Value, _healAlacRoles );
-            ActiveRolesDictionary.Add(_rolesToGenerate[5].Value, _healQuickRoles );
-            ActiveRolesDictionary.Add(_rolesToGenerate[6].Value, _dpsAlacRoles );
-            ActiveRolesDictionary.Add(_rolesToGenerate[7].Value, _dpsQuickRoles );
-            ActiveRolesDictionary.Add(_rolesToGenerate[8].Value, _mushroomRoles );
-            ActiveRolesDictionary.Add(_rolesToGenerate[9].Value, _towerRoles );
-            ActiveRolesDictionary.Add(_rolesToGenerate[10].Value, _reflectRoles );
-            ActiveRolesDictionary.Add(_rolesToGenerate[11].Value, _cannonRoles );
-            ActiveRolesDictionary.Add(_rolesToGenerate[12].Value, _construcPusherRoles );
-            ActiveRolesDictionary.Add(_rolesToGenerate[13].Value, _lampRoles );
-            ActiveRolesDictionary.Add(_rolesToGenerate[14].Value, _pylonRoles );
-            ActiveRolesDictionary.Add(_rolesToGenerate[15].Value, _pillarRoles );
-            ActiveRolesDictionary.Add(_rolesToGenerate[16].Value, _greenRoles );
-            ActiveRolesDictionary.Add(_rolesToGenerate[17].Value, _soullessPusherRoles );
-            ActiveRolesDictionary.Add(_rolesToGenerate[18].Value, _dhuumKiteRoles );
-            ActiveRolesDictionary.Add(_rolesToGenerate[19].Value, _qadimKiteRoles );
-            ActiveRolesDictionary.Add(_rolesToGenerate[20].Value, _swordRoles );
-            ActiveRolesDictionary.Add(_rolesToGenerate[21].Value, _shieldRoles);
+            ActiveRolesDictionary.Add(_rolesToGenerate[0], _handKiteRoles );
+            ActiveRolesDictionary.Add(_rolesToGenerate[1], _oilKiteRoles );
+            ActiveRolesDictionary.Add(_rolesToGenerate[2], _flakKiteRoles );
+            ActiveRolesDictionary.Add(_rolesToGenerate[3], _tankRoles );
+            ActiveRolesDictionary.Add(_rolesToGenerate[4], _healAlacRoles );
+            ActiveRolesDictionary.Add(_rolesToGenerate[5], _healQuickRoles );
+            ActiveRolesDictionary.Add(_rolesToGenerate[6], _dpsAlacRoles );
+            ActiveRolesDictionary.Add(_rolesToGenerate[7], _dpsQuickRoles );
+            ActiveRolesDictionary.Add(_rolesToGenerate[8], _mushroomRoles );
+            ActiveRolesDictionary.Add(_rolesToGenerate[9], _towerRoles );
+            ActiveRolesDictionary.Add(_rolesToGenerate[10], _reflectRoles );
+            ActiveRolesDictionary.Add(_rolesToGenerate[11], _cannonRoles );
+            ActiveRolesDictionary.Add(_rolesToGenerate[12], _construcPusherRoles );
+            ActiveRolesDictionary.Add(_rolesToGenerate[13], _lampRoles );
+            ActiveRolesDictionary.Add(_rolesToGenerate[14], _pylonRoles );
+            ActiveRolesDictionary.Add(_rolesToGenerate[15], _pillarRoles );
+            ActiveRolesDictionary.Add(_rolesToGenerate[16], _greenRoles );
+            ActiveRolesDictionary.Add(_rolesToGenerate[17], _soullessPusherRoles );
+            ActiveRolesDictionary.Add(_rolesToGenerate[18], _dhuumKiteRoles );
+            ActiveRolesDictionary.Add(_rolesToGenerate[19], _qadimKiteRoles );
+            ActiveRolesDictionary.Add(_rolesToGenerate[20], _swordRoles );
+            ActiveRolesDictionary.Add(_rolesToGenerate[21], _shieldRoles);
             RolesArrays_to_ArrayListPosDictionary.Add(_handKiteRoles, 0);
             RolesArrays_to_ArrayListPosDictionary.Add(_oilKiteRoles, 1);
             RolesArrays_to_ArrayListPosDictionary.Add(_flakKiteRoles, 2);
@@ -248,155 +224,169 @@ namespace Falson.SquadRoleRandomizer
             ArrayPos_to_PlayerNameDictionary.Add(8, _playerNames[8].Value);
             ArrayPos_to_PlayerNameDictionary.Add(9, _playerNames[9].Value);      
         }
-        public void PrepRoles()
+        private void PrepRoles()
         {
             //This method prepares the roles to pass to the randomizer. It converts the checkboxes to activated roles to randomize, loads the saved player names into the list of valid options for each role
             //and then sorts them from smallest to largest, removing any role list that has no players. This information is then stored in a list called GenerationSequence, which is passed to the randomizer
             //to be sorted one last time before the randomizer class actually performs the necessary actions to randomize a member into each role.
-            intRoles.Clear();
-            intGenerationSequence.Clear();
-            GenerationSequence = new List<List<string>>();
-            _listOfValidLists = new List<List<string>> 
+            //intRoles.Clear();
+            //intGenerationSequence.Clear();
+            //GenerationSequence = new List<List<string>>();
+            //GenerationSequence.Clear();
+            _listOfValidLists = new List<List<string>>
             {
-            
+            _handKiteValid,
+            _oilKiteValid,
+            _flakKiteValid,
+            _tankValid,
+            _healAlacValid,
+            _healQuickValid,
+            _dpsAlacValid,
+            _dpsQuickValid,
+            _mushroomValid,
+            _towerValid,
+            _reflectValid,
+            _cannonValid,
+            _construcPusherValid,
+            _lampValid,
+            _pylonValid,
+            _pillarValid,
+            _greenValid,
+            _soullessPusherValid,
+            _dhuumKiteValid,
+            _qadimKiteValid,
+            _swordValid,
+            _shieldValid
             };
-
-            
-            GenerationSequence.Clear();
-            foreach (List<string> list in _listOfValidLists)
-            {
-                list.Clear();
-            }
             for (int i = 0; i < 22; i++)
             {
-                if (RoleRandomizerMain.RolestoRandomizeSelectionCheckboxesArray[i].Checked)
+                if (_rolesToGenerate[i].Value)
                 {
-                    var tempkey = RoleRandomizerMain.RolestoRandomizeSelectionCheckboxesArray[i];
+                    var tempkey = _rolesToGenerate[i];
                     var temprole = ActiveRolesDictionary[tempkey];
                     for (int s = 0; s < 10; s++)
                     {
                         if (temprole[s].Value)
                         {
-
                             RolesArrays_to_ValidLists[temprole].Add(ArrayPos_to_PlayerNameDictionary[s]); //adds the player that has checked true for a role to the role valid list for that particular role.
                         }
                     }
                 }
             }
-            var mySortedList = RoleRandomizerMain.ListofRoleValidLists.OrderBy(x => x.Count).ToList();  //sorts the populated lists by length
-            foreach (List<string> item in mySortedList)
+            var mySortedList = _listOfValidLists.OrderBy(x => x.Count).ToList();  //sorts the populated lists by length
+            foreach (var item in mySortedList)
             {
                 if (item.Count != 0) //only roles that have at least 1 player signed up get added to the sequence for generation
                 {
-                    GenerationSequence.Add(item); //converts the current (role)valid list into a string name for the role to be generated and adds to the sequence, from shortest lists to longest.
+                    _generationSequence.Add(item); //converts the current (role)valid list into a string name for the role to be generated and adds to the sequence, from shortest lists to longest.
                 }
             }
-            foreach (var entry in GenerationSequence)
+            foreach (var entry in _generationSequence)
             {
                 if (rolestogeneratemultiple_to_numbertogenerate.ContainsKey(entry))//check if list might need multiple
                 {
                     for (int i = 0; i < rolestogeneratemultiple_to_numbertogenerate[entry].Value; i++) //if it might, get number requested
                     {
-                        intGenerationSequence.Add(rolelistname_to_roleidentifiernumber[entry]); //add that role's index the number of times needed
+                        _intGenerationSequence.Add(rolelistname_to_roleidentifiernumber[entry]); //add that role's index the number of times needed
                     }
                 }
                 else
                 {
-                    intGenerationSequence.Add(rolelistname_to_roleidentifiernumber[entry]); //if it can't accept multiple, just add it once as integer index
+                    _intGenerationSequence.Add(rolelistname_to_roleidentifiernumber[entry]); //if it can't accept multiple, just add it once as integer index
                 }
             }
 
             #region build intRoles list
-            foreach (var name in RoleRandomizerMain.HandKiteValid)
+            foreach (var name in _handKiteValid)
             {
                 intRoles.Add(Tuple.Create(0, name));
             }
-            foreach (var name in RoleRandomizerMain.OilKiteValid)
+            foreach (var name in _oilKiteValid)
             {
                 intRoles.Add(Tuple.Create(1, name));
             }
-            foreach (var name in RoleRandomizerMain.FlakKiteValid)
+            foreach (var name in _flakKiteValid)
             {
                 intRoles.Add(Tuple.Create(2, name));
             }
-            foreach (var name in RoleRandomizerMain.TankValid)
+            foreach (var name in _tankValid)
             {
                 intRoles.Add(Tuple.Create(3, name));
             }
-            foreach (var name in RoleRandomizerMain.HealAlacValid)
+            foreach (var name in _healAlacValid)
             {
                 intRoles.Add(Tuple.Create(4, name));
             }
-            foreach (var name in RoleRandomizerMain.HealQuickValid)
+            foreach (var name in _healQuickValid)
             {
                 intRoles.Add(Tuple.Create(5, name));
             }
-            foreach (var name in RoleRandomizerMain.DPSAlacValid)
+            foreach (var name in _dpsAlacValid)
             {
                 intRoles.Add(Tuple.Create(6, name));
             }
-            foreach (var name in RoleRandomizerMain.DPSQuickValid)
+            foreach (var name in _dpsQuickValid)
             {
                 intRoles.Add(Tuple.Create(7, name));
             }
-            foreach (var name in RoleRandomizerMain.MushroomValid)
+            foreach (var name in _mushroomValid)
             {
                 intRoles.Add(Tuple.Create(8, name));
             }
-            foreach (var name in RoleRandomizerMain.TowerValid)
+            foreach (var name in _towerValid)
             {
                 intRoles.Add(Tuple.Create(9, name));
             }
-            foreach (var name in RoleRandomizerMain.ReflectValid)
+            foreach (var name in _reflectValid)
             {
                 intRoles.Add(Tuple.Create(10, name));
             }
-            foreach (var name in RoleRandomizerMain.CannonValid)
+            foreach (var name in _cannonValid)
             {
                 intRoles.Add(Tuple.Create(11, name));
             }
-            foreach (var name in RoleRandomizerMain.ConstrucPusherValid)
+            foreach (var name in _construcPusherValid)
             {
                 intRoles.Add(Tuple.Create(12, name));
             }
-            foreach (var name in RoleRandomizerMain.LampValid)
+            foreach (var name in _lampValid)
             {
                 intRoles.Add(Tuple.Create(13, name));
             }
-            foreach (var name in RoleRandomizerMain.PylonValid)
+            foreach (var name in _pylonValid)
             {
                 intRoles.Add(Tuple.Create(14, name));
             }
-            foreach (var name in RoleRandomizerMain.PillarValid)
+            foreach (var name in _pillarValid)
             {
                 intRoles.Add(Tuple.Create(15, name));
             }
-            foreach (var name in RoleRandomizerMain.GreenValid)
+            foreach (var name in _greenValid)
             {
                 intRoles.Add(Tuple.Create(16, name));
             }
-            foreach (var name in RoleRandomizerMain.SoullessPusherValid)
+            foreach (var name in _soullessPusherValid)
             {
                 intRoles.Add(Tuple.Create(17, name));
             }
-            foreach (var name in RoleRandomizerMain.DhuumKiteValid)
+            foreach (var name in _dhuumKiteValid)
             {
                 intRoles.Add(Tuple.Create(18, name));
             }
-            foreach (var name in RoleRandomizerMain.QadimKiteValid)
+            foreach (var name in _qadimKiteValid)
             {
                 intRoles.Add(Tuple.Create(19, name));
             }
-            foreach (var name in RoleRandomizerMain.SwordValid)
+            foreach (var name in _swordValid)
             {
                 intRoles.Add(Tuple.Create(20, name));
             }
-            foreach (var name in RoleRandomizerMain.ShieldValid)
+            foreach (var name in _shieldValid)
             {
                 intRoles.Add(Tuple.Create(21, name));
             }
             #endregion
-            var TheRandomizer = new Randomizer.RecursiveRandomizer();
+            var TheRandomizer = new Randomizer.RecursiveRandomizer(intRoles, _intGenerationSequence);
             TheRandomizer.Main();
         }
 

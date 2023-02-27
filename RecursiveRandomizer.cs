@@ -22,16 +22,17 @@ namespace Falson.Randomizer
         public IDictionary<string, string> HoTMechanic_to_SelectedPlayer = new Dictionary<string, string>();
         public IDictionary<string, string> PoFMechanic_to_SelectedPlayer = new Dictionary<string, string>();
 
+        public RecursiveRandomizer(List<Tuple<int,string>> intRoles, List<int> intGenSequence) 
+        {
+            _roles = intRoles;
+            _generationsequence = intGenSequence;
+        }
   
         public void Main()
         {
             falson.ResultsFlowPanel.ClearChildren();
-            _roles.Clear();
-            _generationsequence.Clear();
             _assignedRoles = new List<Tuple<int,string>>();
             setconflicts();
-            _roles = falsonP.intRoles;
-            _generationsequence = falsonP.intGenerationSequence;
             int roleindex = 0;
             if(AssignRoles(roleindex,_roles,_assignedRoles))
             {
