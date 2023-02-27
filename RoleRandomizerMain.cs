@@ -97,7 +97,9 @@ namespace Falson.SquadRoleRandomizer
         private CustomCheckbox[] _swordBoxArray = new CustomCheckbox[10]; //1-2
         private CustomCheckbox[] _shieldBoxArray = new CustomCheckbox[10]; //1-2
         private CustomCheckbox[] _rolestoRandomizeSelectionCheckboxesArray = new CustomCheckbox[22];
-        
+        private int NumberOfAttempts = 0;
+
+
 
         private static readonly Logger Logger = Logger.GetLogger<RoleRandomizerMain>();
 
@@ -154,16 +156,16 @@ namespace Falson.SquadRoleRandomizer
         }
         private void DebuggerMethod() 
         {
+            Debug.WriteLine(NumberOfAttempts);
             var rand = new Random();
-            int NumberOfAttempts = 0;
             //Random rand = new Random();
             for (int i = 0; i < 12; i++)
             {
-                falson.CounterBoxesSettings[i].Value = rand.Next(0, falson.CounterBoxes[i].MaxValue);
+                _counterBoxesSettings[i].Value = rand.Next(0, _counterBoxes[i].MaxValue);
             }
             for (int i = 0; i < 22; i++)
             {
-                falson.RolesToGenerate[i].Value = rand.Next(2) == 1;
+                _rolesToGenerate[i].Value = rand.Next(2) == 1;
             }
             for (int i = 0; i < 10; i++)
             {
@@ -189,13 +191,13 @@ namespace Falson.SquadRoleRandomizer
                 _qadimKiteRoles[i].Value = rand.Next(2) == 1;
                 _swordRoles[i].Value = rand.Next(2) == 1;
                 _shieldRoles[i].Value = rand.Next(2) == 1;
-                NumberOfAttempts++;
             }
+            NumberOfAttempts++;
         }
 
 
       
-    }
+    
 
         protected override async Task LoadAsync()
         {
@@ -820,11 +822,15 @@ namespace Falson.SquadRoleRandomizer
             };
         }
         #endregion
-        private void GenerateRolesButton_Click(object sender, Blish_HUD.Input.MouseEventArgs e)
+        private void GenerateRolesButton_Click(object sender, Blish_HUD.Input.MouseEventArgs e) //uncomment structure below for debugging mode
         {
-            var prepRolesInstance = new PrepareRoles(_listofRolesSettings, _rolesToGenerate, _counterBoxesSettings, _playerNames);
-            prepRolesInstance.Main();
-            _randomizerResultsWindow.Show();
+            //while (true)
+            //{
+                //DebuggerMethod(); //randomize settings first
+                var prepRolesInstance = new PrepareRoles(_listofRolesSettings, _rolesToGenerate, _counterBoxesSettings, _playerNames);
+                prepRolesInstance.Main();
+                _randomizerResultsWindow.Show();
+            //}
         }
         private void _randomizerSettingIcon_Click(object sender, Blish_HUD.Input.MouseEventArgs e)
         {
