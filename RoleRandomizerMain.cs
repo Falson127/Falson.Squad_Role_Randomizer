@@ -152,7 +152,50 @@ namespace Falson.SquadRoleRandomizer
             }
 
         }
+        private void DebuggerMethod() 
+        {
+            var rand = new Random();
+            int NumberOfAttempts = 0;
+            //Random rand = new Random();
+            for (int i = 0; i < 12; i++)
+            {
+                falson.CounterBoxesSettings[i].Value = rand.Next(0, falson.CounterBoxes[i].MaxValue);
+            }
+            for (int i = 0; i < 22; i++)
+            {
+                falson.RolesToGenerate[i].Value = rand.Next(2) == 1;
+            }
+            for (int i = 0; i < 10; i++)
+            {
+                _handKiteRoles[i].Value = rand.Next(2) == 1;
+                _oilKiteRoles[i].Value = rand.Next(2) == 1;
+                _flakKiteRoles[i].Value = rand.Next(2) == 1;
+                _tankRoles[i].Value = rand.Next(2) == 1;
+                _healAlacRoles[i].Value = rand.Next(2) == 1;
+                _healQuickRoles[i].Value = rand.Next(2) == 1;
+                _dpsAlacRoles[i].Value = rand.Next(2) == 1;
+                _dpsQuickRoles[i].Value = rand.Next(2) == 1;
+                _mushroomRoles[i].Value = rand.Next(2) == 1;
+                _towerRoles[i].Value = rand.Next(2) == 1;
+                _reflectRoles[i].Value = rand.Next(2) == 1;
+                _cannonRoles[i].Value = rand.Next(2) == 1;
+                _construcPusherRoles[i].Value = rand.Next(2) == 1;
+                _lampRoles[i].Value = rand.Next(2) == 1;
+                _pylonRoles[i].Value = rand.Next(2) == 1;
+                _pillarRoles[i].Value = rand.Next(2) == 1;
+                _greenRoles[i].Value = rand.Next(2) == 1;
+                _soullessPusherRoles[i].Value = rand.Next(2) == 1;
+                _dhuumKiteRoles[i].Value = rand.Next(2) == 1;
+                _qadimKiteRoles[i].Value = rand.Next(2) == 1;
+                _swordRoles[i].Value = rand.Next(2) == 1;
+                _shieldRoles[i].Value = rand.Next(2) == 1;
+                NumberOfAttempts++;
+            }
+        }
 
+
+      
+    }
 
         protected override async Task LoadAsync()
         {
