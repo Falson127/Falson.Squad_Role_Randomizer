@@ -98,6 +98,10 @@ namespace Falson.Randomizer
                         }
                     }
                 }
+                if (i==4 || i==5 || i==6 || i==7) //ignore the sanity checker for healalac/quick and dpsalac/quick. I think this will just give them priority, and if they cause any other roles to deplete it will still be caught, so should be fine?
+                {
+                    continue;
+                }
                 if (_roleConflictBubblePlayerCount > 10)
                 {
                     return false; //if a single conflict bubble requests more than 10 players, function will return false.
@@ -224,7 +228,7 @@ namespace Falson.Randomizer
                 }
             }
             //add conflicts only where needed
-            #region handkite conflicts
+            #region handkite conflicts (Need to check sanity)
             _conflicts[0, 1] = 1;
             _conflicts[0, 3] = 1;
             _conflicts[0, 4] = 1;
@@ -309,24 +313,24 @@ namespace Falson.Randomizer
             _conflicts[11, 4] = 1;
             _conflicts[11, 5] = 1;
             #endregion
-            #region Lamp conflicts
+            #region Lamp conflicts (need to check sanity)
             _conflicts[13, 4] = 1;
             _conflicts[13, 5] = 1;
             _conflicts[13, 6] = 1;
             _conflicts[13, 7] = 1;
             _conflicts[13, 19] = 1;
             #endregion
-            #region Pylon conflicts
+            #region Pylon conflicts (need to check sanity)
+            _conflicts[14, 3] = 1;
             _conflicts[14, 4] = 1;
             _conflicts[14, 5] = 1;
             _conflicts[14, 6] = 1;
             _conflicts[14, 7] = 1;
-            _conflicts[14, 3] = 1;
             #endregion
             #region Pillar conflicts
             _conflicts[15, 3] = 1;
             #endregion
-            #region Green conflicts
+            #region Green conflicts (need to check sanity)
             _conflicts[16, 3] = 1;
             _conflicts[16, 4] = 1;
             _conflicts[16, 5] = 1;
@@ -340,7 +344,7 @@ namespace Falson.Randomizer
             _conflicts[17, 6] = 1;
             _conflicts[17, 7] = 1;
             #endregion
-            #region DhuumKite conflict
+            #region DhuumKite conflict (need to check sanity)
             _conflicts[18, 3] = 1;
             _conflicts[18, 4] = 1;
             _conflicts[18, 5] = 1;
@@ -348,7 +352,7 @@ namespace Falson.Randomizer
             _conflicts[18, 7] = 1;
             _conflicts[18, 16] = 1;
             #endregion
-            #region QadimKite conflicts
+            #region QadimKite conflicts (need to check sanity)
             _conflicts[19, 3] = 1;
             _conflicts[19, 4] = 1;
             _conflicts[19, 5] = 1;
@@ -359,10 +363,12 @@ namespace Falson.Randomizer
             #region Sword conflicts
             _conflicts[20, 4] = 1;
             _conflicts[20, 5] = 1;
+            _conflicts[20, 21] = 1;
             #endregion
             #region Shield conflicts
             _conflicts[21, 4] = 1;
             _conflicts[21, 5] = 1;
+            _conflicts[21, 20] = 1;
             #endregion
         }
 
