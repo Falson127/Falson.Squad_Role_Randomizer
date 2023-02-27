@@ -9,6 +9,8 @@ using falsonP = Falson.SquadRoleRandomizer.PrepareRoles;
 using falson = Falson.SquadRoleRandomizer.RoleRandomizerMain;
 using Blish_HUD.Controls;
 using Falson.SquadRoleRandomizer;
+using System.Configuration;
+using Blish_HUD.Settings;
 
 namespace Falson.Randomizer
 {
@@ -21,30 +23,121 @@ namespace Falson.Randomizer
         public IDictionary<string, string> RoleName_to_SelectedPlayer = new Dictionary<string, string>();
         public IDictionary<string, string> HoTMechanic_to_SelectedPlayer = new Dictionary<string, string>();
         public IDictionary<string, string> PoFMechanic_to_SelectedPlayer = new Dictionary<string, string>();
+        private readonly SettingEntry<bool>[] _rolesToGenerate = new SettingEntry<bool>[22];
+        private readonly SettingEntry<int>[] _counterboxsettings = new SettingEntry<int>[12];
 
-        public RecursiveRandomizer(List<Tuple<int,string>> intRoles, List<int> intGenSequence) 
+        public RecursiveRandomizer(List<Tuple<int,string>> intRoles, List<int> intGenSequence, SettingEntry<bool>[] rolestogenerate, SettingEntry<int>[] counterboxsettings) 
         {
             _roles = intRoles;
             _generationsequence = intGenSequence;
+            _rolesToGenerate = rolestogenerate;
+            _counterboxsettings = counterboxsettings;
         }
-  
+        private bool SanityCheck()
+        {
+            IDictionary<int, int> roleChecked_to_numberofplayers = new Dictionary<int, int>() //key is the role that was checked within a given 
+            {
+                {0, 1},
+                {1, 1},
+                {2, 1},
+                {3, 1},
+                {4, _counterboxsettings[0].Value},
+                {5, _counterboxsettings[1].Value},
+                {6, _counterboxsettings[2].Value},
+                {7, _counterboxsettings[3].Value},
+                {8, _counterboxsettings[4].Value},
+                {9, 1},
+                {10, 1},
+                {11, _counterboxsettings[5].Value},
+                {12, 1},
+                {13, _counterboxsettings[6].Value},
+                {14, _counterboxsettings[7].Value},
+                {15, _counterboxsettings[8].Value},
+                {16, _counterboxsettings[9].Value},
+                {17, 1},
+                {18, 1},
+                {19, 1},
+                {20, _counterboxsettings[10].Value},
+                {21, _counterboxsettings[11].Value}
+            };
+            IDictionary<int, bool> conflictRoleIndex_to_RoleChecked = new Dictionary<int, bool> 
+            {
+                {0, _rolesToGenerate[0].Value},
+                {1, _rolesToGenerate[1].Value},
+                {2, _rolesToGenerate[2].Value},
+                {3, _rolesToGenerate[3].Value},
+                {4, _rolesToGenerate[4].Value},
+                {5, _rolesToGenerate[5].Value},
+                {6, _rolesToGenerate[6].Value},
+                {7, _rolesToGenerate[7].Value},
+                {8, _rolesToGenerate[8].Value},
+                {9, _rolesToGenerate[9].Value},
+                {10, _rolesToGenerate[10].Value},
+                {11, _rolesToGenerate[11].Value},
+                {12, _rolesToGenerate[12].Value},
+                {13, _rolesToGenerate[13].Value},
+                {14, _rolesToGenerate[14].Value},
+                {15, _rolesToGenerate[15].Value},
+                {16, _rolesToGenerate[16].Value},
+                {17, _rolesToGenerate[17].Value},
+                {18, _rolesToGenerate[18].Value},
+                {19, _rolesToGenerate[19].Value},
+                {20, _rolesToGenerate[20].Value},
+                {21, _rolesToGenerate[21].Value}
+            };
+            for (int i = 0; i < 22; i++)
+            {
+                var _roleConflictBubblePlayerCount = 0;
+                for (int j = 0; j < 22; j++)
+                {
+                    if (_conflicts[i,j] == 1 || i == j) //only execute the check and addition if the given roles i and j are in conflict with each other or if i and j are the same, that way the role itself is included for consideration.
+                    {
+                        if (conflictRoleIndex_to_RoleChecked[j]) //here we need to pass j into a dictionary that checks whether that specific role is enabled for generation, and if it is, we get the number requested.
+                        {
+                            _roleConflictBubblePlayerCount = _roleConflictBubblePlayerCount + roleChecked_to_numberofplayers[j]; //gets number needed for role J and adds it to number of roles requested that conflict with role i.
+                        }
+                    }
+                }
+                if (_roleConflictBubblePlayerCount > 10)
+                {
+                    return false; //if a single conflict bubble requests more than 10 players, function will return false.
+                }
+            }
+            return true; //if the code makes it through all 22 conflict bubbles without the _roleConflictBubblePlayerCount exceeding 10, then it returns true
+        }
         public void Main()
         {
             falson.ResultsFlowPanel.ClearChildren();
-            _assignedRoles = new List<Tuple<int,string>>();
+            _assignedRoles = new List<Tuple<int, string>>();
             setconflicts();
             int roleindex = 0;
-            if(AssignRoles(roleindex,_roles,_assignedRoles))
+            if (SanityCheck()) //if sanity check passes, attempt randomization
             {
-            var Cleaner = new ResultsCleaner(_assignedRoles);
-            Cleaner.Main();
-            UnloadRandomizer();
+                if (AssignRoles(roleindex, _roles, _assignedRoles))
+                {
+                    var Cleaner = new ResultsCleaner(_assignedRoles);
+                    Cleaner.Main();
+                    UnloadRandomizer();
+                }
+                else
+                {
+                    Label templabel = new Label()
+                    {
+                        Text = "The Randomizer failed to find a valid composition based on your configured settings. \nTry decreasing the number of roles being generated or increasing \nthe number of players signed up for each role.",
+                        Parent = falson.ResultsFlowPanel,
+                        AutoSizeWidth = true,
+                        AutoSizeHeight = true
+                    };
+                }
             }
             else
             {
-                Label templabel = new Label() 
+                Label templabel = new Label()
                 {
-                    Text = "The Randomizer failed to find a valid composition based on your configured settings. \nTry decreasing the number of roles being generated or increasing \nthe number of players signed up for each role.",
+                    Text = "Your configuration is invalid. You have requested to generate more than 10 total players" +
+                    "\nwithin at least one group of conflicting roles. The only solution is to reduce" +
+                    "\nthe number of roles requested by unchecking roles to generate or reducing the counter boxes" +
+                    "\n\nPlease feel free to reach out on the Blish HUD Discord for more information on this error.",
                     Parent = falson.ResultsFlowPanel,
                     AutoSizeWidth = true,
                     AutoSizeHeight = true
@@ -53,7 +146,7 @@ namespace Falson.Randomizer
         }
         private void UnloadRandomizer() 
         {
-            _assignedRoles = null;
+            //_assignedRoles = null;
         }
 
         private bool IsAssignmentValid(int roleIndex, string person, List<Tuple<int, string>> assignedRoles)
@@ -69,7 +162,6 @@ namespace Falson.Randomizer
             {
                 //return false;
             }
-
             return true;
         }
 

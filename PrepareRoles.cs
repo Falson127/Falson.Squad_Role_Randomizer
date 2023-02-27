@@ -386,7 +386,7 @@ namespace Falson.SquadRoleRandomizer
                 intRoles.Add(Tuple.Create(21, name));
             }
             #endregion
-            var TheRandomizer = new Randomizer.RecursiveRandomizer(intRoles, _intGenerationSequence);
+            var TheRandomizer = new Randomizer.RecursiveRandomizer(intRoles, _intGenerationSequence, _rolesToGenerate, _counterBoxSettings);
             TheRandomizer.Main();
         }
 
