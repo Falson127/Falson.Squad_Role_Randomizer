@@ -804,7 +804,7 @@ namespace Falson.SquadRoleRandomizer
         #endregion
         private void GenerateRolesButton_Click(object sender, Blish_HUD.Input.MouseEventArgs e)
         {
-            var prepRolesInstance = new PrepareRoles(ListofRoleValidLists, ListofRolesSettings);
+            var prepRolesInstance = new PrepareRoles(ListofRoleValidLists, ListofRolesSettings, RolesToGenerate, CounterBoxesSettings, PlayerNames);
             prepRolesInstance.PrepRoles();
             _randomizerResultsWindow.Show();
         }

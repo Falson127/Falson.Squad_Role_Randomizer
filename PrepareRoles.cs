@@ -13,11 +13,18 @@ namespace Falson.SquadRoleRandomizer
     {
         //public RoleRandomizerMain mainInstance;
 
-        public static List<int> Length_of_Roles_Arrays;
+        //public static List<int> Length_of_Roles_Arrays;
         public static List<List<string>> GenerationSequence;
-        //public static List<List<string>> ListofValidLists;
+        private List<List<string>> _listOfValidLists;
         public static List<int> intGenerationSequence = new List<int>();
         public static List<Tuple<int, string>> intRoles = new List<Tuple<int,string>>();
+        IDictionary<bool, SettingEntry<bool>[]> ActiveRolesDictionary = new Dictionary<bool, SettingEntry<bool>[]>();
+        IDictionary<SettingEntry<bool>[], int> RolesArrays_to_ArrayListPosDictionary = new Dictionary<SettingEntry<bool>[], int>();
+        IDictionary<SettingEntry<bool>[], List<string>> RolesArrays_to_ValidLists = new Dictionary<SettingEntry<bool>[], List<string>>();
+        IDictionary<List<string>, SettingEntry<int>> rolestogeneratemultiple_to_numbertogenerate = new Dictionary<List<string>, SettingEntry<int>>();
+        IDictionary<List<string>, int> rolelistname_to_roleidentifiernumber = new Dictionary<List<string>, int>();
+        IDictionary<int, string> ArrayPos_to_PlayerNameDictionary = new Dictionary<int, string>();
+
 
         //local instances of valid lists
         private readonly List<string> _handKiteValid = new List<string>();
@@ -65,9 +72,16 @@ namespace Falson.SquadRoleRandomizer
         private readonly SettingEntry<bool>[] _qadimKiteRoles = new SettingEntry<bool>[10];
         private readonly SettingEntry<bool>[] _swordRoles = new SettingEntry<bool>[10];
         private readonly SettingEntry<bool>[] _shieldRoles = new SettingEntry<bool>[10];
+        private readonly SettingEntry<bool>[] _rolesToGenerate = new SettingEntry<bool>[22];
+        private readonly SettingEntry<int>[] _counterBoxSettings = new SettingEntry<int>[12];
+        private readonly SettingEntry<string>[] _playerNames = new SettingEntry<string>[10];
         //constructor
-        public PrepareRoles(List<List<string>> listOfValidLists, List<SettingEntry<bool>[]> listofSettingEntries) 
+        public PrepareRoles(List<List<string>> listOfValidLists, List<SettingEntry<bool>[]> listofSettingEntries, SettingEntry<bool>[] rolesToGenerateSettings, SettingEntry<int>[] counterboxsettings, SettingEntry<string>[] playerNames) 
         {
+            _playerNames = playerNames;
+            _rolesToGenerate = rolesToGenerateSettings;
+            _counterBoxSettings = counterboxsettings;
+
             _handKiteValid = listOfValidLists[0];
             _oilKiteValid = listOfValidLists[1];
             _flakKiteValid = listOfValidLists[2];
@@ -113,10 +127,127 @@ namespace Falson.SquadRoleRandomizer
             _qadimKiteRoles = listofSettingEntries[19];
             _swordRoles = listofSettingEntries[20];
             _shieldRoles = listofSettingEntries[21];
-
-
         }
-        
+
+        private void Main() 
+        {
+            FillDictionaries();
+            PrepRoles();
+        }
+
+        public void FillDictionaries() 
+        {
+            ActiveRolesDictionary.Add(_rolesToGenerate[0].Value, _handKiteRoles );
+            ActiveRolesDictionary.Add(_rolesToGenerate[1].Value, _oilKiteRoles );
+            ActiveRolesDictionary.Add(_rolesToGenerate[2].Value, _flakKiteRoles );
+            ActiveRolesDictionary.Add(_rolesToGenerate[3].Value, _tankRoles );
+            ActiveRolesDictionary.Add(_rolesToGenerate[4].Value, _healAlacRoles );
+            ActiveRolesDictionary.Add(_rolesToGenerate[5].Value, _healQuickRoles );
+            ActiveRolesDictionary.Add(_rolesToGenerate[6].Value, _dpsAlacRoles );
+            ActiveRolesDictionary.Add(_rolesToGenerate[7].Value, _dpsQuickRoles );
+            ActiveRolesDictionary.Add(_rolesToGenerate[8].Value, _mushroomRoles );
+            ActiveRolesDictionary.Add(_rolesToGenerate[9].Value, _towerRoles );
+            ActiveRolesDictionary.Add(_rolesToGenerate[10].Value, _reflectRoles );
+            ActiveRolesDictionary.Add(_rolesToGenerate[11].Value, _cannonRoles );
+            ActiveRolesDictionary.Add(_rolesToGenerate[12].Value, _construcPusherRoles );
+            ActiveRolesDictionary.Add(_rolesToGenerate[13].Value, _lampRoles );
+            ActiveRolesDictionary.Add(_rolesToGenerate[14].Value, _pylonRoles );
+            ActiveRolesDictionary.Add(_rolesToGenerate[15].Value, _pillarRoles );
+            ActiveRolesDictionary.Add(_rolesToGenerate[16].Value, _greenRoles );
+            ActiveRolesDictionary.Add(_rolesToGenerate[17].Value, _soullessPusherRoles );
+            ActiveRolesDictionary.Add(_rolesToGenerate[18].Value, _dhuumKiteRoles );
+            ActiveRolesDictionary.Add(_rolesToGenerate[19].Value, _qadimKiteRoles );
+            ActiveRolesDictionary.Add(_rolesToGenerate[20].Value, _swordRoles );
+            ActiveRolesDictionary.Add(_rolesToGenerate[21].Value, _shieldRoles);
+            RolesArrays_to_ArrayListPosDictionary.Add(_handKiteRoles, 0);
+            RolesArrays_to_ArrayListPosDictionary.Add(_oilKiteRoles, 1);
+            RolesArrays_to_ArrayListPosDictionary.Add(_flakKiteRoles, 2);
+            RolesArrays_to_ArrayListPosDictionary.Add(_tankRoles, 3);
+            RolesArrays_to_ArrayListPosDictionary.Add(_healAlacRoles, 4);
+            RolesArrays_to_ArrayListPosDictionary.Add(_healQuickRoles, 5);
+            RolesArrays_to_ArrayListPosDictionary.Add(_dpsAlacRoles, 6);
+            RolesArrays_to_ArrayListPosDictionary.Add(_dpsQuickRoles, 7);
+            RolesArrays_to_ArrayListPosDictionary.Add(_mushroomRoles, 8);
+            RolesArrays_to_ArrayListPosDictionary.Add(_towerRoles, 9);
+            RolesArrays_to_ArrayListPosDictionary.Add(_reflectRoles, 10);
+            RolesArrays_to_ArrayListPosDictionary.Add(_cannonRoles, 11);
+            RolesArrays_to_ArrayListPosDictionary.Add(_construcPusherRoles, 12);
+            RolesArrays_to_ArrayListPosDictionary.Add(_lampRoles, 13);
+            RolesArrays_to_ArrayListPosDictionary.Add(_pylonRoles, 14);
+            RolesArrays_to_ArrayListPosDictionary.Add(_pillarRoles, 15);
+            RolesArrays_to_ArrayListPosDictionary.Add(_greenRoles, 16);
+            RolesArrays_to_ArrayListPosDictionary.Add(_soullessPusherRoles, 17);
+            RolesArrays_to_ArrayListPosDictionary.Add(_dhuumKiteRoles, 18);
+            RolesArrays_to_ArrayListPosDictionary.Add(_qadimKiteRoles, 19);
+            RolesArrays_to_ArrayListPosDictionary.Add(_swordRoles, 20);
+            RolesArrays_to_ArrayListPosDictionary.Add(_shieldRoles, 21);
+            RolesArrays_to_ValidLists.Add(_handKiteRoles, _handKiteValid);
+            RolesArrays_to_ValidLists.Add(_oilKiteRoles, _oilKiteValid );
+            RolesArrays_to_ValidLists.Add(_flakKiteRoles,  _flakKiteValid);
+            RolesArrays_to_ValidLists.Add(_tankRoles,  _tankValid);
+            RolesArrays_to_ValidLists.Add(_healAlacRoles,  _healAlacValid);
+            RolesArrays_to_ValidLists.Add(_healQuickRoles, _healQuickValid);
+            RolesArrays_to_ValidLists.Add(_dpsAlacRoles, _dpsAlacValid);
+            RolesArrays_to_ValidLists.Add(_dpsQuickRoles,  _dpsQuickValid);
+            RolesArrays_to_ValidLists.Add(_mushroomRoles,  _mushroomValid);
+            RolesArrays_to_ValidLists.Add(_towerRoles,  _towerValid );
+            RolesArrays_to_ValidLists.Add(_reflectRoles, _reflectValid );
+            RolesArrays_to_ValidLists.Add(_cannonRoles, _cannonValid );
+            RolesArrays_to_ValidLists.Add(_construcPusherRoles,  _construcPusherValid);
+            RolesArrays_to_ValidLists.Add(_lampRoles,   _lampValid);
+            RolesArrays_to_ValidLists.Add(_pylonRoles, _pylonValid );
+            RolesArrays_to_ValidLists.Add(_pillarRoles, _pillarValid );
+            RolesArrays_to_ValidLists.Add(_greenRoles,  _greenValid );
+            RolesArrays_to_ValidLists.Add(_soullessPusherRoles, _soullessPusherValid );
+            RolesArrays_to_ValidLists.Add(_dhuumKiteRoles, _dhuumKiteValid );
+            RolesArrays_to_ValidLists.Add(_qadimKiteRoles, _qadimKiteValid );
+            RolesArrays_to_ValidLists.Add(_swordRoles,  _swordValid );
+            RolesArrays_to_ValidLists.Add(_shieldRoles, _shieldValid);
+            rolestogeneratemultiple_to_numbertogenerate.Add(_healAlacValid, _counterBoxSettings[0]);
+            rolestogeneratemultiple_to_numbertogenerate.Add(_healQuickValid, _counterBoxSettings [1]);
+            rolestogeneratemultiple_to_numbertogenerate.Add(_dpsAlacValid, _counterBoxSettings[2] );
+            rolestogeneratemultiple_to_numbertogenerate.Add(_dpsQuickValid, _counterBoxSettings[3]);
+            rolestogeneratemultiple_to_numbertogenerate.Add(_mushroomValid, _counterBoxSettings[4]);
+            rolestogeneratemultiple_to_numbertogenerate.Add(_cannonValid, _counterBoxSettings[5]);
+            rolestogeneratemultiple_to_numbertogenerate.Add(_lampValid, _counterBoxSettings[6]);
+            rolestogeneratemultiple_to_numbertogenerate.Add(_pylonValid, _counterBoxSettings[7]);
+            rolestogeneratemultiple_to_numbertogenerate.Add(_pillarValid, _counterBoxSettings[8]);
+            rolestogeneratemultiple_to_numbertogenerate.Add(_greenValid, _counterBoxSettings[9]);
+            rolestogeneratemultiple_to_numbertogenerate.Add(_swordValid, _counterBoxSettings[10]);
+            rolestogeneratemultiple_to_numbertogenerate.Add( _shieldValid, _counterBoxSettings[11]);     
+            rolelistname_to_roleidentifiernumber.Add(_handKiteValid, 0);
+            rolelistname_to_roleidentifiernumber.Add(_oilKiteValid, 1);
+            rolelistname_to_roleidentifiernumber.Add(_flakKiteValid, 2);
+            rolelistname_to_roleidentifiernumber.Add(_tankValid, 3);
+            rolelistname_to_roleidentifiernumber.Add(_healAlacValid, 4);
+            rolelistname_to_roleidentifiernumber.Add(_healQuickValid, 5);
+            rolelistname_to_roleidentifiernumber.Add(_dpsAlacValid, 6);
+            rolelistname_to_roleidentifiernumber.Add(_dpsQuickValid, 7);
+            rolelistname_to_roleidentifiernumber.Add(_mushroomValid, 8);
+            rolelistname_to_roleidentifiernumber.Add(_towerValid, 9);
+            rolelistname_to_roleidentifiernumber.Add(_reflectValid, 10);
+            rolelistname_to_roleidentifiernumber.Add(_cannonValid, 11);
+            rolelistname_to_roleidentifiernumber.Add(_construcPusherValid, 12);
+            rolelistname_to_roleidentifiernumber.Add(_lampValid, 13);
+            rolelistname_to_roleidentifiernumber.Add(_pylonValid, 14);
+            rolelistname_to_roleidentifiernumber.Add(_pillarValid, 15);
+            rolelistname_to_roleidentifiernumber.Add(_greenValid, 16);
+            rolelistname_to_roleidentifiernumber.Add(_soullessPusherValid, 17);
+            rolelistname_to_roleidentifiernumber.Add(_dhuumKiteValid, 18);
+            rolelistname_to_roleidentifiernumber.Add(_qadimKiteValid, 19);
+            rolelistname_to_roleidentifiernumber.Add(_swordValid, 20);
+            rolelistname_to_roleidentifiernumber.Add(_shieldValid, 21);
+            ArrayPos_to_PlayerNameDictionary.Add(0, _playerNames[0].Value);
+            ArrayPos_to_PlayerNameDictionary.Add(1, _playerNames[1].Value);
+            ArrayPos_to_PlayerNameDictionary.Add(2, _playerNames[2].Value);
+            ArrayPos_to_PlayerNameDictionary.Add(3, _playerNames[3].Value);
+            ArrayPos_to_PlayerNameDictionary.Add(4, _playerNames[4].Value);
+            ArrayPos_to_PlayerNameDictionary.Add(5, _playerNames[5].Value);
+            ArrayPos_to_PlayerNameDictionary.Add(6, _playerNames[6].Value);
+            ArrayPos_to_PlayerNameDictionary.Add(7, _playerNames[7].Value);
+            ArrayPos_to_PlayerNameDictionary.Add(8, _playerNames[8].Value);
+            ArrayPos_to_PlayerNameDictionary.Add(9, _playerNames[9].Value);      
+        }
         public void PrepRoles()
         {
             //This method prepares the roles to pass to the randomizer. It converts the checkboxes to activated roles to randomize, loads the saved player names into the list of valid options for each role
@@ -125,137 +256,14 @@ namespace Falson.SquadRoleRandomizer
             intRoles.Clear();
             intGenerationSequence.Clear();
             GenerationSequence = new List<List<string>>();
-            //ListofValidLists = new List<List<string>> { RoleRandomizerMain.HandKiteValid, RoleRandomizerMain.OilKiteValid, RoleRandomizerMain.FlakKiteValid, RoleRandomizerMain.TankValid, RoleRandomizerMain.HealAlacValid, RoleRandomizerMain.HealQuickValid, RoleRandomizerMain.DPSAlacValid, RoleRandomizerMain.DPSQuickValid, RoleRandomizerMain.MushroomValid, RoleRandomizerMain.TowerValid, RoleRandomizerMain.ReflectValid, RoleRandomizerMain.CannonValid, RoleRandomizerMain.ConstrucPusherValid, RoleRandomizerMain.LampValid, RoleRandomizerMain.PylonValid, RoleRandomizerMain.PillarValid, RoleRandomizerMain.GreenValid, RoleRandomizerMain.SoullessPusherValid, RoleRandomizerMain.DhuumKiteValid, RoleRandomizerMain.QadimKiteValid, RoleRandomizerMain.SwordValid, RoleRandomizerMain.ShieldValid, };
-            IDictionary<CustomCheckbox, SettingEntry<bool>[]> ActiveRolesDictionary = new Dictionary<CustomCheckbox, SettingEntry<bool>[]>()
+            _listOfValidLists = new List<List<string>> 
             {
-                {RoleRandomizerMain.RolestoRandomizeSelectionCheckboxesArray[0], RoleRandomizerMain.HandKiteRoles },
-                {RoleRandomizerMain.RolestoRandomizeSelectionCheckboxesArray[1], RoleRandomizerMain.OilKiteRoles },
-                {RoleRandomizerMain.RolestoRandomizeSelectionCheckboxesArray[2], RoleRandomizerMain.FlakKiteRoles },
-                {RoleRandomizerMain.RolestoRandomizeSelectionCheckboxesArray[3], RoleRandomizerMain.TankRoles },
-                {RoleRandomizerMain.RolestoRandomizeSelectionCheckboxesArray[4], RoleRandomizerMain.HealAlacRoles },
-                {RoleRandomizerMain.RolestoRandomizeSelectionCheckboxesArray[5], RoleRandomizerMain.HealQuickRoles },
-                {RoleRandomizerMain.RolestoRandomizeSelectionCheckboxesArray[6], RoleRandomizerMain.DPSAlacRoles },
-                {RoleRandomizerMain.RolestoRandomizeSelectionCheckboxesArray[7], RoleRandomizerMain.DPSQuickRoles },
-                {RoleRandomizerMain.RolestoRandomizeSelectionCheckboxesArray[8], RoleRandomizerMain.MushroomRoles },
-                {RoleRandomizerMain.RolestoRandomizeSelectionCheckboxesArray[9], RoleRandomizerMain.TowerRoles },
-                {RoleRandomizerMain.RolestoRandomizeSelectionCheckboxesArray[10], RoleRandomizerMain.ReflectRoles },
-                {RoleRandomizerMain.RolestoRandomizeSelectionCheckboxesArray[11], RoleRandomizerMain.CannonRoles },
-                {RoleRandomizerMain.RolestoRandomizeSelectionCheckboxesArray[12], RoleRandomizerMain.ConstrucPusherRoles },
-                {RoleRandomizerMain.RolestoRandomizeSelectionCheckboxesArray[13], RoleRandomizerMain.LampRoles },
-                {RoleRandomizerMain.RolestoRandomizeSelectionCheckboxesArray[14], RoleRandomizerMain.PylonRoles },
-                {RoleRandomizerMain.RolestoRandomizeSelectionCheckboxesArray[15], RoleRandomizerMain.PillarRoles },
-                {RoleRandomizerMain.RolestoRandomizeSelectionCheckboxesArray[16], RoleRandomizerMain.GreenRoles },
-                {RoleRandomizerMain.RolestoRandomizeSelectionCheckboxesArray[17], RoleRandomizerMain.SoullessPusherRoles },
-                {RoleRandomizerMain.RolestoRandomizeSelectionCheckboxesArray[18], RoleRandomizerMain.DhuumKiteRoles },
-                {RoleRandomizerMain.RolestoRandomizeSelectionCheckboxesArray[19], RoleRandomizerMain.QadimKiteRoles },
-                {RoleRandomizerMain.RolestoRandomizeSelectionCheckboxesArray[20], RoleRandomizerMain.SwordRoles },
-                {RoleRandomizerMain.RolestoRandomizeSelectionCheckboxesArray[21], RoleRandomizerMain.ShieldRoles }
+            
             };
-            IDictionary<int, string> ArrayPos_to_PlayerNameDictionary = new Dictionary<int, string>()
-            {
-                {0, RoleRandomizerMain.PlayerNames[0].Value},
-                {1, RoleRandomizerMain.PlayerNames[1].Value},
-                {2, RoleRandomizerMain.PlayerNames[2].Value},
-                {3, RoleRandomizerMain.PlayerNames[3].Value},
-                {4, RoleRandomizerMain.PlayerNames[4].Value},
-                {5, RoleRandomizerMain.PlayerNames[5].Value},
-                {6, RoleRandomizerMain.PlayerNames[6].Value},
-                {7, RoleRandomizerMain.PlayerNames[7].Value},
-                {8, RoleRandomizerMain.PlayerNames[8].Value},
-                {9, RoleRandomizerMain.PlayerNames[9].Value}
-            };
-            IDictionary<SettingEntry<bool>[], int> RolesArrays_to_ArrayListPosDictionary = new Dictionary<SettingEntry<bool>[], int>()
-            {
-                {RoleRandomizerMain.HandKiteRoles, 0},
-                {RoleRandomizerMain.OilKiteRoles, 1},
-                {RoleRandomizerMain.FlakKiteRoles, 2},
-                {RoleRandomizerMain.TankRoles, 3},
-                {RoleRandomizerMain.HealAlacRoles, 4},
-                {RoleRandomizerMain.HealQuickRoles, 5},
-                {RoleRandomizerMain.DPSAlacRoles, 6},
-                {RoleRandomizerMain.DPSQuickRoles, 7},
-                {RoleRandomizerMain.MushroomRoles, 8},
-                {RoleRandomizerMain.TowerRoles, 9},
-                {RoleRandomizerMain.ReflectRoles, 10},
-                {RoleRandomizerMain.CannonRoles, 11},
-                {RoleRandomizerMain.ConstrucPusherRoles, 12},
-                {RoleRandomizerMain.LampRoles, 13},
-                {RoleRandomizerMain.PylonRoles, 14},
-                {RoleRandomizerMain.PillarRoles, 15},
-                {RoleRandomizerMain.GreenRoles, 16},
-                {RoleRandomizerMain.SoullessPusherRoles, 17},
-                {RoleRandomizerMain.DhuumKiteRoles, 18},
-                {RoleRandomizerMain.QadimKiteRoles, 19},
-                {RoleRandomizerMain.SwordRoles, 20},
-                {RoleRandomizerMain.ShieldRoles, 21}
-            };
-            IDictionary<List<string>, int> rolelistname_to_roleidentifiernumber = new Dictionary<List<string>, int>()
-            {
-                {RoleRandomizerMain.HandKiteValid, 0},
-                {RoleRandomizerMain.OilKiteValid, 1},
-                {RoleRandomizerMain.FlakKiteValid, 2},
-                {RoleRandomizerMain.TankValid, 3},
-                {RoleRandomizerMain.HealAlacValid, 4},
-                {RoleRandomizerMain.HealQuickValid, 5},
-                {RoleRandomizerMain.DPSAlacValid, 6},
-                {RoleRandomizerMain.DPSQuickValid, 7},
-                {RoleRandomizerMain.MushroomValid, 8},
-                {RoleRandomizerMain.TowerValid, 9},
-                {RoleRandomizerMain.ReflectValid, 10},
-                {RoleRandomizerMain.CannonValid, 11},
-                {RoleRandomizerMain.ConstrucPusherValid, 12},
-                {RoleRandomizerMain.LampValid, 13},
-                {RoleRandomizerMain.PylonValid, 14},
-                {RoleRandomizerMain.PillarValid, 15},
-                {RoleRandomizerMain.GreenValid, 16},
-                {RoleRandomizerMain.SoullessPusherValid, 17},
-                {RoleRandomizerMain.DhuumKiteValid, 18},
-                {RoleRandomizerMain.QadimKiteValid, 19},
-                {RoleRandomizerMain.SwordValid, 20},
-                {RoleRandomizerMain.ShieldValid, 21}
-            };
-            IDictionary<SettingEntry<bool>[], List<string>> RolesArrays_to_ValidLists = new Dictionary<SettingEntry<bool>[], List<string>>()
-            {
-                {RoleRandomizerMain.HandKiteRoles, RoleRandomizerMain.HandKiteValid},
-                {RoleRandomizerMain.OilKiteRoles,RoleRandomizerMain.OilKiteValid },
-                {RoleRandomizerMain.FlakKiteRoles, RoleRandomizerMain.FlakKiteValid},
-                {RoleRandomizerMain.TankRoles, RoleRandomizerMain.TankValid},
-                {RoleRandomizerMain.HealAlacRoles, RoleRandomizerMain.HealAlacValid},
-                {RoleRandomizerMain.HealQuickRoles,RoleRandomizerMain.HealQuickValid},
-                {RoleRandomizerMain.DPSAlacRoles,RoleRandomizerMain.DPSAlacValid},
-                {RoleRandomizerMain.DPSQuickRoles, RoleRandomizerMain.DPSQuickValid},
-                {RoleRandomizerMain.MushroomRoles, RoleRandomizerMain.MushroomValid},
-                {RoleRandomizerMain.TowerRoles, RoleRandomizerMain.TowerValid },
-                {RoleRandomizerMain.ReflectRoles,RoleRandomizerMain.ReflectValid },
-                {RoleRandomizerMain.CannonRoles,RoleRandomizerMain.CannonValid },
-                {RoleRandomizerMain.ConstrucPusherRoles, RoleRandomizerMain.ConstrucPusherValid},
-                {RoleRandomizerMain.LampRoles,  RoleRandomizerMain.LampValid},
-                {RoleRandomizerMain.PylonRoles,RoleRandomizerMain.PylonValid },
-                {RoleRandomizerMain.PillarRoles,RoleRandomizerMain.PillarValid },
-                {RoleRandomizerMain.GreenRoles, RoleRandomizerMain.GreenValid },
-                {RoleRandomizerMain.SoullessPusherRoles,RoleRandomizerMain.SoullessPusherValid },
-                {RoleRandomizerMain.DhuumKiteRoles,RoleRandomizerMain.DhuumKiteValid },
-                {RoleRandomizerMain.QadimKiteRoles,RoleRandomizerMain.QadimKiteValid },
-                {RoleRandomizerMain.SwordRoles, RoleRandomizerMain.SwordValid },
-                {RoleRandomizerMain.ShieldRoles,  RoleRandomizerMain.ShieldValid}
-            };
-            IDictionary<List<string>,SettingEntry<int>> rolestogeneratemultiple_to_numbertogenerate = new Dictionary<List<string>, SettingEntry<int>> 
-            {
-                {RoleRandomizerMain.HealAlacValid, RoleRandomizerMain.CounterBoxesSettings[0]},
-                {RoleRandomizerMain.HealQuickValid,RoleRandomizerMain.CounterBoxesSettings [1]},
-                {RoleRandomizerMain.DPSAlacValid,RoleRandomizerMain.CounterBoxesSettings[2] },
-                {RoleRandomizerMain.DPSQuickValid,RoleRandomizerMain.CounterBoxesSettings[3]},
-                {RoleRandomizerMain.MushroomValid,RoleRandomizerMain.CounterBoxesSettings[4]},
-                {RoleRandomizerMain.CannonValid,RoleRandomizerMain.CounterBoxesSettings[5]},
-                {RoleRandomizerMain.LampValid,RoleRandomizerMain.CounterBoxesSettings[6]},
-                {RoleRandomizerMain.PylonValid,RoleRandomizerMain.CounterBoxesSettings[7]},
-                {RoleRandomizerMain.PillarValid,RoleRandomizerMain.CounterBoxesSettings[8]},
-                {RoleRandomizerMain.GreenValid,RoleRandomizerMain.CounterBoxesSettings[9]},
-                {RoleRandomizerMain.SwordValid,RoleRandomizerMain.CounterBoxesSettings[10]},
-                {RoleRandomizerMain.ShieldValid,RoleRandomizerMain.CounterBoxesSettings[11]}
-            };
+
+            
             GenerationSequence.Clear();
-            foreach (List<string> list in ListofValidLists)
+            foreach (List<string> list in _listOfValidLists)
             {
                 list.Clear();
             }
