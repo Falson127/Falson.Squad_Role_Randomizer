@@ -136,7 +136,8 @@ namespace Falson.Randomizer
                 {
                     Text = "Your configuration is invalid. You have requested to generate more than 10 total players" +
                     "\nwithin at least one group of conflicting roles. The only solution is to reduce" +
-                    "\nthe number of roles requested by unchecking roles to generate or reducing the counter boxes" +
+                    "\nthe number of roles requested by unchecking boxes in 'roles to be randomized' or reducing the" +
+                    "\nnumber requested in the counter boxes" +
                     "\n\nPlease feel free to reach out on the Blish HUD Discord for more information on this error.",
                     Parent = falson.ResultsFlowPanel,
                     AutoSizeWidth = true,
