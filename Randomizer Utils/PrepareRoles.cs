@@ -75,9 +75,9 @@ namespace Falson.SquadRoleRandomizer
         private readonly SettingEntry<int>[] _counterBoxSettings = new SettingEntry<int>[12];
         private readonly SettingEntry<string>[] _playerNames = new SettingEntry<string>[10];
         //constructor
-        public PrepareRoles(List<SettingEntry<bool>[]> listofSettingEntries, SettingEntry<bool>[] rolesToGenerateSettings, SettingEntry<int>[] counterboxsettings, SettingEntry<string>[] playerNames) 
+        public PrepareRoles(FalsonSettings deserializedSettings) 
         {
-            _playerNames = playerNames;
+            _playerNames = deserializedSettings._playerNames;
             _rolesToGenerate = rolesToGenerateSettings;
             _counterBoxSettings = counterboxsettings;
 

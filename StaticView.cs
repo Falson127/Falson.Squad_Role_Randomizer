@@ -62,12 +62,15 @@ namespace Falson.SquadRoleRandomizer
         private CounterBox[] _counterBoxes; //need 12 items in this
 
         private readonly int[] _counterBoxesSettings;
+        private readonly string[] _playerNames;
+        private FalsonSettings _deserializedSettings;
 
         private string ActiveSettingString;
         private int tabId;
 
         public StaticView(FalsonSettings deserializedSettings, SettingEntry<string> base64SettingsString, Tab viewWindowTab) 
         {
+            _deserializedSettings = deserializedSettings;
             Panel omegaMasterPanel = new Panel
             {
                 //Parent = viewWindowTab
@@ -84,7 +87,7 @@ namespace Falson.SquadRoleRandomizer
                 Text = "Generate \n  Roles",
                 Size = new Point(80, 100),
                 Location = new Point(890, 40),
-                Parent = _randomizerSettingsWindow,
+                Parent = omegaMasterPanel,
             };
             _generateRolesButton.Click += GenerateRolesButton_Click;
             _counterBoxes = new CounterBox[12];
@@ -92,7 +95,7 @@ namespace Falson.SquadRoleRandomizer
             _rolesWithNumbers = new Panel
             {
                 Title = "Number of each role to generate",
-                Parent = _randomizerSettingsWindow,
+                Parent = omegaMasterPanel,
                 Size = new Point(480, 165),
                 Location = new Point(401, 0),
             };
@@ -101,7 +104,7 @@ namespace Falson.SquadRoleRandomizer
                 Text = "Generate \n  Roles",
                 Size = new Point(80, 100),
                 Location = new Point(890, 40),
-                Parent = _randomizerSettingsWindow,
+                Parent = omegaMasterPanel,
             };
             _generateRolesButton.Click += GenerateRolesButton_Click;
             _playerNameTextBoxPanel = new Panel
@@ -109,13 +112,13 @@ namespace Falson.SquadRoleRandomizer
                 Title = "Enter Player Names",
                 Size = new Point(400, 165),
                 Location = new Point(0, 0),
-                Parent = _randomizerSettingsWindow,
+                Parent = omegaMasterPanel,
             };
             _randomizeCheckboxesPanel = new Panel
             {
                 Title = "Select roles to be randomized",
                 Size = new Point(1000, 120),
-                Parent = _randomizerSettingsWindow,
+                Parent = omegaMasterPanel,
                 Location = new Point(0, 166),
             };
             _masterFlowPanel = new FlowPanel
@@ -124,7 +127,7 @@ namespace Falson.SquadRoleRandomizer
                 Title = "Set Roles for Each Player  (Click to Expand)",
                 Size = new Point(1000, 400),
                 Location = new Point(0, 255),
-                Parent = _randomizerSettingsWindow,
+                Parent = omegaMasterPanel,
                 CanScroll = true,
                 CanCollapse = false,
                 FlowDirection = ControlFlowDirection.SingleTopToBottom
@@ -132,7 +135,7 @@ namespace Falson.SquadRoleRandomizer
             #region Player Panels
             for (int i = 0; i < 10; i++)
             {
-                _playerPanels[i] = new PlayerPanel(_playerNames[i].Value, _masterFlowPanel);
+                _playerPanels[i] = new PlayerPanel(deserializedSettings._playerNames[i], _masterFlowPanel);
             }
             #endregion
             #region Role Panels
@@ -177,30 +180,30 @@ namespace Falson.SquadRoleRandomizer
             #region Checkboxes
             for (int i = 0; i < 10; i++)
             {
-                _tankBoxArray[i] = new CustomCheckbox(_tankRoles[i]) { Text = "Tank", Location = new Point(0, 0), BasicTooltipText = "Tank", Parent = _standardRolesPanel[i], Checked = _tankRoles[i].Value };
-                _healAlacBoxArray[i] = new CustomCheckbox(_healAlacRoles[i]) { Text = "Heal + Alac", Location = new Point(0, 25), BasicTooltipText = "Heal + Alac", Parent = _standardRolesPanel[i], Checked = _healAlacRoles[i].Value };
-                _healQuickBoxArray[i] = new CustomCheckbox(_healQuickRoles[i]) { Text = "Heal + Quick", Location = new Point(0, 50), BasicTooltipText = "Heal + Quick", Parent = _standardRolesPanel[i], Checked = _healQuickRoles[i].Value };
-                _dpsAlacBoxArray[i] = new CustomCheckbox(_dpsAlacRoles[i]) { Text = "DPS + Alac", Location = new Point(100, 0), BasicTooltipText = "DPS + Alac", Parent = _standardRolesPanel[i], Checked = _dpsAlacRoles[i].Value };
-                _dpsQuickBoxArray[i] = new CustomCheckbox(_dpsQuickRoles[i]) { Text = "DPS + Quick", Location = new Point(100, 25), BasicTooltipText = "DPS + Quick", Parent = _standardRolesPanel[i], Checked = _dpsQuickRoles[i].Value };
+                _tankBoxArray[i] = new CustomCheckbox(deserializedSettings._tankRoles[i]) { Text = "Tank", Location = new Point(0, 0), BasicTooltipText = "Tank", Parent = _standardRolesPanel[i], Checked = deserializedSettings._tankRoles[i] };
+                _healAlacBoxArray[i] = new CustomCheckbox(deserializedSettings._healAlacRoles[i]) { Text = "Heal + Alac", Location = new Point(0, 25), BasicTooltipText = "Heal + Alac", Parent = _standardRolesPanel[i], Checked = deserializedSettings._healAlacRoles[i] };
+                _healQuickBoxArray[i] = new CustomCheckbox(deserializedSettings._healQuickRoles[i]) { Text = "Heal + Quick", Location = new Point(0, 50), BasicTooltipText = "Heal + Quick", Parent = _standardRolesPanel[i], Checked = deserializedSettings._healQuickRoles[i] };
+                _dpsAlacBoxArray[i] = new CustomCheckbox(deserializedSettings._dpsAlacRoles[i]) { Text = "DPS + Alac", Location = new Point(100, 0), BasicTooltipText = "DPS + Alac", Parent = _standardRolesPanel[i], Checked = deserializedSettings._dpsAlacRoles[i] };
+                _dpsQuickBoxArray[i] = new CustomCheckbox(deserializedSettings._dpsQuickRoles[i]) { Text = "DPS + Quick", Location = new Point(100, 25), BasicTooltipText = "DPS + Quick", Parent = _standardRolesPanel[i], Checked = deserializedSettings._dpsQuickRoles[i] };
 
-                _handKiteBoxArray[i] = new CustomCheckbox(_handKiteRoles[i]) { Text = "Hand Kite", Location = new Point(0, 0), BasicTooltipText = "Hand Kite", Parent = _hoTMechanicsPanel[i], Checked = _handKiteRoles[i].Value };
-                _oilKiteBoxArray[i] = new CustomCheckbox(_oilKiteRoles[i]) { Text = "Oil Kite", Location = new Point(0, 25), BasicTooltipText = "Oil Kite", Parent = _hoTMechanicsPanel[i], Checked = _oilKiteRoles[i].Value };
-                _flakKiteBoxArray[i] = new CustomCheckbox(_flakKiteRoles[i]) { Text = "Flak Kite", Location = new Point(0, 50), BasicTooltipText = "Flak Kite", Parent = _hoTMechanicsPanel[i], Checked = _flakKiteRoles[i].Value };
-                _mushroomBoxArray[i] = new CustomCheckbox(_mushroomRoles[i]) { Text = "Mushroom", Location = new Point(100, 0), BasicTooltipText = "Slothosaur Mushroom", Parent = _hoTMechanicsPanel[i], Checked = _mushroomRoles[i].Value };
-                _towerBoxArray[i] = new CustomCheckbox(_towerRoles[i]) { Text = "Tower", Location = new Point(100, 25), BasicTooltipText = "Tower Mesmer", Parent = _hoTMechanicsPanel[i], Checked = _towerRoles[i].Value };
-                _reflectBoxArray[i] = new CustomCheckbox(_reflectRoles[i]) { Text = "Reflect", Location = new Point(100, 50), BasicTooltipText = "Matthias Reflect", Parent = _hoTMechanicsPanel[i], Checked = _reflectRoles[i].Value };
-                _cannonBoxArray[i] = new CustomCheckbox(_cannonRoles[i]) { Text = "Cannons", Location = new Point(200, 0), BasicTooltipText = "Sabetha Cannons", Parent = _hoTMechanicsPanel[i], Checked = _cannonRoles[i].Value };
-                _construcPusherBoxArray[i] = new CustomCheckbox(_construcPusherRoles[i]) { Text = "KC Pusher", Location = new Point(200, 25), BasicTooltipText = "Keep Construct Pusher", Parent = _hoTMechanicsPanel[i], Checked = _construcPusherRoles[i].Value };
+                _handKiteBoxArray[i] = new CustomCheckbox(deserializedSettings._handKiteRoles[i]) { Text = "Hand Kite", Location = new Point(0, 0), BasicTooltipText = "Hand Kite", Parent = _hoTMechanicsPanel[i], Checked = deserializedSettings._handKiteRoles[i] };
+                _oilKiteBoxArray[i] = new CustomCheckbox(deserializedSettings._oilKiteRoles[i]) { Text = "Oil Kite", Location = new Point(0, 25), BasicTooltipText = "Oil Kite", Parent = _hoTMechanicsPanel[i], Checked = deserializedSettings._oilKiteRoles[i] };
+                _flakKiteBoxArray[i] = new CustomCheckbox(deserializedSettings._flakKiteRoles[i]) { Text = "Flak Kite", Location = new Point(0, 50), BasicTooltipText = "Flak Kite", Parent = _hoTMechanicsPanel[i], Checked = deserializedSettings._flakKiteRoles[i] };
+                _mushroomBoxArray[i] = new CustomCheckbox(deserializedSettings._mushroomRoles[i]) { Text = "Mushroom", Location = new Point(100, 0), BasicTooltipText = "Slothosaur Mushroom", Parent = _hoTMechanicsPanel[i], Checked = deserializedSettings._mushroomRoles[i] };
+                _towerBoxArray[i] = new CustomCheckbox(deserializedSettings._towerRoles[i]) { Text = "Tower", Location = new Point(100, 25), BasicTooltipText = "Tower Mesmer", Parent = _hoTMechanicsPanel[i], Checked = deserializedSettings._towerRoles[i] };
+                _reflectBoxArray[i] = new CustomCheckbox(deserializedSettings._reflectRoles[i]) { Text = "Reflect", Location = new Point(100, 50), BasicTooltipText = "Matthias Reflect", Parent = _hoTMechanicsPanel[i], Checked = deserializedSettings._reflectRoles[i] };
+                _cannonBoxArray[i] = new CustomCheckbox(deserializedSettings._cannonRoles[i]) { Text = "Cannons", Location = new Point(200, 0), BasicTooltipText = "Sabetha Cannons", Parent = _hoTMechanicsPanel[i], Checked = deserializedSettings._cannonRoles[i] };
+                _construcPusherBoxArray[i] = new CustomCheckbox(deserializedSettings._construcPusherRoles[i]) { Text = "KC Pusher", Location = new Point(200, 25), BasicTooltipText = "Keep Construct Pusher", Parent = _hoTMechanicsPanel[i], Checked = deserializedSettings._construcPusherRoles[i] };
 
-                _lampBoxArray[i] = new CustomCheckbox(_lampRoles[i]) { Text = "Lamp", Location = new Point(0, 0), BasicTooltipText = "Qadim Lamp", Parent = _poFMechanicsPanel[i], Checked = _lampRoles[i].Value };
-                _pylonBoxArray[i] = new CustomCheckbox(_pylonRoles[i]) { Text = "Pylon", Location = new Point(0, 25), BasicTooltipText = "Qadim Pylon", Parent = _poFMechanicsPanel[i], Checked = _pylonRoles[i].Value };
-                _pillarBoxArray[i] = new CustomCheckbox(_pillarRoles[i]) { Text = "Pillar", Location = new Point(0, 50), BasicTooltipText = "Adina Pillar", Parent = _poFMechanicsPanel[i], Checked = _pillarRoles[i].Value };
-                _greenBoxArray[i] = new CustomCheckbox(_greenRoles[i]) { Text = "Green", Location = new Point(100, 0), BasicTooltipText = "Dhuum Green", Parent = _poFMechanicsPanel[i], Checked = _greenRoles[i].Value };
-                _soullessPusherBoxArray[i] = new CustomCheckbox(_soullessPusherRoles[i]) { Text = "SH Pusher", Location = new Point(100, 25), BasicTooltipText = "Soulless Horror Pusher", Parent = _poFMechanicsPanel[i], Checked = _soullessPusherRoles[i].Value };
-                _dhuumKiteBoxArray[i] = new CustomCheckbox(_dhuumKiteRoles[i]) { Text = "Dhuum Kiter", Location = new Point(100, 50), BasicTooltipText = "Dhuum Messenger Kiter", Parent = _poFMechanicsPanel[i], Checked = _dhuumKiteRoles[i].Value };
-                _qadimKiteBoxArray[i] = new CustomCheckbox(_qadimKiteRoles[i]) { Text = "Qadim Kiter", Location = new Point(200, 0), BasicTooltipText = "Qadim Kiter", Parent = _poFMechanicsPanel[i], Checked = _qadimKiteRoles[i].Value };
-                _swordBoxArray[i] = new CustomCheckbox(_swordRoles[i]) { Text = "Sword", Location = new Point(200, 25), BasicTooltipText = "CA Sword Collector", Parent = _poFMechanicsPanel[i], Checked = _swordRoles[i].Value };
-                _shieldBoxArray[i] = new CustomCheckbox(_shieldRoles[i]) { Text = "Shield", Location = new Point(200, 50), BasicTooltipText = "CA Shield Collector", Parent = _poFMechanicsPanel[i], Checked = _shieldRoles[i].Value };
+                _lampBoxArray[i] = new CustomCheckbox(deserializedSettings._lampRoles[i]) { Text = "Lamp", Location = new Point(0, 0), BasicTooltipText = "Qadim Lamp", Parent = _poFMechanicsPanel[i], Checked = deserializedSettings._lampRoles[i] };
+                _pylonBoxArray[i] = new CustomCheckbox(deserializedSettings._pylonRoles[i]) { Text = "Pylon", Location = new Point(0, 25), BasicTooltipText = "Qadim Pylon", Parent = _poFMechanicsPanel[i], Checked = deserializedSettings._pylonRoles[i] };
+                _pillarBoxArray[i] = new CustomCheckbox(deserializedSettings._pillarRoles[i]) { Text = "Pillar", Location = new Point(0, 50), BasicTooltipText = "Adina Pillar", Parent = _poFMechanicsPanel[i], Checked = deserializedSettings._pillarRoles[i] };
+                _greenBoxArray[i] = new CustomCheckbox(deserializedSettings._greenRoles[i]) { Text = "Green", Location = new Point(100, 0), BasicTooltipText = "Dhuum Green", Parent = _poFMechanicsPanel[i], Checked = deserializedSettings._greenRoles[i] };
+                _soullessPusherBoxArray[i] = new CustomCheckbox(deserializedSettings._soullessPusherRoles[i]) { Text = "SH Pusher", Location = new Point(100, 25), BasicTooltipText = "Soulless Horror Pusher", Parent = _poFMechanicsPanel[i], Checked = deserializedSettings._soullessPusherRoles[i] };
+                _dhuumKiteBoxArray[i] = new CustomCheckbox(deserializedSettings._dhuumKiteRoles[i]) { Text = "Dhuum Kiter", Location = new Point(100, 50), BasicTooltipText = "Dhuum Messenger Kiter", Parent = _poFMechanicsPanel[i], Checked = deserializedSettings._dhuumKiteRoles[i] };
+                _qadimKiteBoxArray[i] = new CustomCheckbox(deserializedSettings._qadimKiteRoles[i]) { Text = "Qadim Kiter", Location = new Point(200, 0), BasicTooltipText = "Qadim Kiter", Parent = _poFMechanicsPanel[i], Checked = deserializedSettings._qadimKiteRoles[i] };
+                _swordBoxArray[i] = new CustomCheckbox(deserializedSettings._swordRoles[i]) { Text = "Sword", Location = new Point(200, 25), BasicTooltipText = "CA Sword Collector", Parent = _poFMechanicsPanel[i], Checked = deserializedSettings._swordRoles[i] };
+                _shieldBoxArray[i] = new CustomCheckbox(deserializedSettings._shieldRoles[i]) { Text = "Shield", Location = new Point(200, 50), BasicTooltipText = "CA Shield Collector", Parent = _poFMechanicsPanel[i], Checked = deserializedSettings._shieldRoles[i] };
             }
             IDictionary<int, string> RandomizeSelectionBoxesInt_to_NameDictionary = new Dictionary<int, string>
             {
@@ -309,12 +312,12 @@ namespace Falson.SquadRoleRandomizer
             };
             for (int i = 0; i < 22; i++)
             {
-                _rolestoRandomizeSelectionCheckboxesArray[i] = new CustomCheckbox(_rolesToGenerate[i])
+                _rolestoRandomizeSelectionCheckboxesArray[i] = new CustomCheckbox(deserializedSettings._rolesToGenerate[i])
                 {
                     Text = RandomizeSelectionBoxesInt_to_NameDictionary[i] + "  ",
                     BasicTooltipText = "Check this box to include " + RandomizeSelectionBoxesInt_to_TooltipDictionary[i] + " in the randomization",
                     Parent = _randomizeCheckboxesPanel,
-                    Checked = _rolesToGenerate[i].Value,
+                    Checked = deserializedSettings._rolesToGenerate[i],
                     Location = RandomizedBoxes_to_LocationDictioanry[i]
 
                 };
@@ -360,7 +363,7 @@ namespace Falson.SquadRoleRandomizer
                     ValueWidth = 10,
                     Width = 60,
                     BasicTooltipText = CounterBoxInt_to_Text[i],
-                    Value = _counterBoxesSettings[i].Value,
+                    Value = _counterBoxesSettings[i],
                     MinValue = 0,
                     Location = new Point(CounterBox_X_PositionDictionary[i], CounterBox_Y_PositionDictionary[i])
                 };
@@ -369,70 +372,70 @@ namespace Falson.SquadRoleRandomizer
             #region Textboxes
             _player1NameBox = new TextBox
             {
-                PlaceholderText = _playerNames[0].Value,
+                PlaceholderText = _playerNames[0],
                 Size = new Point(200, 25),
                 Parent = _playerNameTextBoxPanel,
                 Location = new Point(0, 0)
             };
             _player2NameBox = new TextBox
             {
-                PlaceholderText = _playerNames[1].Value,
+                PlaceholderText = _playerNames[1],
                 Size = new Point(200, 25),
                 Parent = _playerNameTextBoxPanel,
                 Location = new Point(0, 25)
             };
             _player3NameBox = new TextBox
             {
-                PlaceholderText = _playerNames[2].Value,
+                PlaceholderText = _playerNames[2],
                 Size = new Point(200, 25),
                 Parent = _playerNameTextBoxPanel,
                 Location = new Point(0, 50)
             };
             _player4NameBox = new TextBox
             {
-                PlaceholderText = _playerNames[3].Value,
+                PlaceholderText = _playerNames[3],
                 Size = new Point(200, 25),
                 Parent = _playerNameTextBoxPanel,
                 Location = new Point(0, 75)
             };
             _player5NameBox = new TextBox
             {
-                PlaceholderText = _playerNames[4].Value,
+                PlaceholderText = _playerNames[4],
                 Size = new Point(200, 25),
                 Parent = _playerNameTextBoxPanel,
                 Location = new Point(0, 100)
             };
             _player6NameBox = new TextBox
             {
-                PlaceholderText = _playerNames[5].Value,
+                PlaceholderText = _playerNames[5],
                 Size = new Point(200, 25),
                 Parent = _playerNameTextBoxPanel,
                 Location = new Point(200, 0)
             };
             _player7NameBox = new TextBox
             {
-                PlaceholderText = _playerNames[6].Value,
+                PlaceholderText = _playerNames[6],
                 Size = new Point(200, 25),
                 Parent = _playerNameTextBoxPanel,
                 Location = new Point(200, 25)
             };
             _player8NameBox = new TextBox
             {
-                PlaceholderText = _playerNames[7].Value,
+                PlaceholderText = _playerNames[7],
                 Size = new Point(200, 25),
                 Parent = _playerNameTextBoxPanel,
                 Location = new Point(200, 50)
             };
             _player9NameBox = new TextBox
             {
-                PlaceholderText = _playerNames[8].Value,
+                PlaceholderText = _playerNames[8],
                 Size = new Point(200, 25),
                 Parent = _playerNameTextBoxPanel,
                 Location = new Point(200, 75)
             };
             _player10NameBox = new TextBox
             {
-                PlaceholderText = _playerNames[9].Value,
+                PlaceholderText = _playerNames[9],
                 Size = new Point(200, 25),
                 Parent = _playerNameTextBoxPanel,
                 Location = new Point(200, 100)
@@ -513,71 +516,71 @@ namespace Falson.SquadRoleRandomizer
         #region CounterBox Click Functions
         private void CounterBox12Click(object sender, Blish_HUD.Input.MouseEventArgs e)
         {
-            _counterBoxesSettings[11].Value = _counterBoxes[11].Value;
+            _counterBoxesSettings[11] = _counterBoxes[11].Value;
         }
 
         private void CounterBox11Click(object sender, Blish_HUD.Input.MouseEventArgs e)
         {
-            _counterBoxesSettings[10].Value = _counterBoxes[10].Value;
+            _counterBoxesSettings[10] = _counterBoxes[10].Value;
         }
 
         private void CounterBox10Click(object sender, Blish_HUD.Input.MouseEventArgs e)
         {
-            _counterBoxesSettings[9].Value = _counterBoxes[9].Value;
+            _counterBoxesSettings[9] = _counterBoxes[9].Value;
         }
 
         private void CounterBox9Click(object sender, Blish_HUD.Input.MouseEventArgs e)
         {
-            _counterBoxesSettings[8].Value = _counterBoxes[8].Value;
+            _counterBoxesSettings[8] = _counterBoxes[8].Value;
         }
 
         private void CounterBox8Click(object sender, Blish_HUD.Input.MouseEventArgs e)
         {
-            _counterBoxesSettings[7].Value = _counterBoxes[7].Value;
+            _counterBoxesSettings[7] = _counterBoxes[7].Value;
         }
 
         private void CounterBox7Click(object sender, Blish_HUD.Input.MouseEventArgs e)
         {
-            _counterBoxesSettings[6].Value = _counterBoxes[6].Value;
+            _counterBoxesSettings[6] = _counterBoxes[6].Value;
         }
 
         private void CounterBox6Click(object sender, Blish_HUD.Input.MouseEventArgs e)
         {
-            _counterBoxesSettings[5].Value = _counterBoxes[5].Value;
+            _counterBoxesSettings[5] = _counterBoxes[5].Value;
         }
 
         private void CounterBox5Click(object sender, Blish_HUD.Input.MouseEventArgs e)
         {
-            _counterBoxesSettings[4].Value = _counterBoxes[4].Value;
+            _counterBoxesSettings[4] = _counterBoxes[4].Value;
         }
 
         private void CounterBox4Click(object sender, Blish_HUD.Input.MouseEventArgs e)
         {
-            _counterBoxesSettings[3].Value = _counterBoxes[3].Value;
+            _counterBoxesSettings[3] = _counterBoxes[3].Value;
         }
 
         private void CounterBox3Click(object sender, Blish_HUD.Input.MouseEventArgs e)
         {
-            _counterBoxesSettings[2].Value = _counterBoxes[2].Value;
+            _counterBoxesSettings[2] = _counterBoxes[2].Value;
         }
 
         private void CounterBox2Click(object sender, Blish_HUD.Input.MouseEventArgs e)
         {
-            _counterBoxesSettings[1].Value = _counterBoxes[1].Value;
+            _counterBoxesSettings[1] = _counterBoxes[1].Value;
         }
 
         private void CounterBox1Click(object sender, Blish_HUD.Input.MouseEventArgs e)
         {
-            _counterBoxesSettings[0].Value = _counterBoxes[0].Value;
+            _counterBoxesSettings[0] = _counterBoxes[0].Value;
         }
         #endregion
         #region Textbox text changed functions
         private void Player10NameBox_TextChanged(object sender, EventArgs e)
         {
             _playerPanels[9].Title = _player10NameBox.Text;
-            _playerNames[9].Value = _player10NameBox.Text;
+            _playerNames[9] = _player10NameBox.Text;
 
-            if (_playerNames[9].Value == "")
+            if (_playerNames[9] == "")
             {
                 _playerPanels[9].Title = "Enter Player Name";
             };
@@ -586,8 +589,8 @@ namespace Falson.SquadRoleRandomizer
         private void Player9NameBox_TextChanged(object sender, EventArgs e)
         {
             _playerPanels[8].Title = _player9NameBox.Text;
-            _playerNames[8].Value = _player9NameBox.Text;
-            if (_playerNames[8].Value == "")
+            _playerNames[8] = _player9NameBox.Text;
+            if (_playerNames[8] == "")
             {
                 _playerPanels[8].Title = "Enter Player Name";
             };
@@ -596,8 +599,8 @@ namespace Falson.SquadRoleRandomizer
         private void Player8NameBox_TextChanged(object sender, EventArgs e)
         {
             _playerPanels[7].Title = _player8NameBox.Text;
-            _playerNames[7].Value = _player8NameBox.Text;
-            if (_playerNames[7].Value == "")
+            _playerNames[7] = _player8NameBox.Text;
+            if (_playerNames[7] == "")
             {
                 _playerPanels[7].Title = "Enter Player Name";
             };
@@ -606,8 +609,8 @@ namespace Falson.SquadRoleRandomizer
         private void Player7NameBox_TextChanged(object sender, EventArgs e)
         {
             _playerPanels[6].Title = _player7NameBox.Text;
-            _playerNames[6].Value = _player7NameBox.Text;
-            if (_playerNames[6].Value == "")
+            _playerNames[6] = _player7NameBox.Text;
+            if (_playerNames[6] == "")
             {
                 _playerPanels[6].Title = "Enter Player Name";
             };
@@ -616,8 +619,8 @@ namespace Falson.SquadRoleRandomizer
         private void Player6NameBox_TextChanged(object sender, EventArgs e)
         {
             _playerPanels[5].Title = _player6NameBox.Text;
-            _playerNames[5].Value = _player6NameBox.Text;
-            if (_playerNames[5].Value == "")
+            _playerNames[5] = _player6NameBox.Text;
+            if (_playerNames[5] == "")
             {
                 _playerPanels[5].Title = "Enter Player Name";
             };
@@ -626,8 +629,8 @@ namespace Falson.SquadRoleRandomizer
         private void Player5NameBox_TextChanged(object sender, EventArgs e)
         {
             _playerPanels[4].Title = _player5NameBox.Text;
-            _playerNames[4].Value = _player5NameBox.Text;
-            if (_playerNames[4].Value == "")
+            _playerNames[4] = _player5NameBox.Text;
+            if (_playerNames[4] == "")
             {
                 _playerPanels[4].Title = "Enter Player Name";
             };
@@ -636,8 +639,8 @@ namespace Falson.SquadRoleRandomizer
         private void Player4NameBox_TextChanged(object sender, EventArgs e)
         {
             _playerPanels[3].Title = _player4NameBox.Text;
-            _playerNames[3].Value = _player4NameBox.Text;
-            if (_playerNames[3].Value == "")
+            _playerNames[3] = _player4NameBox.Text;
+            if (_playerNames[3] == "")
             {
                 _playerPanels[3].Title = "Enter Player Name";
             };
@@ -646,8 +649,8 @@ namespace Falson.SquadRoleRandomizer
         private void Player3NameBox_TextChanged(object sender, EventArgs e)
         {
             _playerPanels[2].Title = _player3NameBox.Text;
-            _playerNames[2].Value = _player3NameBox.Text;
-            if (_playerNames[2].Value == "")
+            _playerNames[2] = _player3NameBox.Text;
+            if (_playerNames[2] == "")
             {
                 _playerPanels[2].Title = "Enter Player Name";
             };
@@ -656,8 +659,8 @@ namespace Falson.SquadRoleRandomizer
         private void Player2NameBox_TextChanged(object sender, EventArgs e)
         {
             _playerPanels[1].Title = _player2NameBox.Text;
-            _playerNames[1].Value = _player2NameBox.Text;
-            if (_playerNames[1].Value == "")
+            _playerNames[1] = _player2NameBox.Text;
+            if (_playerNames[1] == "")
             {
                 _playerPanels[1].Title = "Enter Player Name";
             };
@@ -666,8 +669,8 @@ namespace Falson.SquadRoleRandomizer
         private void Player1NameBox_TextChanged(object sender, EventArgs e)
         {
             _playerPanels[0].Title = _player1NameBox.Text;
-            _playerNames[0].Value = _player1NameBox.Text;
-            if (_playerNames[0].Value == "")
+            _playerNames[0] = _player1NameBox.Text;
+            if (_playerNames[0] == "")
             {
                 _playerPanels[0].Title = "Enter Player Name";
             };
@@ -678,9 +681,9 @@ namespace Falson.SquadRoleRandomizer
             //while (true)
             //{
             //DebuggerMethod(); //randomize settings first
-            var prepRolesInstance = new PrepareRoles(_listofRolesSettings, _rolesToGenerate, _counterBoxesSettings, _playerNames);
+            var prepRolesInstance = new PrepareRoles(_deserializedSettings);
             prepRolesInstance.Main();
-            _randomizerResultsWindow.Show();
+            RoleRandomizerMain._randomizerResultsWindow.Show();
             //}
         }
         #endregion

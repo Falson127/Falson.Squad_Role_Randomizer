@@ -17,7 +17,7 @@ namespace Falson.SquadRoleRandomizer
     [Export(typeof(Blish_HUD.Modules.Module))]
     public class RoleRandomizerMain : Blish_HUD.Modules.Module
     {
-        private StandardWindow _randomizerResultsWindow;
+        public static StandardWindow _randomizerResultsWindow;
         private StandardWindow _randomizerSettingsWindow;
         private CornerIcon _randomizerSettingIcon;
         private SettingCollection InternalPlayerRolesSettings;
@@ -40,7 +40,7 @@ namespace Falson.SquadRoleRandomizer
         [ImportingConstructor]
         public RoleRandomizerMain([Import("ModuleParameters")] ModuleParameters moduleParameters) : base(moduleParameters) { }
         protected override void DefineSettings(SettingCollection settings)
-        {   
+        {
             InternalPlayerRolesSettings = settings.AddSubCollection("Internal Setting Collection", false);
             InternalPlayerRolesSettings.RenderInUi = false;
             for (int i = 0; i < 3; i++)
@@ -48,11 +48,6 @@ namespace Falson.SquadRoleRandomizer
                 _base64strings[i] = InternalPlayerRolesSettings.DefineSetting($"base64string {i + 1}", "default");
             }
         }
-
-
-      
-    
-
         protected override async Task LoadAsync()
         {
             _randomizerSettingsWindow = new StandardWindow(ContentsManager.GetTexture("155985.png"), new Rectangle(40, 26, 913, 691), new Rectangle(70, 71, 839, 605))
