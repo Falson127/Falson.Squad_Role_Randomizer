@@ -231,6 +231,7 @@ namespace Falson.SquadRoleRandomizer
                 Emblem = ContentsManager.GetTexture("Emblem.png")
 
             };
+
             ResultsFlowPanel = new FlowPanel 
             {
                 Location = new Point(0,0),
