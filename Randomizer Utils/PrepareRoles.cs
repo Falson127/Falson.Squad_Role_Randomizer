@@ -17,10 +17,10 @@ namespace Falson.SquadRoleRandomizer
         private List<List<string>> _listOfValidLists;
         private List<int> _intGenerationSequence = new List<int>();
         private List<Tuple<int, string>> intRoles = new List<Tuple<int,string>>();
-        IDictionary<SettingEntry<bool>, SettingEntry<bool>[]> ActiveRolesDictionary = new Dictionary<SettingEntry<bool>, SettingEntry<bool>[]>();
-        IDictionary<SettingEntry<bool>[], int> RolesArrays_to_ArrayListPosDictionary = new Dictionary<SettingEntry<bool>[], int>();
-        IDictionary<SettingEntry<bool>[], List<string>> RolesArrays_to_ValidLists = new Dictionary<SettingEntry<bool>[], List<string>>();
-        IDictionary<List<string>, SettingEntry<int>> rolestogeneratemultiple_to_numbertogenerate = new Dictionary<List<string>, SettingEntry<int>>();
+        IDictionary<bool, bool[]> ActiveRolesDictionary = new Dictionary<bool, bool[]>();
+        IDictionary<bool[], int> RolesArrays_to_ArrayListPosDictionary = new Dictionary<bool[], int>();
+        IDictionary<bool[], List<string>> RolesArrays_to_ValidLists = new Dictionary<bool[], List<string>>();
+        IDictionary<List<string>, int> rolestogeneratemultiple_to_numbertogenerate = new Dictionary<List<string>, int>();
         IDictionary<List<string>, int> rolelistname_to_roleidentifiernumber = new Dictionary<List<string>, int>();
         IDictionary<int, string> ArrayPos_to_PlayerNameDictionary = new Dictionary<int, string>();
 
@@ -49,60 +49,60 @@ namespace Falson.SquadRoleRandomizer
         private List<string> _swordValid = new List<string>();
         private List<string> _shieldValid = new List<string>();
         //local instances of role settings
-        private readonly SettingEntry<bool>[] _handKiteRoles = new SettingEntry<bool>[10];
-        private readonly SettingEntry<bool>[] _oilKiteRoles = new SettingEntry<bool>[10];
-        private readonly SettingEntry<bool>[] _flakKiteRoles = new SettingEntry<bool>[10];
-        private readonly SettingEntry<bool>[] _tankRoles = new SettingEntry<bool>[10];
-        private readonly SettingEntry<bool>[] _healAlacRoles = new SettingEntry<bool>[10];
-        private readonly SettingEntry<bool>[] _healQuickRoles = new SettingEntry<bool>[10];
-        private readonly SettingEntry<bool>[] _dpsAlacRoles = new SettingEntry<bool>[10];
-        private readonly SettingEntry<bool>[] _dpsQuickRoles = new SettingEntry<bool>[10];
-        private readonly SettingEntry<bool>[] _mushroomRoles = new SettingEntry<bool>[10];
-        private readonly SettingEntry<bool>[] _towerRoles = new SettingEntry<bool>[10];
-        private readonly SettingEntry<bool>[] _reflectRoles = new SettingEntry<bool>[10];
-        private readonly SettingEntry<bool>[] _cannonRoles = new SettingEntry<bool>[10];
-        private readonly SettingEntry<bool>[] _construcPusherRoles = new SettingEntry<bool>[10];
-        private readonly SettingEntry<bool>[] _lampRoles = new SettingEntry<bool>[10];
-        private readonly SettingEntry<bool>[] _pylonRoles = new SettingEntry<bool>[10];
-        private readonly SettingEntry<bool>[] _pillarRoles = new SettingEntry<bool>[10];
-        private readonly SettingEntry<bool>[] _greenRoles = new SettingEntry<bool>[10];
-        private readonly SettingEntry<bool>[] _soullessPusherRoles = new SettingEntry<bool>[10];
-        private readonly SettingEntry<bool>[] _dhuumKiteRoles = new SettingEntry<bool>[10];
-        private readonly SettingEntry<bool>[] _qadimKiteRoles = new SettingEntry<bool>[10];
-        private readonly SettingEntry<bool>[] _swordRoles = new SettingEntry<bool>[10];
-        private readonly SettingEntry<bool>[] _shieldRoles = new SettingEntry<bool>[10];
-        private readonly SettingEntry<bool>[] _rolesToGenerate = new SettingEntry<bool>[22];
-        private readonly SettingEntry<int>[] _counterBoxSettings = new SettingEntry<int>[12];
-        private readonly SettingEntry<string>[] _playerNames = new SettingEntry<string>[10];
+        private readonly bool[] _handKiteRoles = new bool[10];
+        private readonly bool[] _oilKiteRoles = new bool[10];
+        private readonly bool[] _flakKiteRoles = new bool[10];
+        private readonly bool[] _tankRoles = new bool[10];
+        private readonly bool[] _healAlacRoles = new bool[10];
+        private readonly bool[] _healQuickRoles = new bool[10];
+        private readonly bool[] _dpsAlacRoles = new bool[10];
+        private readonly bool[] _dpsQuickRoles = new bool[10];
+        private readonly bool[] _mushroomRoles = new bool[10];
+        private readonly bool[] _towerRoles = new bool[10];
+        private readonly bool[] _reflectRoles = new bool[10];
+        private readonly bool[] _cannonRoles = new bool[10];
+        private readonly bool[] _construcPusherRoles = new bool[10];
+        private readonly bool[] _lampRoles = new bool[10];
+        private readonly bool[] _pylonRoles = new bool[10];
+        private readonly bool[] _pillarRoles = new bool[10];
+        private readonly bool[] _greenRoles = new bool[10];
+        private readonly bool[] _soullessPusherRoles = new bool[10];
+        private readonly bool[] _dhuumKiteRoles = new bool[10];
+        private readonly bool[] _qadimKiteRoles = new bool[10];
+        private readonly bool[] _swordRoles = new bool[10];
+        private readonly bool[] _shieldRoles = new bool[10];
+        private readonly bool[] _rolesToGenerate = new bool[22];
+        private readonly int[] _counterBoxSettings = new int[12];
+        private readonly string[] _playerNames = new string[10];
         //constructor
         public PrepareRoles(FalsonSettings deserializedSettings) 
         {
             _playerNames = deserializedSettings._playerNames;
-            _rolesToGenerate = rolesToGenerateSettings;
-            _counterBoxSettings = counterboxsettings;
+            _rolesToGenerate = deserializedSettings._rolesToGenerate;
+            _counterBoxSettings = deserializedSettings._counterBoxesSettings;
 
-            _handKiteRoles = listofSettingEntries[0];
-            _oilKiteRoles = listofSettingEntries[1];
-            _flakKiteRoles = listofSettingEntries[2];
-            _tankRoles = listofSettingEntries[3];
-            _healAlacRoles = listofSettingEntries[4];
-            _healQuickRoles = listofSettingEntries[5];
-            _dpsAlacRoles = listofSettingEntries[6];
-            _dpsQuickRoles = listofSettingEntries[7];
-            _mushroomRoles = listofSettingEntries[8];
-            _towerRoles = listofSettingEntries[9];
-            _reflectRoles = listofSettingEntries[10];
-            _cannonRoles = listofSettingEntries[11];
-            _construcPusherRoles = listofSettingEntries[12];
-            _lampRoles = listofSettingEntries[13];
-            _pylonRoles = listofSettingEntries[14];
-            _pillarRoles = listofSettingEntries[15];
-            _greenRoles = listofSettingEntries[16];
-            _soullessPusherRoles = listofSettingEntries[17];
-            _dhuumKiteRoles = listofSettingEntries[18];
-            _qadimKiteRoles = listofSettingEntries[19];
-            _swordRoles = listofSettingEntries[20];
-            _shieldRoles = listofSettingEntries[21];
+            _handKiteRoles = deserializedSettings._handKiteRoles;
+            _oilKiteRoles = deserializedSettings._oilKiteRoles;
+            _flakKiteRoles = deserializedSettings._flakKiteRoles;
+            _tankRoles = deserializedSettings._tankRoles;
+            _healAlacRoles = deserializedSettings._healAlacRoles;
+            _healQuickRoles = deserializedSettings._healQuickRoles;
+            _dpsAlacRoles = deserializedSettings._dpsAlacRoles;
+            _dpsQuickRoles = deserializedSettings._dpsQuickRoles;
+            _mushroomRoles = deserializedSettings._mushroomRoles;
+            _towerRoles = deserializedSettings._towerRoles;
+            _reflectRoles = deserializedSettings._reflectRoles;
+            _cannonRoles = deserializedSettings._cannonRoles;
+            _construcPusherRoles = deserializedSettings._construcPusherRoles;
+            _lampRoles = deserializedSettings._lampRoles;
+            _pylonRoles = deserializedSettings._pylonRoles;
+            _pillarRoles = deserializedSettings._pillarRoles;
+            _greenRoles = deserializedSettings._greenRoles;
+            _soullessPusherRoles = deserializedSettings._soullessPusherRoles;
+            _dhuumKiteRoles = deserializedSettings._dhuumKiteRoles;
+            _qadimKiteRoles = deserializedSettings._qadimKiteRoles;
+            _swordRoles = deserializedSettings._swordRoles;
+            _shieldRoles = deserializedSettings._shieldRoles;
         }
 
         public void Main() 
@@ -213,16 +213,16 @@ namespace Falson.SquadRoleRandomizer
             rolelistname_to_roleidentifiernumber.Add(_qadimKiteValid, 19);
             rolelistname_to_roleidentifiernumber.Add(_swordValid, 20);
             rolelistname_to_roleidentifiernumber.Add(_shieldValid, 21);
-            ArrayPos_to_PlayerNameDictionary.Add(0, _playerNames[0].Value);
-            ArrayPos_to_PlayerNameDictionary.Add(1, _playerNames[1].Value);
-            ArrayPos_to_PlayerNameDictionary.Add(2, _playerNames[2].Value);
-            ArrayPos_to_PlayerNameDictionary.Add(3, _playerNames[3].Value);
-            ArrayPos_to_PlayerNameDictionary.Add(4, _playerNames[4].Value);
-            ArrayPos_to_PlayerNameDictionary.Add(5, _playerNames[5].Value);
-            ArrayPos_to_PlayerNameDictionary.Add(6, _playerNames[6].Value);
-            ArrayPos_to_PlayerNameDictionary.Add(7, _playerNames[7].Value);
-            ArrayPos_to_PlayerNameDictionary.Add(8, _playerNames[8].Value);
-            ArrayPos_to_PlayerNameDictionary.Add(9, _playerNames[9].Value);      
+            ArrayPos_to_PlayerNameDictionary.Add(0, _playerNames[0]);
+            ArrayPos_to_PlayerNameDictionary.Add(1, _playerNames[1]);
+            ArrayPos_to_PlayerNameDictionary.Add(2, _playerNames[2]);
+            ArrayPos_to_PlayerNameDictionary.Add(3, _playerNames[3]);
+            ArrayPos_to_PlayerNameDictionary.Add(4, _playerNames[4]);
+            ArrayPos_to_PlayerNameDictionary.Add(5, _playerNames[5]);
+            ArrayPos_to_PlayerNameDictionary.Add(6, _playerNames[6]);
+            ArrayPos_to_PlayerNameDictionary.Add(7, _playerNames[7]);
+            ArrayPos_to_PlayerNameDictionary.Add(8, _playerNames[8]);
+            ArrayPos_to_PlayerNameDictionary.Add(9, _playerNames[9]);      
         }
         private void PrepRoles()
         {
@@ -260,13 +260,13 @@ namespace Falson.SquadRoleRandomizer
             };
             for (int i = 0; i < 22; i++)
             {
-                if (_rolesToGenerate[i].Value)
+                if (_rolesToGenerate[i])
                 {
                     var tempkey = _rolesToGenerate[i];
                     var temprole = ActiveRolesDictionary[tempkey];
                     for (int s = 0; s < 10; s++)
                     {
-                        if (temprole[s].Value)
+                        if (temprole[s])
                         {
                             RolesArrays_to_ValidLists[temprole].Add(ArrayPos_to_PlayerNameDictionary[s]); //adds the player that has checked true for a role to the role valid list for that particular role.
                         }
@@ -285,7 +285,7 @@ namespace Falson.SquadRoleRandomizer
             {
                 if (rolestogeneratemultiple_to_numbertogenerate.ContainsKey(entry))//check if list might need multiple
                 {
-                    for (int i = 0; i < rolestogeneratemultiple_to_numbertogenerate[entry].Value; i++) //if it might, get number requested
+                    for (int i = 0; i < rolestogeneratemultiple_to_numbertogenerate[entry]; i++) //if it might, get number requested
                     {
                         _intGenerationSequence.Add(rolelistname_to_roleidentifiernumber[entry]); //add that role's index the number of times needed
                     }
