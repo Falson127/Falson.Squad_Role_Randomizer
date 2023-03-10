@@ -10,7 +10,7 @@ namespace Falson.SquadRoleRandomizer
 {
     public class CustomCheckbox : Checkbox
     {
-        private readonly SettingEntry<bool> _settingEntry;
+        private readonly SettingEntry<bool> _settingEntry; //change this to bool instead of settingentry<bool> to connect new settings
 
         public CustomCheckbox(SettingEntry<bool> settingsEntry)
         {

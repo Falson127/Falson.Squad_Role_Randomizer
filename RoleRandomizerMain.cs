@@ -53,6 +53,7 @@ namespace Falson.SquadRoleRandomizer
         private SettingEntry<bool>[] _swordRoles = new SettingEntry<bool>[10];
         private SettingEntry<bool>[] _shieldRoles = new SettingEntry<bool>[10];
         private SettingEntry<string>[] _playerNames = new SettingEntry<string>[10];
+        private SettingEntry<string>[] _base64strings = new SettingEntry<string>[3]; //allow up to 3 statics
         //private List<CustomCheckbox[]> ListofCheckboxArrays;
         private List<SettingEntry<bool>[]> _listofRolesSettings;
         private TextBox _player1NameBox;
@@ -116,6 +117,10 @@ namespace Falson.SquadRoleRandomizer
         {   
             InternalPlayerRolesSettings = settings.AddSubCollection("Internal Setting Collection", false);
             InternalPlayerRolesSettings.RenderInUi = false;
+            for (int i = 0; i < 3; i++)
+            {
+                _base64strings[i] = InternalPlayerRolesSettings.DefineSetting($"base64string {i + 1}", "default");
+            }
             for (int i = 0; i < 12; i++)
             {
                 _counterBoxesSettings[i] = InternalPlayerRolesSettings.DefineSetting($"Counter Box {i+1} setting", 1);
