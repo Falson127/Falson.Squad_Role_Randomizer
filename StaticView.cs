@@ -7,7 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
-using System.Windows.Forms;
+using SharpDX.MediaFoundation;
+//using System.Windows.Forms;
 
 namespace Falson.SquadRoleRandomizer
 {
@@ -69,22 +70,25 @@ namespace Falson.SquadRoleRandomizer
         private string ActiveSettingString;
         private int tabId;
 
-        public StaticView(FalsonSettings deserializedSettings, SettingEntry<string> base64SettingsString, Tab viewWindowTab) 
+        public StaticView(FalsonSettings deserializedSettings, SettingEntry<string> base64SettingsString, Tab viewWindowTab)
         {
             _deserializedSettings = deserializedSettings;
+        }
+        protected override void Build(Container buildPanel)
+        {
+
+            //_deserializedSettings = deserializedSettings;
             Panel omegaMasterPanel = new Panel
             {
-                //Parent = (Container)viewWindowTab
+                Parent = buildPanel
             };
-            TabPage viewTabPage = new TabPage();
-            viewTabPage.Controls.Add(omegaMasterPanel);
             _rolesWithNumbers = new Panel
             {
                 Title = "Number of each role to generate",
                 Parent = omegaMasterPanel,
                 Size = new Point(480, 165),
                 Location = new Point(401, 0),
-            };
+            };      
             _generateRolesButton = new StandardButton
             {
                 Text = "Generate \n  Roles",
@@ -138,7 +142,7 @@ namespace Falson.SquadRoleRandomizer
             #region Player Panels
             for (int i = 0; i < 10; i++)
             {
-                _playerPanels[i] = new PlayerPanel(deserializedSettings._playerNames[i], _masterFlowPanel);
+                _playerPanels[i] = new PlayerPanel(_deserializedSettings._playerNames[i], _masterFlowPanel);
             }
             #endregion
             #region Role Panels
@@ -183,30 +187,30 @@ namespace Falson.SquadRoleRandomizer
             #region Checkboxes
             for (int i = 0; i < 10; i++)
             {
-                _tankBoxArray[i] = new CustomCheckbox(deserializedSettings._tankRoles[i]) { Text = "Tank", Location = new Point(0, 0), BasicTooltipText = "Tank", Parent = _standardRolesPanel[i], Checked = deserializedSettings._tankRoles[i] };
-                _healAlacBoxArray[i] = new CustomCheckbox(deserializedSettings._healAlacRoles[i]) { Text = "Heal + Alac", Location = new Point(0, 25), BasicTooltipText = "Heal + Alac", Parent = _standardRolesPanel[i], Checked = deserializedSettings._healAlacRoles[i] };
-                _healQuickBoxArray[i] = new CustomCheckbox(deserializedSettings._healQuickRoles[i]) { Text = "Heal + Quick", Location = new Point(0, 50), BasicTooltipText = "Heal + Quick", Parent = _standardRolesPanel[i], Checked = deserializedSettings._healQuickRoles[i] };
-                _dpsAlacBoxArray[i] = new CustomCheckbox(deserializedSettings._dpsAlacRoles[i]) { Text = "DPS + Alac", Location = new Point(100, 0), BasicTooltipText = "DPS + Alac", Parent = _standardRolesPanel[i], Checked = deserializedSettings._dpsAlacRoles[i] };
-                _dpsQuickBoxArray[i] = new CustomCheckbox(deserializedSettings._dpsQuickRoles[i]) { Text = "DPS + Quick", Location = new Point(100, 25), BasicTooltipText = "DPS + Quick", Parent = _standardRolesPanel[i], Checked = deserializedSettings._dpsQuickRoles[i] };
+                _tankBoxArray[i] = new CustomCheckbox(_deserializedSettings._tankRoles[i]) { Text = "Tank", Location = new Point(0, 0), BasicTooltipText = "Tank", Parent = _standardRolesPanel[i], Checked = _deserializedSettings._tankRoles[i] };
+                _healAlacBoxArray[i] = new CustomCheckbox(_deserializedSettings._healAlacRoles[i]) { Text = "Heal + Alac", Location = new Point(0, 25), BasicTooltipText = "Heal + Alac", Parent = _standardRolesPanel[i], Checked = _deserializedSettings._healAlacRoles[i] };
+                _healQuickBoxArray[i] = new CustomCheckbox(_deserializedSettings._healQuickRoles[i]) { Text = "Heal + Quick", Location = new Point(0, 50), BasicTooltipText = "Heal + Quick", Parent = _standardRolesPanel[i], Checked = _deserializedSettings._healQuickRoles[i] };
+                _dpsAlacBoxArray[i] = new CustomCheckbox(_deserializedSettings._dpsAlacRoles[i]) { Text = "DPS + Alac", Location = new Point(100, 0), BasicTooltipText = "DPS + Alac", Parent = _standardRolesPanel[i], Checked = _deserializedSettings._dpsAlacRoles[i] };
+                _dpsQuickBoxArray[i] = new CustomCheckbox(_deserializedSettings._dpsQuickRoles[i]) { Text = "DPS + Quick", Location = new Point(100, 25), BasicTooltipText = "DPS + Quick", Parent = _standardRolesPanel[i], Checked = _deserializedSettings._dpsQuickRoles[i] };
 
-                _handKiteBoxArray[i] = new CustomCheckbox(deserializedSettings._handKiteRoles[i]) { Text = "Hand Kite", Location = new Point(0, 0), BasicTooltipText = "Hand Kite", Parent = _hoTMechanicsPanel[i], Checked = deserializedSettings._handKiteRoles[i] };
-                _oilKiteBoxArray[i] = new CustomCheckbox(deserializedSettings._oilKiteRoles[i]) { Text = "Oil Kite", Location = new Point(0, 25), BasicTooltipText = "Oil Kite", Parent = _hoTMechanicsPanel[i], Checked = deserializedSettings._oilKiteRoles[i] };
-                _flakKiteBoxArray[i] = new CustomCheckbox(deserializedSettings._flakKiteRoles[i]) { Text = "Flak Kite", Location = new Point(0, 50), BasicTooltipText = "Flak Kite", Parent = _hoTMechanicsPanel[i], Checked = deserializedSettings._flakKiteRoles[i] };
-                _mushroomBoxArray[i] = new CustomCheckbox(deserializedSettings._mushroomRoles[i]) { Text = "Mushroom", Location = new Point(100, 0), BasicTooltipText = "Slothosaur Mushroom", Parent = _hoTMechanicsPanel[i], Checked = deserializedSettings._mushroomRoles[i] };
-                _towerBoxArray[i] = new CustomCheckbox(deserializedSettings._towerRoles[i]) { Text = "Tower", Location = new Point(100, 25), BasicTooltipText = "Tower Mesmer", Parent = _hoTMechanicsPanel[i], Checked = deserializedSettings._towerRoles[i] };
-                _reflectBoxArray[i] = new CustomCheckbox(deserializedSettings._reflectRoles[i]) { Text = "Reflect", Location = new Point(100, 50), BasicTooltipText = "Matthias Reflect", Parent = _hoTMechanicsPanel[i], Checked = deserializedSettings._reflectRoles[i] };
-                _cannonBoxArray[i] = new CustomCheckbox(deserializedSettings._cannonRoles[i]) { Text = "Cannons", Location = new Point(200, 0), BasicTooltipText = "Sabetha Cannons", Parent = _hoTMechanicsPanel[i], Checked = deserializedSettings._cannonRoles[i] };
-                _construcPusherBoxArray[i] = new CustomCheckbox(deserializedSettings._construcPusherRoles[i]) { Text = "KC Pusher", Location = new Point(200, 25), BasicTooltipText = "Keep Construct Pusher", Parent = _hoTMechanicsPanel[i], Checked = deserializedSettings._construcPusherRoles[i] };
+                _handKiteBoxArray[i] = new CustomCheckbox(_deserializedSettings._handKiteRoles[i]) { Text = "Hand Kite", Location = new Point(0, 0), BasicTooltipText = "Hand Kite", Parent = _hoTMechanicsPanel[i], Checked = _deserializedSettings._handKiteRoles[i] };
+                _oilKiteBoxArray[i] = new CustomCheckbox(_deserializedSettings._oilKiteRoles[i]) { Text = "Oil Kite", Location = new Point(0, 25), BasicTooltipText = "Oil Kite", Parent = _hoTMechanicsPanel[i], Checked = _deserializedSettings._oilKiteRoles[i] };
+                _flakKiteBoxArray[i] = new CustomCheckbox(_deserializedSettings._flakKiteRoles[i]) { Text = "Flak Kite", Location = new Point(0, 50), BasicTooltipText = "Flak Kite", Parent = _hoTMechanicsPanel[i], Checked = _deserializedSettings._flakKiteRoles[i] };
+                _mushroomBoxArray[i] = new CustomCheckbox(_deserializedSettings._mushroomRoles[i]) { Text = "Mushroom", Location = new Point(100, 0), BasicTooltipText = "Slothosaur Mushroom", Parent = _hoTMechanicsPanel[i], Checked = _deserializedSettings._mushroomRoles[i] };
+                _towerBoxArray[i] = new CustomCheckbox(_deserializedSettings._towerRoles[i]) { Text = "Tower", Location = new Point(100, 25), BasicTooltipText = "Tower Mesmer", Parent = _hoTMechanicsPanel[i], Checked = _deserializedSettings._towerRoles[i] };
+                _reflectBoxArray[i] = new CustomCheckbox(_deserializedSettings._reflectRoles[i]) { Text = "Reflect", Location = new Point(100, 50), BasicTooltipText = "Matthias Reflect", Parent = _hoTMechanicsPanel[i], Checked = _deserializedSettings._reflectRoles[i] };
+                _cannonBoxArray[i] = new CustomCheckbox(_deserializedSettings._cannonRoles[i]) { Text = "Cannons", Location = new Point(200, 0), BasicTooltipText = "Sabetha Cannons", Parent = _hoTMechanicsPanel[i], Checked = _deserializedSettings._cannonRoles[i] };
+                _construcPusherBoxArray[i] = new CustomCheckbox(_deserializedSettings._construcPusherRoles[i]) { Text = "KC Pusher", Location = new Point(200, 25), BasicTooltipText = "Keep Construct Pusher", Parent = _hoTMechanicsPanel[i], Checked = _deserializedSettings._construcPusherRoles[i] };
 
-                _lampBoxArray[i] = new CustomCheckbox(deserializedSettings._lampRoles[i]) { Text = "Lamp", Location = new Point(0, 0), BasicTooltipText = "Qadim Lamp", Parent = _poFMechanicsPanel[i], Checked = deserializedSettings._lampRoles[i] };
-                _pylonBoxArray[i] = new CustomCheckbox(deserializedSettings._pylonRoles[i]) { Text = "Pylon", Location = new Point(0, 25), BasicTooltipText = "Qadim Pylon", Parent = _poFMechanicsPanel[i], Checked = deserializedSettings._pylonRoles[i] };
-                _pillarBoxArray[i] = new CustomCheckbox(deserializedSettings._pillarRoles[i]) { Text = "Pillar", Location = new Point(0, 50), BasicTooltipText = "Adina Pillar", Parent = _poFMechanicsPanel[i], Checked = deserializedSettings._pillarRoles[i] };
-                _greenBoxArray[i] = new CustomCheckbox(deserializedSettings._greenRoles[i]) { Text = "Green", Location = new Point(100, 0), BasicTooltipText = "Dhuum Green", Parent = _poFMechanicsPanel[i], Checked = deserializedSettings._greenRoles[i] };
-                _soullessPusherBoxArray[i] = new CustomCheckbox(deserializedSettings._soullessPusherRoles[i]) { Text = "SH Pusher", Location = new Point(100, 25), BasicTooltipText = "Soulless Horror Pusher", Parent = _poFMechanicsPanel[i], Checked = deserializedSettings._soullessPusherRoles[i] };
-                _dhuumKiteBoxArray[i] = new CustomCheckbox(deserializedSettings._dhuumKiteRoles[i]) { Text = "Dhuum Kiter", Location = new Point(100, 50), BasicTooltipText = "Dhuum Messenger Kiter", Parent = _poFMechanicsPanel[i], Checked = deserializedSettings._dhuumKiteRoles[i] };
-                _qadimKiteBoxArray[i] = new CustomCheckbox(deserializedSettings._qadimKiteRoles[i]) { Text = "Qadim Kiter", Location = new Point(200, 0), BasicTooltipText = "Qadim Kiter", Parent = _poFMechanicsPanel[i], Checked = deserializedSettings._qadimKiteRoles[i] };
-                _swordBoxArray[i] = new CustomCheckbox(deserializedSettings._swordRoles[i]) { Text = "Sword", Location = new Point(200, 25), BasicTooltipText = "CA Sword Collector", Parent = _poFMechanicsPanel[i], Checked = deserializedSettings._swordRoles[i] };
-                _shieldBoxArray[i] = new CustomCheckbox(deserializedSettings._shieldRoles[i]) { Text = "Shield", Location = new Point(200, 50), BasicTooltipText = "CA Shield Collector", Parent = _poFMechanicsPanel[i], Checked = deserializedSettings._shieldRoles[i] };
+                _lampBoxArray[i] = new CustomCheckbox(_deserializedSettings._lampRoles[i]) { Text = "Lamp", Location = new Point(0, 0), BasicTooltipText = "Qadim Lamp", Parent = _poFMechanicsPanel[i], Checked = _deserializedSettings._lampRoles[i] };
+                _pylonBoxArray[i] = new CustomCheckbox(_deserializedSettings._pylonRoles[i]) { Text = "Pylon", Location = new Point(0, 25), BasicTooltipText = "Qadim Pylon", Parent = _poFMechanicsPanel[i], Checked = _deserializedSettings._pylonRoles[i] };
+                _pillarBoxArray[i] = new CustomCheckbox(_deserializedSettings._pillarRoles[i]) { Text = "Pillar", Location = new Point(0, 50), BasicTooltipText = "Adina Pillar", Parent = _poFMechanicsPanel[i], Checked = _deserializedSettings._pillarRoles[i] };
+                _greenBoxArray[i] = new CustomCheckbox(_deserializedSettings._greenRoles[i]) { Text = "Green", Location = new Point(100, 0), BasicTooltipText = "Dhuum Green", Parent = _poFMechanicsPanel[i], Checked = _deserializedSettings._greenRoles[i] };
+                _soullessPusherBoxArray[i] = new CustomCheckbox(_deserializedSettings._soullessPusherRoles[i]) { Text = "SH Pusher", Location = new Point(100, 25), BasicTooltipText = "Soulless Horror Pusher", Parent = _poFMechanicsPanel[i], Checked = _deserializedSettings._soullessPusherRoles[i] };
+                _dhuumKiteBoxArray[i] = new CustomCheckbox(_deserializedSettings._dhuumKiteRoles[i]) { Text = "Dhuum Kiter", Location = new Point(100, 50), BasicTooltipText = "Dhuum Messenger Kiter", Parent = _poFMechanicsPanel[i], Checked = _deserializedSettings._dhuumKiteRoles[i] };
+                _qadimKiteBoxArray[i] = new CustomCheckbox(_deserializedSettings._qadimKiteRoles[i]) { Text = "Qadim Kiter", Location = new Point(200, 0), BasicTooltipText = "Qadim Kiter", Parent = _poFMechanicsPanel[i], Checked = _deserializedSettings._qadimKiteRoles[i] };
+                _swordBoxArray[i] = new CustomCheckbox(_deserializedSettings._swordRoles[i]) { Text = "Sword", Location = new Point(200, 25), BasicTooltipText = "CA Sword Collector", Parent = _poFMechanicsPanel[i], Checked = _deserializedSettings._swordRoles[i] };
+                _shieldBoxArray[i] = new CustomCheckbox(_deserializedSettings._shieldRoles[i]) { Text = "Shield", Location = new Point(200, 50), BasicTooltipText = "CA Shield Collector", Parent = _poFMechanicsPanel[i], Checked = _deserializedSettings._shieldRoles[i] };
             }
             IDictionary<int, string> RandomizeSelectionBoxesInt_to_NameDictionary = new Dictionary<int, string>
             {
@@ -315,12 +319,12 @@ namespace Falson.SquadRoleRandomizer
             };
             for (int i = 0; i < 22; i++)
             {
-                _rolestoRandomizeSelectionCheckboxesArray[i] = new CustomCheckbox(deserializedSettings._rolesToGenerate[i])
+                _rolestoRandomizeSelectionCheckboxesArray[i] = new CustomCheckbox(_deserializedSettings._rolesToGenerate[i])
                 {
                     Text = RandomizeSelectionBoxesInt_to_NameDictionary[i] + "  ",
                     BasicTooltipText = "Check this box to include " + RandomizeSelectionBoxesInt_to_TooltipDictionary[i] + " in the randomization",
                     Parent = _randomizeCheckboxesPanel,
-                    Checked = deserializedSettings._rolesToGenerate[i],
+                    Checked = _deserializedSettings._rolesToGenerate[i],
                     Location = RandomizedBoxes_to_LocationDictioanry[i]
 
                 };
@@ -513,6 +517,7 @@ namespace Falson.SquadRoleRandomizer
             _counterBoxes[10].Click += CounterBox11Click;
             _counterBoxes[11].Click += CounterBox12Click;
             #endregion
+            base.Build(buildPanel);
 
         }
         #region Event Functions
