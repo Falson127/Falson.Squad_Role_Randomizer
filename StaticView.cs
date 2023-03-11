@@ -70,7 +70,7 @@ namespace Falson.SquadRoleRandomizer
         private string ActiveSettingString;
         private int tabId;
 
-        public StaticView(FalsonSettings deserializedSettings, SettingEntry<string> base64SettingsString, Tab viewWindowTab)
+        public StaticView(FalsonSettings deserializedSettings, SettingEntry<string> base64SettingsString)//, Tab viewWindowTab)
         {
             _deserializedSettings = deserializedSettings;
         }
