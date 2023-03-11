@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
+using System.Windows.Forms;
 
 namespace Falson.SquadRoleRandomizer
 {
@@ -73,8 +74,10 @@ namespace Falson.SquadRoleRandomizer
             _deserializedSettings = deserializedSettings;
             Panel omegaMasterPanel = new Panel
             {
-                //Parent = viewWindowTab
+                //Parent = (Container)viewWindowTab
             };
+            TabPage viewTabPage = new TabPage();
+            viewTabPage.Controls.Add(omegaMasterPanel);
             _rolesWithNumbers = new Panel
             {
                 Title = "Number of each role to generate",

@@ -18,6 +18,7 @@ namespace Falson.SquadRoleRandomizer
     public class RoleRandomizerMain : Blish_HUD.Modules.Module
     {
         public static StandardWindow _randomizerResultsWindow;
+        private TabbedWindow2 _randomizerSettingsTabbedWindow;
         private StandardWindow _randomizerSettingsWindow;
         private CornerIcon _randomizerSettingIcon;
         private SettingCollection InternalPlayerRolesSettings;
@@ -60,6 +61,16 @@ namespace Falson.SquadRoleRandomizer
                 Id = "Falson.RoleRandomizer.SettingsWindow",
                 Emblem = ContentsManager.GetTexture("Emblem.png")
             };
+            _randomizerSettingsTabbedWindow = new TabbedWindow2(ContentsManager.GetTexture("155985.png"), new Rectangle(40,26,913,691), new Rectangle(70,71,839,605)) 
+            {
+                Title = "Randomization Settings",
+                Subtitle = _randomizerSettingsTabbedWindow.SelectedTab.Name,
+                Parent = GameService.Graphics.SpriteScreen,
+                Size = new Point(1050,800),
+                SavesPosition = true,
+                Id = "Falson.RoleRandomizer.TabbedSettingsWindow",
+                Emblem = ContentsManager.GetTexture("Emblem.png")
+            };
             _randomizerResultsWindow = new StandardWindow(ContentsManager.GetTexture("155985.png"), new Rectangle(40, 26, 913, 691), new Rectangle(70, 71, 839, 605))
             {
                 Title = "Results",
@@ -96,15 +107,30 @@ namespace Falson.SquadRoleRandomizer
                 BasicTooltipText = "Click to open settings window"
             };
             _randomizerSettingIcon.Click += _randomizerSettingIcon_Click;
-
+            BuildTabs();
             // Base handler must be called
             base.OnModuleLoaded(e);
         }
         private void _randomizerSettingIcon_Click(object sender, Blish_HUD.Input.MouseEventArgs e)
         {
             _randomizerSettingsWindow.ToggleWindow();
+            _randomizerSettingsTabbedWindow.ToggleWindow();
         }
-
+        private void BuildTabs() //add 3 tabs to the window, getting a settings object based on the base64string for each and passing that to the new view for the tab
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                var settingsObject = CallEncoder(_base64strings[i].Value);
+                _randomizerSettingsTabbedWindow.Tabs.Add(new Tab(ContentsManager.GetTexture("Emblem.png"), () => new StaticView(settingsObject, _base64strings[i])));
+            }
+        }
+        private FalsonSettings CallEncoder(string base64string) //pass base64encoded string, return a deserialized settings object
+        {
+            string _base64string = base64string;
+            SettingsEncoder SettingsHandler = new SettingsEncoder(_base64string);
+            var _deserializedSettings = SettingsHandler.GetSettings();
+            return _deserializedSettings;
+        }
 
 
         protected override void Update(GameTime gameTime)
