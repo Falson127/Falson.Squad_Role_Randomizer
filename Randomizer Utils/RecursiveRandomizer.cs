@@ -23,10 +23,10 @@ namespace Falson.Randomizer
         public IDictionary<string, string> RoleName_to_SelectedPlayer = new Dictionary<string, string>();
         public IDictionary<string, string> HoTMechanic_to_SelectedPlayer = new Dictionary<string, string>();
         public IDictionary<string, string> PoFMechanic_to_SelectedPlayer = new Dictionary<string, string>();
-        private readonly bool[] _rolesToGenerate = new bool[22];
+        private readonly List<Tuple<int,bool>> _rolesToGenerate = new List<Tuple<int,bool>>();
         private readonly int[] _counterboxsettings = new int[12];
 
-        public RecursiveRandomizer(List<Tuple<int,string>> intRoles, List<int> intGenSequence, bool[] rolestogenerate, int[] counterboxsettings) 
+        public RecursiveRandomizer(List<Tuple<int,string>> intRoles, List<int> intGenSequence, List<Tuple<int,bool>> rolestogenerate, int[] counterboxsettings) 
         {
             _roles = intRoles;
             _generationsequence = intGenSequence;
@@ -62,28 +62,28 @@ namespace Falson.Randomizer
             };
             IDictionary<int, bool> conflictRoleIndex_to_RoleChecked = new Dictionary<int, bool> 
             {
-                {0, _rolesToGenerate[0]},
-                {1, _rolesToGenerate[1]},
-                {2, _rolesToGenerate[2]},
-                {3, _rolesToGenerate[3]},
-                {4, _rolesToGenerate[4]},
-                {5, _rolesToGenerate[5]},
-                {6, _rolesToGenerate[6]},
-                {7, _rolesToGenerate[7]},
-                {8, _rolesToGenerate[8]},
-                {9, _rolesToGenerate[9]},
-                {10, _rolesToGenerate[10]},
-                {11, _rolesToGenerate[11]},
-                {12, _rolesToGenerate[12]},
-                {13, _rolesToGenerate[13]},
-                {14, _rolesToGenerate[14]},
-                {15, _rolesToGenerate[15]},
-                {16, _rolesToGenerate[16]},
-                {17, _rolesToGenerate[17]},
-                {18, _rolesToGenerate[18]},
-                {19, _rolesToGenerate[19]},
-                {20, _rolesToGenerate[20]},
-                {21, _rolesToGenerate[21]}
+                {0, _rolesToGenerate[0].Item2},
+                {1, _rolesToGenerate[1].Item2},
+                {2, _rolesToGenerate[2].Item2},
+                {3, _rolesToGenerate[3].Item2},
+                {4, _rolesToGenerate[4].Item2},
+                {5, _rolesToGenerate[5].Item2},
+                {6, _rolesToGenerate[6].Item2},
+                {7, _rolesToGenerate[7].Item2},
+                {8, _rolesToGenerate[8].Item2},
+                {9, _rolesToGenerate[9].Item2},
+                {10, _rolesToGenerate[10].Item2},
+                {11, _rolesToGenerate[11].Item2},
+                {12, _rolesToGenerate[12].Item2},
+                {13, _rolesToGenerate[13].Item2},
+                {14, _rolesToGenerate[14].Item2},
+                {15, _rolesToGenerate[15].Item2},
+                {16, _rolesToGenerate[16].Item2},
+                {17, _rolesToGenerate[17].Item2},
+                {18, _rolesToGenerate[18].Item2},
+                {19, _rolesToGenerate[19].Item2},
+                {20, _rolesToGenerate[20].Item2},
+                {21, _rolesToGenerate[21].Item2}
             };
             for (int i = 0; i < 22; i++)
             {
