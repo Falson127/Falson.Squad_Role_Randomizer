@@ -107,20 +107,22 @@ namespace Falson.SquadRoleRandomizer
                 BasicTooltipText = "Click to open settings window"
             };
             _randomizerSettingIcon.Click += _randomizerSettingIcon_Click;
-            BuildTabs();
+            //BuildTabs();
             // Base handler must be called
             base.OnModuleLoaded(e);
         }
         private void _randomizerSettingIcon_Click(object sender, Blish_HUD.Input.MouseEventArgs e)
         {
-            _randomizerSettingsWindow.ToggleWindow();
+            BuildTabs();
+            //_randomizerSettingsWindow.ToggleWindow();
             _randomizerSettingsTabbedWindow.ToggleWindow();
         }
         private void BuildTabs() //add 3 tabs to the window, getting a settings object based on the base64string for each and passing that to the new view for the tab
         {
             for (int i = 0; i < 3; i++)
             {
-                var settingsObject = CallEncoder(_base64strings[i].Value);
+                //SettingsEncoder encoderInstance = new SettingsEncoder();
+                FalsonSettings settingsObject = CallEncoder(_base64strings[i].Value);
                 _randomizerSettingsTabbedWindow.Tabs.Add(new Tab(ContentsManager.GetTexture("Emblem.png"), () => new StaticView(settingsObject, _base64strings[i])));
             }
         }

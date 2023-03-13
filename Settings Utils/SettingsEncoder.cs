@@ -19,9 +19,9 @@ namespace Falson.SquadRoleRandomizer
         public SettingsEncoder(string base64settingsstring)
         {
             //grab base64string, store locally, and decode it to json
-            string base64string = base64settingsstring;
-            _activeEncodedSettingsString = base64string;
-            string json = Encoding.UTF8.GetString(Convert.FromBase64String(base64string));
+            //string base64string = base64settingsstring;
+            _activeEncodedSettingsString = base64settingsstring;
+            string json = Encoding.UTF8.GetString(Convert.FromBase64String(_activeEncodedSettingsString));
             _activeJsonString = json;
             //create instance of settings class and deserialize the json into that instance object
             FalsonSettings DeserializedSettings = JsonConvert.DeserializeObject<FalsonSettings>(json);

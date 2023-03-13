@@ -17,7 +17,7 @@ namespace Falson.SquadRoleRandomizer
         private List<List<string>> _listOfValidLists;
         private List<int> _intGenerationSequence = new List<int>();
         private List<Tuple<int, string>> intRoles = new List<Tuple<int,string>>();
-        IDictionary<bool, bool[]> ActiveRolesDictionary = new Dictionary<bool, bool[]>();
+        IDictionary<Tuple<int, bool>, bool[]> ActiveRolesDictionary = new Dictionary<Tuple<int, bool>, bool[]>();
         IDictionary<bool[], int> RolesArrays_to_ArrayListPosDictionary = new Dictionary<bool[], int>();
         IDictionary<bool[], List<string>> RolesArrays_to_ValidLists = new Dictionary<bool[], List<string>>();
         IDictionary<List<string>, int> rolestogeneratemultiple_to_numbertogenerate = new Dictionary<List<string>, int>();
@@ -71,14 +71,19 @@ namespace Falson.SquadRoleRandomizer
         private readonly bool[] _qadimKiteRoles = new bool[10];
         private readonly bool[] _swordRoles = new bool[10];
         private readonly bool[] _shieldRoles = new bool[10];
-        private readonly bool[] _rolesToGenerate = new bool[22];
+        //private readonly bool[] _rolesToGenerate = new bool[22];
+        private readonly List<Tuple<int, bool>> _rolesToGenerate = new List<Tuple<int, bool>>();
         private readonly int[] _counterBoxSettings = new int[12];
         private readonly string[] _playerNames = new string[10];
         //constructor
         public PrepareRoles(FalsonSettings deserializedSettings) 
         {
+            for (int i = 0; i < 22; i++)
+            {
+                _rolesToGenerate.Add(Tuple.Create(i, deserializedSettings._rolesToGenerate[i]));
+            }
             _playerNames = deserializedSettings._playerNames;
-            _rolesToGenerate = deserializedSettings._rolesToGenerate;
+            //_rolesToGenerate = deserializedSettings._rolesToGenerate;
             _counterBoxSettings = deserializedSettings._counterBoxesSettings;
 
             _handKiteRoles = deserializedSettings._handKiteRoles;
@@ -260,7 +265,7 @@ namespace Falson.SquadRoleRandomizer
             };
             for (int i = 0; i < 22; i++)
             {
-                if (_rolesToGenerate[i])
+                if (_rolesToGenerate[i].Item2)
                 {
                     var tempkey = _rolesToGenerate[i];
                     var temprole = ActiveRolesDictionary[tempkey];

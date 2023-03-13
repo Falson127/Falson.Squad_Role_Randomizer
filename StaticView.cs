@@ -78,14 +78,11 @@ namespace Falson.SquadRoleRandomizer
         {
 
             //_deserializedSettings = deserializedSettings;
-            Panel omegaMasterPanel = new Panel
-            {
-                Parent = buildPanel
-            };
+
             _rolesWithNumbers = new Panel
             {
                 Title = "Number of each role to generate",
-                Parent = omegaMasterPanel,
+                Parent = buildPanel,
                 Size = new Point(480, 165),
                 Location = new Point(401, 0),
             };      
@@ -94,7 +91,7 @@ namespace Falson.SquadRoleRandomizer
                 Text = "Generate \n  Roles",
                 Size = new Point(80, 100),
                 Location = new Point(890, 40),
-                Parent = omegaMasterPanel,
+                Parent = buildPanel,
             };
             _generateRolesButton.Click += GenerateRolesButton_Click;
             _counterBoxes = new CounterBox[12];
@@ -102,7 +99,7 @@ namespace Falson.SquadRoleRandomizer
             _rolesWithNumbers = new Panel
             {
                 Title = "Number of each role to generate",
-                Parent = omegaMasterPanel,
+                Parent = buildPanel,
                 Size = new Point(480, 165),
                 Location = new Point(401, 0),
             };
@@ -111,7 +108,7 @@ namespace Falson.SquadRoleRandomizer
                 Text = "Generate \n  Roles",
                 Size = new Point(80, 100),
                 Location = new Point(890, 40),
-                Parent = omegaMasterPanel,
+                Parent = buildPanel,
             };
             _generateRolesButton.Click += GenerateRolesButton_Click;
             _playerNameTextBoxPanel = new Panel
@@ -119,13 +116,13 @@ namespace Falson.SquadRoleRandomizer
                 Title = "Enter Player Names",
                 Size = new Point(400, 165),
                 Location = new Point(0, 0),
-                Parent = omegaMasterPanel,
+                Parent = buildPanel,
             };
             _randomizeCheckboxesPanel = new Panel
             {
                 Title = "Select roles to be randomized",
                 Size = new Point(1000, 120),
-                Parent = omegaMasterPanel,
+                Parent = buildPanel,
                 Location = new Point(0, 166),
             };
             _masterFlowPanel = new FlowPanel
@@ -134,7 +131,7 @@ namespace Falson.SquadRoleRandomizer
                 Title = "Set Roles for Each Player  (Click to Expand)",
                 Size = new Point(1000, 400),
                 Location = new Point(0, 255),
-                Parent = omegaMasterPanel,
+                Parent = buildPanel,
                 CanScroll = true,
                 CanCollapse = false,
                 FlowDirection = ControlFlowDirection.SingleTopToBottom
@@ -370,7 +367,7 @@ namespace Falson.SquadRoleRandomizer
                     ValueWidth = 10,
                     Width = 60,
                     BasicTooltipText = CounterBoxInt_to_Text[i],
-                    Value = _counterBoxesSettings[i],
+                    Value = _deserializedSettings._counterBoxesSettings[i],//_counterBoxesSettings[i],
                     MinValue = 0,
                     Location = new Point(CounterBox_X_PositionDictionary[i], CounterBox_Y_PositionDictionary[i])
                 };
@@ -379,70 +376,70 @@ namespace Falson.SquadRoleRandomizer
             #region Textboxes
             _player1NameBox = new TextBox
             {
-                PlaceholderText = _playerNames[0],
+                PlaceholderText = _deserializedSettings._playerNames[0],
                 Size = new Point(200, 25),
                 Parent = _playerNameTextBoxPanel,
                 Location = new Point(0, 0)
             };
             _player2NameBox = new TextBox
             {
-                PlaceholderText = _playerNames[1],
+                PlaceholderText = _deserializedSettings._playerNames[1],
                 Size = new Point(200, 25),
                 Parent = _playerNameTextBoxPanel,
                 Location = new Point(0, 25)
             };
             _player3NameBox = new TextBox
             {
-                PlaceholderText = _playerNames[2],
+                PlaceholderText = _deserializedSettings._playerNames[2],
                 Size = new Point(200, 25),
                 Parent = _playerNameTextBoxPanel,
                 Location = new Point(0, 50)
             };
             _player4NameBox = new TextBox
             {
-                PlaceholderText = _playerNames[3],
+                PlaceholderText = _deserializedSettings._playerNames[3],
                 Size = new Point(200, 25),
                 Parent = _playerNameTextBoxPanel,
                 Location = new Point(0, 75)
             };
             _player5NameBox = new TextBox
             {
-                PlaceholderText = _playerNames[4],
+                PlaceholderText = _deserializedSettings._playerNames[4],
                 Size = new Point(200, 25),
                 Parent = _playerNameTextBoxPanel,
                 Location = new Point(0, 100)
             };
             _player6NameBox = new TextBox
             {
-                PlaceholderText = _playerNames[5],
+                PlaceholderText = _deserializedSettings._playerNames[5],
                 Size = new Point(200, 25),
                 Parent = _playerNameTextBoxPanel,
                 Location = new Point(200, 0)
             };
             _player7NameBox = new TextBox
             {
-                PlaceholderText = _playerNames[6],
+                PlaceholderText = _deserializedSettings._playerNames[6],
                 Size = new Point(200, 25),
                 Parent = _playerNameTextBoxPanel,
                 Location = new Point(200, 25)
             };
             _player8NameBox = new TextBox
             {
-                PlaceholderText = _playerNames[7],
+                PlaceholderText = _deserializedSettings._playerNames[7],
                 Size = new Point(200, 25),
                 Parent = _playerNameTextBoxPanel,
                 Location = new Point(200, 50)
             };
             _player9NameBox = new TextBox
             {
-                PlaceholderText = _playerNames[8],
+                PlaceholderText = _deserializedSettings._playerNames[8],
                 Size = new Point(200, 25),
                 Parent = _playerNameTextBoxPanel,
                 Location = new Point(200, 75)
             };
             _player10NameBox = new TextBox
             {
-                PlaceholderText = _playerNames[9],
+                PlaceholderText = _deserializedSettings._playerNames[9],
                 Size = new Point(200, 25),
                 Parent = _playerNameTextBoxPanel,
                 Location = new Point(200, 100)
@@ -586,9 +583,9 @@ namespace Falson.SquadRoleRandomizer
         private void Player10NameBox_TextChanged(object sender, EventArgs e)
         {
             _playerPanels[9].Title = _player10NameBox.Text;
-            _playerNames[9] = _player10NameBox.Text;
+            _deserializedSettings._playerNames[9] = _player10NameBox.Text;
 
-            if (_playerNames[9] == "")
+            if (_deserializedSettings._playerNames[9] == "")
             {
                 _playerPanels[9].Title = "Enter Player Name";
             };
@@ -597,8 +594,8 @@ namespace Falson.SquadRoleRandomizer
         private void Player9NameBox_TextChanged(object sender, EventArgs e)
         {
             _playerPanels[8].Title = _player9NameBox.Text;
-            _playerNames[8] = _player9NameBox.Text;
-            if (_playerNames[8] == "")
+            _deserializedSettings._playerNames[8] = _player9NameBox.Text;
+            if (_deserializedSettings._playerNames[8] == "")
             {
                 _playerPanels[8].Title = "Enter Player Name";
             };
@@ -607,8 +604,8 @@ namespace Falson.SquadRoleRandomizer
         private void Player8NameBox_TextChanged(object sender, EventArgs e)
         {
             _playerPanels[7].Title = _player8NameBox.Text;
-            _playerNames[7] = _player8NameBox.Text;
-            if (_playerNames[7] == "")
+            _deserializedSettings._playerNames[7] = _player8NameBox.Text;
+            if (_deserializedSettings._playerNames[7] == "")
             {
                 _playerPanels[7].Title = "Enter Player Name";
             };
@@ -617,8 +614,8 @@ namespace Falson.SquadRoleRandomizer
         private void Player7NameBox_TextChanged(object sender, EventArgs e)
         {
             _playerPanels[6].Title = _player7NameBox.Text;
-            _playerNames[6] = _player7NameBox.Text;
-            if (_playerNames[6] == "")
+            _deserializedSettings._playerNames[6] = _player7NameBox.Text;
+            if (_deserializedSettings._playerNames[6] == "")
             {
                 _playerPanels[6].Title = "Enter Player Name";
             };
@@ -627,8 +624,8 @@ namespace Falson.SquadRoleRandomizer
         private void Player6NameBox_TextChanged(object sender, EventArgs e)
         {
             _playerPanels[5].Title = _player6NameBox.Text;
-            _playerNames[5] = _player6NameBox.Text;
-            if (_playerNames[5] == "")
+            _deserializedSettings._playerNames[5] = _player6NameBox.Text;
+            if (_deserializedSettings._playerNames[5] == "")
             {
                 _playerPanels[5].Title = "Enter Player Name";
             };
@@ -637,8 +634,8 @@ namespace Falson.SquadRoleRandomizer
         private void Player5NameBox_TextChanged(object sender, EventArgs e)
         {
             _playerPanels[4].Title = _player5NameBox.Text;
-            _playerNames[4] = _player5NameBox.Text;
-            if (_playerNames[4] == "")
+            _deserializedSettings._playerNames[4] = _player5NameBox.Text;
+            if (_deserializedSettings._playerNames[4] == "")
             {
                 _playerPanels[4].Title = "Enter Player Name";
             };
@@ -647,8 +644,8 @@ namespace Falson.SquadRoleRandomizer
         private void Player4NameBox_TextChanged(object sender, EventArgs e)
         {
             _playerPanels[3].Title = _player4NameBox.Text;
-            _playerNames[3] = _player4NameBox.Text;
-            if (_playerNames[3] == "")
+            _deserializedSettings._playerNames[3] = _player4NameBox.Text;
+            if (_deserializedSettings._playerNames[3] == "")
             {
                 _playerPanels[3].Title = "Enter Player Name";
             };
@@ -657,8 +654,8 @@ namespace Falson.SquadRoleRandomizer
         private void Player3NameBox_TextChanged(object sender, EventArgs e)
         {
             _playerPanels[2].Title = _player3NameBox.Text;
-            _playerNames[2] = _player3NameBox.Text;
-            if (_playerNames[2] == "")
+            _deserializedSettings._playerNames[2] = _player3NameBox.Text;
+            if (_deserializedSettings._playerNames[2] == "")
             {
                 _playerPanels[2].Title = "Enter Player Name";
             };
@@ -667,8 +664,8 @@ namespace Falson.SquadRoleRandomizer
         private void Player2NameBox_TextChanged(object sender, EventArgs e)
         {
             _playerPanels[1].Title = _player2NameBox.Text;
-            _playerNames[1] = _player2NameBox.Text;
-            if (_playerNames[1] == "")
+            _deserializedSettings._playerNames[1] = _player2NameBox.Text;
+            if (_deserializedSettings._playerNames[1] == "")
             {
                 _playerPanels[1].Title = "Enter Player Name";
             };
@@ -677,8 +674,8 @@ namespace Falson.SquadRoleRandomizer
         private void Player1NameBox_TextChanged(object sender, EventArgs e)
         {
             _playerPanels[0].Title = _player1NameBox.Text;
-            _playerNames[0] = _player1NameBox.Text;
-            if (_playerNames[0] == "")
+            _deserializedSettings._playerNames[0] = _player1NameBox.Text;
+            if (_deserializedSettings._playerNames[0] == "")
             {
                 _playerPanels[0].Title = "Enter Player Name";
             };
