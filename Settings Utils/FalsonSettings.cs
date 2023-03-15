@@ -15,7 +15,8 @@ namespace Falson.SquadRoleRandomizer
 
         public bool[] _flakKiteRoles { get; set; }
 
-        public bool[] _tankRoles { get; set; }
+        public bool[] _tankAlacRoles { get; set; }
+        public bool[] _tankQuickRoles { get; set; }
 
         public bool[] _healAlacRoles { get; set; }
 
@@ -63,7 +64,8 @@ namespace Falson.SquadRoleRandomizer
             _handKiteRoles = new bool[10];
             _oilKiteRoles = new bool[10];
             _flakKiteRoles = new bool[10];
-            _tankRoles = new bool[10];
+            _tankAlacRoles = new bool[10];
+            _tankQuickRoles = new bool[10];
             _healAlacRoles = new bool[10];
             _healQuickRoles = new bool[10];
             _dpsAlacRoles = new bool[10];
@@ -92,7 +94,8 @@ namespace Falson.SquadRoleRandomizer
                 _handKiteRoles[i] = false;
                 _oilKiteRoles[i] = false;
                 _flakKiteRoles[i] = false;
-                _tankRoles[i] = false;
+                _tankAlacRoles[i] = false;
+                _tankQuickRoles[i] = false;
                 _healAlacRoles[i] = false;
                 _healQuickRoles[i] = false;
                 _dpsAlacRoles[i] = false;

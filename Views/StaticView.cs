@@ -17,7 +17,8 @@ namespace Falson.SquadRoleRandomizer
         private CustomCheckbox[] _handKiteBoxArray = new CustomCheckbox[10];
         private CustomCheckbox[] _oilKiteBoxArray = new CustomCheckbox[10];
         private CustomCheckbox[] _flakKiteBoxArray = new CustomCheckbox[10];
-        private CustomCheckbox[] _tankBoxArray = new CustomCheckbox[10];
+        private CustomCheckbox[] _tankAlacBoxArray = new CustomCheckbox[10];
+        private CustomCheckbox[] _tankQuickBoxArray = new CustomCheckbox[10];
         private CustomCheckbox[] _healAlacBoxArray = new CustomCheckbox[10]; //1-2
         private CustomCheckbox[] _healQuickBoxArray = new CustomCheckbox[10]; //1-2
         private CustomCheckbox[] _dpsAlacBoxArray = new CustomCheckbox[10]; //1-2

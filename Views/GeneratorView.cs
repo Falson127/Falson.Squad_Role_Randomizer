@@ -27,10 +27,12 @@ namespace Falson.SquadRoleRandomizer.Views
         private Panel _masterPanel;
         private Panel _advancedSettingsPanel;
         private Panel _rolesToGeneratePanel;
+        private Panel _advancedRolesToGeneratePanel;
         private Panel _numberToGeneratePanel;
         private Dropdown _staticSelectionDropdown;
         private Checkbox[] _playerDisableBoxes = new Checkbox[10];
         private StandardButton _generateRolesButton;
+        private Checkbox _enableAdvancedConfigBox;
 
         public GeneratorView(SettingEntry<string>[] base64StringSettings) 
         {
@@ -69,6 +71,12 @@ namespace Falson.SquadRoleRandomizer.Views
                 Size = new Point(80, 100),
                 Location = new Point(890, 40),
                 Parent = _masterPanel,
+            };
+            _rolesToGeneratePanel = new Panel
+            {
+                Title = "Select Roles to Generate",
+                Parent = _masterPanel,
+                Size = new Point(1000,120)
             };
             _generateRolesButton.Click += GenerateRolesButton_Click;
             Dropdown dropdown1 = new Dropdown
