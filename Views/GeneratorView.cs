@@ -22,7 +22,7 @@ namespace Falson.SquadRoleRandomizer.Views
 
         private bool[] _playersToInclude = new bool[10];
         private string _selectedBase64string;
-        private SettingEntry<string> _base64Strings;
+        private SettingEntry<string>[] _base64Strings;
         private FalsonSettings _settingsObject;
         private Panel _masterPanel;
         private Panel _advancedSettingsPanel;
@@ -32,7 +32,7 @@ namespace Falson.SquadRoleRandomizer.Views
         private Checkbox[] _playerDisableBoxes = new Checkbox[10];
         private StandardButton _generateRolesButton;
 
-        public GeneratorView(SettingEntry<string> base64StringSettings) 
+        public GeneratorView(SettingEntry<string>[] base64StringSettings) 
         {
             _base64Strings = base64StringSettings;
         }
@@ -71,13 +71,41 @@ namespace Falson.SquadRoleRandomizer.Views
                 Parent = _masterPanel,
             };
             _generateRolesButton.Click += GenerateRolesButton_Click;
+            Dropdown dropdown1 = new Dropdown
+            {
+                Parent = _masterPanel,
+            };
+            dropdown1.Items.Add("Static 1");
+            dropdown1.Items.Add("Static 2");
+            dropdown1.Items.Add("Static 3");
 
+            _staticSelectionDropdown = dropdown1;
+            _staticSelectionDropdown.ValueChanged += SelectedStaticChanged;
 
             base.Build(buildPanel);
         }
+
+        private void SelectedStaticChanged(object sender, ValueChangedEventArgs e) //set selected settings string after changing in dropdown
+        {
+            if (_staticSelectionDropdown.SelectedItem == "Static 1")
+            {
+                _selectedBase64string = _base64Strings[0].Value;
+            }
+            if (_staticSelectionDropdown.SelectedItem == "Static 2")
+            {
+                _selectedBase64string = _base64Strings[1].Value;
+            }
+            if (_staticSelectionDropdown.SelectedItem == "Static 3")
+            {
+                _selectedBase64string = _base64Strings[2].Value;
+            }
+        }
+
         private void GenerateRolesButton_Click(object sender, Blish_HUD.Input.MouseEventArgs e)
         {
-
+            SettingsEncoder localEncoder = new SettingsEncoder(_selectedBase64string); //initialize decoder with selected base64 string
+            var localSettings = localEncoder.GetSettings(); //get settings object from string
+            PrepareRoles localPreparer = new PrepareRoles(localSettings); //call prep roles with the settings object for the selected static
         }
 
         private void TriggerGenerator() 
