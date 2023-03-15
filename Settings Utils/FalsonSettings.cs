@@ -60,7 +60,7 @@ namespace Falson.SquadRoleRandomizer
         {
             //initialize the settings arrays
             _counterBoxesSettings = new int[12];
-            _rolesToGenerate = new bool[22];
+            _rolesToGenerate = new bool[23];
             _handKiteRoles = new bool[10];
             _oilKiteRoles = new bool[10];
             _flakKiteRoles = new bool[10];
@@ -120,7 +120,7 @@ namespace Falson.SquadRoleRandomizer
             {
                 _counterBoxesSettings[i] = 1;
             }
-            for (int i = 0; i < 22; i++)
+            for (int i = 0; i < 23; i++)
             {
                 _rolesToGenerate[i] = false;
             }

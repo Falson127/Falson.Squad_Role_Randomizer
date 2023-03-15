@@ -29,7 +29,8 @@ namespace Falson.SquadRoleRandomizer
         private List<string> _handKiteValid = new List<string>();
         private List<string> _oilKiteValid = new List<string>();
         private List<string> _flakKiteValid = new List<string>();
-        private List<string> _tankValid = new List<string>();
+        private List<string> _tankAlacValid = new List<string>();
+        private List<string> _tankQuickValid = new List<string>();
         private List<string> _healAlacValid = new List<string>();
         private List<string> _healQuickValid = new List<string>();
         private List<string> _dpsAlacValid = new List<string>();
@@ -52,7 +53,8 @@ namespace Falson.SquadRoleRandomizer
         private readonly bool[] _handKiteRoles = new bool[10];
         private readonly bool[] _oilKiteRoles = new bool[10];
         private readonly bool[] _flakKiteRoles = new bool[10];
-        private readonly bool[] _tankRoles = new bool[10];
+        private readonly bool[] _tankAlacRoles = new bool[10];
+        private readonly bool[] _tankQuickRoles = new bool[10];
         private readonly bool[] _healAlacRoles = new bool[10];
         private readonly bool[] _healQuickRoles = new bool[10];
         private readonly bool[] _dpsAlacRoles = new bool[10];
@@ -78,7 +80,7 @@ namespace Falson.SquadRoleRandomizer
         //constructor
         public PrepareRoles(FalsonSettings deserializedSettings) 
         {
-            for (int i = 0; i < 22; i++)
+            for (int i = 0; i < 23; i++)
             {
                 _rolesToGenerate.Add(Tuple.Create(i, deserializedSettings._rolesToGenerate[i]));
             }
@@ -89,7 +91,8 @@ namespace Falson.SquadRoleRandomizer
             _handKiteRoles = deserializedSettings._handKiteRoles;
             _oilKiteRoles = deserializedSettings._oilKiteRoles;
             _flakKiteRoles = deserializedSettings._flakKiteRoles;
-            _tankRoles = deserializedSettings._tankRoles;
+            _tankAlacRoles = deserializedSettings._tankAlacRoles;
+            _tankQuickRoles = deserializedSettings._tankQuickRoles;
             _healAlacRoles = deserializedSettings._healAlacRoles;
             _healQuickRoles = deserializedSettings._healQuickRoles;
             _dpsAlacRoles = deserializedSettings._dpsAlacRoles;
@@ -121,7 +124,8 @@ namespace Falson.SquadRoleRandomizer
             ActiveRolesDictionary.Add(_rolesToGenerate[0], _handKiteRoles );
             ActiveRolesDictionary.Add(_rolesToGenerate[1], _oilKiteRoles );
             ActiveRolesDictionary.Add(_rolesToGenerate[2], _flakKiteRoles );
-            ActiveRolesDictionary.Add(_rolesToGenerate[3], _tankRoles );
+            ActiveRolesDictionary.Add(_rolesToGenerate[3], _tankAlacRoles );
+            ActiveRolesDictionary.Add(_rolesToGenerate[22], _tankQuickRoles);
             ActiveRolesDictionary.Add(_rolesToGenerate[4], _healAlacRoles );
             ActiveRolesDictionary.Add(_rolesToGenerate[5], _healQuickRoles );
             ActiveRolesDictionary.Add(_rolesToGenerate[6], _dpsAlacRoles );
@@ -143,7 +147,7 @@ namespace Falson.SquadRoleRandomizer
             RolesArrays_to_ArrayListPosDictionary.Add(_handKiteRoles, 0);
             RolesArrays_to_ArrayListPosDictionary.Add(_oilKiteRoles, 1);
             RolesArrays_to_ArrayListPosDictionary.Add(_flakKiteRoles, 2);
-            RolesArrays_to_ArrayListPosDictionary.Add(_tankRoles, 3);
+            RolesArrays_to_ArrayListPosDictionary.Add(_tankAlacRoles, 3);
             RolesArrays_to_ArrayListPosDictionary.Add(_healAlacRoles, 4);
             RolesArrays_to_ArrayListPosDictionary.Add(_healQuickRoles, 5);
             RolesArrays_to_ArrayListPosDictionary.Add(_dpsAlacRoles, 6);
@@ -165,7 +169,7 @@ namespace Falson.SquadRoleRandomizer
             RolesArrays_to_ValidLists.Add(_handKiteRoles, _handKiteValid);
             RolesArrays_to_ValidLists.Add(_oilKiteRoles, _oilKiteValid );
             RolesArrays_to_ValidLists.Add(_flakKiteRoles,  _flakKiteValid);
-            RolesArrays_to_ValidLists.Add(_tankRoles,  _tankValid);
+            RolesArrays_to_ValidLists.Add(_tankAlacRoles,  _tankAlacValid);
             RolesArrays_to_ValidLists.Add(_healAlacRoles,  _healAlacValid);
             RolesArrays_to_ValidLists.Add(_healQuickRoles, _healQuickValid);
             RolesArrays_to_ValidLists.Add(_dpsAlacRoles, _dpsAlacValid);
@@ -199,7 +203,7 @@ namespace Falson.SquadRoleRandomizer
             rolelistname_to_roleidentifiernumber.Add(_handKiteValid, 0);
             rolelistname_to_roleidentifiernumber.Add(_oilKiteValid, 1);
             rolelistname_to_roleidentifiernumber.Add(_flakKiteValid, 2);
-            rolelistname_to_roleidentifiernumber.Add(_tankValid, 3);
+            rolelistname_to_roleidentifiernumber.Add(_tankAlacValid, 3);
             rolelistname_to_roleidentifiernumber.Add(_healAlacValid, 4);
             rolelistname_to_roleidentifiernumber.Add(_healQuickValid, 5);
             rolelistname_to_roleidentifiernumber.Add(_dpsAlacValid, 6);
@@ -243,7 +247,7 @@ namespace Falson.SquadRoleRandomizer
             _handKiteValid,
             _oilKiteValid,
             _flakKiteValid,
-            _tankValid,
+            _tankAlacValid,
             _healAlacValid,
             _healQuickValid,
             _dpsAlacValid,
@@ -314,7 +318,7 @@ namespace Falson.SquadRoleRandomizer
             {
                 intRoles.Add(Tuple.Create(2, name));
             }
-            foreach (var name in _tankValid)
+            foreach (var name in _tankAlacValid)
             {
                 intRoles.Add(Tuple.Create(3, name));
             }
