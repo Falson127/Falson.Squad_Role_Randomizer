@@ -63,13 +63,13 @@ namespace Falson.SquadRoleRandomizer
         private CustomButton[] _checkAllPoF = new CustomButton[10];
         private CustomButton _checkAllGenerateRoles;
         private CounterBox[] _counterBoxes; //need 12 items in this
-
-        private readonly int[] _counterBoxesSettings;
-        private readonly string[] _playerNames;
         private FalsonSettings _deserializedSettings;
+        private Dropdown _staticSelectionDropdown = new Dropdown();
+
+        private int _activeStaticInt;
+
 
         private string ActiveSettingString;
-        private int tabId;
 
         public StaticView(FalsonSettings deserializedSettings, SettingEntry<string> base64SettingsString)//, Tab viewWindowTab)
         {
@@ -79,6 +79,19 @@ namespace Falson.SquadRoleRandomizer
         {
 
             //_deserializedSettings = deserializedSettings;
+            Dropdown dropdown1 = new Dropdown 
+            {
+                Width = 150,
+                Height = 50,
+                BasicTooltipText = "Select the static you want to modify",
+                Parent = buildPanel,
+                Location = new Point(500, 0)
+            };
+            dropdown1.Items.Add("Static 1");
+            dropdown1.Items.Add("Static 2");
+            dropdown1.Items.Add("Static 3");
+
+            _staticSelectionDropdown = dropdown1;
 
             _rolesWithNumbers = new Panel
             {
@@ -186,7 +199,7 @@ namespace Falson.SquadRoleRandomizer
             for (int j = 0; j < 10; j++)
             {
                 int i = j;
-                _tankAlacBoxArray[i] = new CustomCheckbox(_deserializedSettings._tankAlacRoles[i], isChecked =>{_deserializedSettings._tankAlacRoles[i] = isChecked;}){ Text = "Heal + Alac Tank", Location = new Point(0, 0), BasicTooltipText = "Heal + Alac Tank", Parent = _standardRolesPanel[i], Checked = _deserializedSettings._tankAlacRoles[i] };
+                _tankAlacBoxArray[i] = new CustomCheckbox(_deserializedSettings._tankAlacRoles[i], isChecked =>{_deserializedSettings._tankAlacRoles[i] = isChecked; RoleRandomizerMain._base64strings[0].Value = SettingsEncoder.UpdateBase64(_deserializedSettings);}){ Text = "Heal + Alac Tank", Location = new Point(0, 0), BasicTooltipText = "Heal + Alac Tank", Parent = _standardRolesPanel[i], Checked = _deserializedSettings._tankAlacRoles[i] };
                 _tankQuickBoxArray[i] = new CustomCheckbox(_deserializedSettings._tankQuickRoles[i], isChecked => { _deserializedSettings._tankQuickRoles[i] = isChecked; }) { Text = "Heal + Quick Tank", Location = new Point(0,25), BasicTooltipText = "Heal + Quickness Tank", Parent = _standardRolesPanel[i], Checked = _deserializedSettings._tankQuickRoles[i] };
                 _healAlacBoxArray[i] = new CustomCheckbox(_deserializedSettings._healAlacRoles[i], isChecked => { _deserializedSettings._healAlacRoles[i] = isChecked; }) { Text = "Heal + Alac", Location = new Point(0, 50), BasicTooltipText = "Heal + Alac", Parent = _standardRolesPanel[i], Checked = _deserializedSettings._healAlacRoles[i] };
                 _healQuickBoxArray[i] = new CustomCheckbox(_deserializedSettings._healQuickRoles[i], isChecked => { _deserializedSettings._healQuickRoles[i] = isChecked; }) { Text = "Heal + Quick", Location = new Point(150, 0), BasicTooltipText = "Heal + Quick", Parent = _standardRolesPanel[i], Checked = _deserializedSettings._healQuickRoles[i] };

@@ -22,7 +22,7 @@ namespace Falson.SquadRoleRandomizer
         private StandardWindow _randomizerSettingsWindow;
         private CornerIcon _randomizerSettingIcon;
         private SettingCollection InternalPlayerRolesSettings;
-        private SettingEntry<string>[] _base64strings = new SettingEntry<string>[3]; //allow up to 3 statics
+        public static SettingEntry<string>[] _base64strings = new SettingEntry<string>[3]; //allow up to 3 statics
         private List<SettingEntry<bool>[]> _listofRolesSettings;
         public static FlowPanel ResultsFlowPanel;
         private int NumberOfAttempts = 0;
@@ -119,12 +119,8 @@ namespace Falson.SquadRoleRandomizer
         }
         private void BuildTabs() //add 3 tabs to the window, getting a settings object based on the base64string for each and passing that to the new view for the tab
         {
-            for (int i = 0; i < 3; i++)
-            {
-                //SettingsEncoder encoderInstance = new SettingsEncoder();
-                FalsonSettings settingsObject = CallEncoder(_base64strings[i].Value);
-                _randomizerSettingsTabbedWindow.Tabs.Add(new Tab(ContentsManager.GetTexture("Emblem.png"), () => new StaticView(settingsObject, _base64strings[i])));
-            }
+                FalsonSettings settingsObject = CallEncoder(_base64strings[0].Value);
+                _randomizerSettingsTabbedWindow.Tabs.Add(new Tab(ContentsManager.GetTexture("Emblem.png"), () => new StaticView(settingsObject, _base64strings[0])));   
         }
         private FalsonSettings CallEncoder(string base64string) //pass base64encoded string, return a deserialized settings object
         {

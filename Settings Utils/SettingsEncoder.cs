@@ -26,7 +26,8 @@ namespace Falson.SquadRoleRandomizer
             //create instance of settings class and deserialize the json into that instance object
             FalsonSettings DeserializedSettings = JsonConvert.DeserializeObject<FalsonSettings>(json);
         }
-        public string UpdateBase64(FalsonSettings DeserializedSettings) 
+        public SettingsEncoder() { } //empty constructor for updating the base64string as needed (just pass settings object to method)
+        public static string UpdateBase64(FalsonSettings DeserializedSettings) //static?
         {
             string base64string;
             string json = JsonConvert.SerializeObject(DeserializedSettings);
