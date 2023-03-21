@@ -61,7 +61,7 @@ namespace Falson.SquadRoleRandomizer
                 Id = "Falson.RoleRandomizer.SettingsWindow",
                 Emblem = ContentsManager.GetTexture("Emblem.png")
             };
-            _randomizerSettingsTabbedWindow = new TabbedWindow2(ContentsManager.GetTexture("155985.png"), new Rectangle(40,26,913,691), new Rectangle(70,71,839,605)) 
+            _randomizerSettingsTabbedWindow = new TabbedWindow2(ContentsManager.GetTexture("155985.png"), new Rectangle(40,26,913,691), new Rectangle(95,71,839,605)) 
             {
                 Title = "Randomization Settings",
                 //Subtitle = _randomizerSettingsTabbedWindow.SelectedTab.Name,

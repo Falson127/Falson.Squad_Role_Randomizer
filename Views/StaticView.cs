@@ -183,14 +183,15 @@ namespace Falson.SquadRoleRandomizer
             _checkAllGenerateRoles = new CustomButton(_randomizeCheckboxesPanel, 220, 170);
             #endregion
             #region Checkboxes
-            for (int i = 0; i < 10; i++)
+            for (int j = 0; j < 10; j++)
             {
+                int i = j;
                 _tankAlacBoxArray[i] = new CustomCheckbox(_deserializedSettings._tankAlacRoles[i], isChecked =>{_deserializedSettings._tankAlacRoles[i] = isChecked;}){ Text = "Heal + Alac Tank", Location = new Point(0, 0), BasicTooltipText = "Heal + Alac Tank", Parent = _standardRolesPanel[i], Checked = _deserializedSettings._tankAlacRoles[i] };
                 _tankQuickBoxArray[i] = new CustomCheckbox(_deserializedSettings._tankQuickRoles[i], isChecked => { _deserializedSettings._tankQuickRoles[i] = isChecked; }) { Text = "Heal + Quick Tank", Location = new Point(0,25), BasicTooltipText = "Heal + Quickness Tank", Parent = _standardRolesPanel[i], Checked = _deserializedSettings._tankQuickRoles[i] };
                 _healAlacBoxArray[i] = new CustomCheckbox(_deserializedSettings._healAlacRoles[i], isChecked => { _deserializedSettings._healAlacRoles[i] = isChecked; }) { Text = "Heal + Alac", Location = new Point(0, 50), BasicTooltipText = "Heal + Alac", Parent = _standardRolesPanel[i], Checked = _deserializedSettings._healAlacRoles[i] };
-                _healQuickBoxArray[i] = new CustomCheckbox(_deserializedSettings._healQuickRoles[i], isChecked => { _deserializedSettings._healQuickRoles[i] = isChecked; }) { Text = "Heal + Quick", Location = new Point(100, 0), BasicTooltipText = "Heal + Quick", Parent = _standardRolesPanel[i], Checked = _deserializedSettings._healQuickRoles[i] };
-                _dpsAlacBoxArray[i] = new CustomCheckbox(_deserializedSettings._dpsAlacRoles[i], isChecked => { _deserializedSettings._dpsAlacRoles[i] = isChecked; }) { Text = "DPS + Alac", Location = new Point(100, 25), BasicTooltipText = "DPS + Alac", Parent = _standardRolesPanel[i], Checked = _deserializedSettings._dpsAlacRoles[i] };
-                _dpsQuickBoxArray[i] = new CustomCheckbox(_deserializedSettings._dpsQuickRoles[i], isChecked => { _deserializedSettings._dpsQuickRoles[i] = isChecked; }) { Text = "DPS + Quick", Location = new Point(100, 50), BasicTooltipText = "DPS + Quick", Parent = _standardRolesPanel[i], Checked = _deserializedSettings._dpsQuickRoles[i] };
+                _healQuickBoxArray[i] = new CustomCheckbox(_deserializedSettings._healQuickRoles[i], isChecked => { _deserializedSettings._healQuickRoles[i] = isChecked; }) { Text = "Heal + Quick", Location = new Point(150, 0), BasicTooltipText = "Heal + Quick", Parent = _standardRolesPanel[i], Checked = _deserializedSettings._healQuickRoles[i] };
+                _dpsAlacBoxArray[i] = new CustomCheckbox(_deserializedSettings._dpsAlacRoles[i], isChecked => { _deserializedSettings._dpsAlacRoles[i] = isChecked; }) { Text = "DPS + Alac", Location = new Point(150, 25), BasicTooltipText = "DPS + Alac", Parent = _standardRolesPanel[i], Checked = _deserializedSettings._dpsAlacRoles[i] };
+                _dpsQuickBoxArray[i] = new CustomCheckbox(_deserializedSettings._dpsQuickRoles[i], isChecked => { _deserializedSettings._dpsQuickRoles[i] = isChecked; }) { Text = "DPS + Quick", Location = new Point(150, 50), BasicTooltipText = "DPS + Quick", Parent = _standardRolesPanel[i], Checked = _deserializedSettings._dpsQuickRoles[i] };
 
                 _handKiteBoxArray[i] = new CustomCheckbox(_deserializedSettings._handKiteRoles[i], isChecked => { _deserializedSettings._handKiteRoles[i] = isChecked; }) { Text = "Hand Kite", Location = new Point(0, 0), BasicTooltipText = "Hand Kite", Parent = _hoTMechanicsPanel[i], Checked = _deserializedSettings._handKiteRoles[i] };
                 _oilKiteBoxArray[i] = new CustomCheckbox(_deserializedSettings._oilKiteRoles[i], isChecked => { _deserializedSettings._oilKiteRoles[i] = isChecked; }) { Text = "Oil Kite", Location = new Point(0, 25), BasicTooltipText = "Oil Kite", Parent = _hoTMechanicsPanel[i], Checked = _deserializedSettings._oilKiteRoles[i] };
@@ -316,8 +317,9 @@ namespace Falson.SquadRoleRandomizer
                 {10, "# of Swords"},
                 {11, "# of Shields"}
             };
-            for (int i = 0; i < 22; i++)
+            for (int j = 0; j < 22; j++)
             {
+                int i = j;
                 _rolestoRandomizeSelectionCheckboxesArray[i] = new CustomCheckbox(_deserializedSettings._rolesToGenerate[i], isChecked => { _deserializedSettings._rolesToGenerate[i] = isChecked; })
                 {
                     Text = RandomizeSelectionBoxesInt_to_NameDictionary[i] + "  ",
@@ -523,62 +525,62 @@ namespace Falson.SquadRoleRandomizer
         #region CounterBox Click Functions
         private void CounterBox12Click(object sender, Blish_HUD.Input.MouseEventArgs e)
         {
-            _counterBoxesSettings[11] = _counterBoxes[11].Value;
+            _deserializedSettings._counterBoxesSettings[11] = _counterBoxes[11].Value;
         }
 
         private void CounterBox11Click(object sender, Blish_HUD.Input.MouseEventArgs e)
         {
-            _counterBoxesSettings[10] = _counterBoxes[10].Value;
+            _deserializedSettings._counterBoxesSettings[10] = _counterBoxes[10].Value;
         }
 
         private void CounterBox10Click(object sender, Blish_HUD.Input.MouseEventArgs e)
         {
-            _counterBoxesSettings[9] = _counterBoxes[9].Value;
+            _deserializedSettings._counterBoxesSettings[9] = _counterBoxes[9].Value;
         }
 
         private void CounterBox9Click(object sender, Blish_HUD.Input.MouseEventArgs e)
         {
-            _counterBoxesSettings[8] = _counterBoxes[8].Value;
+            _deserializedSettings._counterBoxesSettings[8] = _counterBoxes[8].Value;
         }
 
         private void CounterBox8Click(object sender, Blish_HUD.Input.MouseEventArgs e)
         {
-            _counterBoxesSettings[7] = _counterBoxes[7].Value;
+            _deserializedSettings._counterBoxesSettings[7] = _counterBoxes[7].Value;
         }
 
         private void CounterBox7Click(object sender, Blish_HUD.Input.MouseEventArgs e)
         {
-            _counterBoxesSettings[6] = _counterBoxes[6].Value;
+            _deserializedSettings._counterBoxesSettings[6] = _counterBoxes[6].Value;
         }
 
         private void CounterBox6Click(object sender, Blish_HUD.Input.MouseEventArgs e)
         {
-            _counterBoxesSettings[5] = _counterBoxes[5].Value;
+            _deserializedSettings._counterBoxesSettings[5] = _counterBoxes[5].Value;
         }
 
         private void CounterBox5Click(object sender, Blish_HUD.Input.MouseEventArgs e)
         {
-            _counterBoxesSettings[4] = _counterBoxes[4].Value;
+            _deserializedSettings._counterBoxesSettings[4] = _counterBoxes[4].Value;
         }
 
         private void CounterBox4Click(object sender, Blish_HUD.Input.MouseEventArgs e)
         {
-            _counterBoxesSettings[3] = _counterBoxes[3].Value;
+            _deserializedSettings._counterBoxesSettings[3] = _counterBoxes[3].Value;
         }
 
         private void CounterBox3Click(object sender, Blish_HUD.Input.MouseEventArgs e)
         {
-            _counterBoxesSettings[2] = _counterBoxes[2].Value;
+            _deserializedSettings._counterBoxesSettings[2] = _counterBoxes[2].Value;
         }
 
         private void CounterBox2Click(object sender, Blish_HUD.Input.MouseEventArgs e)
         {
-            _counterBoxesSettings[1] = _counterBoxes[1].Value;
+            _deserializedSettings._counterBoxesSettings[1] = _counterBoxes[1].Value;
         }
 
         private void CounterBox1Click(object sender, Blish_HUD.Input.MouseEventArgs e)
         {
-            _counterBoxesSettings[0] = _counterBoxes[0].Value;
+            _deserializedSettings._counterBoxesSettings[0] = _counterBoxes[0].Value;
         }
         #endregion
         #region Textbox text changed functions

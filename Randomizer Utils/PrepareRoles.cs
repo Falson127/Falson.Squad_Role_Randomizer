@@ -148,6 +148,7 @@ namespace Falson.SquadRoleRandomizer
             RolesArrays_to_ArrayListPosDictionary.Add(_oilKiteRoles, 1);
             RolesArrays_to_ArrayListPosDictionary.Add(_flakKiteRoles, 2);
             RolesArrays_to_ArrayListPosDictionary.Add(_tankAlacRoles, 3);
+            RolesArrays_to_ArrayListPosDictionary.Add(_tankQuickRoles, 22);
             RolesArrays_to_ArrayListPosDictionary.Add(_healAlacRoles, 4);
             RolesArrays_to_ArrayListPosDictionary.Add(_healQuickRoles, 5);
             RolesArrays_to_ArrayListPosDictionary.Add(_dpsAlacRoles, 6);
@@ -170,6 +171,7 @@ namespace Falson.SquadRoleRandomizer
             RolesArrays_to_ValidLists.Add(_oilKiteRoles, _oilKiteValid );
             RolesArrays_to_ValidLists.Add(_flakKiteRoles,  _flakKiteValid);
             RolesArrays_to_ValidLists.Add(_tankAlacRoles,  _tankAlacValid);
+            RolesArrays_to_ValidLists.Add(_tankQuickRoles, _tankQuickValid);
             RolesArrays_to_ValidLists.Add(_healAlacRoles,  _healAlacValid);
             RolesArrays_to_ValidLists.Add(_healQuickRoles, _healQuickValid);
             RolesArrays_to_ValidLists.Add(_dpsAlacRoles, _dpsAlacValid);
@@ -204,6 +206,7 @@ namespace Falson.SquadRoleRandomizer
             rolelistname_to_roleidentifiernumber.Add(_oilKiteValid, 1);
             rolelistname_to_roleidentifiernumber.Add(_flakKiteValid, 2);
             rolelistname_to_roleidentifiernumber.Add(_tankAlacValid, 3);
+            rolelistname_to_roleidentifiernumber.Add(_tankQuickValid, 22);
             rolelistname_to_roleidentifiernumber.Add(_healAlacValid, 4);
             rolelistname_to_roleidentifiernumber.Add(_healQuickValid, 5);
             rolelistname_to_roleidentifiernumber.Add(_dpsAlacValid, 6);
@@ -265,9 +268,10 @@ namespace Falson.SquadRoleRandomizer
             _dhuumKiteValid,
             _qadimKiteValid,
             _swordValid,
-            _shieldValid
+            _shieldValid,
+            _tankQuickValid
             };
-            for (int i = 0; i < 22; i++)
+            for (int i = 0; i < 23; i++)
             {
                 if (_rolesToGenerate[i].Item2)
                 {
