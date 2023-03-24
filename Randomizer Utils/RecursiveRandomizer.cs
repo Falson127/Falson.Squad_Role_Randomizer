@@ -16,7 +16,7 @@ namespace Falson.Randomizer
 {
     public class RecursiveRandomizer
     {
-        private int[,] _conflicts = new int[22, 22]; //format: [x,y] x=role of interest, y=test role. If [x,y] = 0, then role y does not conflcit with x. if = 1, then role y does conflict with x
+        private int[,] _conflicts = new int[23, 23]; //format: [x,y] x=role of interest, y=test role. If [x,y] = 0, then role y does not conflcit with x. if = 1, then role y does conflict with x
         private List<Tuple<int, string>> _roles = new List<Tuple<int, string>>();
         private List<int> _generationsequence = new List<int>();
         private List<Tuple<int, string>> _assignedRoles;
@@ -83,12 +83,13 @@ namespace Falson.Randomizer
                 {18, _rolesToGenerate[18].Item2},
                 {19, _rolesToGenerate[19].Item2},
                 {20, _rolesToGenerate[20].Item2},
-                {21, _rolesToGenerate[21].Item2}
+                {21, _rolesToGenerate[21].Item2},
+                {22, _rolesToGenerate[22].Item2}
             };
-            for (int i = 0; i < 22; i++)
+            for (int i = 0; i < 23; i++)
             {
                 var _roleConflictBubblePlayerCount = 0;
-                for (int j = 0; j < 22; j++)
+                for (int j = 0; j < 23; j++)
                 {
                     if (_conflicts[i,j] == 1 || i == j) //only execute the check and addition if the given roles i and j are in conflict with each other or if i and j are the same, that way the role itself is included for consideration.
                     {
@@ -220,9 +221,9 @@ namespace Falson.Randomizer
         private void setconflicts()
         {
             //start with no conflicts
-            for (int i = 0; i < 22; i++)
+            for (int i = 0; i < 23; i++)
             {
-                for (int s = 0; s < 22; s++)
+                for (int s = 0; s < 23; s++)
                 {
                     _conflicts[i, s] = 0;
                 }
@@ -248,6 +249,12 @@ namespace Falson.Randomizer
             _conflicts[3, 1] = 1;
             _conflicts[3, 6] = 1;
             _conflicts[3, 7] = 1;
+            _conflicts[3, 22] = 1;
+            _conflicts[22,0] = 1;
+            _conflicts[22,1] = 1;
+            _conflicts[22, 6] = 1;
+            _conflicts[22, 7] = 1;
+            _conflicts[22, 3] = 1;
             #endregion
             #region HealAlac conflicts
             _conflicts[4, 0] = 1;
