@@ -64,12 +64,8 @@ namespace Falson.SquadRoleRandomizer
         private CustomButton _checkAllGenerateRoles;
         private CounterBox[] _counterBoxes; //need 12 items in this
         private FalsonSettings _deserializedSettings;
-        private Dropdown _staticSelectionDropdown = new Dropdown();
-
-        private int _activeStaticInt;
 
 
-        private string ActiveSettingString;
 
         public StaticView(FalsonSettings deserializedSettings, SettingEntry<string> base64SettingsString)//, Tab viewWindowTab)
         {
@@ -79,35 +75,14 @@ namespace Falson.SquadRoleRandomizer
         {
 
             //_deserializedSettings = deserializedSettings;
-            Dropdown dropdown1 = new Dropdown 
-            {
-                Width = 150,
-                Height = 50,
-                BasicTooltipText = "Select the static you want to modify",
-                Parent = buildPanel,
-                Location = new Point(500, 0)
-            };
-            dropdown1.Items.Add("Static 1");
-            dropdown1.Items.Add("Static 2");
-            dropdown1.Items.Add("Static 3");
-
-            _staticSelectionDropdown = dropdown1;
-
-            _rolesWithNumbers = new Panel
+             _rolesWithNumbers = new Panel
             {
                 Title = "Number of each role to generate",
                 Parent = buildPanel,
                 Size = new Point(480, 165),
                 Location = new Point(401, 0),
             };      
-            _generateRolesButton = new StandardButton
-            {
-                Text = "Generate \n  Roles",
-                Size = new Point(80, 100),
-                Location = new Point(890, 40),
-                Parent = buildPanel,
-            };
-            _generateRolesButton.Click += GenerateRolesButton_Click;
+
             _counterBoxes = new CounterBox[12];
             _counterBoxLabels = new Label[12];
             _rolesWithNumbers = new Panel
@@ -117,14 +92,7 @@ namespace Falson.SquadRoleRandomizer
                 Size = new Point(480, 165),
                 Location = new Point(401, 0),
             };
-            _generateRolesButton = new StandardButton
-            {
-                Text = "Generate \n  Roles",
-                Size = new Point(80, 100),
-                Location = new Point(890, 40),
-                Parent = buildPanel,
-            };
-            _generateRolesButton.Click += GenerateRolesButton_Click;
+
             _playerNameTextBoxPanel = new Panel
             {
                 Title = "Enter Player Names",
@@ -698,16 +666,6 @@ namespace Falson.SquadRoleRandomizer
             };
         }
         #endregion
-        private void GenerateRolesButton_Click(object sender, Blish_HUD.Input.MouseEventArgs e) //uncomment structure below for debugging mode
-        {
-            //while (true)
-            //{
-            //DebuggerMethod(); //randomize settings first
-            var prepRolesInstance = new PrepareRoles(_deserializedSettings);
-            prepRolesInstance.Main();
-            RoleRandomizerMain._randomizerResultsWindow.Show();
-            //}
-        }
         #endregion
 
     }

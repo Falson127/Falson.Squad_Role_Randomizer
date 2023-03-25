@@ -120,8 +120,9 @@ namespace Falson.SquadRoleRandomizer
         }
         private void BuildTabs() //add 3 tabs to the window, getting a settings object based on the base64string for each and passing that to the new view for the tab
         {
-                //FalsonSettings settingsObject = CallEncoder(_base64strings[0].Value);
-                _randomizerSettingsTabbedWindow.Tabs.Add(new Tab(ContentsManager.GetTexture("Emblem.png"), () => new StaticViewMain()));   
+            //FalsonSettings settingsObject = CallEncoder(_base64strings[0].Value);
+            _randomizerSettingsTabbedWindow.Tabs.Add(new Tab(ContentsManager.GetTexture("Emblem.png"), () => new StaticViewMain()));
+            _randomizerSettingsTabbedWindow.Tabs.Add(new Tab(ContentsManager.GetTexture("Emblem.png"), () => new GeneratorView(_base64strings)));
         }
         private FalsonSettings CallEncoder(string base64string) //pass base64encoded string, return a deserialized settings object
         {
