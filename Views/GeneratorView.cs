@@ -26,7 +26,7 @@ namespace Falson.SquadRoleRandomizer.Views
         private SettingEntry<string>[] _base64Strings;
         //private FalsonSettings _settingsObject;
         private Panel _masterPanel;
-        private Panel _advancedSettingsPanel;
+        //private Panel _advancedSettingsPanel;
         private Panel _wingsToIncludePanel;
         private Panel _advancedRolesToGeneratePanel;
         private Panel _numberToGeneratePanel;
@@ -84,12 +84,28 @@ namespace Falson.SquadRoleRandomizer.Views
             _enableAdvancedConfigBox.CheckedChanged += _enableAdvancedConfigBox_CheckedChanged;
             for (int i = 0; i < 10; i++)
             {
+                int xpos;
+                //int ypos;
+                if (i<6)
+                {
+                    xpos = 0;
+                }
+                else 
+                {
+                    xpos = 150;
+                }
                 _playerDisableBoxes[i] = new Checkbox
                 {
                     Text = $"Disable Player {i + 1}",
                     BasicTooltipText = $"Check this box to disable player {i + 1} from being included in the randomization",
                     Checked = false,
-                    Parent = _advancedSettingsPanel
+                    Parent = _masterPanel,
+                    Location = new Point(xpos, (i * 25) + 25)
+                };
+                var j = i;
+                _playerDisableBoxes[j].CheckedChanged += delegate
+                {
+                    _playersToInclude[j] = !_playerDisableBoxes[j].Checked;
                 };
             }
             _numberToGeneratePanel = new Panel
@@ -127,6 +143,11 @@ namespace Falson.SquadRoleRandomizer.Views
             base.Build(buildPanel);
         }
 
+        private void GeneratorView_CheckedChanged(object sender, CheckChangedEvent e)
+        {
+            throw new NotImplementedException();
+        }
+
         private void _enableAdvancedConfigBox_CheckedChanged(object sender, CheckChangedEvent e)
         {
             //when box is changed, get the current state
@@ -134,7 +155,7 @@ namespace Falson.SquadRoleRandomizer.Views
             if (state)
             {
                 _advancedRolesToGeneratePanel.Show();
-                _advancedSettingsPanel.Show();
+                //_advancedSettingsPanel.Show();
                 _numberToGeneratePanel.Show();
                 _wingsToIncludePanel.Hide();
             }
