@@ -18,7 +18,9 @@ namespace Falson.SquadRoleRandomizer.Views
         private ViewContainer _viewContainer;
         private int _selectedSettings;
 
-        public StaticViewMain() 
+        //public StaticViewMain()
+        
+        protected override void Build(Container buildPanel)
         {
             Dropdown dropdown1 = new Dropdown
             {
@@ -37,7 +39,8 @@ namespace Falson.SquadRoleRandomizer.Views
             { 
                 Size = new Point(1050, 800),
                 Location = new Point(0, 0),
-                ShowBorder = false
+                ShowBorder = false,
+                Parent = buildPanel
             };
             //Create Settings Encoder Instance
             SettingsEncoder localEncoder = new SettingsEncoder(RoleRandomizerMain._base64strings[_selectedSettings].Value);
