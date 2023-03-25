@@ -24,16 +24,18 @@ namespace Falson.SquadRoleRandomizer.Views
         private bool[] _playersToInclude = new bool[10];
         private string _selectedBase64string;
         private SettingEntry<string>[] _base64Strings;
-        private FalsonSettings _settingsObject;
+        //private FalsonSettings _settingsObject;
         private Panel _masterPanel;
         private Panel _advancedSettingsPanel;
-        private Panel _rolesToGeneratePanel;
+        private Panel _wingsToIncludePanel;
         private Panel _advancedRolesToGeneratePanel;
         private Panel _numberToGeneratePanel;
         private Dropdown _staticSelectionDropdown;
         private Checkbox[] _playerDisableBoxes = new Checkbox[10];
         private StandardButton _generateRolesButton;
         private Checkbox _enableAdvancedConfigBox;
+        private Checkbox _hotWingsEnabled;
+        private Checkbox _pofWingsEnabled;
 
         public GeneratorView(SettingEntry<string>[] base64StringSettings) 
         {
@@ -48,7 +50,29 @@ namespace Falson.SquadRoleRandomizer.Views
                 Size = new Point(1050,800),
                 BackgroundColor = Color.Red
             };
-
+            _advancedRolesToGeneratePanel = new Panel 
+            {
+                Parent = _masterPanel,
+                Size = new Point(1000,120),
+                Location = new Point (401, 0),
+                Title = "Roles to Generate"
+            };
+            _hotWingsEnabled = new Checkbox 
+            {
+                Text = "Enable HoT Mechanics",
+                BasicTooltipText = "If checked, this box will enable assignment of HoT specific mechanics in the randomization",
+                Checked = true,
+                Parent = _wingsToIncludePanel,
+                Location = new Point(500,25)
+            };
+            _pofWingsEnabled = new Checkbox 
+            {
+                Text = "Enable PoF Mechanics",
+                BasicTooltipText = "If checked, this box will enable assignment of PoF specific mechanics in the randomization",
+                Checked = true,
+                Parent = _wingsToIncludePanel,
+                Location = new Point(500,75)
+            };
             _enableAdvancedConfigBox = new Checkbox 
             {
                 Text = "Advanced Configuration Mode",
@@ -57,7 +81,7 @@ namespace Falson.SquadRoleRandomizer.Views
                 Location = new Point(0,0),
                 Parent = _masterPanel
             };
-
+            _enableAdvancedConfigBox.CheckedChanged += _enableAdvancedConfigBox_CheckedChanged;
             for (int i = 0; i < 10; i++)
             {
                 _playerDisableBoxes[i] = new Checkbox
@@ -82,9 +106,9 @@ namespace Falson.SquadRoleRandomizer.Views
                 Location = new Point(890, 40),
                 Parent = _masterPanel,
             };
-            _rolesToGeneratePanel = new Panel
+            _wingsToIncludePanel = new Panel
             {
-                Title = "Select Roles to Generate",
+                Title = "Select Wings to Generate Roles For",
                 Parent = _masterPanel,
                 Size = new Point(1000,120)
             };
@@ -101,6 +125,19 @@ namespace Falson.SquadRoleRandomizer.Views
             _staticSelectionDropdown.ValueChanged += SelectedStaticChanged;
 
             base.Build(buildPanel);
+        }
+
+        private void _enableAdvancedConfigBox_CheckedChanged(object sender, CheckChangedEvent e)
+        {
+            //when box is changed, get the current state
+            var state = _enableAdvancedConfigBox.Checked;
+            if (state)
+            {
+                _advancedRolesToGeneratePanel.Show();
+                _advancedSettingsPanel.Show();
+                _numberToGeneratePanel.Show();
+                _wingsToIncludePanel.Hide();
+            }
         }
 
         private void SelectedStaticChanged(object sender, ValueChangedEventArgs e) //set selected settings string after changing in dropdown
@@ -132,7 +169,7 @@ namespace Falson.SquadRoleRandomizer.Views
             }
             else //if advanced config is not checked, send to the new role preparer for a simple composition
             {
-                PrepareRolesSimple localPreparer = new PrepareRolesSimple(localSettings);
+                PrepareRolesSimple localPreparer = new PrepareRolesSimple(localSettings,_hotWingsEnabled.Checked,_pofWingsEnabled.Checked);
                 localPreparer.Main();
                 RoleRandomizerMain._randomizerResultsWindow.Show();
             }

@@ -8,9 +8,14 @@ namespace Falson.SquadRoleRandomizer.Randomizer_Utils
 {
     public class PrepareRolesSimple
     {
-        public PrepareRolesSimple(FalsonSettings deserializedSettings) 
+        private readonly bool _hotWingsEnabled;
+        private readonly bool _pofWingsEnabled;
+        private readonly FalsonSettings _deserializedSettings;
+        public PrepareRolesSimple(FalsonSettings deserializedSettings, bool hotWingsEnabled, bool pofWingsEnabled) 
         {
-        
+            _deserializedSettings = deserializedSettings;
+            _hotWingsEnabled = hotWingsEnabled;
+            _pofWingsEnabled = pofWingsEnabled;
         }
     
         public void Main() 
