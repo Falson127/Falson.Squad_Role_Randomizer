@@ -196,7 +196,7 @@ namespace Falson.SquadRoleRandomizer
             _checkAllGenerateRoles = new CustomButton(_randomizeCheckboxesPanel, 220, 170);
             #endregion
             #region Checkboxes
-            for (int j = 0; j < 10; j++)
+            for (int j = 0; j < 10; j++) //commenting for a commit so I don't forget. Need to adjust line 202 and add second delegate to all other boxes. They need to adjust the chosen settings string, not just 0 (that was for proof of concept)
             {
                 int i = j;
                 _tankAlacBoxArray[i] = new CustomCheckbox(_deserializedSettings._tankAlacRoles[i], isChecked =>{_deserializedSettings._tankAlacRoles[i] = isChecked; RoleRandomizerMain._base64strings[0].Value = SettingsEncoder.UpdateBase64(_deserializedSettings);}){ Text = "Heal + Alac Tank", Location = new Point(0, 0), BasicTooltipText = "Heal + Alac Tank", Parent = _standardRolesPanel[i], Checked = _deserializedSettings._tankAlacRoles[i] };
