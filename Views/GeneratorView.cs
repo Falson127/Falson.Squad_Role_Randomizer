@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using SharpDX.MediaFoundation;
 using System.Windows.Forms.VisualStyles;
+using Falson.SquadRoleRandomizer.Randomizer_Utils;
 
 namespace Falson.SquadRoleRandomizer.Views
 {
@@ -46,6 +47,15 @@ namespace Falson.SquadRoleRandomizer.Views
                 Parent = buildPanel,
                 Size = new Point(1050,800),
                 BackgroundColor = Color.Red
+            };
+
+            _enableAdvancedConfigBox = new Checkbox 
+            {
+                Text = "Advanced Configuration Mode",
+                BasicTooltipText = "Check this box to enable greater customization of the role randomizer",
+                Checked = false,
+                Location = new Point(0,0),
+                Parent = _masterPanel
             };
 
             for (int i = 0; i < 10; i++)
@@ -113,14 +123,20 @@ namespace Falson.SquadRoleRandomizer.Views
         {
             SettingsEncoder localEncoder = new SettingsEncoder(_selectedBase64string); //initialize decoder with selected base64 string
             var localSettings = localEncoder.GetSettings(); //get settings object from string
-            PrepareRoles localPreparer = new PrepareRoles(localSettings); //call prep roles with the settings object for the selected static
+            
+            if (_enableAdvancedConfigBox.Checked) //if advanced config is checked, send to the original role preparation class
+            {
+                PrepareRoles localPreparer = new PrepareRoles(localSettings); //call prep roles with the settings object for the selected static
+                localPreparer.Main();
+                RoleRandomizerMain._randomizerResultsWindow.Show();
+            }
+            else //if advanced config is not checked, send to the new role preparer for a simple composition
+            {
+                PrepareRolesSimple localPreparer = new PrepareRolesSimple(localSettings);
+                localPreparer.Main();
+                RoleRandomizerMain._randomizerResultsWindow.Show();
+            }
         }
-
-        private void TriggerGenerator() 
-        {
-            //call this to pass all current settings plus the selected static config to the Prepare Roles class
-        }
-
 
     }
 }
