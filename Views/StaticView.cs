@@ -261,67 +261,7 @@ namespace Falson.SquadRoleRandomizer
 
         }
         #region Event Functions
-        #region CounterBox Click Functions
-        private void CounterBox12Click(object sender, Blish_HUD.Input.MouseEventArgs e)
-        {
-            _deserializedSettings._counterBoxesSettings[11] = _counterBoxes[11].Value;
-        }
 
-        private void CounterBox11Click(object sender, Blish_HUD.Input.MouseEventArgs e)
-        {
-            _deserializedSettings._counterBoxesSettings[10] = _counterBoxes[10].Value;
-        }
-
-        private void CounterBox10Click(object sender, Blish_HUD.Input.MouseEventArgs e)
-        {
-            _deserializedSettings._counterBoxesSettings[9] = _counterBoxes[9].Value;
-        }
-
-        private void CounterBox9Click(object sender, Blish_HUD.Input.MouseEventArgs e)
-        {
-            _deserializedSettings._counterBoxesSettings[8] = _counterBoxes[8].Value;
-        }
-
-        private void CounterBox8Click(object sender, Blish_HUD.Input.MouseEventArgs e)
-        {
-            _deserializedSettings._counterBoxesSettings[7] = _counterBoxes[7].Value;
-        }
-
-        private void CounterBox7Click(object sender, Blish_HUD.Input.MouseEventArgs e)
-        {
-            _deserializedSettings._counterBoxesSettings[6] = _counterBoxes[6].Value;
-        }
-
-        private void CounterBox6Click(object sender, Blish_HUD.Input.MouseEventArgs e)
-        {
-            _deserializedSettings._counterBoxesSettings[5] = _counterBoxes[5].Value;
-        }
-
-        private void CounterBox5Click(object sender, Blish_HUD.Input.MouseEventArgs e)
-        {
-            _deserializedSettings._counterBoxesSettings[4] = _counterBoxes[4].Value;
-        }
-
-        private void CounterBox4Click(object sender, Blish_HUD.Input.MouseEventArgs e)
-        {
-            _deserializedSettings._counterBoxesSettings[3] = _counterBoxes[3].Value;
-        }
-
-        private void CounterBox3Click(object sender, Blish_HUD.Input.MouseEventArgs e)
-        {
-            _deserializedSettings._counterBoxesSettings[2] = _counterBoxes[2].Value;
-        }
-
-        private void CounterBox2Click(object sender, Blish_HUD.Input.MouseEventArgs e)
-        {
-            _deserializedSettings._counterBoxesSettings[1] = _counterBoxes[1].Value;
-        }
-
-        private void CounterBox1Click(object sender, Blish_HUD.Input.MouseEventArgs e)
-        {
-            _deserializedSettings._counterBoxesSettings[0] = _counterBoxes[0].Value;
-        }
-        #endregion
         #region Textbox text changed functions
         private void Player10NameBox_TextChanged(object sender, EventArgs e)
         {
@@ -332,6 +272,7 @@ namespace Falson.SquadRoleRandomizer
             {
                 _playerPanels[9].Title = "Enter Player Name";
             };
+            RoleRandomizerMain._base64strings[_activeSettingIndex].Value = SettingsEncoder.UpdateBase64(_deserializedSettings);
         }
 
         private void Player9NameBox_TextChanged(object sender, EventArgs e)
@@ -342,6 +283,7 @@ namespace Falson.SquadRoleRandomizer
             {
                 _playerPanels[8].Title = "Enter Player Name";
             };
+            RoleRandomizerMain._base64strings[_activeSettingIndex].Value = SettingsEncoder.UpdateBase64(_deserializedSettings);
         }
 
         private void Player8NameBox_TextChanged(object sender, EventArgs e)
@@ -352,6 +294,7 @@ namespace Falson.SquadRoleRandomizer
             {
                 _playerPanels[7].Title = "Enter Player Name";
             };
+            RoleRandomizerMain._base64strings[_activeSettingIndex].Value = SettingsEncoder.UpdateBase64(_deserializedSettings);
         }
 
         private void Player7NameBox_TextChanged(object sender, EventArgs e)
@@ -362,6 +305,7 @@ namespace Falson.SquadRoleRandomizer
             {
                 _playerPanels[6].Title = "Enter Player Name";
             };
+            RoleRandomizerMain._base64strings[_activeSettingIndex].Value = SettingsEncoder.UpdateBase64(_deserializedSettings);
         }
 
         private void Player6NameBox_TextChanged(object sender, EventArgs e)
@@ -372,6 +316,7 @@ namespace Falson.SquadRoleRandomizer
             {
                 _playerPanels[5].Title = "Enter Player Name";
             };
+            RoleRandomizerMain._base64strings[_activeSettingIndex].Value = SettingsEncoder.UpdateBase64(_deserializedSettings);
         }
 
         private void Player5NameBox_TextChanged(object sender, EventArgs e)
@@ -382,6 +327,7 @@ namespace Falson.SquadRoleRandomizer
             {
                 _playerPanels[4].Title = "Enter Player Name";
             };
+            RoleRandomizerMain._base64strings[_activeSettingIndex].Value = SettingsEncoder.UpdateBase64(_deserializedSettings);
         }
 
         private void Player4NameBox_TextChanged(object sender, EventArgs e)
@@ -392,6 +338,7 @@ namespace Falson.SquadRoleRandomizer
             {
                 _playerPanels[3].Title = "Enter Player Name";
             };
+            RoleRandomizerMain._base64strings[_activeSettingIndex].Value = SettingsEncoder.UpdateBase64(_deserializedSettings);
         }
 
         private void Player3NameBox_TextChanged(object sender, EventArgs e)
@@ -402,6 +349,7 @@ namespace Falson.SquadRoleRandomizer
             {
                 _playerPanels[2].Title = "Enter Player Name";
             };
+            RoleRandomizerMain._base64strings[_activeSettingIndex].Value = SettingsEncoder.UpdateBase64(_deserializedSettings);
         }
 
         private void Player2NameBox_TextChanged(object sender, EventArgs e)
@@ -412,6 +360,7 @@ namespace Falson.SquadRoleRandomizer
             {
                 _playerPanels[1].Title = "Enter Player Name";
             };
+            RoleRandomizerMain._base64strings[_activeSettingIndex].Value = SettingsEncoder.UpdateBase64(_deserializedSettings);
         }
 
         private void Player1NameBox_TextChanged(object sender, EventArgs e)
@@ -422,6 +371,7 @@ namespace Falson.SquadRoleRandomizer
             {
                 _playerPanels[0].Title = "Enter Player Name";
             };
+            RoleRandomizerMain._base64strings[_activeSettingIndex].Value = SettingsEncoder.UpdateBase64(_deserializedSettings);
         }
         #endregion
         #endregion
