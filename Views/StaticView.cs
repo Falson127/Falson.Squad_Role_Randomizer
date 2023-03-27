@@ -82,7 +82,7 @@ namespace Falson.SquadRoleRandomizer
             {
                 ShowBorder = true,
                 Title = "Set Roles for Each Player  (Click to Expand)",
-                Size = new Point(1000, 400),
+                Size = new Point(1000, 500),
                 Location = new Point(0, 180),
                 Parent = buildPanel,
                 CanScroll = true,
