@@ -32,29 +32,31 @@ namespace Falson.SquadRoleRandomizer.Views
         private Panel _numberToGeneratePanel;
         private Dropdown _staticSelectionDropdown;
         private Checkbox[] _playerDisableBoxes = new Checkbox[10];
+        private Checkbox[] _rolesToGenerateBoxes = new Checkbox[23];
+        private CounterBox[] _counterBoxes = new CounterBox[12];
+        private Label[] _counterBoxLabels = new Label[12];
         private StandardButton _generateRolesButton;
         private Checkbox _enableAdvancedConfigBox;
         private Checkbox _hotWingsEnabled;
         private Checkbox _pofWingsEnabled;
+        private readonly FalsonSettings _deserializedSettings;
 
         public GeneratorView(SettingEntry<string>[] base64StringSettings) 
         {
             _base64Strings = base64StringSettings;
+            SettingsEncoder localEncoder = new SettingsEncoder(_base64Strings[0].Value);
+            _deserializedSettings = localEncoder.GetSettings();
+
         }
 
         protected override void Build(Container buildPanel)
         {
-            _masterPanel = new Panel 
-            {
-                Parent = buildPanel,
-                Size = new Point(1050,800),
-                BackgroundColor = Color.Red
-            };
+
             _advancedRolesToGeneratePanel = new Panel 
             {
-                Parent = _masterPanel,
+                Parent = buildPanel,
                 Size = new Point(1000,120),
-                Location = new Point (401, 0),
+                Location = new Point (0, 180),
                 Title = "Roles to Generate"
             };
             _hotWingsEnabled = new Checkbox 
@@ -79,28 +81,30 @@ namespace Falson.SquadRoleRandomizer.Views
                 BasicTooltipText = "Check this box to enable greater customization of the role randomizer",
                 Checked = false,
                 Location = new Point(0,0),
-                Parent = _masterPanel
+                Parent = buildPanel
             };
             _enableAdvancedConfigBox.CheckedChanged += _enableAdvancedConfigBox_CheckedChanged;
             for (int i = 0; i < 10; i++)
             {
                 int xpos;
-                //int ypos;
-                if (i<6)
+                int ypos;
+                if (i<5)
                 {
                     xpos = 0;
+                    ypos = (i * 25) + 25;
                 }
                 else 
                 {
                     xpos = 150;
+                    ypos = (25 * (i-5))+25;
                 }
                 _playerDisableBoxes[i] = new Checkbox
                 {
-                    Text = $"Disable Player {i + 1}",
-                    BasicTooltipText = $"Check this box to disable player {i + 1} from being included in the randomization",
+                    Text = $"Disable {_deserializedSettings._playerNames[i]}",
+                    BasicTooltipText = $"Check this box to prevent {_deserializedSettings._playerNames[i]} from being included in the randomization",
                     Checked = false,
-                    Parent = _masterPanel,
-                    Location = new Point(xpos, (i * 25) + 25)
+                    Parent = buildPanel,
+                    Location = new Point(xpos, ypos)
                 };
                 var j = i;
                 _playerDisableBoxes[j].CheckedChanged += delegate
@@ -111,7 +115,7 @@ namespace Falson.SquadRoleRandomizer.Views
             _numberToGeneratePanel = new Panel
             {
                 Title = "Number of each role to generate",
-                Parent = _masterPanel,
+                Parent = buildPanel,
                 Size = new Point(480, 165),
                 Location = new Point(401, 0),
             };
@@ -131,7 +135,8 @@ namespace Falson.SquadRoleRandomizer.Views
             _generateRolesButton.Click += GenerateRolesButton_Click;
             Dropdown dropdown1 = new Dropdown
             {
-                Parent = _masterPanel,
+                Parent = buildPanel,
+                Location = new Point(0, 150)
             };
             dropdown1.Items.Add("Static 1");
             dropdown1.Items.Add("Static 2");
@@ -140,6 +145,219 @@ namespace Falson.SquadRoleRandomizer.Views
             _staticSelectionDropdown = dropdown1;
             _staticSelectionDropdown.ValueChanged += SelectedStaticChanged;
 
+            IDictionary<int, string> RandomizeSelectionBoxesInt_to_NameDictionary = new Dictionary<int, string>
+            {
+                {0,"Hand Kite"},
+                {1,"Oil Kite"},
+                {2,"Flak Kite"},
+                {3,"Heal/Alac Tank"},
+                {4,"Heal Alac"},
+                {5,"Heal Quick"},
+                {6,"DPS Alac"},
+                {7,"DPS Quick"},
+                {8,"Mushrooms"},
+                {9,"Tower"},
+                {10,"Reflect"},
+                {11,"Cannons"},
+                {12,"KC Pusher"},
+                {13,"Lamp(s)"},
+                {14,"Pylon(s)"},
+                {15,"Pillar(s)"},
+                {16,"Green(s)"},
+                {17,"SH Pusher"},
+                {18,"Dhuum Kite"},
+                {19,"Qadim Kite"},
+                {20,"Sword Collector(s)"},
+                {21,"Shield Collector(s)"},
+                {22, "Heal/Quick Tank"}
+            };
+            IDictionary<int, string> RandomizeSelectionBoxesInt_to_TooltipDictionary = new Dictionary<int, string>
+            {
+                {0,"Hand Kite"},
+                {1,"Oil Kite"},
+                {2,"Flak Kite"},
+                {3,"Heal/Alac Tank"},
+                {4,"Heal Alac"},
+                {5,"Heal Quickness"},
+                {6,"DPS Alac"},
+                {7,"DPS Quickness"},
+                {8,"Slothosaur Mushrooms"},
+                {9,"Tower Mesmer"},
+                {10,"Matthias Reflect"},
+                {11,"Sabetha Cannons"},
+                {12,"Keep Construct Pusher"},
+                {13,"Qadim Lamp(s)"},
+                {14,"Qadim Pylon(s)"},
+                {15,"Adina Pillar(s)"},
+                {16,"Dhuum Green(s)"},
+                {17,"Soulless Horror Pusher"},
+                {18,"Dhuum Messenger Kiter"},
+                {19,"Qadim Kite"},
+                {20,"Sword Collector(s)"},
+                {21,"Shield Collector(s)"},
+                {22, "Heal/Quickness Tank" }
+            };
+            IDictionary<int, Point> RandomizedBoxes_to_LocationDictioanry = new Dictionary<int, Point>
+            {
+                {7,new Point(140,30)},
+                {1,new Point(240,0)},
+                {2,new Point(240,15)},
+                {3,new Point(0,0)},
+                {22,new Point(0,15)}, 
+                {4,new Point(0,30)},
+                {5,new Point(140,0)},
+                {6,new Point(140,15)},
+                {0,new Point(240,30)},
+                {8,new  Point(340,0)},
+                {9,new Point(340,15)},
+                {10,new Point(340,30)},
+                {11,new Point(440,0)},
+                {12,new Point(440,15)},
+                {13,new Point(440,30)},
+                {14,new Point(540,0)},
+                {15,new Point(540,15)},
+                {16,new Point(540,30)},
+                {17,new Point(640,0)},
+                {18,new Point(640,15)},
+                {19,new Point(640,30)},
+                {20,new Point(740,0)},
+                {21,new Point(740,15)}
+            };
+            IDictionary<int, int> CounterBoxes_MaxAllowedIntValues = new Dictionary<int, int>
+            {
+                {0, 2},
+                {1, 2},
+                {2, 2},
+                {3, 2},
+                {4, 4},
+                {5, 2},
+                {6, 3},
+                {7, 3},
+                {8, 5},
+                {9, 2},
+                {10, 2},
+                {11, 2}
+            };
+            IDictionary<int, string> CounterBoxInt_to_Text = new Dictionary<int, string>
+            {
+                {0, "# of Heal/Alac"},
+                {1, "# of Heal/Quick"},
+                {2, "# of DPS/Alac"},
+                {3, "# of DPS/Quick"},
+                {4, "# of Mushrooms"},
+                {5, "# of Cannons"},
+                {6, "# of Lamps"},
+                {7, "# of Pylons"},
+                {8, "# of Pillars"},
+                {9, "# of Greens"},
+                {10, "# of Swords"},
+                {11, "# of Shields"}
+            };
+            for (int j = 0; j < 23; j++)
+            {
+                int i = j;
+                _rolesToGenerateBoxes[i] = new Checkbox
+                {
+                    Text = RandomizeSelectionBoxesInt_to_NameDictionary[i] + "  ",
+                    BasicTooltipText = "Check this box to include " + RandomizeSelectionBoxesInt_to_TooltipDictionary[i] + " in the randomization",
+                    Parent = _advancedRolesToGeneratePanel,
+                    Checked = true,
+                    Location = RandomizedBoxes_to_LocationDictioanry[i]
+
+                };
+            }
+
+            #region CounterBoxes
+            IDictionary<int, int> CounterBox_X_PositionDictionary = new Dictionary<int, int>
+            {
+                {0, 100},
+                {1, 100},
+                {2, 100},
+                {3, 100},
+                {4, 100},
+                {5, 260},
+                {6, 260},
+                {7, 260},
+                {8, 260},
+                {9, 260},
+                {10, 420},
+                {11, 420},
+            };
+            IDictionary<int, int> CounterBox_Y_PositionDictionary = new Dictionary<int, int>
+            {
+                {0, 0},
+                {1, 25},
+                {2, 50},
+                {3, 75},
+                {4, 100},
+                {5, 0},
+                {6, 25},
+                {7, 50},
+                {8, 75},
+                {9, 100},
+                {10, 0},
+                {11, 25},
+            };
+            for (int i = 0; i < 12; i++)
+            {
+                _counterBoxes[i] = new CounterBox
+                {
+                    MaxValue = CounterBoxes_MaxAllowedIntValues[i],
+                    Parent = _numberToGeneratePanel,
+                    ValueWidth = 10,
+                    Width = 60,
+                    BasicTooltipText = CounterBoxInt_to_Text[i],
+                    Value = _deserializedSettings._counterBoxesSettings[i],//_counterBoxesSettings[i],
+                    MinValue = 0,
+                    Location = new Point(CounterBox_X_PositionDictionary[i], CounterBox_Y_PositionDictionary[i])
+                };
+            }
+            #endregion
+            #region Labels
+
+            IDictionary<int, int> CounterBoxLabel_X_PositionDictionary = new Dictionary<int, int>
+            {
+                {0, 0},
+                {1, 0},
+                {2, 0},
+                {3, 0},
+                {4, 0},
+                {5, 160},
+                {6, 160},
+                {7, 160},
+                {8, 160},
+                {9, 160},
+                {10, 320},
+                {11, 320},
+            };
+            IDictionary<int, int> CounterBoxLabel_Y_PositionDictionary = new Dictionary<int, int>
+            {
+                {0, 0},
+                {1, 25},
+                {2, 50},
+                {3, 75},
+                {4, 100},
+                {5, 0},
+                {6, 25},
+                {7, 50},
+                {8, 75},
+                {9, 100},
+                {10, 0},
+                {11, 25},
+            };
+
+            _counterBoxLabels = new Label[12];
+            for (int i = 0; i < 12; i++)
+            {
+                _counterBoxLabels[i] = new Label
+                {
+                    Text = CounterBoxInt_to_Text[i],
+                    Size = new Point(100, 25),
+                    Location = new Point(CounterBoxLabel_X_PositionDictionary[i], CounterBoxLabel_Y_PositionDictionary[i]),
+                    Parent = _numberToGeneratePanel
+                };
+            }
+            #endregion
             base.Build(buildPanel);
         }
 
@@ -158,6 +376,12 @@ namespace Falson.SquadRoleRandomizer.Views
                 //_advancedSettingsPanel.Show();
                 _numberToGeneratePanel.Show();
                 _wingsToIncludePanel.Hide();
+            }
+            else
+            {
+                _advancedRolesToGeneratePanel.Hide();
+                _numberToGeneratePanel.Hide();
+                _wingsToIncludePanel.Show();
             }
         }
 
