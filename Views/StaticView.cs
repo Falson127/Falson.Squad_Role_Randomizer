@@ -37,7 +37,6 @@ namespace Falson.SquadRoleRandomizer
         private CustomCheckbox[] _qadimKiteBoxArray = new CustomCheckbox[10];
         private CustomCheckbox[] _swordBoxArray = new CustomCheckbox[10]; //1-2
         private CustomCheckbox[] _shieldBoxArray = new CustomCheckbox[10]; //1-2
-        private CustomCheckbox[] _rolestoRandomizeSelectionCheckboxesArray = new CustomCheckbox[22];
         private TextBox _player1NameBox;
         private TextBox _player2NameBox;
         private TextBox _player3NameBox;
@@ -50,18 +49,13 @@ namespace Falson.SquadRoleRandomizer
         private TextBox _player10NameBox;
         private Panel _playerNameTextBoxPanel;
         private FlowPanel _masterFlowPanel;
-        private Panel _randomizeCheckboxesPanel = new Panel();
         private PlayerPanel[] _playerPanels = new PlayerPanel[10];
         private Panel[] _standardRolesPanel = new Panel[10]; //5 items
         private Panel[] _hoTMechanicsPanel = new Panel[10]; //8 items
         private Panel[] _poFMechanicsPanel = new Panel[10]; //9 items
-        private Panel _rolesWithNumbers;
-        private Label[] _counterBoxLabels;
-        private StandardButton _generateRolesButton;
         private CustomButton[] _checkAllRoles = new CustomButton[10];
         private CustomButton[] _checkAllHoT = new CustomButton[10];
         private CustomButton[] _checkAllPoF = new CustomButton[10];
-        private CustomButton _checkAllGenerateRoles;
         private CounterBox[] _counterBoxes; //need 12 items in this
         private FalsonSettings _deserializedSettings;
 
@@ -89,7 +83,7 @@ namespace Falson.SquadRoleRandomizer
                 ShowBorder = true,
                 Title = "Set Roles for Each Player  (Click to Expand)",
                 Size = new Point(1000, 400),
-                Location = new Point(0, 255),
+                Location = new Point(0, 180),
                 Parent = buildPanel,
                 CanScroll = true,
                 CanCollapse = false,

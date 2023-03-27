@@ -33,8 +33,9 @@ namespace Falson.SquadRoleRandomizer.Views
             {
                 BasicTooltipText = "Select which static you would like to modify",
                 Size = new Point(150, 50),
-                Location = new Point(50, 600),
-                Parent = _viewContainingPanel
+                Location = new Point(600, 75),
+                Parent = _viewContainingPanel,
+                ZIndex = 10
             };
             dropdown1.Items.Add("Static 1");
             dropdown1.Items.Add("Static 2");
