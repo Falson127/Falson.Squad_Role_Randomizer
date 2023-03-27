@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using SharpDX.MediaFoundation;
+using Falson.SquadRoleRandomizer.Custom_Controls;
 //using System.Windows.Forms;
 
 namespace Falson.SquadRoleRandomizer
@@ -56,7 +57,8 @@ namespace Falson.SquadRoleRandomizer
         private CustomButton[] _checkAllRoles = new CustomButton[10];
         private CustomButton[] _checkAllHoT = new CustomButton[10];
         private CustomButton[] _checkAllPoF = new CustomButton[10];
-        private CounterBox[] _counterBoxes; //need 12 items in this
+        private IOButton _importButton;
+        private IOButton _exportButton;
         private FalsonSettings _deserializedSettings;
         private int _activeSettingIndex;
 
@@ -90,6 +92,20 @@ namespace Falson.SquadRoleRandomizer
                 CanScroll = true,
                 CanCollapse = false,
                 FlowDirection = ControlFlowDirection.SingleTopToBottom
+            };
+            _importButton = new IOButton("Import", _activeSettingIndex) 
+            {
+                Size = new Point(125,40),
+                Text = "Import Settings",
+                Location = new Point(550,25),
+                Parent = buildPanel
+            };
+            _exportButton = new IOButton("Export", _activeSettingIndex) 
+            {
+                Size = new Point(125,40),
+                Text = "Export Settings",
+                Location = new Point(700,25),
+                Parent = buildPanel
             };
             #region Player Panels
             for (int i = 0; i < 10; i++)
@@ -165,13 +181,7 @@ namespace Falson.SquadRoleRandomizer
                 _swordBoxArray[i] = new CustomCheckbox(_deserializedSettings._swordRoles[i], isChecked => { _deserializedSettings._swordRoles[i] = isChecked; RoleRandomizerMain._base64strings[_activeSettingIndex].Value = SettingsEncoder.UpdateBase64(_deserializedSettings); }) { Text = "Sword", Location = new Point(200, 25), BasicTooltipText = "CA Sword Collector", Parent = _poFMechanicsPanel[i], Checked = _deserializedSettings._swordRoles[i] };
                 _shieldBoxArray[i] = new CustomCheckbox(_deserializedSettings._shieldRoles[i], isChecked => { _deserializedSettings._shieldRoles[i] = isChecked; RoleRandomizerMain._base64strings[_activeSettingIndex].Value = SettingsEncoder.UpdateBase64(_deserializedSettings); }) { Text = "Shield", Location = new Point(200, 50), BasicTooltipText = "CA Shield Collector", Parent = _poFMechanicsPanel[i], Checked = _deserializedSettings._shieldRoles[i] };
             }
-
-
-
-
-
             #endregion
-
             #region Textboxes
             _player1NameBox = new TextBox
             {
@@ -244,7 +254,6 @@ namespace Falson.SquadRoleRandomizer
                 Location = new Point(200, 100)
             };
             #endregion
-
             #region Event Subscriptions
             _player1NameBox.TextChanged += Player1NameBox_TextChanged;
             _player2NameBox.TextChanged += Player2NameBox_TextChanged;
@@ -257,6 +266,7 @@ namespace Falson.SquadRoleRandomizer
             _player9NameBox.TextChanged += Player9NameBox_TextChanged;
             _player10NameBox.TextChanged += Player10NameBox_TextChanged;
             #endregion
+
             base.Build(buildPanel);
 
         }

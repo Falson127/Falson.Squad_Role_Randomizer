@@ -15,7 +15,7 @@ namespace Falson.SquadRoleRandomizer.Views
     {
         private Panel _viewContainingPanel;
         private Dropdown _staticSelectionDropdown;
-        private ViewContainer _viewContainer;
+        public static ViewContainer _viewContainer;
         private int _selectedSettings;
 
         //public StaticViewMain()
