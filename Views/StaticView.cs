@@ -75,23 +75,6 @@ namespace Falson.SquadRoleRandomizer
         {
 
             //_deserializedSettings = deserializedSettings;
-             _rolesWithNumbers = new Panel
-            {
-                Title = "Number of each role to generate",
-                Parent = buildPanel,
-                Size = new Point(480, 165),
-                Location = new Point(401, 0),
-            };      
-
-            _counterBoxes = new CounterBox[12];
-            _counterBoxLabels = new Label[12];
-            _rolesWithNumbers = new Panel
-            {
-                Title = "Number of each role to generate",
-                Parent = buildPanel,
-                Size = new Point(480, 165),
-                Location = new Point(401, 0),
-            };
 
             _playerNameTextBoxPanel = new Panel
             {
@@ -100,13 +83,7 @@ namespace Falson.SquadRoleRandomizer
                 Location = new Point(0, 0),
                 Parent = buildPanel,
             };
-            _randomizeCheckboxesPanel = new Panel
-            {
-                Title = "Select roles to be randomized",
-                Size = new Point(1000, 120),
-                Parent = buildPanel,
-                Location = new Point(0, 166),
-            };
+
             _masterFlowPanel = new FlowPanel
             {
                 ShowBorder = true,
@@ -161,7 +138,6 @@ namespace Falson.SquadRoleRandomizer
                 _checkAllHoT[i] = new CustomButton(_hoTMechanicsPanel[i], 420, 5);
                 _checkAllPoF[i] = new CustomButton(_poFMechanicsPanel[i], 750, 5);
             }
-            _checkAllGenerateRoles = new CustomButton(_randomizeCheckboxesPanel, 220, 170);
             #endregion
             #region Checkboxes
             for (int j = 0; j < 10; j++) //commenting for a commit so I don't forget. Need to adjust line 202 and add second delegate to all other boxes. They need to adjust the chosen settings string, not just 0 (that was for proof of concept)
@@ -193,171 +169,13 @@ namespace Falson.SquadRoleRandomizer
                 _swordBoxArray[i] = new CustomCheckbox(_deserializedSettings._swordRoles[i], isChecked => { _deserializedSettings._swordRoles[i] = isChecked; }) { Text = "Sword", Location = new Point(200, 25), BasicTooltipText = "CA Sword Collector", Parent = _poFMechanicsPanel[i], Checked = _deserializedSettings._swordRoles[i] };
                 _shieldBoxArray[i] = new CustomCheckbox(_deserializedSettings._shieldRoles[i], isChecked => { _deserializedSettings._shieldRoles[i] = isChecked; }) { Text = "Shield", Location = new Point(200, 50), BasicTooltipText = "CA Shield Collector", Parent = _poFMechanicsPanel[i], Checked = _deserializedSettings._shieldRoles[i] };
             }
-            IDictionary<int, string> RandomizeSelectionBoxesInt_to_NameDictionary = new Dictionary<int, string>
-            {
-                {0,"Hand Kite"},
-                {1,"Oil Kite"},
-                {2,"Flak Kite"},
-                {3,"Tank"},
-                {4,"Heal Alac"},
-                {5,"Heal Quick"},
-                {6,"DPS Alac"},
-                {7,"DPS Quick"},
-                {8,"Mushrooms"},
-                {9,"Tower"},
-                {10,"Reflect"},
-                {11,"Cannons"},
-                {12,"KC Pusher"},
-                {13,"Lamp(s)"},
-                {14,"Pylon(s)"},
-                {15,"Pillar(s)"},
-                {16,"Green(s)"},
-                {17,"SH Pusher"},
-                {18,"Dhuum Kite"},
-                {19,"Qadim Kite"},
-                {20,"Sword Collector(s)"},
-                {21,"Shield Collector(s)"},
-            };
-            IDictionary<int, string> RandomizeSelectionBoxesInt_to_TooltipDictionary = new Dictionary<int, string>
-            {
-                {0,"Hand Kite"},
-                {1,"Oil Kite"},
-                {2,"Flak Kite"},
-                {3,"Tank"},
-                {4,"Heal Alac"},
-                {5,"Heal Quickness"},
-                {6,"DPS Alac"},
-                {7,"DPS Quickness"},
-                {8,"Slothosaur Mushrooms"},
-                {9,"Tower Mesmer"},
-                {10,"Matthias Reflect"},
-                {11,"Sabetha Cannons"},
-                {12,"Keep Construct Pusher"},
-                {13,"Qadim Lamp(s)"},
-                {14,"Qadim Pylon(s)"},
-                {15,"Adina Pillar(s)"},
-                {16,"Dhuum Green(s)"},
-                {17,"Soulless Horror Pusher"},
-                {18,"Dhuum Messenger Kiter"},
-                {19,"Qadim Kite"},
-                {20,"Sword Collector(s)"},
-                {21,"Shield Collector(s)"},
-            };
-            IDictionary<int, Point> RandomizedBoxes_to_LocationDictioanry = new Dictionary<int, Point>
-            {
-                {0,new Point(100,30)},
-                {1,new Point(200,0)},
-                {2,new Point(200,15)},
-                {3,new Point(0,0)},
-                {4,new Point(0,15)},
-                {5,new Point(0,30)},
-                {6,new Point(100,0)},
-                {7,new Point(100,15)},
-                {8,new Point(200,30)},
-                {9,new  Point(300,0)},
-                {10,new Point(300,15)},
-                {11,new Point(300,30)},
-                {12,new Point(400,0)},
-                {13,new Point(400,15)},
-                {14,new Point(400,30)},
-                {15,new Point(500,0)},
-                {16,new Point(500,15)},
-                {17,new Point(500,30)},
-                {18,new Point(600,0)},
-                {19,new Point(600,15)},
-                {20,new Point(600,30)},
-                {21,new Point(700,0)},
-            };
-            IDictionary<int, int> CounterBoxes_MaxAllowedIntValues = new Dictionary<int, int>
-            {
-                {0, 2},
-                {1, 2},
-                {2, 2},
-                {3, 2},
-                {4, 4},
-                {5, 2},
-                {6, 3},
-                {7, 3},
-                {8, 5},
-                {9, 2},
-                {10, 2},
-                {11, 2}
-            };
-            IDictionary<int, string> CounterBoxInt_to_Text = new Dictionary<int, string>
-            {
-                {0, "# of Heal/Alac"},
-                {1, "# of Heal/Quick"},
-                {2, "# of DPS/Alac"},
-                {3, "# of DPS/Quick"},
-                {4, "# of Mushrooms"},
-                {5, "# of Cannons"},
-                {6, "# of Lamps"},
-                {7, "# of Pylons"},
-                {8, "# of Pillars"},
-                {9, "# of Greens"},
-                {10, "# of Swords"},
-                {11, "# of Shields"}
-            };
-            for (int j = 0; j < 22; j++)
-            {
-                int i = j;
-                _rolestoRandomizeSelectionCheckboxesArray[i] = new CustomCheckbox(_deserializedSettings._rolesToGenerate[i], isChecked => { _deserializedSettings._rolesToGenerate[i] = isChecked; })
-                {
-                    Text = RandomizeSelectionBoxesInt_to_NameDictionary[i] + "  ",
-                    BasicTooltipText = "Check this box to include " + RandomizeSelectionBoxesInt_to_TooltipDictionary[i] + " in the randomization",
-                    Parent = _randomizeCheckboxesPanel,
-                    Checked = _deserializedSettings._rolesToGenerate[i],
-                    Location = RandomizedBoxes_to_LocationDictioanry[i]
 
-                };
-            }
+
+
+
+
             #endregion
-            #region CounterBoxes
-            IDictionary<int, int> CounterBox_X_PositionDictionary = new Dictionary<int, int>
-            {
-                {0, 100},
-                {1, 100},
-                {2, 100},
-                {3, 100},
-                {4, 100},
-                {5, 260},
-                {6, 260},
-                {7, 260},
-                {8, 260},
-                {9, 260},
-                {10, 420},
-                {11, 420},
-            };
-            IDictionary<int, int> CounterBox_Y_PositionDictionary = new Dictionary<int, int>
-            {
-                {0, 0},
-                {1, 25},
-                {2, 50},
-                {3, 75},
-                {4, 100},
-                {5, 0},
-                {6, 25},
-                {7, 50},
-                {8, 75},
-                {9, 100},
-                {10, 0},
-                {11, 25},
-            };
-            for (int i = 0; i < 12; i++)
-            {
-                _counterBoxes[i] = new CounterBox
-                {
-                    MaxValue = CounterBoxes_MaxAllowedIntValues[i],
-                    Parent = _rolesWithNumbers,
-                    ValueWidth = 10,
-                    Width = 60,
-                    BasicTooltipText = CounterBoxInt_to_Text[i],
-                    Value = _deserializedSettings._counterBoxesSettings[i],//_counterBoxesSettings[i],
-                    MinValue = 0,
-                    Location = new Point(CounterBox_X_PositionDictionary[i], CounterBox_Y_PositionDictionary[i])
-                };
-            }
-            #endregion
+
             #region Textboxes
             _player1NameBox = new TextBox
             {
@@ -430,51 +248,7 @@ namespace Falson.SquadRoleRandomizer
                 Location = new Point(200, 100)
             };
             #endregion
-            #region Labels
 
-            IDictionary<int, int> CounterBoxLabel_X_PositionDictionary = new Dictionary<int, int>
-            {
-                {0, 0},
-                {1, 0},
-                {2, 0},
-                {3, 0},
-                {4, 0},
-                {5, 160},
-                {6, 160},
-                {7, 160},
-                {8, 160},
-                {9, 160},
-                {10, 320},
-                {11, 320},
-            };
-            IDictionary<int, int> CounterBoxLabel_Y_PositionDictionary = new Dictionary<int, int>
-            {
-                {0, 0},
-                {1, 25},
-                {2, 50},
-                {3, 75},
-                {4, 100},
-                {5, 0},
-                {6, 25},
-                {7, 50},
-                {8, 75},
-                {9, 100},
-                {10, 0},
-                {11, 25},
-            };
-
-            _counterBoxLabels = new Label[12];
-            for (int i = 0; i < 12; i++)
-            {
-                _counterBoxLabels[i] = new Label
-                {
-                    Text = CounterBoxInt_to_Text[i],
-                    Size = new Point(100, 25),
-                    Location = new Point(CounterBoxLabel_X_PositionDictionary[i], CounterBoxLabel_Y_PositionDictionary[i]),
-                    Parent = _rolesWithNumbers
-                };
-            }
-            #endregion
             #region Event Subscriptions
             _player1NameBox.TextChanged += Player1NameBox_TextChanged;
             _player2NameBox.TextChanged += Player2NameBox_TextChanged;
@@ -486,18 +260,6 @@ namespace Falson.SquadRoleRandomizer
             _player8NameBox.TextChanged += Player8NameBox_TextChanged;
             _player9NameBox.TextChanged += Player9NameBox_TextChanged;
             _player10NameBox.TextChanged += Player10NameBox_TextChanged;
-            _counterBoxes[0].Click += CounterBox1Click;
-            _counterBoxes[1].Click += CounterBox2Click;
-            _counterBoxes[2].Click += CounterBox3Click;
-            _counterBoxes[3].Click += CounterBox4Click;
-            _counterBoxes[4].Click += CounterBox5Click;
-            _counterBoxes[5].Click += CounterBox6Click;
-            _counterBoxes[6].Click += CounterBox7Click;
-            _counterBoxes[7].Click += CounterBox8Click;
-            _counterBoxes[8].Click += CounterBox9Click;
-            _counterBoxes[9].Click += CounterBox10Click;
-            _counterBoxes[10].Click += CounterBox11Click;
-            _counterBoxes[11].Click += CounterBox12Click;
             #endregion
             base.Build(buildPanel);
 

@@ -22,11 +22,19 @@ namespace Falson.SquadRoleRandomizer.Views
         
         protected override void Build(Container buildPanel)
         {
+            _viewContainingPanel = new Panel
+            { 
+                Size = new Point(1050, 800),
+                Location = new Point(0, 0),
+                ShowBorder = false,
+                Parent = buildPanel
+            };
             Dropdown dropdown1 = new Dropdown
             {
                 BasicTooltipText = "Select which static you would like to modify",
                 Size = new Point(150, 50),
-                Location = new Point(50, 600)
+                Location = new Point(50, 600),
+                Parent = _viewContainingPanel
             };
             dropdown1.Items.Add("Static 1");
             dropdown1.Items.Add("Static 2");
@@ -35,19 +43,14 @@ namespace Falson.SquadRoleRandomizer.Views
             _staticSelectionDropdown.SelectedItem = _staticSelectionDropdown.Items[0];
             _selectedSettings = 0;
 
-            _viewContainingPanel = new Panel
-            { 
-                Size = new Point(1050, 800),
-                Location = new Point(0, 0),
-                ShowBorder = false,
-                Parent = buildPanel
-            };
             //Create Settings Encoder Instance
             SettingsEncoder localEncoder = new SettingsEncoder(RoleRandomizerMain._base64strings[_selectedSettings].Value);
             var localSettingsObject = localEncoder.GetSettings();
             //create staticview instance
             StaticView localView = new StaticView(localSettingsObject, RoleRandomizerMain._base64strings[_selectedSettings]);
             _viewContainer = new ViewContainer();
+            _viewContainer.Size = new Point(1050, 800);
+            _viewContainer.Parent = _viewContainingPanel;
             _viewContainer.Show(localView);
             _viewContainingPanel.Children.Add(_viewContainer);
             _staticSelectionDropdown.ValueChanged += staticChanged;
