@@ -141,13 +141,16 @@ namespace Falson.SquadRoleRandomizer
         /// <inheritdoc />
         protected override void Unload()
         {
+            StaticViewMain._viewContainer = null;
+            _base64strings = null;
+            ResultsFlowPanel = null;
+
             #region Disposables
             _randomizerSettingIcon?.Dispose();
             _randomizerResultsWindow?.Dispose();
             _randomizerSettingsWindow?.Dispose();
             ResultsFlowPanel?.Dispose();
             #endregion
-            ResultsFlowPanel = null;
             #region Events
             _randomizerSettingIcon.Click -= _randomizerSettingIcon_Click;
             #endregion
