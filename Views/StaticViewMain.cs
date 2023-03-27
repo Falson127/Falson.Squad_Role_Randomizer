@@ -48,7 +48,7 @@ namespace Falson.SquadRoleRandomizer.Views
             SettingsEncoder localEncoder = new SettingsEncoder(RoleRandomizerMain._base64strings[_selectedSettings].Value);
             var localSettingsObject = localEncoder.GetSettings();
             //create staticview instance
-            StaticView localView = new StaticView(localSettingsObject, RoleRandomizerMain._base64strings[_selectedSettings]);
+            StaticView localView = new StaticView(localSettingsObject, RoleRandomizerMain._base64strings[_selectedSettings],_selectedSettings);
             _viewContainer = new ViewContainer();
             _viewContainer.Size = new Point(1050, 800);
             _viewContainer.Parent = _viewContainingPanel;
@@ -73,7 +73,7 @@ namespace Falson.SquadRoleRandomizer.Views
             }
             SettingsEncoder localEncoder = new SettingsEncoder(RoleRandomizerMain._base64strings[_selectedSettings].Value);
             var localSettingsObject = localEncoder.GetSettings();
-            StaticView localView = new StaticView(localSettingsObject, RoleRandomizerMain._base64strings[_selectedSettings]);
+            StaticView localView = new StaticView(localSettingsObject, RoleRandomizerMain._base64strings[_selectedSettings],_selectedSettings);
             _viewContainer.Show(localView);
         }
     }
