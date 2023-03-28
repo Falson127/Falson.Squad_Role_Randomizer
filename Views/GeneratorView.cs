@@ -40,12 +40,15 @@ namespace Falson.SquadRoleRandomizer.Views
         private Checkbox _hotWingsEnabled;
         private Checkbox _pofWingsEnabled;
         private readonly FalsonSettings _deserializedSettings;
+        private bool[] _rolesToGenerate = new bool[23];
+        private int[] _counterBoxSettings = new int[12];
 
         public GeneratorView(SettingEntry<string>[] base64StringSettings) 
         {
             _base64Strings = base64StringSettings;
             SettingsEncoder localEncoder = new SettingsEncoder(_base64Strings[0].Value);
             _deserializedSettings = localEncoder.GetSettings();
+            _selectedBase64string = _base64Strings[0].Value;
 
         }
 
@@ -117,14 +120,14 @@ namespace Falson.SquadRoleRandomizer.Views
                 Title = "Number of each role to generate",
                 Parent = buildPanel,
                 Size = new Point(480, 165),
-                Location = new Point(401, 0),
+                Location = new Point(300, 0),
             };
             _generateRolesButton = new StandardButton
             {
                 Text = "Generate \n  Roles",
                 Size = new Point(80, 100),
                 Location = new Point(890, 40),
-                Parent = _masterPanel,
+                Parent = buildPanel,
             };
             _wingsToIncludePanel = new Panel
             {
@@ -263,7 +266,6 @@ namespace Falson.SquadRoleRandomizer.Views
                     Parent = _advancedRolesToGeneratePanel,
                     Checked = true,
                     Location = RandomizedBoxes_to_LocationDictioanry[i]
-
                 };
             }
 
@@ -408,7 +410,15 @@ namespace Falson.SquadRoleRandomizer.Views
             
             if (_enableAdvancedConfigBox.Checked) //if advanced config is checked, send to the original role preparation class
             {
-                PrepareRoles localPreparer = new PrepareRoles(localSettings); //call prep roles with the settings object for the selected static
+                for (int i = 0; i < 23; i++)
+                {
+                    _rolesToGenerate[i] = _rolesToGenerateBoxes[i].Checked; //at generation time, check all boxes, place the state of the box into the bool array
+                }
+                for (int i = 0; i < 12; i++)
+                {
+                    _counterBoxSettings[i] = _counterBoxes[i].Value; //same as above, but for the integers in the counter boxes
+                }
+                PrepareRoles localPreparer = new PrepareRoles(localSettings, _rolesToGenerate, _counterBoxSettings); //call prep roles with the settings object for the selected static
                 localPreparer.Main();
                 RoleRandomizerMain._randomizerResultsWindow.Show();
             }

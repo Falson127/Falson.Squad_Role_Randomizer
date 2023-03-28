@@ -52,7 +52,8 @@ namespace Falson.Randomizer
                 {18, 1},
                 {19, 1},
                 {20, _counterboxsettings[10]},
-                {21, _counterboxsettings[11]}
+                {21, _counterboxsettings[11]},
+                {22, 1 }
             };
             IDictionary<int, bool> conflictRoleIndex_to_RoleChecked = new Dictionary<int, bool> 
             {

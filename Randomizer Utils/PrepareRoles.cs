@@ -78,15 +78,14 @@ namespace Falson.SquadRoleRandomizer
         private readonly int[] _counterBoxSettings = new int[12];
         private readonly string[] _playerNames = new string[10];
         //constructor
-        public PrepareRoles(FalsonSettings deserializedSettings) 
+        public PrepareRoles(FalsonSettings deserializedSettings, bool[] rolesToGenerate, int[] counterBoxSettings) 
         {
             for (int i = 0; i < 23; i++)
             {
-                _rolesToGenerate.Add(Tuple.Create(i, deserializedSettings._rolesToGenerate[i]));
+                _rolesToGenerate.Add(Tuple.Create(i, rolesToGenerate[i]));
             }
             _playerNames = deserializedSettings._playerNames;
-            //_rolesToGenerate = deserializedSettings._rolesToGenerate;
-            _counterBoxSettings = deserializedSettings._counterBoxesSettings;
+            _counterBoxSettings = counterBoxSettings;
 
             _handKiteRoles = deserializedSettings._handKiteRoles;
             _oilKiteRoles = deserializedSettings._oilKiteRoles;

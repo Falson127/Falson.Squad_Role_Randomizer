@@ -20,7 +20,8 @@ namespace Falson.SquadRoleRandomizer
         private List<string> _handKiteIs = new List<string>();
         private List<string> _oilKiteIs = new List<string>();
         private List<string> _flakKiteIs = new List<string>();
-        private List<string> _tankIs = new List<string>();
+        private List<string> _tankAlacIs = new List<string>();
+        private List<string> _tankQuickIs = new List<string>();
         private List<string> _healAlacIs = new List<string>();
         private List<string> _healQuickIs = new List<string>();
         private List<string> _dpsAlacIs = new List<string>();
@@ -51,7 +52,7 @@ namespace Falson.SquadRoleRandomizer
             roleindexint_to_rolelist.Add(0, _handKiteIs);
             roleindexint_to_rolelist.Add(1, _oilKiteIs);
             roleindexint_to_rolelist.Add(2, _flakKiteIs);
-            roleindexint_to_rolelist.Add(3, _tankIs);
+            roleindexint_to_rolelist.Add(3, _tankAlacIs);
             roleindexint_to_rolelist.Add(4, _healAlacIs);
             roleindexint_to_rolelist.Add(5, _healQuickIs);
             roleindexint_to_rolelist.Add(6, _dpsAlacIs);
@@ -70,6 +71,7 @@ namespace Falson.SquadRoleRandomizer
             roleindexint_to_rolelist.Add(19, _qadimKiteIs);
             roleindexint_to_rolelist.Add(20, _swordIs);
             roleindexint_to_rolelist.Add(21, _shieldIs);
+            roleindexint_to_rolelist.Add(22, _tankQuickIs);
         }
         public void Main()
         {
@@ -83,7 +85,8 @@ namespace Falson.SquadRoleRandomizer
                 roleindexint_to_rolelist[_assignedRoles[i].Item1].Add(_assignedRoles[i].Item2);
             }
             #region Call all datamanip methods
-            Tank();
+            TankAlac();
+            TankQuick();
             HealAlac();
             HealQuick();
             DPSAlac();
@@ -167,11 +170,18 @@ namespace Falson.SquadRoleRandomizer
                 CleanedHoTMechanics.Add("The Flak Kite is: " + player);
             }
         }
-        private void Tank() 
+        private void TankAlac() 
         {
-            foreach (var player in _tankIs)
+            foreach (var player in _tankAlacIs)
             {
-                CleanedRoles.Add("The Tank is: " + player);
+                CleanedRoles.Add("The Heal Alac Tank is: " + player);
+            }
+        }
+        private void TankQuick() 
+        {
+            foreach (var player in _tankQuickIs)
+            {
+                CleanedRoles.Add("The Heal Quick Tank is: " + player);
             }
         }
         private void HealAlac() 
