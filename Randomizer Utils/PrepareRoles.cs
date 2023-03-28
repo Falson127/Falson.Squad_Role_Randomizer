@@ -326,6 +326,10 @@ namespace Falson.SquadRoleRandomizer
             {
                 intRoles.Add(Tuple.Create(3, name));
             }
+            foreach (var name in _tankQuickValid)
+            {
+                intRoles.Add(Tuple.Create(22, name));
+            }
             foreach (var name in _healAlacValid)
             {
                 intRoles.Add(Tuple.Create(4, name));
