@@ -1,16 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-//using System.Windows.Forms;
-using System.Diagnostics;
-using falsonP = Falson.SquadRoleRandomizer.PrepareRoles;
 using falson = Falson.SquadRoleRandomizer.RoleRandomizerMain;
 using Blish_HUD.Controls;
 using Falson.SquadRoleRandomizer;
-using System.Configuration;
-using Blish_HUD.Settings;
+
 
 namespace Falson.Randomizer
 {
@@ -383,7 +377,7 @@ namespace Falson.Randomizer
     //0 HandKiteValid 
     //1 OilKiteValid 
     //2 FlakKiteValid
-    //3 TankValid 
+    //3 TankAlacValid 
     //4 HealAlacValid
     //5 HealQuickValid
     //6 DPSAlacValid 
@@ -402,5 +396,6 @@ namespace Falson.Randomizer
     //19 QadimKiteValid 
     //20 SwordValid 
     //21 ShieldValid 
+    //22 TankQuickValid
 }
 
