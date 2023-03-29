@@ -16,6 +16,16 @@ namespace Falson.SquadRoleRandomizer.Randomizer_Utils
         private readonly int[] _counterBoxSettings = new int[12];
         private List<Tuple<int, string>> intRoles = new List<Tuple<int, string>>();
         private readonly string[] _playerNames = new string[10];
+        //messing with stuff
+        private bool tankAlacEmpty;
+        private bool tankQuickEmpty;
+        private bool healAlacEmpty;
+        private bool healQuickEmpty;
+        private bool dpsAlacEmpty;
+        private bool dpsQuickEmpty;
+        private int alacSelected = 0;
+        private int quickSelected = 0;
+        private Random rng = new Random();
 
 
         //local roles
@@ -240,20 +250,13 @@ namespace Falson.SquadRoleRandomizer.Randomizer_Utils
                     nonEmptyRoles.Add(role); //creates a list of any roles that are not empty
                 }
             }
-            var rng = new Random();
             int tankType;
             int healType;
             int boon1Type;
             int boon2Type;
             var mySortedList = nonEmptyRoles.OrderBy(x => x.Count).ToList();  //sorts the nonEmpty roles by length
-            bool tankAlacEmpty;
-            bool tankQuickEmpty;
-            bool healAlacEmpty;
-            bool healQuickEmpty;
-            bool dpsAlacEmpty;
-            bool dpsQuickEmpty;
-            int alacSelected = 0;
-            int quickSelected = 0;
+            
+
             //determine if any roles are empty before we try to pull from them
             #region Determine Empty Main Roles
             if (nonEmptyRoles.Contains(_tankAlacValid))
@@ -306,11 +309,25 @@ namespace Falson.SquadRoleRandomizer.Randomizer_Utils
             }
 
             #endregion
-            #region Assign Boons to Roles
-            //pick tank boon
+            List<List<string>> priorityLists = new List<List<string>> { _tankAlacValid, _tankQuickValid,_healAlacValid,_healQuickValid,_dpsAlacValid,_dpsQuickValid};
+            List<List<string>> priorityLists2 = new List<List<string>>();
+            foreach (var list in priorityLists)
+            {
+                if (list.Count != 0)
+                {
+                    priorityLists2.Add(list);
+                }
+            }
+            var sortedList = priorityLists2.OrderBy(list => list.Count).ToList(); //order from smallest to largest
+
+
+
+        }
+        public void PickTankBoon() 
+        {
             if (tankAlacEmpty)
             {
-                _rolesToGenerate.Add(Tuple.Create(22,true));
+                _rolesToGenerate.Add(Tuple.Create(22, true));
                 quickSelected++;
             }
             else
@@ -322,6 +339,7 @@ namespace Falson.SquadRoleRandomizer.Randomizer_Utils
                 }
                 else
                 {
+                    int tankType;
                     tankType = rng.Next(2); //if neither lists are empty, pick one at random
                     if (tankType == 0)
                     {
@@ -335,6 +353,9 @@ namespace Falson.SquadRoleRandomizer.Randomizer_Utils
                     }
                 }
             }
+        }
+        public void PickHealBoon() 
+        {
             //pick healer boon
             if (healAlacEmpty)
             {
@@ -350,6 +371,7 @@ namespace Falson.SquadRoleRandomizer.Randomizer_Utils
                 }
                 else
                 {
+                    int healType;
                     healType = rng.Next(2);
                     if (healType == 0)
                     {
@@ -363,6 +385,9 @@ namespace Falson.SquadRoleRandomizer.Randomizer_Utils
                     }
                 }
             }
+        }
+        public void PickDPSBoon1() 
+        {
             //pick DPSboon1
             if (alacSelected < 2)
             {
@@ -374,8 +399,11 @@ namespace Falson.SquadRoleRandomizer.Randomizer_Utils
                 _rolesToGenerate.Add(Tuple.Create(7, true));
                 quickSelected++;
             }
+        }
+        public void PickDPSBoon2() 
+        {
             //pick DPSboon2
-            if (alacSelected <2)
+            if (alacSelected < 2)
             {
                 _rolesToGenerate.Add(Tuple.Create(6, true));
                 alacSelected++;
@@ -385,9 +413,6 @@ namespace Falson.SquadRoleRandomizer.Randomizer_Utils
                 _rolesToGenerate.Add(Tuple.Create(7, true));
                 quickSelected++;
             }
-            #endregion
-
-
         }
         public void PrepRoles()
         {
