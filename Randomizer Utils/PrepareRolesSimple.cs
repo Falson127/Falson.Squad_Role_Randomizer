@@ -325,34 +325,7 @@ namespace Falson.SquadRoleRandomizer.Randomizer_Utils
         }
         public void PickTankBoon() 
         {
-            if (tankAlacEmpty)
-            {
-                _rolesToGenerate.Add(Tuple.Create(22, true));
-                quickSelected++;
-            }
-            else
-            {
-                if (tankQuickEmpty)
-                {
-                    _rolesToGenerate.Add(Tuple.Create(3, true));
-                    alacSelected++;
-                }
-                else
-                {
-                    int tankType;
-                    tankType = rng.Next(2); //if neither lists are empty, pick one at random
-                    if (tankType == 0)
-                    {
-                        _rolesToGenerate.Add(Tuple.Create(3, true));
-                        alacSelected++;
-                    }
-                    else
-                    {
-                        _rolesToGenerate.Add(Tuple.Create(22, true));
-                        quickSelected++;
-                    }
-                }
-            }
+
         }
         public void PickHealBoon() 
         {
