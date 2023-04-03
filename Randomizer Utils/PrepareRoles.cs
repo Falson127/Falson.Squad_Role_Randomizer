@@ -73,12 +73,13 @@ namespace Falson.SquadRoleRandomizer
         private readonly bool[] _qadimKiteRoles = new bool[10];
         private readonly bool[] _swordRoles = new bool[10];
         private readonly bool[] _shieldRoles = new bool[10];
+        private readonly bool[] _playersToInclude = new bool[10];
         //private readonly bool[] _rolesToGenerate = new bool[22];
         private readonly List<Tuple<int, bool>> _rolesToGenerate = new List<Tuple<int, bool>>();
         private readonly int[] _counterBoxSettings = new int[12];
         private readonly string[] _playerNames = new string[10];
         //constructor
-        public PrepareRoles(FalsonSettings deserializedSettings, bool[] rolesToGenerate, int[] counterBoxSettings) 
+        public PrepareRoles(FalsonSettings deserializedSettings, bool[] rolesToGenerate, int[] counterBoxSettings, bool[] playerToInclude) 
         {
             for (int i = 0; i < 23; i++)
             {
@@ -86,6 +87,7 @@ namespace Falson.SquadRoleRandomizer
             }
             _playerNames = deserializedSettings._playerNames;
             _counterBoxSettings = counterBoxSettings;
+            _playersToInclude = playerToInclude;
 
             _handKiteRoles = deserializedSettings._handKiteRoles;
             _oilKiteRoles = deserializedSettings._oilKiteRoles;
@@ -278,9 +280,12 @@ namespace Falson.SquadRoleRandomizer
                     var temprole = ActiveRolesDictionary[tempkey];
                     for (int s = 0; s < 10; s++)
                     {
-                        if (temprole[s])
+                        if (_playersToInclude[s]) //only add the player to the valid list if they are set to be included in the randomizer
                         {
-                            RolesArrays_to_ValidLists[temprole].Add(ArrayPos_to_PlayerNameDictionary[s]); //adds the player that has checked true for a role to the role valid list for that particular role.
+                            if (temprole[s])
+                            {
+                                RolesArrays_to_ValidLists[temprole].Add(ArrayPos_to_PlayerNameDictionary[s]); //adds the player that has checked true for a role to the role valid list for that particular role.
+                            }
                         }
                     }
                 }
