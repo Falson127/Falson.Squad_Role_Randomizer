@@ -19,6 +19,7 @@ namespace Falson.SquadRoleRandomizer
             this.Text = buttonText;
             this.Size = new Microsoft.Xna.Framework.Point(50, 25);
             this.Parent = parent;
+            this.BasicTooltipText = $"Click to Check/Uncheck all roles associated with '{buttonText}'";
 
         }
         protected override void OnClick(MouseEventArgs e)
