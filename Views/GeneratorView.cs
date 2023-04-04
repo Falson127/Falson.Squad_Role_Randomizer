@@ -255,14 +255,14 @@ namespace Falson.SquadRoleRandomizer.Views
             _wing7BoxesList.Add(_rolesToGenerateBoxes[15]);
 
 
-            _wingButtons[0] = new WingButton(_allRolesBoxesList, "All", 150, 193, buildPanel);
-            _wingButtons[1] = new WingButton(_wing1BoxesList, "W1", 200, 193, buildPanel);
-            _wingButtons[2] = new WingButton(_wing2BoxesList, "W2", 250, 193, buildPanel);
-            _wingButtons[3] = new WingButton(_wing3BoxesList, "W3", 300, 193, buildPanel);
-            _wingButtons[4] = new WingButton(_wing4BoxesList, "W4", 350, 193, buildPanel);
-            _wingButtons[5] = new WingButton(_wing5BoxesList, "W5", 400, 193, buildPanel);
-            _wingButtons[6] = new WingButton(_wing6BoxesList, "W6", 450, 193, buildPanel);
-            _wingButtons[7] = new WingButton(_wing7BoxesList, "W7", 500, 193, buildPanel);
+            _wingButtons[0] = new WingButton(_allRolesBoxesList, "All", 150, 195, buildPanel);
+            _wingButtons[1] = new WingButton(_wing1BoxesList, "W1", 200, 195, buildPanel);
+            _wingButtons[2] = new WingButton(_wing2BoxesList, "W2", 250, 195, buildPanel);
+            _wingButtons[3] = new WingButton(_wing3BoxesList, "W3", 300, 195, buildPanel);
+            _wingButtons[4] = new WingButton(_wing4BoxesList, "W4", 350, 195, buildPanel);
+            _wingButtons[5] = new WingButton(_wing5BoxesList, "W5", 400, 195, buildPanel);
+            _wingButtons[6] = new WingButton(_wing6BoxesList, "W6", 450, 195, buildPanel);
+            _wingButtons[7] = new WingButton(_wing7BoxesList, "W7", 500, 195, buildPanel);
 
             #region CounterBoxes
             IDictionary<int, int> CounterBox_X_PositionDictionary = new Dictionary<int, int>
