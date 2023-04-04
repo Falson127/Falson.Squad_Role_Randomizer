@@ -27,7 +27,6 @@ namespace Falson.SquadRoleRandomizer.Views
         //private FalsonSettings _settingsObject;
         private Panel _masterPanel;
         //private Panel _advancedSettingsPanel;
-        private Panel _wingsToIncludePanel;
         private Panel _advancedRolesToGeneratePanel;
         private Panel _numberToGeneratePanel;
         private Dropdown _staticSelectionDropdown;
@@ -36,14 +35,19 @@ namespace Falson.SquadRoleRandomizer.Views
         private CounterBox[] _counterBoxes = new CounterBox[12];
         private Label[] _counterBoxLabels = new Label[12];
         private StandardButton _generateRolesButton;
-        private Checkbox _enableAdvancedConfigBox;
-        private Checkbox[] _wingsToIncludeBoxes = new Checkbox[7];
-        private Checkbox _hotWingsEnabled;
-        private Checkbox _pofWingsEnabled;
+        //private Checkbox[] _wingsToIncludeBoxes = new Checkbox[7];
         private readonly FalsonSettings _deserializedSettings;
         private bool[] _rolesToGenerate = new bool[23];
         private int[] _counterBoxSettings = new int[12];
         private bool[] _wingsToGenerate = new bool[7];
+        private List<Checkbox> _roleBoxesList;
+        private List<Checkbox> _wing1BoxesList;
+        private List<Checkbox> _wing2BoxesList;
+        private List<Checkbox> _wing3BoxesList;
+        private List<Checkbox> _wing4BoxesList;
+        private List<Checkbox> _wing5BoxesList;
+        private List<Checkbox> _wing6BoxesList;
+        private List<Checkbox> _wing7BoxesList;
 
         public GeneratorView(SettingEntry<string>[] base64StringSettings) 
         {
@@ -64,31 +68,7 @@ namespace Falson.SquadRoleRandomizer.Views
                 Location = new Point (0, 180),
                 Title = "Roles to Generate"
             };
-            _hotWingsEnabled = new Checkbox 
-            {
-                Text = "Enable HoT Mechanics",
-                BasicTooltipText = "If checked, this box will enable assignment of HoT specific mechanics in the randomization",
-                Checked = true,
-                Parent = _wingsToIncludePanel,
-                Location = new Point(500,25)
-            };
-            _pofWingsEnabled = new Checkbox 
-            {
-                Text = "Enable PoF Mechanics",
-                BasicTooltipText = "If checked, this box will enable assignment of PoF specific mechanics in the randomization",
-                Checked = true,
-                Parent = _wingsToIncludePanel,
-                Location = new Point(500,75)
-            };
-            _enableAdvancedConfigBox = new Checkbox 
-            {
-                Text = "Advanced Configuration Mode",
-                BasicTooltipText = "Check this box to enable greater customization of the role randomizer",
-                Checked = false,
-                Location = new Point(0,0),
-                Parent = buildPanel
-            };
-            _enableAdvancedConfigBox.CheckedChanged += _enableAdvancedConfigBox_CheckedChanged;
+            
             for (int i = 0; i < 10; i++)
             {
                 int xpos;
@@ -131,14 +111,7 @@ namespace Falson.SquadRoleRandomizer.Views
                 Location = new Point(840, 40),
                 Parent = buildPanel,
             };
-            _wingsToIncludePanel = new Panel
-            {
-                Title = "Select Wings to Generate Roles For",
-                Parent = buildPanel,
-                Size = new Point(850,120),
-                Location = new Point (0, 180),
-                ShowBorder = true,
-            };
+            
             _generateRolesButton.Click += GenerateRolesButton_Click;
             Dropdown dropdown1 = new Dropdown
             {
@@ -364,21 +337,7 @@ namespace Falson.SquadRoleRandomizer.Views
                 };
             }
             #endregion
-            
-            for (int i = 0; i < 7; i++)
-            {
-                _wingsToIncludeBoxes[i] = new Checkbox
-                {
-                    Text = $"Wing {i+1}",
-                    BasicTooltipText = $"Checking this box will include mechanics for wing {i+1} in the randomization",
-                    Checked = true,
-                    Location = new Point((i * 100) + 75, 25),
-                    Parent = _wingsToIncludePanel
-                };
-            }
-            _advancedRolesToGeneratePanel.Hide();
-            _numberToGeneratePanel.Hide();
-            _wingsToIncludePanel.Show();
+
             base.Build(buildPanel);
         }
 
@@ -387,24 +346,6 @@ namespace Falson.SquadRoleRandomizer.Views
             throw new NotImplementedException();
         }
 
-        private void _enableAdvancedConfigBox_CheckedChanged(object sender, CheckChangedEvent e)
-        {
-            //when box is changed, get the current state
-            var state = _enableAdvancedConfigBox.Checked;
-            if (state)
-            {
-                _advancedRolesToGeneratePanel.Show();
-                //_advancedSettingsPanel.Show();
-                _numberToGeneratePanel.Show();
-                _wingsToIncludePanel.Hide();
-            }
-            else
-            {
-                _advancedRolesToGeneratePanel.Hide();
-                _numberToGeneratePanel.Hide();
-                _wingsToIncludePanel.Show();
-            }
-        }
 
         private void SelectedStaticChanged(object sender, ValueChangedEventArgs e) //set selected settings string after changing in dropdown
         {
@@ -426,31 +367,17 @@ namespace Falson.SquadRoleRandomizer.Views
         {
             SettingsEncoder localEncoder = new SettingsEncoder(_selectedBase64string); //initialize decoder with selected base64 string
             var localSettings = localEncoder.GetSettings(); //get settings object from string
-            
-            if (_enableAdvancedConfigBox.Checked) //if advanced config is checked, send to the original role preparation class
+            for (int i = 0; i < 23; i++)
             {
-                for (int i = 0; i < 23; i++)
-                {
-                    _rolesToGenerate[i] = _rolesToGenerateBoxes[i].Checked; //at generation time, check all boxes, place the state of the box into the bool array
-                }
-                for (int i = 0; i < 12; i++)
-                {
-                    _counterBoxSettings[i] = _counterBoxes[i].Value; //same as above, but for the integers in the counter boxes
-                }
-                PrepareRoles localPreparer = new PrepareRoles(localSettings, _rolesToGenerate, _counterBoxSettings); //call prep roles with the settings object for the selected static
-                localPreparer.Main();
-                RoleRandomizerMain._randomizerResultsWindow.Show();
+                _rolesToGenerate[i] = _rolesToGenerateBoxes[i].Checked; //at generation time, check all boxes, place the state of the box into the bool array
             }
-            else //if advanced config is not checked, send to the new role preparer for a simple composition
+            for (int i = 0; i < 12; i++)
             {
-                for (int i = 0; i < 7; i++)
-                {
-                    _wingsToGenerate[i] = _wingsToIncludeBoxes[i].Checked;
-                }
-                PrepareRolesSimple localPreparer = new PrepareRolesSimple(localSettings,_wingsToGenerate);
-                localPreparer.Main();
-                RoleRandomizerMain._randomizerResultsWindow.Show();
+                _counterBoxSettings[i] = _counterBoxes[i].Value; //same as above, but for the integers in the counter boxes
             }
+            PrepareRoles localPreparer = new PrepareRoles(localSettings, _rolesToGenerate, _counterBoxSettings, _playersToInclude); //call prep roles with the settings object for the selected static
+            localPreparer.Main();
+            RoleRandomizerMain._randomizerResultsWindow.Show();
         }
 
     }
