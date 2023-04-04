@@ -40,14 +40,16 @@ namespace Falson.SquadRoleRandomizer.Views
         private bool[] _rolesToGenerate = new bool[23];
         private int[] _counterBoxSettings = new int[12];
         private bool[] _wingsToGenerate = new bool[7];
+        private WingButton[] _wingButtons = new WingButton[8];
         private List<Checkbox> _roleBoxesList;
-        private List<Checkbox> _wing1BoxesList;
-        private List<Checkbox> _wing2BoxesList;
-        private List<Checkbox> _wing3BoxesList;
-        private List<Checkbox> _wing4BoxesList;
-        private List<Checkbox> _wing5BoxesList;
-        private List<Checkbox> _wing6BoxesList;
-        private List<Checkbox> _wing7BoxesList;
+        private List<Checkbox> _wing1BoxesList = new List<Checkbox>();
+        private List<Checkbox> _wing2BoxesList = new List<Checkbox>();
+        private List<Checkbox> _wing3BoxesList = new List<Checkbox>();
+        private List<Checkbox> _wing4BoxesList = new List<Checkbox>();
+        private List<Checkbox> _wing5BoxesList = new List<Checkbox>();
+        private List<Checkbox> _wing6BoxesList = new List<Checkbox>();
+        private List<Checkbox> _wing7BoxesList = new List<Checkbox>();
+        private List<Checkbox> _allRolesBoxesList = new List<Checkbox>();
 
         public GeneratorView(SettingEntry<string>[] base64StringSettings) 
         {
@@ -111,6 +113,8 @@ namespace Falson.SquadRoleRandomizer.Views
                 Location = new Point(840, 40),
                 Parent = buildPanel,
             };
+
+            
             
             _generateRolesButton.Click += GenerateRolesButton_Click;
             Dropdown dropdown1 = new Dropdown
@@ -244,7 +248,35 @@ namespace Falson.SquadRoleRandomizer.Views
                     Checked = true,
                     Location = RandomizedBoxes_to_LocationDictioanry[i]
                 };
+                _allRolesBoxesList.Add(_rolesToGenerateBoxes[i]);
             }
+            _wing1BoxesList.Add(_rolesToGenerateBoxes[2]);
+            _wing1BoxesList.Add(_rolesToGenerateBoxes[11]);
+            _wing2BoxesList.Add(_rolesToGenerateBoxes[8]);
+            _wing2BoxesList.Add(_rolesToGenerateBoxes[10]);
+            _wing3BoxesList.Add(_rolesToGenerateBoxes[9]);
+            _wing3BoxesList.Add(_rolesToGenerateBoxes[12]);
+            _wing4BoxesList.Add(_rolesToGenerateBoxes[0]);
+            _wing4BoxesList.Add(_rolesToGenerateBoxes[1]);
+            _wing5BoxesList.Add(_rolesToGenerateBoxes[16]);
+            _wing5BoxesList.Add(_rolesToGenerateBoxes[17]);
+            _wing5BoxesList.Add(_rolesToGenerateBoxes[18]);
+            _wing6BoxesList.Add(_rolesToGenerateBoxes[13]);
+            _wing6BoxesList.Add(_rolesToGenerateBoxes[19]);
+            _wing6BoxesList.Add(_rolesToGenerateBoxes[20]);
+            _wing6BoxesList.Add(_rolesToGenerateBoxes[21]);
+            _wing7BoxesList.Add(_rolesToGenerateBoxes[14]);
+            _wing7BoxesList.Add(_rolesToGenerateBoxes[15]);
+
+
+            _wingButtons[0] = new WingButton(_allRolesBoxesList, "All", 150, 183, buildPanel);
+            _wingButtons[1] = new WingButton(_wing1BoxesList, "W1", 200, 183, buildPanel) { };
+            _wingButtons[2] = new WingButton(_wing2BoxesList, "W2", 250, 183, buildPanel) { };
+            _wingButtons[3] = new WingButton(_wing3BoxesList, "W3", 300, 183, buildPanel) { };
+            _wingButtons[4] = new WingButton(_wing4BoxesList, "W4", 350, 183, buildPanel) { };
+            _wingButtons[5] = new WingButton(_wing5BoxesList, "W5", 400, 183, buildPanel) { };
+            _wingButtons[6] = new WingButton(_wing6BoxesList, "W6", 450, 183, buildPanel) { };
+            _wingButtons[7] = new WingButton(_wing7BoxesList, "W7", 500, 183, buildPanel) { };
 
             #region CounterBoxes
             IDictionary<int, int> CounterBox_X_PositionDictionary = new Dictionary<int, int>
