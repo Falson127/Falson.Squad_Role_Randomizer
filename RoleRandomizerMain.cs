@@ -144,6 +144,7 @@ namespace Falson.SquadRoleRandomizer
             StaticViewMain._viewContainer = null;
             _base64strings = null;
             ResultsFlowPanel = null;
+            //Players.PlayerDisableBoxes = null;
 
             #region Disposables
             _randomizerSettingIcon?.Dispose();

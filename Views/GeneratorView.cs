@@ -50,6 +50,7 @@ namespace Falson.SquadRoleRandomizer.Views
         private List<Checkbox> _wing6BoxesList = new List<Checkbox>();
         private List<Checkbox> _wing7BoxesList = new List<Checkbox>();
         private List<Checkbox> _allRolesBoxesList = new List<Checkbox>();
+        private ViewContainer _playerContainer = new ViewContainer();
 
         public GeneratorView(SettingEntry<string>[] base64StringSettings) 
         {
@@ -62,43 +63,27 @@ namespace Falson.SquadRoleRandomizer.Views
 
         protected override void Build(Container buildPanel)
         {
-
+            for (int i = 0; i < 10; i++)
+            {
+                _playersToInclude[i] = true;
+            }
             _advancedRolesToGeneratePanel = new Panel 
             {
                 Parent = buildPanel,
                 Size = new Point(1000,120),
-                Location = new Point (0, 180),
+                Location = new Point (0, 190),
                 Title = "Roles to Generate"
             };
-            
-            for (int i = 0; i < 10; i++)
+            _playerContainer = new ViewContainer
             {
-                int xpos;
-                int ypos;
-                if (i<5)
-                {
-                    xpos = 0;
-                    ypos = (i * 25) + 25;
-                }
-                else 
-                {
-                    xpos = 150;
-                    ypos = (25 * (i-5))+25;
-                }
-                _playerDisableBoxes[i] = new Checkbox
-                {
-                    Text = $"Disable {_deserializedSettings._playerNames[i]}",
-                    BasicTooltipText = $"Check this box to prevent {_deserializedSettings._playerNames[i]} from being included in the randomization",
-                    Checked = false,
-                    Parent = buildPanel,
-                    Location = new Point(xpos, ypos)
-                };
-                var j = i;
-                _playerDisableBoxes[j].CheckedChanged += delegate
-                {
-                    _playersToInclude[j] = !_playerDisableBoxes[j].Checked;
-                };
-            }
+                Title = "Enable/Disable Players",
+                Location = new Point(0, 0),
+                Size = new Point(300,160),
+                Parent = buildPanel
+            };
+            Players newView = new Players(_selectedBase64string);
+            _playerContainer.Show(newView);
+            
             _numberToGeneratePanel = new Panel
             {
                 Title = "Number of each role to generate",
@@ -120,7 +105,7 @@ namespace Falson.SquadRoleRandomizer.Views
             Dropdown dropdown1 = new Dropdown
             {
                 Parent = buildPanel,
-                Location = new Point(0, 150)
+                Location = new Point(0, 160)
             };
             dropdown1.Items.Add("Static 1");
             dropdown1.Items.Add("Static 2");
@@ -250,6 +235,7 @@ namespace Falson.SquadRoleRandomizer.Views
                 };
                 _allRolesBoxesList.Add(_rolesToGenerateBoxes[i]);
             }
+            
             _wing1BoxesList.Add(_rolesToGenerateBoxes[2]);
             _wing1BoxesList.Add(_rolesToGenerateBoxes[11]);
             _wing2BoxesList.Add(_rolesToGenerateBoxes[8]);
@@ -269,14 +255,14 @@ namespace Falson.SquadRoleRandomizer.Views
             _wing7BoxesList.Add(_rolesToGenerateBoxes[15]);
 
 
-            _wingButtons[0] = new WingButton(_allRolesBoxesList, "All", 150, 183, buildPanel);
-            _wingButtons[1] = new WingButton(_wing1BoxesList, "W1", 200, 183, buildPanel) { };
-            _wingButtons[2] = new WingButton(_wing2BoxesList, "W2", 250, 183, buildPanel) { };
-            _wingButtons[3] = new WingButton(_wing3BoxesList, "W3", 300, 183, buildPanel) { };
-            _wingButtons[4] = new WingButton(_wing4BoxesList, "W4", 350, 183, buildPanel) { };
-            _wingButtons[5] = new WingButton(_wing5BoxesList, "W5", 400, 183, buildPanel) { };
-            _wingButtons[6] = new WingButton(_wing6BoxesList, "W6", 450, 183, buildPanel) { };
-            _wingButtons[7] = new WingButton(_wing7BoxesList, "W7", 500, 183, buildPanel) { };
+            _wingButtons[0] = new WingButton(_allRolesBoxesList, "All", 150, 193, buildPanel);
+            _wingButtons[1] = new WingButton(_wing1BoxesList, "W1", 200, 193, buildPanel);
+            _wingButtons[2] = new WingButton(_wing2BoxesList, "W2", 250, 193, buildPanel);
+            _wingButtons[3] = new WingButton(_wing3BoxesList, "W3", 300, 193, buildPanel);
+            _wingButtons[4] = new WingButton(_wing4BoxesList, "W4", 350, 193, buildPanel);
+            _wingButtons[5] = new WingButton(_wing5BoxesList, "W5", 400, 193, buildPanel);
+            _wingButtons[6] = new WingButton(_wing6BoxesList, "W6", 450, 193, buildPanel);
+            _wingButtons[7] = new WingButton(_wing7BoxesList, "W7", 500, 193, buildPanel);
 
             #region CounterBoxes
             IDictionary<int, int> CounterBox_X_PositionDictionary = new Dictionary<int, int>
@@ -369,17 +355,20 @@ namespace Falson.SquadRoleRandomizer.Views
                 };
             }
             #endregion
-
             base.Build(buildPanel);
+            //must let panel base build before assigning the delegates in this instance, or they will fucking break
+            for (int i = 0; i < 10; i++)
+            {
+                var j = i;
+                newView.PlayerDisableBoxes[j].CheckedChanged += delegate
+                {
+                    _playersToInclude[j] = !newView.PlayerDisableBoxes[j].Checked;
+                };
+            }
         }
 
-        private void GeneratorView_CheckedChanged(object sender, CheckChangedEvent e)
-        {
-            throw new NotImplementedException();
-        }
 
-
-        private void SelectedStaticChanged(object sender, ValueChangedEventArgs e) //set selected settings string after changing in dropdown
+        private async void SelectedStaticChanged(object sender, ValueChangedEventArgs e) //set selected settings string after changing in dropdown
         {
             if (_staticSelectionDropdown.SelectedItem == "Static 1")
             {
@@ -392,6 +381,21 @@ namespace Falson.SquadRoleRandomizer.Views
             if (_staticSelectionDropdown.SelectedItem == "Static 3")
             {
                 _selectedBase64string = _base64Strings[2].Value;
+            }
+            Players newView = new Players(_selectedBase64string);
+            _playerContainer.Show(newView);
+            for (int i = 0; i < 10; i++)//reset to all true for new static
+            {
+                _playersToInclude[i] = true;
+            }
+            await newView.WaitForBuildComplete();
+            for (int i = 0; i < 10; i++)
+            {
+                var j = i;
+                newView.PlayerDisableBoxes[j].CheckedChanged += delegate
+                {
+                    _playersToInclude[j] = !newView.PlayerDisableBoxes[j].Checked;
+                };
             }
         }
 

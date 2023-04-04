@@ -548,8 +548,8 @@ namespace Falson.SquadRoleRandomizer.Randomizer_Utils
             }
             #endregion
             //
-            var TheRandomizer = new Randomizer.RecursiveRandomizer(intRoles, _intGenerationSequence, _rolesToGenerate, _counterBoxSettings);
-            TheRandomizer.Main();
+            //var TheRandomizer = new Randomizer.RecursiveRandomizer(intRoles, _intGenerationSequence, _rolesToGenerate, _counterBoxSettings);
+            //TheRandomizer.Main();
         }
     }
 }

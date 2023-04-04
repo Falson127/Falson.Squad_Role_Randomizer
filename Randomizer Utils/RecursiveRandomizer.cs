@@ -19,13 +19,22 @@ namespace Falson.Randomizer
         public IDictionary<string, string> PoFMechanic_to_SelectedPlayer = new Dictionary<string, string>();
         private readonly List<Tuple<int,bool>> _rolesToGenerate = new List<Tuple<int,bool>>();
         private readonly int[] _counterboxsettings = new int[12];
+        private readonly int _numberOfPlayers;
 
-        public RecursiveRandomizer(List<Tuple<int,string>> intRoles, List<int> intGenSequence, List<Tuple<int,bool>> rolestogenerate, int[] counterboxsettings) 
+        public RecursiveRandomizer(List<Tuple<int,string>> intRoles, List<int> intGenSequence, List<Tuple<int,bool>> rolestogenerate, int[] counterboxsettings, bool[] playersIncluded) 
         {
             _roles = intRoles;
             _generationsequence = intGenSequence;
             _rolesToGenerate = rolestogenerate;
             _counterboxsettings = counterboxsettings;
+            _numberOfPlayers = 0;
+            foreach (var player in playersIncluded)
+            {
+                if (player)
+                {
+                    _numberOfPlayers++;
+                }
+            }
         }
         private bool SanityCheck()
         {
@@ -98,12 +107,12 @@ namespace Falson.Randomizer
                 {
                     continue;
                 }
-                if (_roleConflictBubblePlayerCount > 10)
+                if (_roleConflictBubblePlayerCount > _numberOfPlayers)
                 {
                     return false; //if a single conflict bubble requests more than 10 players, function will return false.
                 }
             }
-            return true; //if the code makes it through all 22 conflict bubbles without the _roleConflictBubblePlayerCount exceeding 10, then it returns true
+            return true; //if the code makes it through all 22 conflict bubbles without the _roleConflictBubblePlayerCount exceeding the number of players, then it returns true
         }
         public void Main()
         {
@@ -134,10 +143,10 @@ namespace Falson.Randomizer
             {
                 Label templabel = new Label()
                 {
-                    Text = "Your configuration is invalid. You have requested to generate more than 10 total players" +
-                    "\nwithin at least one group of conflicting roles. The only solution is to reduce" +
-                    "\nthe number of roles requested by unchecking boxes in 'roles to be randomized' or reducing the" +
-                    "\nnumber requested in the counter boxes" +
+                    Text = "Your configuration is invalid. You have requested to generate more than the total # of available players" +
+                    "\nwithin at least one group of conflicting roles. The only solutions are to reduce" +
+                    "\nthe number of roles requested by unchecking boxes in 'roles to be randomized', reducing the" +
+                    "\nnumber requested in the counter boxes, or 'un-disabling' players if you have done so" +
                     "\n\nPlease feel free to reach out on the Blish HUD Discord for more information on this error.",
                     Parent = falson.ResultsFlowPanel,
                     AutoSizeWidth = true,
