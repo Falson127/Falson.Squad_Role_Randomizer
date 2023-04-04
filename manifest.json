@@ -1,6 +1,6 @@
 {
   "name": "Raid Squad Role Randomizer",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "namespace": "Falson.SquadRoleRandomizer",
   "package": "Falson.SquadRoleRandomizer.dll",
   "manifest_version": 1,

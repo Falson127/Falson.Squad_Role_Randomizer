@@ -60,6 +60,7 @@ namespace Falson.SquadRoleRandomizer
         private IOButton _importButton;
         private IOButton _exportButton;
         private FalsonSettings _deserializedSettings;
+        private Scrollbar _playerListScrollbar;
         private int _activeSettingIndex;
 
 
@@ -85,14 +86,15 @@ namespace Falson.SquadRoleRandomizer
             _masterFlowPanel = new FlowPanel
             {
                 ShowBorder = true,
-                Title = "Set Roles for Each Player  (Click to Expand)",
-                Size = new Point(1000, 500),
+                Title = "Set Roles for Each Player  (Click to Expand, Scroll as needed)",
+                Size = new Point(1000, 490),
                 Location = new Point(0, 180),
                 Parent = buildPanel,
                 CanScroll = true,
                 CanCollapse = false,
                 FlowDirection = ControlFlowDirection.SingleTopToBottom
             };
+            
             _importButton = new IOButton("Import", _activeSettingIndex) 
             {
                 Size = new Point(125,40),
