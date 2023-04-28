@@ -29,7 +29,9 @@ namespace Falson.SquadRoleRandomizer.Views
         //private Panel _advancedSettingsPanel;
         private Panel _advancedRolesToGeneratePanel;
         private Panel _numberToGeneratePanel;
+        private Panel _manualAssignmentPanel;
         private Dropdown _staticSelectionDropdown;
+        private Label[] _manualAssignmentLabels = new Label[10];
         private Checkbox[] _playerDisableBoxes = new Checkbox[10];
         private Checkbox[] _rolesToGenerateBoxes = new Checkbox[23];
         private CounterBox[] _counterBoxes = new CounterBox[12];
@@ -39,9 +41,7 @@ namespace Falson.SquadRoleRandomizer.Views
         private readonly FalsonSettings _deserializedSettings;
         private bool[] _rolesToGenerate = new bool[23];
         private int[] _counterBoxSettings = new int[12];
-        private bool[] _wingsToGenerate = new bool[7];
         private WingButton[] _wingButtons = new WingButton[8];
-        private List<Checkbox> _roleBoxesList;
         private List<Checkbox> _wing1BoxesList = new List<Checkbox>();
         private List<Checkbox> _wing2BoxesList = new List<Checkbox>();
         private List<Checkbox> _wing3BoxesList = new List<Checkbox>();
@@ -83,7 +83,13 @@ namespace Falson.SquadRoleRandomizer.Views
             };
             Players newView = new Players(_selectedBase64string);
             _playerContainer.Show(newView);
-            
+            _manualAssignmentPanel = new Panel 
+            {
+                Title = "Manual Role Assignment",
+                Parent = buildPanel,
+                Location = new Point(0,350),
+                Size = new Point(1000,500)
+            };
             _numberToGeneratePanel = new Panel
             {
                 Title = "Number of each role to generate",
@@ -99,8 +105,24 @@ namespace Falson.SquadRoleRandomizer.Views
                 Parent = buildPanel,
             };
 
-            
-            
+            #region Manual Assignment
+            //create the labels for each player
+            for (int i = 0; i < 10; i++)
+            {
+                _manualAssignmentLabels[i] = new Label 
+                {
+                    Text = _deserializedSettings._playerNames[i],
+                    Parent = _manualAssignmentPanel,
+                    AutoSizeWidth = true,
+                    Height = 25,
+                    Location = new Point(0, (25*i) + 25),
+                };
+            }
+
+
+            #endregion
+
+
             _generateRolesButton.Click += GenerateRolesButton_Click;
             Dropdown dropdown1 = new Dropdown
             {
